@@ -25,8 +25,8 @@ class AuthRepoImpl implements AuthRepo {
     required String password,
   }) async {
     try {
-      final Session user = await account.createEmailPasswordSession(
-          email: email, password: password);
+      final Session user =
+          await account.createEmailSession(email: email, password: password);
       return left(user);
     } on AppwriteException catch (e) {
       return right(

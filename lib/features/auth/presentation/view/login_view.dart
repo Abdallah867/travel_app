@@ -51,7 +51,7 @@ class LoginView extends StatelessWidget {
                       width: 254,
                       onPressed: () => context.go(AppRoutes.kRegisterView),
                     ),
-                    // const Spacer(flex: 3),
+                    const Spacer(flex: 3),
                   ],
                 ),
               ),

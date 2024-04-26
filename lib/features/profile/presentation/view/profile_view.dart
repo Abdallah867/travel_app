@@ -11,7 +11,7 @@ class ProfileView extends StatelessWidget {
     return BlocBuilder<CurrentAccountCubit, CurrentAccountState>(
       builder: (context, state) {
         return state is CurrentAccountExists
-            ? Text('${context.read<CurrentAccountCubit>().userInformations!}')
+            ? Text(context.read<CurrentAccountCubit>().userInformations!.userId)
             : const Text('No user');
       },
     );

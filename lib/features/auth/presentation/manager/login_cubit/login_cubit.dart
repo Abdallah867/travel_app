@@ -10,6 +10,7 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthRepo authRepo;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  GlobalKey<FormState> loginKey = GlobalKey();
 
   LoginCubit({required this.authRepo}) : super(LoginInitial());
 

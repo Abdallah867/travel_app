@@ -22,14 +22,18 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> registerUser() async {
     emit(RegisterLoading());
 
+    String username = usernameController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
     var response = await authRepo.registerUser(
-      username: usernameController.text.trim(),
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
+      username: username,
+      email: email,
+      password: password,
     );
     response.fold((user) async {
-      var newSession = await authRepo.loginUser(
-          email: emailController.text, password: passwordController.text);
+      var newSession =
+          await authRepo.loginUser(email: email, password: password);
       newSession.fold(
         (session) async {
           var savedData = await userProfileRepo.saveUserData(user: user);

@@ -4,13 +4,14 @@ import 'package:travel_app/core/routes/app_routes.dart';
 
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/home/presentation/views/home_view.dart';
 
 abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const RegisterView(),
+        builder: (context, state) => const HomeView(),
       ),
       GoRoute(
         path: AppRoutes.kLoginView,
@@ -20,19 +21,10 @@ abstract class AppRouter {
         path: AppRoutes.kRegisterView,
         builder: (context, state) => const RegisterView(),
       ),
-      // GoRoute(
-      //   path: AppRoutes.kHomeView,
-      //   builder: (context, state) => const HomeView(),
-      // ),
+      GoRoute(
+        path: AppRoutes.kHomeView,
+        builder: (context, state) => const HomeView(),
+      ),
     ],
   );
-}
-
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
 }

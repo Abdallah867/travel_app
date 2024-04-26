@@ -5,22 +5,15 @@ import '../../../../../core/widgets/vertical_widget.dart';
 import '../../manager/login_cubit/login_cubit.dart';
 import 'login_bloc_consumer.dart';
 
-class LoginForm extends StatefulWidget {
+class LoginForm extends StatelessWidget {
   const LoginForm({
     super.key,
   });
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
-  GlobalKey<FormState> loginKey = GlobalKey();
-
-  @override
   Widget build(BuildContext context) {
     return Form(
-      key: loginKey,
+      key: context.read<LoginCubit>().loginKey,
       child: Column(
         children: [
           CustomTextFormField(
@@ -34,7 +27,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: context.read<LoginCubit>().passwordController,
           ),
           const VerticalSpace(size: 35),
-          LoginBlocConsumer(loginKey: loginKey),
+          LoginBlocConsumer(loginKey: context.read<LoginCubit>().loginKey),
         ],
       ),
     );
