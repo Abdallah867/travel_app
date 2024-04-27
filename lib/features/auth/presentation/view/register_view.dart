@@ -39,21 +39,6 @@ class RegisterViewBody extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const VerticalSpace(size: 70),
-                      Text(
-                        AppStrings.welcome,
-                        style: TextStyles.textStyle30WithAclonica,
-                      ),
-                      Text(
-                        AppStrings.register,
-                        style: TextStyles.textStyle40WithAclonica,
-                      ),
-                    ],
-                  ),
                   const VerticalSpace(size: 35),
                   const RegisterForm(),
                   const VerticalSpace(size: 25),

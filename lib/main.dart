@@ -23,7 +23,7 @@ class TravelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(430, 932),
+      designSize: const Size(360, 800),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
@@ -31,7 +31,7 @@ class TravelApp extends StatelessWidget {
         theme: ThemeData(
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
-            background: AppColors.whiteColor,
+            background: AppColors.backgroundColor,
             seedColor: AppColors.greyColor,
           ),
         ),

@@ -6,7 +6,6 @@ import '../../../../core/routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
 import '../manager/login_cubit/login_cubit.dart';
@@ -27,21 +26,6 @@ class LoginView extends StatelessWidget {
               sliver: SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const VerticalSpace(size: 70),
-                        Text(
-                          AppStrings.welcome,
-                          style: TextStyles.textStyle30WithAclonica,
-                        ),
-                        Text(
-                          AppStrings.login,
-                          style: TextStyles.textStyle40WithAclonica,
-                        ),
-                      ],
-                    ),
                     const VerticalSpace(size: 35),
                     const LoginForm(),
                     const VerticalSpace(size: 25),
@@ -51,7 +35,7 @@ class LoginView extends StatelessWidget {
                       width: 254,
                       onPressed: () => context.go(AppRoutes.kRegisterView),
                     ),
-                    const Spacer(flex: 3),
+                    // const Spacer(flex: 3),
                   ],
                 ),
               ),

@@ -37,7 +37,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: style ?? TextStyles.textStyle20Bold,
+        style: style ?? TextStyles.textStyle20,
       ),
     );
   }
