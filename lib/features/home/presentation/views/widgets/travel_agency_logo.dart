@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_assets.dart';
 
@@ -9,9 +10,9 @@ class TravelAgencyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(12)),
-      child: Image.asset(AppAssets.travelAgencyLogo),
+    return CircleAvatar(
+      radius: 50.r,
+      backgroundImage: const AssetImage(AppAssets.travelAgencyLogo),
     );
   }
 }

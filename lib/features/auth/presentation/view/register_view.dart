@@ -6,7 +6,6 @@ import '../../../../core/routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
 import '../manager/register_cubit/register_cubit.dart';
