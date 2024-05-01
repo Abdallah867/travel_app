@@ -14,9 +14,11 @@ class MainView extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(child: VerticalSpace(size: 50)),
         SliverToBoxAdapter(child: TitleSection()),
-        SliverToBoxAdapter(child: VerticalSpace(size: 12)),
+        SliverToBoxAdapter(child: VerticalSpace(size: 8)),
         SliverToBoxAdapter(child: TravelAgenciesListView()),
-        SliverToBoxAdapter(child: VerticalSpace(size: 12)),
+        SliverToBoxAdapter(child: VerticalSpace(size: 28)),
+        SliverToBoxAdapter(child: TitleSection()),
+        SliverToBoxAdapter(child: VerticalSpace(size: 8)),
         SliverToBoxAdapter(child: TripListView()),
       ],
     );

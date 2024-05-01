@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/core/utils/font_weight_helper.dart';
-import 'package:travel_app/core/utils/text_styles.dart';
-import 'package:travel_app/core/widgets/vertical_widget.dart';
-import 'package:travel_app/features/home/presentation/views/widgets/location_and_price_widget.dart';
-import 'package:travel_app/features/home/presentation/views/widgets/trip_card.dart';
+
+import '../../../../../core/utils/font_weight_helper.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
+import 'location_and_price_widget.dart';
 
 class CardInformations extends StatelessWidget {
   const CardInformations({
