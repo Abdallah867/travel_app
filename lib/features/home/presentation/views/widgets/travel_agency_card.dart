@@ -11,17 +11,17 @@ class TravelAgencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250.w,
+      width: 280.w,
+      height: 100.h,
       child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        horizontalTitleGap: 12.w,
+        minVerticalPadding: 16.h,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         tileColor: AppColors.whiteColor,
-        leading: SizedBox(
-          width: 52.w,
-          // height: 50.h,
-          child: const TravelAgencyLogo(),
-        ),
+        leading: const TravelAgencyLogo(),
         title: Text(
           'Travel DZ',
           style: TextStyles.textStyle16,
