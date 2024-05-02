@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/text_styles.dart';
+import '../../../../../../core/widgets/horizontal_space.dart';
 
 class ReviewWidget extends StatelessWidget {
   const ReviewWidget({

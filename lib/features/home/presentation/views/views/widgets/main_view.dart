@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../../core/widgets/vertical_widget.dart';
 import 'title_section.dart';
 import 'travel_agencies_list_view.dart';
 import 'trip_list_view.dart';

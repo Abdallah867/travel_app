@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/text_styles.dart';
+import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/text_styles.dart';
 
 class TitleSection extends StatelessWidget {
   const TitleSection({
@@ -12,7 +12,7 @@ class TitleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

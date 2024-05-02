@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/routes/app_routes.dart';
-import '../../../../../core/widgets/circular_loading_widget.dart';
-import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../../../../core/routes/app_routes.dart';
+import '../../../../../../core/widgets/circular_loading_widget.dart';
+import '../../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import 'nav_bar_view.dart';
 
 class HomeBlocBuilder extends StatelessWidget {

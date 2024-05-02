@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/app_colors.dart';
 import 'card_informations.dart';
 import 'trip_image.dart';
 
@@ -15,9 +15,9 @@ class TripCard extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(32.r)),
         color: AppColors.whiteColor,
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0.w),
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TripImage(),
