@@ -1,6 +1,8 @@
+import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/errors/failure.dart';
 import '../../../../profile/data/repos/user_profile_repo.dart';
 import '../../../data/repos/auth_repo.dart';
 
@@ -31,23 +33,41 @@ class RegisterCubit extends Cubit<RegisterState> {
       email: email,
       password: password,
     );
-    response.fold((user) async {
-      var newSession =
-          await authRepo.loginUser(email: email, password: password);
-      newSession.fold(
-        (session) async {
-          var savedData = await userProfileRepo.saveUserData(user: user);
-          savedData.fold(
-            (unit) => emit(RegisterSuccess()),
-            (failure) => emit(RegisterFailure(errMessage: failure.errMessage)),
-          );
-        },
-        (failure) => emit(
-          RegisterFailure(errMessage: failure.errMessage),
-        ),
-      );
-    }, (failure) {
-      emit(RegisterFailure(errMessage: failure.errMessage));
-    });
+    response.fold(
+      (user) async {
+        await createNewSessionAndSavingUser(
+          email: email,
+          password: password,
+          user: user,
+        );
+      },
+      (failure) => handleRegistrationError(failure),
+    );
+  }
+
+  void handleRegistrationError(Failure failure) {
+    emit(RegisterFailure(errMessage: failure.errMessage));
+  }
+
+  Future<void> createNewSessionAndSavingUser({
+    required String email,
+    required String password,
+    required User user,
+  }) async {
+    var newSession = await authRepo.loginUser(email: email, password: password);
+    newSession.fold(
+      (session) async {
+        await saveUserProfile(user: user);
+      },
+      (failure) => handleRegistrationError(failure),
+    );
+  }
+
+  Future<void> saveUserProfile({required user}) async {
+    var savedData = await userProfileRepo.saveUserData(user: user);
+    savedData.fold(
+      (unit) => emit(RegisterSuccess()),
+      (failure) => emit(RegisterFailure(errMessage: failure.errMessage)),
+    );
   }
 }
