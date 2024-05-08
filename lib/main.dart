@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/core/constants/app_constants.dart';
 
 import 'core/routes/app_router.dart';
 import 'core/services/service_locator.dart';
@@ -23,7 +24,10 @@ class TravelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 800),
+      designSize: const Size(
+        AppConstants.designWidth,
+        AppConstants.designHeight,
+      ),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
