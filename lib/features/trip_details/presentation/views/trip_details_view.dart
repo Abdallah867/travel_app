@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:travel_app/core/utils/font_weight_helper.dart';
 import 'package:travel_app/core/utils/text_styles.dart';
 import 'package:travel_app/core/widgets/horizontal_space.dart';
 import 'package:travel_app/core/widgets/vertical_widget.dart';
+
+import 'widgets/custom_circular_icon.dart';
 
 class TripDetailsView extends StatelessWidget {
   final String tripId;
@@ -32,13 +35,15 @@ class TripDetailsView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 16.0.w, vertical: 16.h),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomCircularIcon(
-                          icon: Icons.arrow_back,
+                          icon: Icons.arrow_back_ios_new,
+                          onPressed: () => context.pop(),
                         ),
                         CustomCircularIcon(
+                          onPressed: () {},
                           icon: Icons.bookmark_outline,
                         ),
                       ],
@@ -104,25 +109,6 @@ class TripDetailsView extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomCircularIcon extends StatelessWidget {
-  final IconData icon;
-  const CustomCircularIcon({
-    super.key,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 28,
-      child: Icon(
-        icon,
-        size: 32,
       ),
     );
   }
