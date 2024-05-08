@@ -8,6 +8,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../data/repos/auth_rep_impl.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import 'widgets/login_form.dart';
 
@@ -17,7 +18,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<LoginCubit>(),
+      create: (context) => LoginCubit(authRepo: getIt.get<AuthRepoImpl>()),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -35,7 +36,6 @@ class LoginView extends StatelessWidget {
                       width: 254,
                       onPressed: () => context.go(AppRoutes.kRegisterView),
                     ),
-                    // const Spacer(flex: 3),
                   ],
                 ),
               ),

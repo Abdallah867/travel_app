@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/app_colors.dart';
+import '../utils/font_weight_helper.dart';
 import '../utils/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
@@ -37,7 +38,11 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: style ?? TextStyles.textStyle20,
+        style: style ??
+            TextStyles.textStyle20.copyWith(
+              color: AppColors.whiteColor,
+              fontWeight: FontWeightHelper.bold,
+            ),
       ),
     );
   }
