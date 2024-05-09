@@ -4,11 +4,15 @@ import 'package:travel_app/core/utils/app_colors.dart';
 
 class CustomCircularIcon extends StatelessWidget {
   final IconData icon;
+  final Color bgColor;
+  final double radius;
   final VoidCallback onPressed;
   const CustomCircularIcon({
     super.key,
     required this.icon,
     required this.onPressed,
+    this.bgColor = AppColors.whiteColor,
+    this.radius = 24,
   });
 
   @override
@@ -16,12 +20,12 @@ class CustomCircularIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: CircleAvatar(
-        backgroundColor: AppColors.whiteColor,
-        radius: 24.r,
+        backgroundColor: bgColor,
+        radius: radius.r,
         child: Icon(
           icon,
           color: AppColors.secondaryColor,
-          size: 28.sp,
+          size: (radius + 4).sp,
         ),
       ),
     );

@@ -22,8 +22,9 @@ class _ExpandableTextState extends State<ExpandableText> {
       children: [
         Text(
           'Lorem ipsum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
-          style: TextStyles.textStyle16
-              .copyWith(fontWeight: FontWeightHelper.regular),
+          style: TextStyles.textStyle16.copyWith(
+              fontWeight: FontWeightHelper.regular,
+              color: Colors.black.withOpacity(.55)),
           maxLines: !isExpanded ? 3 : null,
         ),
         GestureDetector(
@@ -31,7 +32,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             isExpanded = !isExpanded;
           }),
           child: Text(
-            !isExpanded ? 'Show More....' : 'Show Less....',
+            !isExpanded ? 'Show More' : 'Show Less',
             style: TextStyles.textStyle16.copyWith(
               fontWeight: FontWeightHelper.regular,
               color: AppColors.secondaryColor,
