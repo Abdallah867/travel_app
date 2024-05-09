@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:travel_app/core/routes/app_routes.dart';
+import 'package:travel_app/features/booking/presentation/views/booking_view.dart';
 import 'package:travel_app/features/trip_details/presentation/views/trip_details_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
@@ -32,6 +33,10 @@ abstract class AppRouter {
               tripId: tripId!,
             );
           }),
+      GoRoute(
+        path: AppRoutes.kBookingView,
+        builder: (context, GoRouterState state) => const BookingView(),
+      ),
     ],
   );
 }

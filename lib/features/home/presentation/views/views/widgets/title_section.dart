@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../core/utils/app_strings.dart';
 import '../../../../../../core/utils/text_styles.dart';
 
 class TitleSection extends StatelessWidget {
+  final String title;
   const TitleSection({
     super.key,
+    required this.title,
   });
 
   @override
@@ -18,11 +21,11 @@ class TitleSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Agences de voyage',
+            title,
             style: TextStyles.textStyle20,
           ),
           Text(
-            'Voir tous',
+            AppStrings.seeAll,
             style: TextStyles.textStyle14
                 .copyWith(color: AppColors.secondaryColor),
           ),
