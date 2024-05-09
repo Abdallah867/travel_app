@@ -1,7 +1,7 @@
 abstract class AppRoutes {
-  static const kRegisterView = '/registerView';
-  static const kLoginView = '/loginView';
-  static const kHomeView = '/homeView';
+  static const kRegisterView = '/register';
+  static const kLoginView = '/login';
+  static const kHomeView = '/home';
   static const kTrips = '/trips';
   static const kTripDetailsView = '/trips/:tripId';
 }
