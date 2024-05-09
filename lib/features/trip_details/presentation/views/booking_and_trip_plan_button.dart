@@ -5,6 +5,8 @@ import 'package:travel_app/core/widgets/custom_button.dart';
 import 'package:travel_app/core/widgets/horizontal_space.dart';
 import 'package:travel_app/features/trip_details/presentation/views/widgets/custom_circular_icon.dart';
 
+import '../../../../core/utils/app_strings.dart';
+
 class BookingAndTripPlanButton extends StatelessWidget {
   const BookingAndTripPlanButton({
     super.key,
@@ -25,7 +27,7 @@ class BookingAndTripPlanButton extends StatelessWidget {
           const HorizontalSpace(size: 12),
           Expanded(
             child: CustomButton(
-              text: 'Book Now',
+              text: AppStrings.bookNow,
               onPressed: () {},
             ),
           ),

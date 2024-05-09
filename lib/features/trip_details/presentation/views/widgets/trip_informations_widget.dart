@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/core/utils/app_strings.dart';
 import 'package:travel_app/core/widgets/vertical_widget.dart';
 import 'agency_name_widget.dart';
 import 'contact_agency_widget.dart';
@@ -17,10 +18,10 @@ class TripInformationsWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          DetailsTitleSection(title: 'Description'),
+          DetailsTitleSection(title: AppStrings.description),
           ExpandableText(),
           VerticalSpace(size: 16),
-          DetailsTitleSection(title: 'About'),
+          DetailsTitleSection(title: AppStrings.about),
           AgencyNameWidget(),
           VerticalSpace(size: 4),
           ContactAgencyWidget(),
