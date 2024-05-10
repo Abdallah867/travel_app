@@ -20,7 +20,7 @@ class _ExpandableTextState extends State<ExpandableText> {
     return Wrap(
       children: [
         Text(
-          'orem isum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
+          'lkmorem isum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
           style: TextStyles.textStyle16.copyWith(
               fontWeight: FontWeightHelper.regular,
               color: Colors.black.withOpacity(.55)),
