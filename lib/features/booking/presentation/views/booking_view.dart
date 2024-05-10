@@ -7,7 +7,9 @@ class BookingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const SizedBox(),
+      body: const SizedBox(
+        height: 507.0,
+      ),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/features/trip_details/presentation/views/trip_details_view.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
@@ -21,7 +20,7 @@ class _ExpandableTextState extends State<ExpandableText> {
     return Wrap(
       children: [
         Text(
-          'Lorem ipsum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
+          'orem isum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
           style: TextStyles.textStyle16.copyWith(
               fontWeight: FontWeightHelper.regular,
               color: Colors.black.withOpacity(.55)),
