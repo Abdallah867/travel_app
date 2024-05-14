@@ -58,7 +58,7 @@ Future<void> _dialogBuilder(BuildContext context) {
           children: [
             VerticalSpace(size: 12),
             CounterSection(
-              title: 'Adultes',
+              title: 'Adultesn',
             ),
             VerticalSpace(size: 16),
             CounterSection(
