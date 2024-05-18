@@ -32,8 +32,10 @@ abstract class DatabaseService {
 }
 
 class AppwriteService implements DatabaseService {
-  final Databases database = getIt.get<Databases>();
+  final Databases database;
   final String databaseId = AppwriteConstants.databaseId;
+
+  AppwriteService({required this.database});
 
   @override
   Future<Either<Map<String, dynamic>, Failure>> get({
