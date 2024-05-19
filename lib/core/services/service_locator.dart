@@ -32,23 +32,25 @@ void _setupAuth() {
     ),
   );
 
-  getIt.registerLazySingleton(
-    () => RegisterCubit(
-      authRepo: getIt.get<AuthRepoImpl>(),
-      userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-    ),
-  );
-  getIt.registerLazySingleton(
-    () => LoginCubit(
-      authRepo: getIt.get<AuthRepoImpl>(),
-    ),
-  );
-  getIt.registerLazySingleton(
-    () => CurrentAccountCubit(
-      authRepo: getIt.get<AuthRepoImpl>(),
-      userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-    ),
-  );
+  //To delete
+
+  // getIt.registerLazySingleton(
+  //   () => RegisterCubit(
+  //     authRepo: getIt.get<AuthRepoImpl>(),
+  //     userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+  //   ),
+  // );
+  // getIt.registerLazySingleton(
+  //   () => LoginCubit(
+  //     authRepo: getIt.get<AuthRepoImpl>(),
+  //   ),
+  // );
+  // getIt.registerLazySingleton(
+  //   () => CurrentAccountCubit(
+  //     authRepo: getIt.get<AuthRepoImpl>(),
+  //     userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+  //   ),
+  // );
 }
 
 void _setupProfile() {
