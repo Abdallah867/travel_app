@@ -5,9 +5,9 @@ import '../../../../core/errors/failure.dart';
 import '../models/user_model.dart';
 
 abstract class UserProfileRepo {
-  Future<Either<UserModel, Failure>> getUserData({required User user});
+  Future<Either<UserModel, Failure>> getUserData({required String userId});
 
-  Future<Either<Document, Failure>> saveUserData({required User user});
+  Future<Either<void, Failure>> saveUserData({required User user});
 
   // Future<Either<UserModel, Failure>> updateUserData();
 }

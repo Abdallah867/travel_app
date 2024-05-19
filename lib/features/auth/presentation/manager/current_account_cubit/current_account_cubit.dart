@@ -24,7 +24,7 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
     if (user == null) {
       emit(NoCurrentAccount());
     } else {
-      var userInDatabase = await userProfileRepo.getUserData(user: user);
+      var userInDatabase = await userProfileRepo.getUserData(userId: user.$id);
       userInDatabase.fold(
         (l) {
           userInformations = l;

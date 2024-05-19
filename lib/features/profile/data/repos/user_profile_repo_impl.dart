@@ -2,26 +2,27 @@ import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/constants/appwrite_constants.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
+import '../../../../core/networking/appwrite_service.dart';
 import '../models/user_model.dart';
 import 'user_profile_repo.dart';
 
 class UserProfileRepoImpl implements UserProfileRepo {
-  final Databases database;
+  final DatabaseService databaseService;
 
-  UserProfileRepoImpl({required this.database});
+  const UserProfileRepoImpl({required this.databaseService});
 
   @override
-  Future<Either<UserModel, Failure>> getUserData({required User user}) async {
+  Future<Either<UserModel, Failure>> getUserData(
+      {required String userId}) async {
     try {
-      Document response = await database.getDocument(
-        databaseId: AppwriteConstants.databaseId,
-        collectionId: AppwriteConstants.profilesCollectionId,
-        documentId: user.$id,
+      final response = await databaseService.get(
+        endpoint: AppConstants.profilesCollectionEndpoint,
+        id: userId,
       );
-      UserModel gottenUser = UserModel.fromMap(response.data);
-      return left(gottenUser);
+
+      return left(UserModel.fromMap(response));
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
@@ -34,12 +35,10 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<Document, Failure>> saveUserData({required User user}) async {
+  Future<Either<void, Failure>> saveUserData({required User user}) async {
     try {
-      Document document = await database.createDocument(
-        databaseId: AppwriteConstants.databaseId,
-        collectionId: AppwriteConstants.profilesCollectionId,
-        documentId: user.$id,
+      await databaseService.create(
+        endpoint: AppConstants.profilesCollectionEndpoint,
         data: {
           'userId': user.$id,
           'username': user.name,
@@ -47,7 +46,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
         },
       );
 
-      return left(document);
+      return left(null);
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
