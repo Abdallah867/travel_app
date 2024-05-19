@@ -6,10 +6,12 @@ class BookingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const SizedBox(
-        height: 507.0,
-      ),
-    );
+        appBar: AppBar(),
+        body: const Column(
+          children: [
+            Text('Nombre d\'adultes'),
+            Text('Nombre d\'enfants'),
+          ],
+        ));
   }
 }
