@@ -39,6 +39,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               return null;
             }
           },
+          onTapOutside: (event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           controller: widget.controller,
           obscureText: widget.isPassword ? isPasswordVisible : false,
           decoration: InputDecoration(

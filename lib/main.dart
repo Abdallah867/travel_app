@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +16,12 @@ void main() {
   Bloc.observer = SimpleBlocObserver();
 
   setupServiceLocator();
-  runApp(const TravelApp());
+  runApp(
+    DevicePreview(
+      enabled: kDebugMode,
+      builder: (context) => const TravelApp(),
+    ),
+  );
 }
 
 class TravelApp extends StatelessWidget {

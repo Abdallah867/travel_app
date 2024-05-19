@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
-import '../../../../core/networking/appwrite_service.dart';
+import '../../../../core/networking/database_service.dart';
 import '../models/user_model.dart';
 import 'user_profile_repo.dart';
 
