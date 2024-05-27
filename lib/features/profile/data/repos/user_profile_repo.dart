@@ -9,5 +9,7 @@ abstract class UserProfileRepo {
 
   Future<Either<void, Failure>> saveUserData({required User user});
 
-  // Future<Either<UserModel, Failure>> updateUserData();
+  Future<Either<UserModel, Failure>> updateUserData();
+
+  Future<Either<void, Failure>> deleteUser();
 }

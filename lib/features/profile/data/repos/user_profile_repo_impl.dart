@@ -57,4 +57,16 @@ class UserProfileRepoImpl implements UserProfileRepo {
       );
     }
   }
+
+  @override
+  Future<Either<void, Failure>> deleteUser() {
+    // TODO: implement deleteUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<UserModel, Failure>> updateUserData() {
+    // TODO: implement updateUserData
+    throw UnimplementedError();
+  }
 }
