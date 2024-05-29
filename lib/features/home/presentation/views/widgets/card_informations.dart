@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/utils/font_weight_helper.dart';
-import '../../../../../../core/utils/text_styles.dart';
-import '../../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../core/utils/font_weight_helper.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
 import 'location_and_price_widget.dart';
 
 class CardInformations extends StatelessWidget {
