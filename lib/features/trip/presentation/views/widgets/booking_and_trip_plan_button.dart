@@ -6,7 +6,7 @@ import 'package:travel_app/core/utils/app_colors.dart';
 import 'package:travel_app/core/widgets/custom_button.dart';
 import 'package:travel_app/core/widgets/horizontal_space.dart';
 import 'package:travel_app/core/widgets/vertical_widget.dart';
-import 'package:travel_app/features/trip_details/presentation/views/widgets/custom_circular_icon.dart';
+import 'package:travel_app/features/trip/presentation/views/widgets/custom_circular_icon.dart';
 
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';

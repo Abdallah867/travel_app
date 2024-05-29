@@ -1,15 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import '../../../home/data/models/agency_model.dart';
+
 class TripModel {
   final String tripId;
   final String image;
   final String location;
   final String description;
-  final double price;
-  final String duration;
-  final String rating;
-  final String agencyId;
+  final int price;
+  final int duration;
+  final double rating;
+  final AgencyModel agency;
   TripModel({
     required this.tripId,
     required this.image,
@@ -18,7 +20,7 @@ class TripModel {
     required this.price,
     required this.duration,
     required this.rating,
-    required this.agencyId,
+    required this.agency,
   });
 
   TripModel copyWith({
@@ -26,10 +28,10 @@ class TripModel {
     String? image,
     String? location,
     String? description,
-    double? price,
-    String? duration,
-    String? rating,
-    String? agencyId,
+    int? price,
+    int? duration,
+    double? rating,
+    AgencyModel? agency,
   }) {
     return TripModel(
       tripId: tripId ?? this.tripId,
@@ -39,7 +41,7 @@ class TripModel {
       price: price ?? this.price,
       duration: duration ?? this.duration,
       rating: rating ?? this.rating,
-      agencyId: agencyId ?? this.agencyId,
+      agency: agency ?? this.agency,
     );
   }
 
@@ -52,7 +54,7 @@ class TripModel {
       'price': price,
       'duration': duration,
       'rating': rating,
-      'agencyId': agencyId,
+      'agency': agency.toMap(),
     };
   }
 
@@ -62,10 +64,10 @@ class TripModel {
       image: map['image'] as String,
       location: map['location'] as String,
       description: map['description'] as String,
-      price: map['price'] as double,
-      duration: map['duration'] as String,
-      rating: map['rating'] as String,
-      agencyId: map['agencyId'] as String,
+      price: map['price'] as int,
+      duration: map['duration'] as int,
+      rating: map['rating'] as double,
+      agency: AgencyModel.fromMap(map['agency'] as Map<String, dynamic>),
     );
   }
 
@@ -76,7 +78,7 @@ class TripModel {
 
   @override
   String toString() {
-    return 'TripModel(tripId: $tripId, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agencyId: $agencyId)';
+    return 'TripModel(tripId: $tripId, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
   }
 
   @override
@@ -90,7 +92,7 @@ class TripModel {
         other.price == price &&
         other.duration == duration &&
         other.rating == rating &&
-        other.agencyId == agencyId;
+        other.agency == agency;
   }
 
   @override
@@ -102,6 +104,6 @@ class TripModel {
         price.hashCode ^
         duration.hashCode ^
         rating.hashCode ^
-        agencyId.hashCode;
+        agency.hashCode;
   }
 }
