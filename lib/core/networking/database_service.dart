@@ -1,7 +1,14 @@
+import 'package:appwrite/models.dart';
+
 abstract class DatabaseService {
   Future<Map<String, dynamic>> get({
     required String id,
     required String endpoint,
+  });
+
+  Future<List<Document>> getList({
+    required String endpoint,
+    List<String>? queries,
   });
 
   Future<Map<String, dynamic>> create({

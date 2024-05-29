@@ -77,13 +77,28 @@ class AppwriteService implements DatabaseService {
     required Map<dynamic, dynamic> data,
   }) async {
     try {
-      Document response = await database.updateDocument(
+      final Document response = await database.updateDocument(
         databaseId: databaseId,
         collectionId: AppConstants.appwriteCollections[endpoint]!,
         documentId: id,
         data: data,
       );
       return response.data;
+    } on AppwriteException {
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Document>> getList({required String endpoint, queries}) async {
+    try {
+      final DocumentList response = await database.listDocuments(
+        databaseId: databaseId,
+        collectionId: AppConstants.appwriteCollections[endpoint]!,
+      );
+      return response.documents;
     } on AppwriteException {
       rethrow;
     } catch (e) {
