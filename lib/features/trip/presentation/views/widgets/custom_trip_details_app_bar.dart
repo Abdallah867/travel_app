@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:travel_app/features/trip_details/presentation/views/widgets/custom_circular_icon.dart';
-import 'package:travel_app/features/trip_details/presentation/views/widgets/save_button.dart';
+import 'package:travel_app/features/trip/presentation/views/widgets/custom_circular_icon.dart';
+import 'package:travel_app/features/trip/presentation/views/widgets/save_button.dart';
 
 class CustomTripDetailsAppBar extends StatelessWidget {
   const CustomTripDetailsAppBar({
