@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:travel_app/core/routes/app_routes.dart';
-import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/app_colors.dart';
 import 'card_informations.dart';
 import 'trip_image.dart';
 

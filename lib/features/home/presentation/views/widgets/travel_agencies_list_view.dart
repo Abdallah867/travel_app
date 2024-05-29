@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
 import 'travel_agency_card.dart';
 
 class TravelAgenciesListView extends StatelessWidget {
