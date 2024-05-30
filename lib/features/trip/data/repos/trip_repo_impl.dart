@@ -32,4 +32,29 @@ abstract class TripRepoImpl implements TripRepo {
       );
     }
   }
+
+  @override
+  Future<Either<void, Failure>> updateSavedTrips({
+    required String userId,
+    required List<String> savedTripsIds,
+  }) async {
+    try {
+      await database.update(
+        id: userId,
+        endpoint: AppConstants.savesCollectionEndpoint,
+        data: {
+          'trips': savedTripsIds,
+        },
+      );
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
 }
