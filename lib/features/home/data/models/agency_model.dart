@@ -4,7 +4,7 @@ import 'dart:convert';
 class AgencyModel {
   final String agencyId;
   final String agnecyName;
-  final String profilePicture;
+  final String agencyLogo;
   final String description;
   final String email;
   final String phoneNumber;
@@ -12,7 +12,7 @@ class AgencyModel {
   AgencyModel({
     required this.agencyId,
     required this.agnecyName,
-    required this.profilePicture,
+    required this.agencyLogo,
     required this.description,
     required this.email,
     required this.phoneNumber,
@@ -22,7 +22,7 @@ class AgencyModel {
   AgencyModel copyWith({
     String? agencyId,
     String? agnecyName,
-    String? profilePicture,
+    String? agencyLogo,
     String? description,
     String? email,
     String? phoneNumber,
@@ -31,7 +31,7 @@ class AgencyModel {
     return AgencyModel(
       agencyId: agencyId ?? this.agencyId,
       agnecyName: agnecyName ?? this.agnecyName,
-      profilePicture: profilePicture ?? this.profilePicture,
+      agencyLogo: agencyLogo ?? this.agencyLogo,
       description: description ?? this.description,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -43,7 +43,7 @@ class AgencyModel {
     return <String, dynamic>{
       'agencyId': agencyId,
       'agnecyName': agnecyName,
-      'profilePicture': profilePicture,
+      'agencyLogo': agencyLogo,
       'description': description,
       'email': email,
       'phoneNumber': phoneNumber,
@@ -55,7 +55,7 @@ class AgencyModel {
     return AgencyModel(
       agencyId: map['agencyId'] as String,
       agnecyName: map['agnecyName'] as String,
-      profilePicture: map['profilePicture'] as String,
+      agencyLogo: map['agencyLogo'] as String,
       description: map['description'] as String,
       email: map['email'] as String,
       phoneNumber: map['phoneNumber'] as String,
@@ -70,7 +70,7 @@ class AgencyModel {
 
   @override
   String toString() {
-    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, profilePicture: $profilePicture, description: $description, email: $email, phoneNumber: $phoneNumber, address: $address)';
+    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, agencyLogo: $agencyLogo, description: $description, email: $email, phoneNumber: $phoneNumber, address: $address)';
   }
 
   @override
@@ -79,7 +79,7 @@ class AgencyModel {
 
     return other.agencyId == agencyId &&
         other.agnecyName == agnecyName &&
-        other.profilePicture == profilePicture &&
+        other.agencyLogo == agencyLogo &&
         other.description == description &&
         other.email == email &&
         other.phoneNumber == phoneNumber &&
@@ -90,7 +90,7 @@ class AgencyModel {
   int get hashCode {
     return agencyId.hashCode ^
         agnecyName.hashCode ^
-        profilePicture.hashCode ^
+        agencyLogo.hashCode ^
         description.hashCode ^
         email.hashCode ^
         phoneNumber.hashCode ^

@@ -33,6 +33,7 @@ class AppwriteService implements DatabaseService {
 
   @override
   Future<Map<String, dynamic>> create({
+    String? id,
     required Map<String, dynamic> data,
     required String endpoint,
   }) async {
@@ -40,7 +41,7 @@ class AppwriteService implements DatabaseService {
       final response = await database.createDocument(
         databaseId: databaseId,
         collectionId: AppConstants.appwriteCollections[endpoint]!,
-        documentId: UniqueKey().toString(),
+        documentId: id ?? UniqueKey().toString(),
         data: data,
       );
       return response.data;

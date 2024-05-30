@@ -14,6 +14,7 @@ abstract class DatabaseService {
   Future<Map<String, dynamic>> create({
     required Map<String, dynamic> data,
     required String endpoint,
+    required String id,
   });
 
   Future<Map<String, dynamic>> delete({

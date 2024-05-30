@@ -38,6 +38,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
   Future<Either<void, Failure>> saveUserData({required User user}) async {
     try {
       await databaseService.create(
+        id: user.$id,
         endpoint: AppConstants.profilesCollectionEndpoint,
         data: {
           'userId': user.$id,
