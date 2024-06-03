@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
@@ -39,6 +41,7 @@ class TripRepoImpl implements TripRepo {
     required List<String> savedTripsIds,
   }) async {
     try {
+      log('$savedTripsIds');
       await database.update(
         id: userId,
         endpoint: AppConstants.savesCollectionEndpoint,
@@ -60,8 +63,26 @@ class TripRepoImpl implements TripRepo {
 
   @override
   Future<Either<List<TripModel>, Failure>> getSavedTrips(
-      {required String userId}) {
-    // TODO: implement getSavedTrips
-    throw UnimplementedError();
+      {required String userId}) async {
+    try {
+      final response = await database.get(
+        id: userId,
+        endpoint: AppConstants.savesCollectionEndpoint,
+      );
+
+      List jsonTrips = response['trips'] ?? [];
+      List<TripModel> trips =
+          jsonTrips.map((trip) => TripModel.fromMap(trip)).toList();
+
+      return left(trips);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
   }
 }
