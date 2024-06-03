@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -12,13 +14,18 @@ class TripsCubit extends Cubit<TripsState> {
   List<TripModel> trips = [];
 
   Future<void> getTrips() async {
+    emit(TripsLoadInProgess());
     final response = await tripRepo.getTrips();
     response.fold(
       (trips) {
         this.trips = trips;
+        log('$trips');
         emit(TripsLoaded());
       },
-      (failure) => emit(TripsFailure(errMessage: failure.errMessage)),
+      (failure) {
+        log(failure.errMessage);
+        emit(TripsFailure(errMessage: failure.errMessage));
+      },
     );
   }
 }

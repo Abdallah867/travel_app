@@ -12,7 +12,7 @@ class TripModel {
   final int price;
   final int duration;
   final double rating;
-  final AgencyModel agency;
+  final AgencyModel? agency;
   TripModel({
     required this.tripId,
     required this.title,
@@ -22,7 +22,7 @@ class TripModel {
     required this.price,
     required this.duration,
     required this.rating,
-    required this.agency,
+    this.agency,
   });
 
   TripModel copyWith({
@@ -59,7 +59,7 @@ class TripModel {
       'price': price,
       'duration': duration,
       'rating': rating,
-      'agency': agency.toMap(),
+      'agency': agency?.toMap(),
     };
   }
 
@@ -73,7 +73,9 @@ class TripModel {
       price: map['price'] as int,
       duration: map['duration'] as int,
       rating: map['rating'] as double,
-      agency: AgencyModel.fromMap(map['agency'] as Map<String, dynamic>),
+      agency: map['agency'] != null
+          ? AgencyModel.fromMap(map['agency'] as Map<String, dynamic>)
+          : null,
     );
   }
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:travel_app/features/home/presentation/views/widgets/trip_card.dart';
-import 'package:travel_app/features/trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
-import 'package:travel_app/features/trip/presentation/manager/trips_cubit/trips_cubit.dart';
+import 'trip_card.dart';
+import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
+import '../../../../trip/presentation/manager/trips_cubit/trips_cubit.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../trip/data/models/trip_model.dart';
 
@@ -28,7 +28,7 @@ class TripListView extends StatelessWidget {
                     ),
                     child: const TripCard(),
                   ),
-              itemCount: 5,
+              itemCount: trips.length,
               separatorBuilder: (BuildContext context, int index) =>
                   const HorizontalSpace(size: 15)),
         );
