@@ -14,34 +14,30 @@ class TripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TripsCubit, TripsState>(
-      builder: (context, state) {
-        return InkWell(
-          onTap: () {
-            context.push(
-              '${AppRoutes.kTrips}/1',
-              extra: BlocProvider.of<TripCubit>(context).trip,
-            );
-          },
-          child: Container(
-            width: 208.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(32.r)),
-              color: AppColors.whiteColor,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0.w),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TripImage(),
-                  CardInformations(),
-                ],
-              ),
-            ),
-          ),
+    return InkWell(
+      onTap: () {
+        context.push(
+          '${AppRoutes.kTrips}/1',
+          extra: BlocProvider.of<TripCubit>(context).trip,
         );
       },
+      child: Container(
+        width: 208.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(32.r)),
+          color: AppColors.whiteColor,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.0.w),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TripImage(),
+              CardInformations(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

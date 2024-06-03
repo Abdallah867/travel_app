@@ -11,6 +11,6 @@ final class SaveTripsInitial extends SaveTripsState {}
 
 final class SaveTripsLoadInProgress extends SaveTripsState {}
 
-final class SaveTripsLoaded extends SaveTripsState {}
+final class SaveTripsSuccess extends SaveTripsState {}
 
 final class SaveTripsFailure extends SaveTripsState {}

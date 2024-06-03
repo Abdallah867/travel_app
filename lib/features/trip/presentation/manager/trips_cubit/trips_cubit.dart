@@ -19,7 +19,6 @@ class TripsCubit extends Cubit<TripsState> {
     response.fold(
       (trips) {
         this.trips = trips;
-        log('$trips');
         emit(TripsLoaded());
       },
       (failure) {

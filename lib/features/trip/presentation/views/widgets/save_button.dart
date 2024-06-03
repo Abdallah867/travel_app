@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:travel_app/core/networking/appwrite_service.dart';
-import 'package:travel_app/core/services/service_locator.dart';
-import 'package:travel_app/features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
-import 'package:travel_app/features/trip/data/repos/trip_repo_impl.dart';
-import 'package:travel_app/features/trip/presentation/manager/save_trips_cubit.dart/save_trips_cubit.dart';
+import '../../../../../core/services/service_locator.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../data/repos/trip_repo_impl.dart';
+import '../../manager/save_trips_cubit.dart/save_trips_cubit.dart';
 
+import '../../manager/trip_details_cubit/trip_cubit.dart';
 import 'custom_circular_icon.dart';
 
 class SaveButton extends StatelessWidget {
@@ -14,11 +16,7 @@ class SaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SaveTripsCubit(
-        tripRepo: TripRepoImpl(
-          database: getIt.get<AppwriteService>(),
-        ),
-      ),
+      create: (context) => SaveTripsCubit(tripRepo: getIt.get<TripRepoImpl>()),
       child: const SaveButtonBlocBuilder(),
     );
   }
@@ -33,24 +31,23 @@ class SaveButtonBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final SaveTripsCubit saveTripCubit =
         BlocProvider.of<SaveTripsCubit>(context);
-    final userId = getIt.get<CurrentAccountCubit>().userInformations?.userId;
+    final userId = getIt.get<CurrentAccountCubit>().userInformations?.userId ??
+        '662cd19aa97849b7e878';
+    log(userId.toString());
+    final tripId = BlocProvider.of<TripCubit>(context).trip.tripId;
     return BlocBuilder<SaveTripsCubit, SaveTripsState>(
         builder: (context, state) {
       return saveTripCubit.isTripSaved
           ? CustomCircularIcon(
               icon: Icons.bookmark,
               onPressed: () {
-                if (userId != null) {
-                  saveTripCubit.unsaveTrip(tripId: '12333', userId: userId);
-                }
+                saveTripCubit.unsaveTrip(tripId: tripId, userId: userId);
               },
             )
           : CustomCircularIcon(
               icon: Icons.bookmark_outline,
               onPressed: () {
-                if (userId != null) {
-                  saveTripCubit.saveTrip(tripId: '12333', userId: userId);
-                }
+                saveTripCubit.saveTrip(tripId: tripId, userId: userId);
               },
             );
     });

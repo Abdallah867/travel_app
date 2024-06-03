@@ -36,7 +36,7 @@ class LocationAndPriceWidget extends StatelessWidget {
           ],
         ),
         Text(
-          tripCubit.trip.price.toString(),
+          '${tripCubit.trip.price} DA',
           style: TextStyles.textStyle14.copyWith(
             fontWeight: FontWeightHelper.semiBold,
             color: AppColors.secondaryColor,
