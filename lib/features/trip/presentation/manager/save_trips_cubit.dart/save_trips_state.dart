@@ -8,3 +8,9 @@ sealed class SaveTripsState extends Equatable {
 }
 
 final class SaveTripsInitial extends SaveTripsState {}
+
+final class SaveTripsLoadInProgress extends SaveTripsState {}
+
+final class SaveTripsLoaded extends SaveTripsState {}
+
+final class SaveTripsFailure extends SaveTripsState {}

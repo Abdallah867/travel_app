@@ -8,7 +8,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
 import 'trip_repo.dart';
 
-abstract class TripRepoImpl implements TripRepo {
+class TripRepoImpl implements TripRepo {
   final DatabaseService database;
 
   const TripRepoImpl({required this.database});
