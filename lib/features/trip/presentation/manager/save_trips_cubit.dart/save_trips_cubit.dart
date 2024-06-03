@@ -13,27 +13,36 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
 
   bool isTripSaved = false;
 
-  saveTrip({required tripId}) {
+  void saveTrip({required String tripId, required String userId}) {
     final newSavedTrips = List<String>.from(savedTripsIds);
     newSavedTrips.add(tripId);
-    updateTrip(newSavedTrips);
+    updateTrip(userId: userId, savedTrips: newSavedTrips);
   }
 
-  unsaveTrip({required tripId}) {
+  void unsaveTrip({required String tripId, required String userId}) {
     final newSavedTrips = List<String>.from(savedTripsIds);
     newSavedTrips.remove(tripId);
-    updateTrip(newSavedTrips);
+    updateTrip(userId: userId, savedTrips: newSavedTrips);
   }
 
-  Future<void> updateTrip(List<String> savedTrips) async {
-    try {
-      isTripSaved = !isTripSaved;
-      await tripRepo.updateSavedTrips(
-        savedTripsIds: savedTrips,
-        userId: '123',
-      );
-    } on Exception catch (e) {
-      isTripSaved = !isTripSaved;
-    }
+  Future<void> updateTrip({
+    required List<String> savedTrips,
+    required String userId,
+  }) async {
+    isTripSaved = !isTripSaved;
+    emit(SaveTripsLoadInProgress());
+    final savedTrip = await tripRepo.updateSavedTrips(
+      savedTripsIds: savedTrips,
+      userId: userId,
+    );
+    savedTrip.fold(
+      (l) {
+        emit(SaveTripsLoaded());
+      },
+      (r) {
+        isTripSaved = !isTripSaved;
+        emit(SaveTripsFailure());
+      },
+    );
   }
 }

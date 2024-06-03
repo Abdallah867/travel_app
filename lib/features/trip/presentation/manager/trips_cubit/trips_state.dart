@@ -9,7 +9,7 @@ sealed class TripsState extends Equatable {
 
 final class TripsInitial extends TripsState {}
 
-final class TripsLoadingInProgess extends TripsState {}
+final class TripsLoadInProgess extends TripsState {}
 
 final class TripsLoaded extends TripsState {}
 

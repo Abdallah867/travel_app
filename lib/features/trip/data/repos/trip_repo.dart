@@ -5,7 +5,7 @@ import '../models/trip_model.dart';
 
 abstract class TripRepo {
   Future<Either<List<TripModel>, Failure>> getTrips();
-  Future<void> updateSavedTrips({
+  Future<Either<void, Failure>> updateSavedTrips({
     required String userId,
     required List<String> savedTripsIds,
   });
