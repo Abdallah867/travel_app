@@ -5,6 +5,7 @@ import '../../../home/data/models/agency_model.dart';
 
 class TripModel {
   final String tripId;
+  final String title;
   final String image;
   final String location;
   final String description;
@@ -14,6 +15,7 @@ class TripModel {
   final AgencyModel agency;
   TripModel({
     required this.tripId,
+    required this.title,
     required this.image,
     required this.location,
     required this.description,
@@ -25,6 +27,7 @@ class TripModel {
 
   TripModel copyWith({
     String? tripId,
+    String? title,
     String? image,
     String? location,
     String? description,
@@ -35,6 +38,7 @@ class TripModel {
   }) {
     return TripModel(
       tripId: tripId ?? this.tripId,
+      title: title ?? this.title,
       image: image ?? this.image,
       location: location ?? this.location,
       description: description ?? this.description,
@@ -48,6 +52,7 @@ class TripModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'tripId': tripId,
+      'title': title,
       'image': image,
       'location': location,
       'description': description,
@@ -61,6 +66,7 @@ class TripModel {
   factory TripModel.fromMap(Map<String, dynamic> map) {
     return TripModel(
       tripId: map['tripId'] as String,
+      title: map['title'] as String,
       image: map['image'] as String,
       location: map['location'] as String,
       description: map['description'] as String,
@@ -78,7 +84,7 @@ class TripModel {
 
   @override
   String toString() {
-    return 'TripModel(tripId: $tripId, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
+    return 'TripModel(tripId: $tripId, title: $title, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
   }
 
   @override
@@ -86,6 +92,7 @@ class TripModel {
     if (identical(this, other)) return true;
 
     return other.tripId == tripId &&
+        other.title == title &&
         other.image == image &&
         other.location == location &&
         other.description == description &&
@@ -98,6 +105,7 @@ class TripModel {
   @override
   int get hashCode {
     return tripId.hashCode ^
+        title.hashCode ^
         image.hashCode ^
         location.hashCode ^
         description.hashCode ^

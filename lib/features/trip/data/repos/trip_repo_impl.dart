@@ -16,7 +16,7 @@ class TripRepoImpl implements TripRepo {
   Future<Either<List<TripModel>, Failure>> getTrips() async {
     try {
       final List<Document> response = await database.getList(
-        endpoint: AppConstants.profilesCollectionEndpoint,
+        endpoint: AppConstants.tripsCollectionEndpoint,
       );
 
       final tripsList =
@@ -56,5 +56,12 @@ class TripRepoImpl implements TripRepo {
         Failure(errMessage: e.toString()),
       );
     }
+  }
+
+  @override
+  Future<Either<List<TripModel>, Failure>> getSavedTrips(
+      {required String userId}) {
+    // TODO: implement getSavedTrips
+    throw UnimplementedError();
   }
 }
