@@ -1,8 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
-import 'package:travel_app/core/networking/database_service.dart';
-import 'package:travel_app/features/trip/data/models/trip_model.dart';
+import '../../../../core/networking/database_service.dart';
+import '../models/trip_model.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';

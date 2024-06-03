@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../trip/data/repos/trip_repo_impl.dart';
+import '../../../../trip/presentation/manager/trips_cubit/trips_cubit.dart';
 import 'title_section.dart';
 import 'travel_agencies_list_view.dart';
 import 'trip_list_view.dart';
@@ -11,20 +15,26 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(child: VerticalSpace(size: 50)),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(child: VerticalSpace(size: 50)),
+        const SliverToBoxAdapter(
             child: TitleSection(title: AppStrings.travelAgencies)),
-        SliverToBoxAdapter(child: VerticalSpace(size: 8)),
-        SliverToBoxAdapter(child: TravelAgenciesListView()),
-        SliverToBoxAdapter(child: VerticalSpace(size: 28)),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(child: VerticalSpace(size: 8)),
+        const SliverToBoxAdapter(child: TravelAgenciesListView()),
+        const SliverToBoxAdapter(child: VerticalSpace(size: 28)),
+        const SliverToBoxAdapter(
             child: TitleSection(
           title: AppStrings.availableTrips,
         )),
-        SliverToBoxAdapter(child: VerticalSpace(size: 8)),
-        SliverToBoxAdapter(child: TripListView()),
+        const SliverToBoxAdapter(child: VerticalSpace(size: 8)),
+        SliverToBoxAdapter(
+            child: BlocProvider(
+          create: (context) => TripsCubit(
+            tripRepo: getIt.get<TripRepoImpl>(),
+          )..getTrips(),
+          child: const TripListView(),
+        )),
       ],
     );
   }

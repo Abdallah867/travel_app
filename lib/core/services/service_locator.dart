@@ -6,6 +6,7 @@ import '../../features/auth/presentation/manager/current_account_cubit/current_a
 import '../../features/auth/presentation/manager/login_cubit/login_cubit.dart';
 import '../../features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import '../../features/profile/data/repos/user_profile_repo_impl.dart';
+import '../../features/trip/data/repos/trip_repo_impl.dart';
 import '../networking/appwrite_service.dart';
 
 final getIt = GetIt.instance;
@@ -14,6 +15,7 @@ void setupServiceLocator() {
   _setupAppwrite();
   _setupAuth();
   _setupProfile();
+  _setuptTrips();
 }
 
 void _setupAppwrite() {
@@ -61,6 +63,14 @@ void _setupProfile() {
   getIt.registerFactory(
     () => UserProfileRepoImpl(
       databaseService: getIt.get<AppwriteService>(),
+    ),
+  );
+}
+
+void _setuptTrips() {
+  getIt.registerFactory(
+    () => TripRepoImpl(
+      database: getIt.get<AppwriteService>(),
     ),
   );
 }
