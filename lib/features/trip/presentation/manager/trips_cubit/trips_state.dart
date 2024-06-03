@@ -13,4 +13,8 @@ final class TripsLoadInProgess extends TripsState {}
 
 final class TripsLoaded extends TripsState {}
 
-final class TripsFailure extends TripsState {}
+final class TripsFailure extends TripsState {
+  final String errMessage;
+
+  const TripsFailure({required this.errMessage});
+}

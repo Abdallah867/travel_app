@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:travel_app/core/routes/app_routes.dart';
-import 'package:travel_app/core/utils/app_colors.dart';
-import 'package:travel_app/core/widgets/custom_button.dart';
-import 'package:travel_app/core/widgets/horizontal_space.dart';
-import 'package:travel_app/core/widgets/vertical_widget.dart';
-import 'package:travel_app/features/trip/presentation/views/widgets/custom_circular_icon.dart';
 
+import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
+import 'custom_circular_icon.dart';
 
 class BookingAndTripPlanButton extends StatelessWidget {
   const BookingAndTripPlanButton({

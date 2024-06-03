@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
 import 'location_and_price_widget.dart';
 
 class CardInformations extends StatelessWidget {
@@ -20,7 +22,7 @@ class CardInformations extends StatelessWidget {
         children: [
           const VerticalSpace(size: 4),
           Text(
-            'Voyage à Skikda',
+            BlocProvider.of<TripCubit>(context).trip.title,
             style: TextStyles.textStyle16
                 .copyWith(fontWeight: FontWeightHelper.semiBold),
           ),

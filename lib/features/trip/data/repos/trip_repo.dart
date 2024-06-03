@@ -9,4 +9,8 @@ abstract class TripRepo {
     required String userId,
     required List<String> savedTripsIds,
   });
+
+  Future<Either<List<TripModel>, Failure>> getSavedTrips({
+    required String userId,
+  });
 }

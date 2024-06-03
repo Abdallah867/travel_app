@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/core/utils/app_colors.dart';
-import 'package:travel_app/core/utils/font_weight_helper.dart';
-import 'package:travel_app/core/utils/text_styles.dart';
-import 'package:travel_app/core/widgets/horizontal_space.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/font_weight_helper.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
+
+import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
 
 class LocationAndPriceWidget extends StatelessWidget {
   const LocationAndPriceWidget({
@@ -11,6 +14,7 @@ class LocationAndPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tripCubit = BlocProvider.of<TripCubit>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -23,7 +27,7 @@ class LocationAndPriceWidget extends StatelessWidget {
             ),
             const HorizontalSpace(size: 2),
             Text(
-              'Skikda',
+              tripCubit.trip.location,
               style: TextStyles.textStyle14.copyWith(
                 fontWeight: FontWeightHelper.medium,
                 color: AppColors.lighterGrey,
@@ -32,7 +36,7 @@ class LocationAndPriceWidget extends StatelessWidget {
           ],
         ),
         Text(
-          '20.000 DZD',
+          tripCubit.trip.price.toString(),
           style: TextStyles.textStyle14.copyWith(
             fontWeight: FontWeightHelper.semiBold,
             color: AppColors.secondaryColor,
