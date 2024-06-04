@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -22,7 +20,6 @@ class TripsCubit extends Cubit<TripsState> {
         emit(TripsLoaded());
       },
       (failure) {
-        log(failure.errMessage);
         emit(TripsFailure(errMessage: failure.errMessage));
       },
     );

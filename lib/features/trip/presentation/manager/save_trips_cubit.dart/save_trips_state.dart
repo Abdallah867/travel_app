@@ -13,4 +13,8 @@ final class SaveTripsLoadInProgress extends SaveTripsState {}
 
 final class SaveTripsSuccess extends SaveTripsState {}
 
-final class SaveTripsFailure extends SaveTripsState {}
+final class SaveTripsFailure extends SaveTripsState {
+  final String errMessage;
+
+  const SaveTripsFailure({required this.errMessage});
+}
