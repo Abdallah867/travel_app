@@ -13,4 +13,7 @@ final class GetSavedTripsLoadInProgress extends GetSavedTripsState {}
 
 final class GetSavedTripsSuccess extends GetSavedTripsState {}
 
-final class GetSavedTripsFailure extends GetSavedTripsState {}
+final class GetSavedTripsFailure extends GetSavedTripsState {
+  final String errMessage;
+  const GetSavedTripsFailure({required this.errMessage});
+}

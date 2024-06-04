@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -23,8 +21,7 @@ class GetSavedTripsCubit extends Cubit<GetSavedTripsState> {
         emit(GetSavedTripsSuccess());
       },
       (failure) {
-        log(failure.errMessage);
-        emit(GetSavedTripsFailure());
+        emit(GetSavedTripsFailure(errMessage: failure.errMessage));
       },
     );
   }

@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../data/models/trip_model.dart';
 import '../../../data/repos/trip_repo.dart';
 
 part 'save_trips_state.dart';
@@ -15,7 +14,7 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
 
   List<String> savedTripsIds = [];
 
-  bool isTripSaved = false;
+  late bool isTripSaved;
 
   Future<void> getSavedTripsIds({required String userId}) async {
     emit(SaveTripsLoadInProgress());
@@ -27,11 +26,12 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
       },
       (failure) {
         log(failure.errMessage);
-        emit(SaveTripsFailure());
+        emit(SaveTripsFailure(errMessage: failure.errMessage));
       },
     );
   }
 
+  void checkIsSaved(tripId) => isTripSaved = savedTripsIds.contains(tripId);
   void saveTrip({required String tripId, required String userId}) {
     final newSavedTrips = List<String>.from(savedTripsIds);
     newSavedTrips.add(tripId);
@@ -58,9 +58,9 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
       (l) {
         emit(SaveTripsSuccess());
       },
-      (r) {
+      (failure) {
         isTripSaved = !isTripSaved;
-        emit(SaveTripsFailure());
+        emit(SaveTripsFailure(errMessage: failure.errMessage));
       },
     );
   }
