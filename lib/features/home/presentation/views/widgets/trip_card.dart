@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
-import '../../../../trip/presentation/manager/trips_cubit/trips_cubit.dart';
 import 'card_informations.dart';
 import 'trip_image.dart';
 
@@ -14,17 +13,17 @@ class TripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         context.push(
           '${AppRoutes.kTrips}/1',
-          extra: BlocProvider.of<TripCubit>(context).trip,
+          extra: BlocProvider.of<TripCubit>(context),
         );
       },
       child: Container(
         width: 208.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(32.r)),
+          borderRadius: BorderRadius.all(Radius.circular(48.r)),
           color: AppColors.whiteColor,
         ),
         child: Padding(
