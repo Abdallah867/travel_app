@@ -12,15 +12,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => CurrentAccountCubit(
-            authRepo: getIt.get<AuthRepoImpl>(),
-            userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-          )..currentUserAccount(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => CurrentAccountCubit(
+        authRepo: getIt.get<AuthRepoImpl>(),
+        userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+      )..currentUserAccount(),
       child: const HomeBlocBuilder(),
     );
   }

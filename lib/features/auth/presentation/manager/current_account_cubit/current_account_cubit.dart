@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/models.dart';
 import 'package:bloc/bloc.dart';
 
@@ -21,6 +23,8 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
     emit(CurrentAccountLoading());
 
     User? user = await authRepo.currentUserAccount();
+    log(user.toString());
+
     if (user == null) {
       emit(NoCurrentAccount());
     } else {

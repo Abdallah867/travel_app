@@ -14,7 +14,7 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
 
   List<String> savedTripsIds = [];
 
-  late bool isTripSaved;
+  bool isTripSaved = false;
 
   Future<void> getSavedTripsIds({required String userId}) async {
     emit(SaveTripsLoadInProgress());
@@ -31,7 +31,7 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
     );
   }
 
-  void checkIsSaved(tripId) => isTripSaved = savedTripsIds.contains(tripId);
+  // void checkIsSaved(tripId) => isTripSaved = savedTripsIds.contains(tripId);
   void saveTrip({required String tripId, required String userId}) {
     final newSavedTrips = List<String>.from(savedTripsIds);
     newSavedTrips.add(tripId);

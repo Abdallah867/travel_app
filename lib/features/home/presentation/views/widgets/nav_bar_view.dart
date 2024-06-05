@@ -19,7 +19,6 @@ class NavBarView extends StatelessWidget {
       body: SafeArea(
         child: PersistentTabView(
           context,
-          bottomScreenMargin: 0,
           controller: _controller,
           decoration: const NavBarDecoration(
             borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -64,17 +63,16 @@ PersistentBottomNavBarItem navBarIcon(IconData icon) {
       color: AppColors.whiteColor,
     ),
     icon: Container(
-      // alignment: Alignment.center,
       height: 32,
       width: 32,
       decoration: const BoxDecoration(
-          color: AppColors.secondaryColor, shape: BoxShape.circle),
+          color: AppColors.backgroundColor, shape: BoxShape.circle),
       child: Icon(
         icon,
         size: 20,
-        color: AppColors.whiteColor,
+        color: AppColors.secondaryColor,
       ),
     ),
-    activeColorPrimary: AppColors.secondaryColor,
+    // activeColorSecondary: Colors.black,
   );
 }

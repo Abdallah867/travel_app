@@ -31,10 +31,11 @@ abstract class AppRouter {
       GoRoute(
           path: AppRoutes.kTripDetailsView,
           builder: (context, state) {
-            final trip = state.extra as TripModel;
-            return BlocProvider(
-                create: (context) => TripCubit(trip: trip),
-                child: const TripDetailsView());
+            final tripCubit = state.extra as TripCubit;
+            return BlocProvider.value(
+              value: tripCubit,
+              child: const TripDetailsView(),
+            );
           }),
       GoRoute(
         path: AppRoutes.kBookingView,

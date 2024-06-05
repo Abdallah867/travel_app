@@ -20,15 +20,10 @@ class TitleSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyles.textStyle20,
-          ),
-          Text(
-            AppStrings.seeAll,
-            style: TextStyles.textStyle14
-                .copyWith(color: AppColors.secondaryColor),
-          ),
+          Text(title, style: TextStyles.textStyle20),
+          Text(AppStrings.seeAll,
+              style: TextStyles.textStyle14
+                  .copyWith(color: AppColors.secondaryColor)),
 
           // const Icon(
           //   Icons.arrow_forward,
