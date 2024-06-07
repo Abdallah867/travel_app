@@ -9,12 +9,12 @@ class TripImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 16.h),
+      margin: EdgeInsets.only(top: 12.h),
       height: 208.h,
       width: 208.w,
       decoration: BoxDecoration(
         color: Colors.grey,
-        borderRadius: BorderRadius.all(Radius.circular(32.r)),
+        borderRadius: BorderRadius.all(Radius.circular(24.r)),
       ),
     );
   }

@@ -12,12 +12,14 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CurrentAccountCubit(
-        authRepo: getIt.get<AuthRepoImpl>(),
-        userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-      )..currentUserAccount(),
-      child: const HomeBlocBuilder(),
+    return SafeArea(
+      child: BlocProvider(
+        create: (context) => CurrentAccountCubit(
+          authRepo: getIt.get<AuthRepoImpl>(),
+          userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+        )..currentUserAccount(),
+        child: const HomeBlocBuilder(),
+      ),
     );
   }
 }

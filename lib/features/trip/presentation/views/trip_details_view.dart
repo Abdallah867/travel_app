@@ -17,19 +17,23 @@ class TripDetailsView extends StatelessWidget {
       bottomNavigationBar: const BookingAndTripPlanButton(),
       body: BlocBuilder<TripCubit, TripState>(
         builder: (context, state) {
-          return const SafeArea(
+          return SafeArea(
             child: CustomScrollView(
               slivers: [
-                SliverToBoxAdapter(
-                  child: Stack(
-                    children: [
-                      CustomTripDetailImage(),
-                      CustomTripDetailsAppBar(),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      const Stack(
+                        children: [
+                          CustomTripDetailImage(),
+                          CustomTripDetailsAppBar(),
+                        ],
+                      ),
+                      const VerticalSpace(size: 96),
+                      const TripInformationsWidget(),
                     ],
                   ),
                 ),
-                SliverToBoxAdapter(child: VerticalSpace(size: 96)),
-                SliverToBoxAdapter(child: TripInformationsWidget()),
               ],
             ),
           );

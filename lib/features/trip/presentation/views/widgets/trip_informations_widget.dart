@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/core/utils/app_strings.dart';
-import 'package:travel_app/core/widgets/vertical_widget.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
 import 'agency_name_widget.dart';
 import 'contact_agency_widget.dart';
 import 'details_title_section.dart';
@@ -25,6 +25,7 @@ class TripInformationsWidget extends StatelessWidget {
           AgencyNameWidget(),
           VerticalSpace(size: 4),
           ContactAgencyWidget(),
+          VerticalSpace(size: 24),
         ],
       ),
     );
