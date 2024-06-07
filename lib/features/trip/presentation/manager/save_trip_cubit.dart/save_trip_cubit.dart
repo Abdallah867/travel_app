@@ -6,27 +6,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/repos/trip_repo.dart';
 
-part 'save_trips_state.dart';
+part 'save_trip_state.dart';
 
-class SaveTripsCubit extends Cubit<SaveTripsState> {
+class SaveTripCubit extends Cubit<SaveTripState> {
   final TripRepo tripRepo;
-  SaveTripsCubit({required this.tripRepo}) : super(SaveTripsInitial());
+  SaveTripCubit({required this.tripRepo}) : super(SaveTripInitial());
 
   List<String> savedTripsIds = [];
 
   bool isTripSaved = false;
 
   Future<void> getSavedTripsIds({required String userId}) async {
-    emit(SaveTripsLoadInProgress());
+    emit(SaveTripLoadInProgress());
     final response = await tripRepo.getSavedTrips(userId: userId);
     response.fold(
       (savedTrips) {
         savedTripsIds = savedTrips.map((trip) => trip.tripId).toList();
-        emit(SaveTripsSuccess());
+        emit(SaveTripSuccess());
       },
       (failure) {
         log(failure.errMessage);
-        emit(SaveTripsFailure(errMessage: failure.errMessage));
+        emit(SaveTripFailure(errMessage: failure.errMessage));
       },
     );
   }
@@ -49,18 +49,18 @@ class SaveTripsCubit extends Cubit<SaveTripsState> {
     required String userId,
   }) async {
     isTripSaved = !isTripSaved;
-    emit(SaveTripsLoadInProgress());
+    emit(SaveTripLoadInProgress());
     final savedTrip = await tripRepo.updateSavedTrips(
       savedTripsIds: savedTrips,
       userId: userId,
     );
     savedTrip.fold(
       (l) {
-        emit(SaveTripsSuccess());
+        emit(SaveTripSuccess());
       },
       (failure) {
         isTripSaved = !isTripSaved;
-        emit(SaveTripsFailure(errMessage: failure.errMessage));
+        emit(SaveTripFailure(errMessage: failure.errMessage));
       },
     );
   }

@@ -5,7 +5,7 @@ import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 
-import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
 
 class LocationAndPriceWidget extends StatelessWidget {
   const LocationAndPriceWidget({

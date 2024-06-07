@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import 'review_widget.dart';
+import '../../../../trip/presentation/views/widgets/review_widget.dart';
 import 'travel_agency_logo.dart';
 
 class TravelAgencyCard extends StatelessWidget {

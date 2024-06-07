@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'trip_card.dart';
-import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
-import '../../../../trip/presentation/manager/trips_cubit/trips_cubit.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
+import '../../../../home/presentation/manager/trips_cubit/trips_cubit.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
-import '../../../../trip/data/models/trip_model.dart';
+import '../../../data/models/trip_model.dart';
 
 class TripListView extends StatelessWidget {
   const TripListView({super.key});

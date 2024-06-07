@@ -5,10 +5,10 @@ import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../trip/data/repos/trip_repo_impl.dart';
-import '../../../../trip/presentation/manager/trips_cubit/trips_cubit.dart';
+import '../../manager/trips_cubit/trips_cubit.dart';
 import 'title_section.dart';
 import 'travel_agencies_list_view.dart';
-import 'trip_list_view.dart';
+import '../../../../trip/presentation/views/widgets/trip_list_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
