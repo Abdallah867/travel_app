@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/trip/data/models/trip_model.dart';
-import '../../features/trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
+import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import 'app_routes.dart';
 import '../../features/booking/presentation/views/booking_view.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';

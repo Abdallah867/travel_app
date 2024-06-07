@@ -4,7 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
-import '../saved_trips_view.dart';
+import '../../../../trip/presentation/views/saved_trips_view.dart';
 import 'main_view.dart';
 
 final PersistentTabController _controller =

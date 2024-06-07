@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
-import 'card_informations.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
+import '../../../../home/presentation/views/widgets/card_informations.dart';
 import 'trip_image.dart';
 
 class TripCard extends StatelessWidget {

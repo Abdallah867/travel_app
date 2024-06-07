@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../manager/trip_details_cubit/trip_cubit.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/vertical_widget.dart';
-import '../manager/trip_details_cubit/trip_cubit.dart';
+import '../manager/trip_cubit/trip_cubit.dart';
 import 'widgets/booking_and_trip_plan_button.dart';
 import 'widgets/custom_trip_detail_image.dart';
 import 'widgets/custom_trip_details_app_bar.dart';

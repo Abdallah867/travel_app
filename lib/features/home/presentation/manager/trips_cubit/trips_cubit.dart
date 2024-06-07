@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/trip_model.dart';
-import '../../../data/repos/trip_repo.dart';
+import '../../../../trip/data/models/trip_model.dart';
+import '../../../../trip/data/repos/trip_repo.dart';
 
 part 'trips_state.dart';
 
