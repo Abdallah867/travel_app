@@ -12,6 +12,9 @@ class CustomButton extends StatelessWidget {
   final double width;
   final TextStyle? style;
   final VoidCallback? onPressed;
+  final double borderRadius;
+  final BorderSide borderSide;
+  final Color? textColor;
 
   const CustomButton({
     super.key,
@@ -21,6 +24,9 @@ class CustomButton extends StatelessWidget {
     this.width = 330,
     this.style,
     this.onPressed,
+    this.borderRadius = 50,
+    this.borderSide = BorderSide.none,
+    this.textColor,
   });
 
   @override
@@ -30,19 +36,26 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(borderRadius.r),
+          side: borderSide,
         ),
         foregroundColor: Colors.transparent,
         backgroundColor: color,
         minimumSize: Size(width.w, height.h),
       ),
-      child: Text(
-        text,
-        style: style ??
-            TextStyles.textStyle20.copyWith(
-              color: AppColors.whiteColor,
-              fontWeight: FontWeightHelper.bold,
-            ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            text,
+            style: style ??
+                TextStyles.textStyle20.copyWith(
+                  color: textColor ?? AppColors.whiteColor,
+                  fontWeight: FontWeightHelper.bold,
+                ),
+          ),
+        ],
       ),
     );
   }
