@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const kTrips = '/trips';
   static const kTripDetailsView = '/trips/:tripId';
   static const kBookingView = '/booking';
+  static const kEditProfileView = '/editProfile';
 }

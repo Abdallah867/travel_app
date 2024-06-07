@@ -16,8 +16,6 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CurrentAccountCubit, CurrentAccountState>(
       builder: (context, state) {
-        final user =
-            BlocProvider.of<CurrentAccountCubit>(context).userInformations;
         return Scaffold(
           body: CustomScrollView(
             slivers: [
@@ -26,17 +24,7 @@ class ProfileView extends StatelessWidget {
                   [
                     const HorizontalSpace(size: double.infinity),
                     const VerticalSpace(size: 60),
-                    const ProfilePictureWidget(),
-                    const VerticalSpace(size: 8),
-                    CenteredText(
-                      text: user!.username,
-                      style: TextStyles.textStyle20
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    CenteredText(
-                      text: user.email,
-                      style: TextStyles.textStyle14,
-                    ),
+                    const ProfileInformationsWidget(),
                     const VerticalSpace(size: 24),
                   ],
                 ),

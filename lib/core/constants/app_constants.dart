@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../features/profile/data/models/menu_item.dart';
+import '../routes/app_routes.dart';
 
 class AppConstants {
   static const double designHeight = 915;
@@ -17,9 +18,10 @@ class AppConstants {
   };
 
   static const List<MenuItem> menuItems = [
-    MenuItem(name: 'Profile', icon: Icons.person),
-    MenuItem(name: 'Bookings', icon: Icons.calendar_month),
-    MenuItem(name: 'Settings', icon: Icons.settings),
-    MenuItem(name: 'Notifications', icon: Icons.notification_add),
+    MenuItem(
+        name: 'Profile', icon: Icons.person, path: AppRoutes.kEditProfileView),
+    MenuItem(name: 'Bookings', icon: Icons.calendar_month, path: ''),
+    MenuItem(name: 'Settings', icon: Icons.settings, path: ''),
+    MenuItem(name: 'Notifications', icon: Icons.notification_add, path: ''),
   ];
 }
