@@ -16,6 +16,7 @@ class ProfileMenusListView extends StatelessWidget {
         return ProfileMenu(
           name: menus[index].name,
           icon: menus[index].icon,
+          path: menus[index].path,
         );
       },
     );
