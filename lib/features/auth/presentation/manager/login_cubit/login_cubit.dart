@@ -14,6 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.authRepo}) : super(LoginInitial());
 
   Future<void> loginUser() async {
+    //TODO: change hard coded email and password,
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 

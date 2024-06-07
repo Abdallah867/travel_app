@@ -21,13 +21,13 @@ class TripCard extends StatelessWidget {
         );
       },
       child: Container(
-        width: 208.w,
+        width: 212.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(48.r)),
+          borderRadius: BorderRadius.all(Radius.circular(36.r)),
           color: AppColors.whiteColor,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.0.w),
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

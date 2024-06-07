@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/text_styles.dart';
-import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/vertical_widget.dart';
 
-import '../../../../core/widgets/horizontal_space.dart';
-import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/centered_text.dart';
+import '../../../../core/widgets/horizontal_space.dart';
+import '../../../../core/widgets/vertical_widget.dart';
+import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import 'widgets/profile_menus_list_view.dart';
 import 'widgets/profile_picture_widget.dart';
 
