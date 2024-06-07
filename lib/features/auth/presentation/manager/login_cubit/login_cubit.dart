@@ -19,7 +19,8 @@ class LoginCubit extends Cubit<LoginState> {
 
     emit(LoginLoading());
 
-    var response = await authRepo.loginUser(email: email, password: password);
+    var response = await authRepo.loginUser(
+        email: 'abdoallahusma5704@gmail.com', password: 'Abdallah23');
     response.fold(
       (session) => emit(LoginSuccess(session: session)),
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
