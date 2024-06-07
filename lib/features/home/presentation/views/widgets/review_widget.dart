@@ -5,8 +5,10 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 
 class ReviewWidget extends StatelessWidget {
+  final double review;
   const ReviewWidget({
     super.key,
+    this.review = 5.0,
   });
 
   @override
@@ -20,7 +22,7 @@ class ReviewWidget extends StatelessWidget {
         ),
         const HorizontalSpace(size: 4),
         Text(
-          '(5.0)',
+          '$review',
           style: TextStyles.textStyle14.copyWith(
             color: AppColors.lighterGrey,
           ),
