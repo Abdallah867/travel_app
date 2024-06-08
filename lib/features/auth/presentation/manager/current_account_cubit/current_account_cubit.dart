@@ -38,4 +38,9 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
       );
     }
   }
+
+  void updateUserInformations(UserModel newUser) {
+    userInformations = newUser;
+    emit(CurrentAccountExists());
+  }
 }

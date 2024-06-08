@@ -10,7 +10,7 @@ part 'edit_profile_state.dart';
 class EditProfileCubit extends Cubit<EditProfileState> {
   final UserProfileRepo userProfileRepo;
 
-  final UserModel user;
+  UserModel user;
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -20,21 +20,31 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   UserModel updateInformations() {
     final updatedUser = user.copyWith(
-      email: emailController.text,
-      username: usernameController.text,
-      phoneNumber: phoneNumberController.text,
+      email: emailController.text.trim(),
+      username: usernameController.text.trim(),
+      phoneNumber: phoneNumberController.text.trim(),
     );
     return updatedUser;
   }
 
+  void setInitialValue() {
+    usernameController.text = user.username;
+    emailController.text = user.email;
+    phoneNumberController.text = user.phoneNumber ?? '';
+  }
+
   Future<void> updateUserData() async {
+    emit(EditProfileLoadInProgress());
     final UserModel updatedUserInformations = updateInformations();
     final response = await userProfileRepo.updateUserData(
       newUserInformations: updatedUserInformations,
     );
 
     response.fold(
-      (_) => emit(EditProfileSuccess()),
+      (updatedUser) {
+        user = updatedUser;
+        emit(EditProfileSuccess());
+      },
       (failure) => emit(EditProfileFailure(errMessage: failure.errMessage)),
     );
   }
