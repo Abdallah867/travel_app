@@ -8,3 +8,13 @@ sealed class EditProfileState extends Equatable {
 }
 
 final class EditProfileInitial extends EditProfileState {}
+
+final class EditProfileLoadInProgress extends EditProfileState {}
+
+final class EditProfileSuccess extends EditProfileState {}
+
+final class EditProfileFailure extends EditProfileState {
+  final String errMessage;
+
+  const EditProfileFailure({required this.errMessage});
+}
