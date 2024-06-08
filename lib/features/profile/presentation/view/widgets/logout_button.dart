@@ -17,9 +17,10 @@ class LogoutButton extends StatelessWidget {
           color: Colors.white,
           borderSide: const BorderSide(
             color: Colors.red,
+            width: 2,
           ),
           textColor: Colors.red,
-          borderRadius: 20,
+          borderRadius: 16,
           onPressed: () {
             print('Logout');
           },

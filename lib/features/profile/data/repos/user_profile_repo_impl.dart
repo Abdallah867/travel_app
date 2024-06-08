@@ -60,14 +60,42 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<void, Failure>> deleteUser() {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<Either<void, Failure>> deleteUser({required String userId}) async {
+    try {
+      await databaseService.delete(
+        id: userId,
+        endpoint: AppConstants.profilesCollectionEndpoint,
+      );
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
   }
 
   @override
-  Future<Either<UserModel, Failure>> updateUserData() {
-    // TODO: implement updateUserData
-    throw UnimplementedError();
+  Future<Either<void, Failure>> updateUserData(
+      {required UserModel newUserInformations}) async {
+    try {
+      await databaseService.update(
+        id: newUserInformations.userId,
+        endpoint: AppConstants.profilesCollectionEndpoint,
+        data: newUserInformations.toMap(),
+      );
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
   }
 }
