@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/functions/show_snack_bar.dart';
 import '../../../../core/services/service_locator.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../../data/repos/user_profile_repo_impl.dart';
 
 import '../../../../core/functions/custom_app_bar.dart';
@@ -26,7 +28,7 @@ class EditProfileView extends StatelessWidget {
         create: (context) => EditProfileCubit(
           userProfileRepo: getIt.get<UserProfileRepoImpl>(),
           user: user,
-        ),
+        )..setInitialValue(),
         child: EditProfileBlocConsumer(user: user),
       ),
     );
@@ -45,42 +47,57 @@ class EditProfileBlocConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     final EditProfileCubit editProfileCubit =
         BlocProvider.of<EditProfileCubit>(context);
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          children: [
-            const VerticalSpace(size: 36),
-            const ProfileInformationsWidget(),
-            const VerticalSpace(size: 24),
-            CustomTextFormField(
-              name: 'Username',
-              initialValue: user.username,
-              controller: editProfileCubit.usernameController,
+    return BlocConsumer<EditProfileCubit, EditProfileState>(
+      listener: (context, state) {
+        if (state is EditProfileSuccess) {
+          BlocProvider.of<CurrentAccountCubit>(context)
+              .updateUserInformations(editProfileCubit.user);
+          editProfileCubit.setInitialValue();
+          showSnackBar(
+              context, 'Profile updated successfully', AppStrings.success);
+        }
+        if (state is EditProfileFailure) {
+          showSnackBar(context, state.errMessage, AppStrings.error);
+        }
+      },
+      builder: (context, state) {
+        return Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                const VerticalSpace(size: 36),
+                const ProfileInformationsWidget(),
+                const VerticalSpace(size: 24),
+                CustomTextFormField(
+                  name: 'Username',
+                  controller: editProfileCubit.usernameController,
+                ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Email',
+                  controller: editProfileCubit.emailController,
+                ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Phone Number',
+                  controller: editProfileCubit.phoneNumberController,
+                ),
+                const VerticalSpace(size: 32),
+                state is! EditProfileLoadInProgress
+                    ? CustomButton(
+                        text: 'Save',
+                        onPressed: () async {
+                          await editProfileCubit.updateUserData();
+                        },
+                        width: double.infinity,
+                      )
+                    : const CircularProgressIndicator(),
+              ],
             ),
-            const VerticalSpace(size: 16),
-            CustomTextFormField(
-              name: 'Email',
-              initialValue: user.email,
-              controller: editProfileCubit.emailController,
-            ),
-            const VerticalSpace(size: 16),
-            CustomTextFormField(
-              name: 'Phone Number',
-              initialValue: user.phoneNumber,
-              controller: editProfileCubit.phoneNumberController,
-            ),
-            const VerticalSpace(size: 32),
-            CustomButton(
-              text: 'Save',
-              onPressed: () {
-                print('Save');
-              },
-              width: double.infinity,
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

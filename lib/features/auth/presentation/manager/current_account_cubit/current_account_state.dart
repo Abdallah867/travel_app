@@ -6,6 +6,8 @@ final class CurrentAccountInitial extends CurrentAccountState {}
 
 final class CurrentAccountLoading extends CurrentAccountState {}
 
+final class UpdateUserInformation extends CurrentAccountState {}
+
 final class CurrentAccountExists extends CurrentAccountState {
   // final User user;
 
