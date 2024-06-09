@@ -10,8 +10,12 @@ import 'user_profile_repo.dart';
 
 class UserProfileRepoImpl implements UserProfileRepo {
   final DatabaseService databaseService;
+  final Account account;
 
-  const UserProfileRepoImpl({required this.databaseService});
+  const UserProfileRepoImpl({
+    required this.databaseService,
+    required this.account,
+  });
 
   @override
   Future<Either<UserModel, Failure>> getUserData(
@@ -79,7 +83,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<void, Failure>> updateUserData(
+  Future<Either<UserModel, Failure>> updateUserData(
       {required UserModel newUserInformations}) async {
     try {
       await databaseService.update(
@@ -87,6 +91,40 @@ class UserProfileRepoImpl implements UserProfileRepo {
         endpoint: AppConstants.profilesCollectionEndpoint,
         data: newUserInformations.toMap(),
       );
+      return left(newUserInformations);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<void, Failure>> updateUsername(
+      {required String newUsername}) async {
+    try {
+      await account.updateName(name: newUsername);
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<void, Failure>> updateEmail(
+      {required String newEmail, required String password}) async {
+    try {
+      await account.updateEmail(email: newEmail, password: password);
       return left(null);
     } on AppwriteException catch (e) {
       return right(

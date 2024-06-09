@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/functions/show_snack_bar.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -13,7 +14,7 @@ import '../../../../core/widgets/vertical_widget.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../data/models/user_model.dart';
 import '../manager/cubit/edit_profile_cubit.dart';
-import 'widgets/profile_picture_widget.dart';
+import 'widgets/profile_informations_widget.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
@@ -55,6 +56,7 @@ class EditProfileBlocConsumer extends StatelessWidget {
           editProfileCubit.setInitialValue();
           showSnackBar(
               context, 'Profile updated successfully', AppStrings.success);
+          context.pop();
         }
         if (state is EditProfileFailure) {
           showSnackBar(context, state.errMessage, AppStrings.error);
@@ -67,7 +69,9 @@ class EditProfileBlocConsumer extends StatelessWidget {
             child: Column(
               children: [
                 const VerticalSpace(size: 36),
-                const ProfileInformationsWidget(),
+                ProfileInformationsWidget(
+                  user: editProfileCubit.user,
+                ),
                 const VerticalSpace(size: 24),
                 CustomTextFormField(
                   name: 'Username',
