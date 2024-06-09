@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/centered_text.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
-import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../data/models/user_model.dart';
 
 class ProfileInformationsWidget extends StatelessWidget {
+  final UserModel? user;
   const ProfileInformationsWidget({
     super.key,
+    required this.user,
   });
 
   @override
   Widget build(BuildContext context) {
-    final user = BlocProvider.of<CurrentAccountCubit>(context).userInformations;
-
     return Column(
       children: [
         CircleAvatar(
@@ -25,11 +24,11 @@ class ProfileInformationsWidget extends StatelessWidget {
         ),
         const VerticalSpace(size: 8),
         CenteredText(
-          text: user!.username,
+          text: user?.username ?? '',
           style: TextStyles.textStyle20.copyWith(fontWeight: FontWeight.bold),
         ),
         CenteredText(
-          text: user.email,
+          text: user?.email ?? '',
           style: TextStyles.textStyle14,
         ),
       ],

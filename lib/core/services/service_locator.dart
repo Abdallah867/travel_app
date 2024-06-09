@@ -15,7 +15,7 @@ void setupServiceLocator() {
   _setupAppwrite();
   _setupAuth();
   _setupProfile();
-  _setuptTrips();
+  _setupTrips();
 }
 
 void _setupAppwrite() {
@@ -63,11 +63,12 @@ void _setupProfile() {
   getIt.registerFactory(
     () => UserProfileRepoImpl(
       databaseService: getIt.get<AppwriteService>(),
+      account: getIt.get<Account>(),
     ),
   );
 }
 
-void _setuptTrips() {
+void _setupTrips() {
   getIt.registerFactory(
     () => TripRepoImpl(
       database: getIt.get<AppwriteService>(),
