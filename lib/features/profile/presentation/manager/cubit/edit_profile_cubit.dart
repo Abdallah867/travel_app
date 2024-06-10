@@ -9,11 +9,11 @@ part 'edit_profile_state.dart';
 
 class EditProfileCubit extends Cubit<EditProfileState> {
   final UserProfileRepo userProfileRepo;
-
   UserModel user;
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   EditProfileCubit({required this.user, required this.userProfileRepo})
       : super(EditProfileInitial());

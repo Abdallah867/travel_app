@@ -43,6 +43,9 @@ class TravelApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         theme: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
             background: AppColors.backgroundColor,

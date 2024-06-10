@@ -87,6 +87,12 @@ class EditProfileBlocConsumer extends StatelessWidget {
                   name: 'Phone Number',
                   controller: editProfileCubit.phoneNumberController,
                 ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Password',
+                  isPassword: true,
+                  controller: editProfileCubit.passwordController,
+                ),
                 const VerticalSpace(size: 32),
                 state is! EditProfileLoadInProgress
                     ? CustomButton(

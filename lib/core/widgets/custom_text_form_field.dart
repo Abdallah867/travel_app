@@ -21,7 +21,7 @@ class CustomTextFormField extends StatefulWidget {
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
-  bool isPasswordVisible = false;
+  bool isPasswordHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +46,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           },
           initialValue: widget.initialValue,
           controller: widget.controller,
-          obscureText: widget.isPassword ? isPasswordVisible : false,
+          obscureText: widget.isPassword ? isPasswordHidden : false,
           decoration: InputDecoration(
             suffixIcon:
-                widget.isPassword ? visibiltyIcon(isPasswordVisible) : null,
+                widget.isPassword ? visibiltyIcon(isPasswordHidden) : null,
             filled: true,
             fillColor: AppColors.lightGreyColor,
             border: const OutlineInputBorder(),
@@ -80,7 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return IconButton(
       onPressed: () {
         setState(() {
-          isPasswordVisible = !isPasswordVisible;
+          isPasswordHidden = !isPasswordHidden;
         });
       },
       icon: visibilty
