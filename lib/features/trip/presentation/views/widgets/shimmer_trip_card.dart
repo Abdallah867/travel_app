@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../core/widgets/custom_shimmer.dart';
 
 class ShimmerTripCard extends StatelessWidget {
   const ShimmerTripCard({super.key});
@@ -19,34 +20,21 @@ class ShimmerTripCard extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(left: 20.w, bottom: 16.h, top: 16.h),
-            child: FadeShimmer(
-              height: 72.h,
-              width: 72.w,
-              radius: 16.r,
-            ),
+            child: const CustomShimmer.box(),
           ),
           const HorizontalSpace(size: 12),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const HorizontalSpace(size: double.infinity),
-                  FadeShimmer(
-                    width: double.infinity,
-                    height: 5.h,
-                  ),
-                  const VerticalSpace(size: 4),
-                  FadeShimmer(
-                    width: double.infinity,
-                    height: 5.h,
-                  ),
-                  const VerticalSpace(size: 4),
-                  FadeShimmer(
-                    width: double.infinity,
-                    height: 5.h,
-                  ),
+                  HorizontalSpace(size: double.infinity),
+                  CustomShimmer(),
+                  VerticalSpace(size: 8),
+                  CustomShimmer(),
+                  VerticalSpace(size: 8),
+                  CustomShimmer(),
                 ],
               ),
             ),

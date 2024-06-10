@@ -12,7 +12,7 @@ class SaveTripListViewShimmer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
       // scrollDirection: Axis.horizontal,
       itemBuilder: (BuildContext context, int index) => const ShimmerTripCard(),
-      itemCount: 5,
+      itemCount: 3,
       separatorBuilder: (BuildContext context, int index) =>
           const VerticalSpace(size: 16),
     );
