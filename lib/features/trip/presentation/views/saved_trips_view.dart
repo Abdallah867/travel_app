@@ -20,16 +20,9 @@ class SavedTripsView extends StatelessWidget {
       create: (context) =>
           GetSavedTripsCubit(tripRepo: getIt.get<TripRepoImpl>())
             ..getSavedTrips(userId: userId!),
-      // child: BlocBuilder<CurrentAccountCubit, CurrentAccountState>(
-      // builder: (context, state) {
       child: Scaffold(
-        appBar: customAppBar(BlocProvider.of<CurrentAccountCubit>(context)
-                .userInformations
-                ?.username ??
-            ' '),
+        appBar: customAppBar('Saved Trips'),
         body: const SavedTripsBlocBuilder(),
-        // },
-        // ),
       ),
     );
   }
