@@ -103,6 +103,31 @@ class UserProfileRepoImpl implements UserProfileRepo {
     }
   }
 
+  // @override
+  // Future<Either<UserModel, Failure>> updateUserData(
+  //     {required String username, String phoneNumber, String email}) async {
+  //   try {
+  //     await databaseService.update(
+  //       id: newUserInformations.userId,
+  //       endpoint: AppConstants.profilesCollectionEndpoint,
+  //       data: {
+  //         'username': username,
+  //         'email': email,
+  //         'phoneNumber': phoneNumber,
+  //       },
+  //     );
+  //     return left(newUserInformations);
+  //   } on AppwriteException catch (e) {
+  //     return right(
+  //    Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+  //     );
+  //   } catch (e) {
+  //     return right(
+  //       Failure(errMessage: e.toString()),
+  //     );
+  //   }
+  // }
+
   @override
   Future<Either<void, Failure>> updateUsername(
       {required String newUsername}) async {
