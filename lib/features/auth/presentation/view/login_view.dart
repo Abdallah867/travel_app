@@ -8,7 +8,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
-import '../../data/repos/auth_rep_impl.dart';
+import '../../data/repos/auth_repo_impl.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import 'widgets/login_form.dart';
 
