@@ -19,7 +19,7 @@ class GetSavedTripsCubit extends Cubit<GetSavedTripsState> {
     response.fold(
       (newSavedTrips) {
         savedTrips = newSavedTrips;
-        // emit(GetSavedTripsSuccess());
+        emit(GetSavedTripsSuccess());
       },
       (failure) {
         emit(GetSavedTripsFailure(errMessage: failure.errMessage));
