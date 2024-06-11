@@ -34,7 +34,6 @@ class LoginBlocConsumer extends StatelessWidget {
         return state is! LoginLoading
             ? CustomButton(
                 text: AppStrings.login,
-                width: 254,
                 onPressed: () async {
                   if (_loginKey.currentState!.validate()) {
                     context.read<LoginCubit>().loginUser();

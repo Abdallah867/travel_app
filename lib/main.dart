@@ -49,7 +49,7 @@ class TravelApp extends StatelessWidget {
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
             background: AppColors.backgroundColor,
-            seedColor: AppColors.greyColor,
+            seedColor: AppColors.secondaryColor,
           ),
         ),
       ),

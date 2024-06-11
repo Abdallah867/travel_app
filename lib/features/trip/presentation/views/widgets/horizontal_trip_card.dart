@@ -28,6 +28,17 @@ class HorizontalTripCard extends StatelessWidget {
         decoration: BoxDecoration(
           // border radius
           borderRadius: BorderRadius.circular(16.r),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(17, 17, 26, 0.1),
+              blurRadius: 0,
+              spreadRadius: 0,
+              offset: Offset(
+                0,
+                1,
+              ),
+            ),
+          ],
           color: AppColors.whiteColor,
         ),
         child: Row(

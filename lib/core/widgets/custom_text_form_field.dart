@@ -47,32 +47,29 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           initialValue: widget.initialValue,
           controller: widget.controller,
           obscureText: widget.isPassword ? isPasswordHidden : false,
+          cursorColor: Colors.black,
           decoration: InputDecoration(
-            suffixIcon:
-                widget.isPassword ? visibiltyIcon(isPasswordHidden) : null,
             filled: true,
-            fillColor: AppColors.lightGreyColor,
-            border: const OutlineInputBorder(),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: const BorderSide(
-                color: AppColors.greyColor,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: const BorderSide(
-                width: 2,
-                color: AppColors.greyColor,
-              ),
-            ),
+            fillColor: AppColors.greyBlueColor,
+            border: customOutlineInputDecoration(),
+            enabledBorder: customOutlineInputDecoration(),
+            focusedBorder: customOutlineInputDecoration(),
             hintText: widget.name,
             hintStyle: const TextStyle(
-              color: AppColors.greyColor,
+              color: Color(0xFFA5A5A5),
             ),
+            suffixIcon:
+                widget.isPassword ? visibiltyIcon(isPasswordHidden) : null,
           ),
         ),
       ],
+    );
+  }
+
+  OutlineInputBorder customOutlineInputDecoration() {
+    return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(15)),
+      borderSide: BorderSide.none,
     );
   }
 
@@ -86,7 +83,49 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       icon: visibilty
           ? const Icon(Icons.visibility_outlined)
           : const Icon(Icons.visibility_off_outlined),
-      color: AppColors.greyColor,
+      color: const Color(0xFFA5A5A5),
     );
   }
 }
+
+// class CustomSearchBar extends StatelessWidget {
+//   final void Function(String, BuildContext)? onChanged;
+//   const CustomSearchBar({super.key, this.onChanged});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 0),
+//       child: SizedBox(
+//         height: 55,
+//         child: TextField(
+//           onChanged: (value) {
+//             if (onChanged != null && value.isNotEmpty) {
+//               onChanged!(value, context);
+//             }
+//           },
+//           cursorColor: Colors.black,
+//           decoration: InputDecoration(
+//             prefixIcon: const Icon(Icons.search),
+//             filled: true,
+//             fillColor: const Color(0xFFF2F3F2),
+//             border: customOutlineInputDecoration(),
+//             enabledBorder: customOutlineInputDecoration(),
+//             focusedBorder: customOutlineInputDecoration(),
+//             hintText: 'Search a product',
+//             hintStyle: const TextStyle(
+//               color: Color(0xFF7C7C7C),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   OutlineInputBorder customOutlineInputDecoration() {
+//     return const OutlineInputBorder(
+//       borderRadius: BorderRadius.all(Radius.circular(15)),
+//       borderSide: BorderSide.none,
+//     );
+//   }
+// }

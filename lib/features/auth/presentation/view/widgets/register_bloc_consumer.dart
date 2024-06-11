@@ -35,7 +35,6 @@ class RegisterBlocConsumer extends StatelessWidget {
         return state is! RegisterLoading
             ? CustomButton(
                 text: AppStrings.register,
-                width: 254,
                 onPressed: () async {
                   if (_registerKey.currentState!.validate()) {
                     BlocProvider.of<RegisterCubit>(context).registerUser();
