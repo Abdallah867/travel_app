@@ -61,8 +61,6 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         () => updateValue(AppStrings.username, usernameController.text));
     phoneNumberController.addListener(
         () => updateValue(AppStrings.phoneNumber, phoneNumberController.text));
-    passwordController.addListener(
-        () => updateValue(AppStrings.password, passwordController.text));
   }
 
   Future<void> updateUserData() async {
@@ -75,9 +73,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
     response.fold((updatedUser) {
       user = updatedUser;
+      passwordController.clear();
       emit(EditProfileSuccess());
     }, (failure) {
       log(failure.errMessage);
+      passwordController.clear();
+
       emit(EditProfileFailure(errMessage: failure.errMessage));
     });
   }

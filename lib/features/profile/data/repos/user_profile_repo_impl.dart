@@ -93,7 +93,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
       if (newUserInformations[AppStrings.email] != null) {
         await account.updateEmail(
           email: newUserInformations[AppStrings.email],
-          password: newUserInformations[AppStrings.password],
+          password: password,
         );
       }
 
