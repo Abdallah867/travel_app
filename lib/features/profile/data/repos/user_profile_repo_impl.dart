@@ -84,14 +84,15 @@ class UserProfileRepoImpl implements UserProfileRepo {
 
   @override
   Future<Either<UserModel, Failure>> updateUserData(
-      {required UserModel newUserInformations}) async {
+      {required Map<String, dynamic> newUserInformations,
+      required String userId}) async {
     try {
-      await databaseService.update(
-        id: newUserInformations.userId,
+      final response = await databaseService.update(
+        id: userId,
         endpoint: AppConstants.profilesCollectionEndpoint,
-        data: newUserInformations.toMap(),
+        data: newUserInformations,
       );
-      return left(newUserInformations);
+      return left(UserModel.fromMap(response));
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),

@@ -22,7 +22,7 @@ class ReviewWidget extends StatelessWidget {
         ),
         const HorizontalSpace(size: 4),
         Text(
-          '$review',
+          '(${review.toDouble().toStringAsFixed(1)})',
           style: TextStyles.textStyle14.copyWith(
             color: AppColors.lighterGrey,
           ),

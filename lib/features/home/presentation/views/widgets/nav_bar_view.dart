@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../profile/data/models/user_model.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
 import '../../../../trip/presentation/views/saved_trips_view.dart';
 import 'main_view.dart';
