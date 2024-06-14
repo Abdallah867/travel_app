@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/functions/show_snack_bar.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../data/models/user_model.dart';
+import '../../manager/cubit/edit_profile_cubit.dart';
+import 'profile_informations_widget.dart';
+
+class EditProfileBlocConsumer extends StatelessWidget {
+  const EditProfileBlocConsumer({
+    super.key,
+    required this.user,
+  });
+
+  final UserModel user;
+
+  @override
+  Widget build(BuildContext context) {
+    final EditProfileCubit editProfileCubit =
+        BlocProvider.of<EditProfileCubit>(context);
+    return BlocConsumer<EditProfileCubit, EditProfileState>(
+      listener: (context, state) {
+        handlingEditProfileListener(state, context, editProfileCubit);
+      },
+      builder: (context, state) {
+        return Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              children: [
+                const VerticalSpace(size: 36),
+                ProfileInformationsWidget(
+                  user: editProfileCubit.user,
+                ),
+                const VerticalSpace(size: 24),
+                CustomTextFormField(
+                  name: 'Username',
+                  controller: editProfileCubit.usernameController,
+                ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Email',
+                  controller: editProfileCubit.emailController,
+                ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Phone Number',
+                  controller: editProfileCubit.phoneNumberController,
+                ),
+                const VerticalSpace(size: 16),
+                CustomTextFormField(
+                  name: 'Password',
+                  isPassword: true,
+                  controller: editProfileCubit.passwordController,
+                ),
+                const VerticalSpace(size: 32),
+                state is! EditProfileLoadInProgress
+                    ? CustomButton(
+                        text: 'Save',
+                        onPressed: editProfileCubit.isButtonDisabled
+                            ? null
+                            : () async {
+                                await editProfileCubit.updateUserData();
+                              },
+                      )
+                    : const CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void handlingEditProfileListener(EditProfileState state, BuildContext context,
+      EditProfileCubit editProfileCubit) {
+    if (state is EditProfileSuccess) {
+      BlocProvider.of<CurrentAccountCubit>(context)
+          .updateUserInformations(editProfileCubit.user);
+      editProfileCubit.setInitialValue();
+      showSnackBar(context, 'Profile updated successfully', AppStrings.success);
+      // context.pop();
+    }
+    if (state is EditProfileFailure) {
+      showSnackBar(context, state.errMessage, AppStrings.error);
+    }
+  }
+}

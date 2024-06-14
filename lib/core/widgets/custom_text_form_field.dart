@@ -8,12 +8,14 @@ class CustomTextFormField extends StatefulWidget {
   final bool isPassword;
   final TextEditingController? controller;
   final String? initialValue;
+  final VoidCallback? onTapOutside;
   const CustomTextFormField({
     super.key,
     required this.name,
     this.isPassword = false,
     this.controller,
     this.initialValue,
+    this.onTapOutside,
   });
 
   @override
@@ -43,6 +45,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           },
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
+            widget.onTapOutside == null ? null : widget.onTapOutside!();
           },
           initialValue: widget.initialValue,
           controller: widget.controller,
