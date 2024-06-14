@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/functions/validate_email.dart';
+import '../../../../../core/functions/validate_password.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../manager/register_cubit/register_cubit.dart';
 import 'register_bloc_consumer.dart';
 
-class RegisterForm extends StatefulWidget {
+class RegisterForm extends StatelessWidget {
   const RegisterForm({
     super.key,
   });
 
-  @override
-  State<RegisterForm> createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -29,12 +26,18 @@ class _RegisterFormState extends State<RegisterForm> {
           CustomTextFormField(
             name: 'Email',
             controller: context.read<RegisterCubit>().emailController,
+            validator: (value) {
+              return validateEmail(value, context);
+            },
           ),
           const VerticalSpace(size: 25),
           CustomTextFormField(
             name: 'Password',
             isPassword: true,
             controller: context.read<RegisterCubit>().passwordController,
+            validator: (value) {
+              return validatePassword(value, context);
+            },
           ),
           const VerticalSpace(size: 35),
           RegisterBlocConsumer(
