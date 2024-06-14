@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/networking/database_service.dart';
+import '../../../../core/utils/app_strings.dart';
 import '../models/user_model.dart';
 import 'user_profile_repo.dart';
 
@@ -83,10 +84,24 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<UserModel, Failure>> updateUserData(
-      {required Map<String, dynamic> newUserInformations,
-      required String userId}) async {
+  Future<Either<UserModel, Failure>> updateUserData({
+    required Map<String, dynamic> newUserInformations,
+    required String userId,
+    required String password,
+  }) async {
     try {
+      if (newUserInformations[AppStrings.email] != null) {
+        await account.updateEmail(
+          email: newUserInformations[AppStrings.email],
+          password: newUserInformations[AppStrings.password],
+        );
+      }
+
+      if (newUserInformations[AppStrings.username] != null) {
+        await account.updateName(
+          name: newUserInformations[AppStrings.username],
+        );
+      }
       final response = await databaseService.update(
         id: userId,
         endpoint: AppConstants.profilesCollectionEndpoint,

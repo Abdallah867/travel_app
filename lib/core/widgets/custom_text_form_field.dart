@@ -9,6 +9,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? initialValue;
   final VoidCallback? onTapOutside;
+  final String? Function(String?)? validator;
   const CustomTextFormField({
     super.key,
     required this.name,
@@ -16,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.initialValue,
     this.onTapOutside,
+    this.validator,
   });
 
   @override
@@ -36,13 +38,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
         const VerticalSpace(size: 9),
         TextFormField(
-          validator: (value) {
-            if (value?.isEmpty ?? true) {
-              return "Field required";
-            } else {
-              return null;
-            }
-          },
+          validator: widget.validator ??
+              (value) {
+                if (value?.isEmpty ?? true) {
+                  return "Field required";
+                } else {
+                  return null;
+                }
+              },
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
             widget.onTapOutside == null ? null : widget.onTapOutside!();
@@ -54,9 +57,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             filled: true,
             fillColor: AppColors.greyBlueColor,
-            border: customOutlineInputDecoration(),
-            enabledBorder: customOutlineInputDecoration(),
-            focusedBorder: customOutlineInputDecoration(),
+            border: customInputBorder(),
+            enabledBorder: customInputBorder(),
+            focusedBorder: customInputBorder(),
+            focusedErrorBorder: customErrorInputBorder(),
+            errorBorder: customErrorInputBorder(),
             hintText: widget.name,
             hintStyle: const TextStyle(
               color: Color(0xFFA5A5A5),
@@ -69,9 +74,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
-  OutlineInputBorder customOutlineInputDecoration() {
+  OutlineInputBorder customErrorInputBorder() {
     return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(15)),
+        borderSide: BorderSide(color: Colors.red, width: 2),
+        borderRadius: BorderRadius.all(Radius.circular(16)));
+  }
+
+  OutlineInputBorder customInputBorder() {
+    return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(16)),
       borderSide: BorderSide.none,
     );
   }
