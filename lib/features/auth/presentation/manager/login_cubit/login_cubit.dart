@@ -15,14 +15,12 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.authRepo}) : super(LoginInitial());
 
   Future<void> loginUser() async {
-    //TODO: change hard coded email and password,
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
     emit(LoginLoading());
 
-    var response = await authRepo.loginUser(
-        email: 'abdoallahusma5704@gmail.com', password: 'Abdallah23');
+    var response = await authRepo.loginUser(email: email, password: password);
     response.fold(
       (session) => emit(LoginSuccess(session: session)),
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),

@@ -36,7 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           widget.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        const VerticalSpace(size: 9),
+        const VerticalSpace(size: 4),
         TextFormField(
           validator: widget.validator ??
               (value) {
@@ -53,10 +53,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           initialValue: widget.initialValue,
           controller: widget.controller,
           obscureText: widget.isPassword ? isPasswordHidden : false,
-          cursorColor: Colors.black,
+          cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
             filled: true,
-            fillColor: AppColors.greyBlueColor,
+            fillColor: const Color(0xFFF7F8F9),
             border: customInputBorder(),
             enabledBorder: customInputBorder(),
             focusedBorder: customInputBorder(),
@@ -74,6 +74,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
+  // const Color(0xFFE3E2E9)
+
   OutlineInputBorder customErrorInputBorder() {
     return const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.red, width: 2),
@@ -83,7 +85,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   OutlineInputBorder customInputBorder() {
     return const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(16)),
-      borderSide: BorderSide.none,
+      borderSide: BorderSide(
+        color: Color(0xFFE3E2E9),
+        width: 1.0,
+      ),
     );
   }
 
