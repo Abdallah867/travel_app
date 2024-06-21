@@ -56,7 +56,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
             filled: true,
-            fillColor: const Color(0xFFF7F8F9),
+            fillColor: AppColors.greyBlueColor,
             border: customInputBorder(),
             enabledBorder: customInputBorder(),
             focusedBorder: customInputBorder(),
@@ -79,12 +79,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   OutlineInputBorder customErrorInputBorder() {
     return const OutlineInputBorder(
         borderSide: BorderSide(color: Colors.red, width: 2),
-        borderRadius: BorderRadius.all(Radius.circular(16)));
+        borderRadius: BorderRadius.all(Radius.circular(12)));
   }
 
   OutlineInputBorder customInputBorder() {
     return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(16)),
+      borderRadius: BorderRadius.all(Radius.circular(12)),
       borderSide: BorderSide(
         color: Color(0xFFE3E2E9),
         width: 1.0,

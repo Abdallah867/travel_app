@@ -31,58 +31,55 @@ class EditProfileBlocConsumer extends StatelessWidget {
         handlingEditProfileListener(state, context, editProfileCubit);
       },
       builder: (context, state) {
+        print('tefa7a 1');
+
         return Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Form(
               key: editProfileCubit.formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // const VerticalSpace(size: 24),
-                    ProfileInformationsWidget(
-                      user: editProfileCubit.user,
-                    ),
-                    const VerticalSpace(size: 24),
-                    CustomTextFormField(
-                      name: 'Username',
-                      controller: editProfileCubit.usernameController,
-                    ),
-                    const VerticalSpace(size: 16),
-                    CustomTextFormField(
-                      name: 'Email',
-                      controller: editProfileCubit.emailController,
-                      validator: (value) => validateEmail(value, context),
-                    ),
-                    const VerticalSpace(size: 16),
-                    CustomTextFormField(
-                      name: 'Phone Number',
-                      controller: editProfileCubit.phoneNumberController,
-                      validator: (value) => validatePhoneNumber(value, context),
-                    ),
-                    const VerticalSpace(size: 16),
-                    CustomTextFormField(
-                      name: 'Password',
-                      isPassword: true,
-                      controller: editProfileCubit.passwordController,
-                      validator: (value) => validatePassword(value, context),
-                    ),
-                    const VerticalSpace(size: 32),
-                    state is! EditProfileLoadInProgress
-                        ? CustomButton(
-                            text: 'Save',
-                            onPressed: editProfileCubit.isButtonDisabled
-                                ? null
-                                : () async {
-                                    if (editProfileCubit.formKey.currentState!
-                                        .validate()) {
-                                      await editProfileCubit.updateUserData();
-                                    }
-                                  },
-                          )
-                        : const CircularProgressIndicator(),
-                    const VerticalSpace(size: 100),
-                  ],
+              child: AbsorbPointer(
+                absorbing: state is EditProfileLoadInProgress,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // const VerticalSpace(size: 24),
+                      ProfileInformationsWidget(
+                        user: editProfileCubit.user,
+                      ),
+                      const VerticalSpace(size: 24),
+                      CustomTextFormField(
+                        name: 'Username',
+                        controller: editProfileCubit.usernameController,
+                      ),
+                      const VerticalSpace(size: 16),
+                      CustomTextFormField(
+                        name: 'Email',
+                        controller: editProfileCubit.emailController,
+                        validator: (value) => validateEmail(value, context),
+                      ),
+                      const VerticalSpace(size: 16),
+                      CustomTextFormField(
+                        name: 'Phone Number',
+                        controller: editProfileCubit.phoneNumberController,
+                        validator: (value) =>
+                            validatePhoneNumber(value, context),
+                      ),
+                      const VerticalSpace(size: 16),
+                      CustomTextFormField(
+                        name: 'Password',
+                        isPassword: true,
+                        controller: editProfileCubit.passwordController,
+                        validator: (value) => validatePassword(value, context),
+                      ),
+                      const VerticalSpace(size: 32),
+                      state is! EditProfileLoadInProgress
+                          ? CustomButtonBlocBuilder(
+                              editProfileCubit: editProfileCubit)
+                          : const CircularProgressIndicator(),
+                      const VerticalSpace(size: 100),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -104,5 +101,34 @@ class EditProfileBlocConsumer extends StatelessWidget {
     if (state is EditProfileFailure) {
       showSnackBar(context, state.errMessage, AppStrings.error);
     }
+  }
+}
+
+class CustomButtonBlocBuilder extends StatelessWidget {
+  const CustomButtonBlocBuilder({
+    super.key,
+    required this.editProfileCubit,
+  });
+
+  final EditProfileCubit editProfileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EditProfileCubit, EditProfileState>(
+      builder: (context, state) {
+        return state is EditProfileInformationChanged
+            ? CustomButton(
+                text: 'Save',
+                onPressed: !state.isChanged
+                    ? null
+                    : () async {
+                        if (editProfileCubit.formKey.currentState!.validate()) {
+                          await editProfileCubit.updateUserData();
+                        }
+                      },
+              )
+            : const SizedBox();
+      },
+    );
   }
 }

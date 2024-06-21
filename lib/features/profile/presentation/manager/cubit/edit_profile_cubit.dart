@@ -1,42 +1,40 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/app_strings.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repos/user_profile_repo.dart';
 
 part 'edit_profile_state.dart';
 
 class EditProfileCubit extends Cubit<EditProfileState> {
-  final UserProfileRepo userProfileRepo;
-  UserModel user;
-  late UserModel updatedUser;
-  bool isButtonDisabled = true;
-  Map<String, dynamic> updatedUserInformations = {};
-
   TextEditingController emailController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
 
+  final UserProfileRepo userProfileRepo;
+  bool isButtonDisabled = true;
+  UserModel user;
+
   EditProfileCubit({required this.user, required this.userProfileRepo})
-      : super(EditProfileInitial());
+      : super(const EditProfileInformationChanged(isChanged: false));
 
-  void updateValue(String key, String value) {
-    updatedUserInformations[key] = value;
-    updatedUser = updateInformations();
-    checkIfInformarionsHasBeenChanged();
-    log(updatedUserInformations.toString());
-    emit(EditProfileInformationChanged(isButtonDisabled: isButtonDisabled));
-  }
+  Future<void> updateUserData() async {
+    emit(EditProfileLoadInProgress());
+    final response = await userProfileRepo.updateUserData(
+      newUserInformations: updateInformations(),
+      password: passwordController.text.trim(),
+    );
+    passwordController.clear();
 
-  void checkIfInformarionsHasBeenChanged() {
-    isButtonDisabled = (user == updatedUser ? true : false);
-    log('$isButtonDisabled');
+    response.fold((updatedUser) {
+      user = updatedUser;
+      emit(EditProfileSuccess());
+    }, (failure) {
+      emit(EditProfileFailure(errMessage: failure.errMessage));
+    });
   }
 
   UserModel updateInformations() {
@@ -54,41 +52,15 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     phoneNumberController.text = user.phoneNumber ?? '';
   }
 
+  void checkIfInformarionsHasBeenChanged() {
+    emit(EditProfileInformationChanged(
+        isChanged: (!(user == updateInformations()) ? true : false)));
+  }
+
   void setupControllerListeners() {
-    emailController
-        .addListener(() => updateValue(AppStrings.email, emailController.text));
-    usernameController.addListener(
-        () => updateValue(AppStrings.username, usernameController.text));
-    phoneNumberController.addListener(
-        () => updateValue(AppStrings.phoneNumber, phoneNumberController.text));
-  }
-
-  Future<void> updateUserData() async {
-    emit(EditProfileLoadInProgress());
-    final response = await userProfileRepo.updateUserData(
-      newUserInformations: updatedUserInformations,
-      userId: user.userId,
-      password: passwordController.text.trim(),
-    );
-
-    response.fold((updatedUser) {
-      user = updatedUser;
-      passwordController.clear();
-      emit(EditProfileSuccess());
-    }, (failure) {
-      log(failure.errMessage);
-      passwordController.clear();
-
-      emit(EditProfileFailure(errMessage: failure.errMessage));
-    });
-  }
-
-  @override
-  Future<void> close() {
-    usernameController.dispose();
-    emailController.dispose();
-    phoneNumberController.dispose();
-    passwordController.dispose();
-    return super.close();
+    emailController.addListener(() => checkIfInformarionsHasBeenChanged());
+    usernameController.addListener(() => checkIfInformarionsHasBeenChanged());
+    phoneNumberController
+        .addListener(() => checkIfInformarionsHasBeenChanged());
   }
 }

@@ -1,13 +1,15 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class UserModel {
+class UserModel extends Equatable {
   final String userId;
   final String username;
   final String email;
   final String? profilePicture;
   final String? phoneNumber;
-  UserModel({
+  const UserModel({
     required this.userId,
     required this.username,
     required this.email,
@@ -30,6 +32,13 @@ class UserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
+
+  @override
+  List<Object> get props => [
+        username,
+        email,
+        phoneNumber ?? '',
+      ];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -62,25 +71,5 @@ class UserModel {
   @override
   String toString() {
     return 'UserModel(userId: $userId, username: $username, email: $email, profilePicture: $profilePicture, phoneNumber: $phoneNumber)';
-  }
-
-  @override
-  bool operator ==(covariant UserModel other) {
-    if (identical(this, other)) return true;
-
-    return other.userId == userId &&
-        other.username == username &&
-        other.email == email &&
-        other.profilePicture == profilePicture &&
-        other.phoneNumber == phoneNumber;
-  }
-
-  @override
-  int get hashCode {
-    return userId.hashCode ^
-        username.hashCode ^
-        email.hashCode ^
-        profilePicture.hashCode ^
-        phoneNumber.hashCode;
   }
 }

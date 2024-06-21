@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/networking/database_service.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../models/user_model.dart';
 import 'user_profile_repo.dart';
 
@@ -85,27 +84,23 @@ class UserProfileRepoImpl implements UserProfileRepo {
 
   @override
   Future<Either<UserModel, Failure>> updateUserData({
-    required Map<String, dynamic> newUserInformations,
-    required String userId,
+    required UserModel newUserInformations,
     required String password,
   }) async {
     try {
-      if (newUserInformations[AppStrings.email] != null) {
-        await account.updateEmail(
-          email: newUserInformations[AppStrings.email],
-          password: password,
-        );
-      }
+      await account.updateEmail(
+        email: newUserInformations.email,
+        password: password,
+      );
 
-      if (newUserInformations[AppStrings.username] != null) {
-        await account.updateName(
-          name: newUserInformations[AppStrings.username],
-        );
-      }
+      await account.updateName(
+        name: newUserInformations.username,
+      );
+
       final response = await databaseService.update(
-        id: userId,
+        id: newUserInformations.userId,
         endpoint: AppConstants.profilesCollectionEndpoint,
-        data: newUserInformations,
+        data: newUserInformations.toMap(),
       );
       return left(UserModel.fromMap(response));
     } on AppwriteException catch (e) {
@@ -118,31 +113,6 @@ class UserProfileRepoImpl implements UserProfileRepo {
       );
     }
   }
-
-  // @override
-  // Future<Either<UserModel, Failure>> updateUserData(
-  //     {required String username, String phoneNumber, String email}) async {
-  //   try {
-  //     await databaseService.update(
-  //       id: newUserInformations.userId,
-  //       endpoint: AppConstants.profilesCollectionEndpoint,
-  //       data: {
-  //         'username': username,
-  //         'email': email,
-  //         'phoneNumber': phoneNumber,
-  //       },
-  //     );
-  //     return left(newUserInformations);
-  //   } on AppwriteException catch (e) {
-  //     return right(
-  //    Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
-  //     );
-  //   } catch (e) {
-  //     return right(
-  //       Failure(errMessage: e.toString()),
-  //     );
-  //   }
-  // }
 
   @override
   Future<Either<void, Failure>> updateUsername(

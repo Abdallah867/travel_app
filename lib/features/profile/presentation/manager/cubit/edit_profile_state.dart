@@ -14,10 +14,11 @@ final class EditProfileLoadInProgress extends EditProfileState {}
 final class EditProfileSuccess extends EditProfileState {}
 
 final class EditProfileInformationChanged extends EditProfileState {
-  final bool isButtonDisabled;
-  const EditProfileInformationChanged({required this.isButtonDisabled});
+  final bool isChanged;
+
+  const EditProfileInformationChanged({required this.isChanged});
   @override
-  List<Object> get props => [isButtonDisabled];
+  List<Object> get props => [isChanged];
 }
 
 final class EditProfileFailure extends EditProfileState {
