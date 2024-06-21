@@ -10,8 +10,7 @@ abstract class UserProfileRepo {
   Future<Either<void, Failure>> saveUserData({required User user});
 
   Future<Either<UserModel, Failure>> updateUserData({
-    required Map<String, dynamic> newUserInformations,
-    required String userId,
+    required UserModel newUserInformations,
     required String password,
   });
 

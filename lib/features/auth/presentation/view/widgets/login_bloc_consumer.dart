@@ -40,7 +40,7 @@ class LoginBlocConsumer extends StatelessWidget {
                   }
                 },
               )
-            : const CircularLoadingWidget();
+            : const CircularProgressIndicator();
       },
     );
   }
