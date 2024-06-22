@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/functions/show_snack_bar.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/widgets/circular_loading_widget.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../manager/login_cubit/login_cubit.dart';
 

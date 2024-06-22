@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
+import '../../../../trip/data/repos/trip_repo_impl.dart';
 import '../../../../trip/presentation/views/saved_trips_view.dart';
+import '../../manager/trips_cubit/trips_cubit.dart';
 import 'main_view.dart';
 
 final PersistentTabController _controller =
@@ -39,7 +43,12 @@ class NavBarView extends StatelessWidget {
 
 List<Widget> _buildScreens() {
   return [
-    const MainView(),
+    BlocProvider(
+      create: (context) => TripsCubit(
+        tripRepo: getIt.get<TripRepoImpl>(),
+      )..getTrips(),
+      child: const MainView(),
+    ),
     const ProfileView(),
     const SavedTripsView(),
     const ProfileView(),
