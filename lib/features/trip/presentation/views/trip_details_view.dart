@@ -9,8 +9,9 @@ import 'widgets/custom_trip_details_app_bar.dart';
 import 'widgets/trip_informations_widget.dart';
 
 class TripDetailsView extends StatelessWidget {
-  final String userId;
-  const TripDetailsView({super.key, required this.userId});
+  const TripDetailsView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

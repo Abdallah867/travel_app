@@ -18,15 +18,14 @@ class TripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final trip = BlocProvider.of<TripCubit>(context).trip;
-    final userId =
-        BlocProvider.of<CurrentAccountCubit>(context).userInformations?.userId;
+    // final currentAccountCubit =
     return GestureDetector(
       onTap: () {
         context.push(
           '${AppRoutes.kTrips}/1',
           extra: {
             'tripCubit': BlocProvider.of<TripCubit>(context),
-            'userId': userId
+            'currentAccountCubit': BlocProvider.of<CurrentAccountCubit>(context)
           },
         );
       },

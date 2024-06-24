@@ -33,10 +33,10 @@ class ProfileView extends StatelessWidget {
                         user: BlocProvider.of<CurrentAccountCubit>(context)
                             .userInformations,
                       ),
-                      const VerticalSpace(size: 24),
                     ],
                   ),
                 ),
+                const SliverToBoxAdapter(child: VerticalSpace(size: 24)),
                 const ProfileMenusListView(),
                 const SliverToBoxAdapter(child: VerticalSpace(size: 16)),
                 const LogoutButton(),

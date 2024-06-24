@@ -19,12 +19,13 @@ void main() async {
   await dotenv.load(fileName: ".env");
 
   setupServiceLocator();
-  runApp(
-    DevicePreview(
-      enabled: kDebugMode,
-      builder: (context) => const TravelApp(),
-    ),
-  );
+  runApp(const TravelApp());
+  // runApp(
+  //   DevicePreview(
+  //     enabled: kDebugMode,
+  //     builder: (context) => const TravelApp(),
+  //   ),
+  // );
 }
 
 class TravelApp extends StatelessWidget {
