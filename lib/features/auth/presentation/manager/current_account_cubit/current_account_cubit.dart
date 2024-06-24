@@ -30,8 +30,8 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
     } else {
       var userInDatabase = await userProfileRepo.getUserData(userId: user.$id);
       userInDatabase.fold(
-        (l) {
-          userInformations = l;
+        (user) {
+          userInformations = user;
           print(userInformations);
           emit(CurrentAccountExists());
         },

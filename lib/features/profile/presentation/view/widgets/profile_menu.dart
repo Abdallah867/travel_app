@@ -38,7 +38,7 @@ class ProfileMenu extends StatelessWidget {
           trailing: const Icon(Icons.arrow_forward_ios),
           minVerticalPadding: 20.h,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
       ),

@@ -33,12 +33,17 @@ abstract class AppRouter {
       GoRoute(
           path: AppRoutes.kTripDetailsView,
           builder: (context, state) {
-            final extra = state.extra as Map<String, dynamic>;
-            return BlocProvider.value(
-              value: extra['tripCubit'] as TripCubit,
-              child: TripDetailsView(
-                userId: extra['userId'],
-              ),
+            final cubits = state.extra as Map<String, dynamic>;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: cubits['tripCubit'] as TripCubit,
+                ),
+                BlocProvider.value(
+                  value: cubits['currentAccountCubit'] as CurrentAccountCubit,
+                ),
+              ],
+              child: const TripDetailsView(),
             );
           }),
       GoRoute(
