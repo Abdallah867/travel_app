@@ -32,10 +32,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        // Text(
+        //   widget.name,
+        //   style: const TextStyle(fontWeight: FontWeight.bold),
+        // ),
         const VerticalSpace(size: 4),
         TextFormField(
           validator: widget.validator ??
@@ -56,7 +56,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
             filled: true,
-            fillColor: AppColors.greyBlueColor,
+            fillColor: const Color(0xFFE5E4E2),
             border: customInputBorder(),
             enabledBorder: customInputBorder(),
             focusedBorder: customInputBorder(),
@@ -64,7 +64,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             errorBorder: customErrorInputBorder(),
             hintText: widget.name,
             hintStyle: const TextStyle(
-              color: Color(0xFFA5A5A5),
+              color: AppColors.platinumGrey,
             ),
             suffixIcon:
                 widget.isPassword ? visibiltyIcon(isPasswordHidden) : null,
@@ -84,12 +84,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   OutlineInputBorder customInputBorder() {
     return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
-      borderSide: BorderSide(
-        color: Color(0xFFE3E2E9),
-        width: 1.0,
-      ),
-    );
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide.none);
   }
 
   IconButton visibiltyIcon(bool visibilty) {

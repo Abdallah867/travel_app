@@ -23,8 +23,9 @@ abstract class TextStyles {
   );
 
   static TextStyle textStyle16WithOpacity = TextStyle(
-    color: Colors.black.withOpacity(.4),
-    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.grey.withOpacity(.8),
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
   );
 
   static TextStyle textStyle14 = TextStyle(
