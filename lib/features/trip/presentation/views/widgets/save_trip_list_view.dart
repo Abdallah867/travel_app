@@ -12,7 +12,7 @@ class SaveTripList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tripsCubit = BlocProvider.of<SavedTripsCubit>(context);
-    List<TripModel> savedTrips = tripsCubit.savedTrips;
+    List<TripModel> savedTrips = [];
 
     if (savedTrips.isNotEmpty) {
       return TripsList(trips: savedTrips);
