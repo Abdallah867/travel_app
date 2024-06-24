@@ -32,6 +32,7 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
       userInDatabase.fold(
         (l) {
           userInformations = l;
+          print(userInformations);
           emit(CurrentAccountExists());
         },
         (failure) => (CurrentAccountFailure(errMessage: failure.errMessage),),

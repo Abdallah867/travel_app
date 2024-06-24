@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/services/service_locator.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../data/repos/trip_repo_impl.dart';
-import '../../manager/save_trip_cubit.dart/save_trip_cubit.dart';
-
+import '../../manager/saved_trips_cubit.dart/saved_trips_cubit.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
 import 'custom_circular_icon.dart';
 
@@ -15,8 +13,13 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = getIt.get<CurrentAccountCubit>().userInformations?.userId;
+    print(userId);
+
     return BlocProvider(
-      create: (context) => SaveTripCubit(tripRepo: getIt.get<TripRepoImpl>()),
+      create: (context) => SavedTripsCubit(tripRepo: getIt.get<TripRepoImpl>())
+        ..getSavedTrips(userId: userId!)
+        ..getSavedTripsIds(userId: userId),
       child: const SaveButtonBlocBuilder(),
     );
   }
@@ -29,14 +32,16 @@ class SaveButtonBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SaveTripCubit saveTripCubit = BlocProvider.of<SaveTripCubit>(context);
+    final SavedTripsCubit saveTripCubit =
+        BlocProvider.of<SavedTripsCubit>(context);
 
     // TODO: remove the userId from here
     final userId = getIt.get<CurrentAccountCubit>().userInformations?.userId;
-    log(userId.toString());
     final tripId = BlocProvider.of<TripCubit>(context).trip.tripId;
-    return BlocBuilder<SaveTripCubit, SaveTripState>(builder: (context, state) {
-      return saveTripCubit.isTripSaved
+    print('$userId, $tripId');
+    return BlocBuilder<SavedTripsCubit, SavedTripsState>(
+        builder: (context, state) {
+      return saveTripCubit.isSaved(tripId)
           ? CustomCircularIcon(
               icon: Icons.bookmark,
               onPressed: () {

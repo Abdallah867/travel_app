@@ -24,15 +24,17 @@ import 'shimmer_trip_card.dart';
 //   }
 // }
 
-class ShimmerTripsListView extends StatelessWidget {
-  const ShimmerTripsListView({super.key});
+class ShimmerTripsList extends StatelessWidget {
+  const ShimmerTripsList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return const ShimmerTripCard();
+          return Padding(
+              padding: EdgeInsets.only(top: 16.h),
+              child: const ShimmerTripCard());
         },
         childCount: 5,
       ),
