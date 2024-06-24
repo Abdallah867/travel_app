@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/trip_model.dart';
 import '../../manager/saved_trips_cubit.dart/saved_trips_cubit.dart';
-import 'trips_list_view.dart';
+import 'trips_list.dart';
 
 class SaveTripListView extends StatelessWidget {
   const SaveTripListView({super.key});
