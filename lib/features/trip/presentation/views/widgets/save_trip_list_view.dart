@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/trip_model.dart';
-import '../../manager/get_saved_trips_cubit.dart/get_saved_trips_cubit.dart';
+import '../../manager/saved_trips_cubit.dart/saved_trips_cubit.dart';
 import 'trips_list_view.dart';
 
 class SaveTripListView extends StatelessWidget {
@@ -10,11 +10,11 @@ class SaveTripListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tripsCubit = BlocProvider.of<GetSavedTripsCubit>(context);
+    final tripsCubit = BlocProvider.of<SavedTripsCubit>(context);
     List<TripModel> savedTrips = tripsCubit.savedTrips;
 
     if (savedTrips.isNotEmpty) {
-      return TripsListView(trips: savedTrips);
+      return TripsList(trips: savedTrips);
     } else {
       return const Center(child: Text('No Saved Trips'));
     }

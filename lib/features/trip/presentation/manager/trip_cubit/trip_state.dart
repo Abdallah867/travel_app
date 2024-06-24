@@ -7,7 +7,7 @@ sealed class TripState extends Equatable {
   List<Object> get props => [];
 }
 
-final class TripInProgess extends TripState {}
+final class TripLoadInProgress extends TripState {}
 
 final class TripSuccess extends TripState {}
 

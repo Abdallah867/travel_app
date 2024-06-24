@@ -4,28 +4,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/widgets/custom_shimmer.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import 'location_and_price_widget.dart';
+import 'review_widget.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
-import '../../../../home/presentation/views/widgets/card_informations.dart';
-import 'trip_image.dart';
 
 class TripCard extends StatelessWidget {
   const TripCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final trip = BlocProvider.of<TripCubit>(context).trip;
+    final userId =
+        BlocProvider.of<CurrentAccountCubit>(context).userInformations?.userId;
     return GestureDetector(
       onTap: () {
         context.push(
           '${AppRoutes.kTrips}/1',
-          extra: BlocProvider.of<TripCubit>(context),
+          extra: {
+            'tripCubit': BlocProvider.of<TripCubit>(context),
+            'userId': userId
+          },
         );
       },
       child: Container(
-        width: 212.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(36.r)),
-          color: AppColors.whiteColor,
+          // border radius
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(17, 17, 26, 0.1),
@@ -37,41 +45,41 @@ class TripCard extends StatelessWidget {
               ),
             ),
           ],
+          color: AppColors.whiteColor,
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TripImage(),
-              CardInformations(),
-            ],
-          ),
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 20.w, bottom: 16.h, top: 16.h),
+              height: 72.h,
+              width: 72.w,
+              decoration: BoxDecoration(
+                color: AppColors.greyColor,
+                borderRadius: BorderRadius.all(Radius.circular(16.r)),
+              ),
+            ),
+            const HorizontalSpace(size: 12),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const HorizontalSpace(size: double.infinity),
+                    Text(trip.title, style: TextStyles.textStyle20SemiBold),
+                    const VerticalSpace(size: 4),
+                    ReviewWidget(
+                      review: trip.rating,
+                    ),
+                    const VerticalSpace(size: 4),
+                    const LocationAndPriceWidget(),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
-  }
-}
-
-class TripCardShimmer extends StatelessWidget {
-  const TripCardShimmer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      CustomShimmer.box(
-        height: 208.h,
-        width: 208.w,
-      ),
-      CustomShimmer(
-        width: 208.w,
-      ),
-      CustomShimmer(
-        width: 208.w,
-      ),
-      CustomShimmer(
-        width: 208.w,
-      ),
-    ]);
   }
 }
