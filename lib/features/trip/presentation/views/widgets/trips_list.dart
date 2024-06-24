@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/services/service_locator.dart';
-import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../data/models/trip_model.dart';
 import '../../../data/repos/trip_repo_impl.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
@@ -29,11 +28,9 @@ class TripsList extends StatelessWidget {
                 trip: trips[index],
                 tripRepo: getIt.get<TripRepoImpl>(),
               ),
-              child: Column(
-                children: [
-                  VerticalSpace(size: 16.h),
-                  const TripCard(),
-                ],
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 16.h),
+                child: const TripCard(),
               ),
             );
           },

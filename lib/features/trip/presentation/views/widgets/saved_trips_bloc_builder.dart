@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../manager/saved_trips_cubit.dart/saved_trips_cubit.dart';
 import 'save_trip_list_view.dart';
-import 'save_trip_list_view_shimmer.dart';
 import 'shimmer_trips_list.dart';
 
 class SavedTripsBlocBuilder extends StatelessWidget {
