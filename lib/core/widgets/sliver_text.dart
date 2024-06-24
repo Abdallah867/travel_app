@@ -7,7 +7,9 @@ class SliverText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Text(text),
+      child: Center(
+        child: Text(text),
+      ),
     );
   }
 }
