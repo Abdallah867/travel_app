@@ -25,8 +25,3 @@ class TripsListBlocBuilder extends StatelessWidget {
     );
   }
 }
-
-// const CustomScrollView(
-//           slivers: [
-//             SavedTripsBlocBuilder(),
-//           ],

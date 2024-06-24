@@ -22,7 +22,11 @@ class SavedTripsView extends StatelessWidget {
         ..getSavedTripsIds(userId: userId),
       child: Scaffold(
         appBar: customAppBar('Saved Trips'),
-        body: const SavedTripsBlocBuilder(),
+        body: const CustomScrollView(
+          slivers: [
+            SavedTripsBlocBuilder(),
+          ],
+        ),
       ),
     );
   }
