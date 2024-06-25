@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/widgets/circular_loading_widget.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../../auth/presentation/view/login_view.dart';
 import 'nav_bar_view.dart';
 
 class HomeBlocBuilder extends StatelessWidget {

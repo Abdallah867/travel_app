@@ -7,8 +7,8 @@ class BookingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const SizedBox(
-        height: 507.0,
+      body: const Center(
+        child: Text('Booking View'),
       ),
     );
   }

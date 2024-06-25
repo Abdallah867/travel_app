@@ -15,17 +15,15 @@ import 'simple_bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
-
   await dotenv.load(fileName: ".env");
 
   setupServiceLocator();
-  runApp(const TravelApp());
-  // runApp(
-  //   DevicePreview(
-  //     enabled: kDebugMode,
-  //     builder: (context) => const TravelApp(),
-  //   ),
-  // );
+  runApp(
+    DevicePreview(
+      enabled: kDebugMode,
+      builder: (context) => const TravelApp(),
+    ),
+  );
 }
 
 class TravelApp extends StatelessWidget {
@@ -44,13 +42,10 @@ class TravelApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         theme: ThemeData(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          hoverColor: Colors.transparent,
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
-            background: AppColors.backgroundColor,
-            seedColor: AppColors.secondaryColor,
+            surface: AppColors.backgroundColor,
+            seedColor: AppColors.greyColor,
           ),
         ),
       ),

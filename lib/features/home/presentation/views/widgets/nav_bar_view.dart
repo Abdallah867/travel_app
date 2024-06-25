@@ -1,87 +1,77 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../booking/presentation/views/booking_view.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
 import '../../../../trip/data/repos/trip_repo_impl.dart';
 import '../../../../trip/presentation/views/saved_trips_view.dart';
 import '../../manager/trips_cubit/trips_cubit.dart';
 import 'main_view.dart';
 
-final PersistentTabController _controller =
-    PersistentTabController(initialIndex: 0);
-
-class NavBarView extends StatelessWidget {
+class NavBarView extends StatefulWidget {
   const NavBarView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: PersistentTabView(
-          context,
-          controller: _controller,
-          decoration: const NavBarDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-          ),
-          margin: EdgeInsets.only(left: 41.w, right: 41.w, bottom: 30.h),
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-
-          navBarHeight: 70.0.h,
-          backgroundColor: AppColors.secondaryColor, // Default is Colors.white.
-          navBarStyle: NavBarStyle
-              .style6, // Choose the nav bar style with this property.
-        ),
-      ),
-    );
-  }
+  State<NavBarView> createState() => _NavBarViewState();
 }
 
-List<Widget> _buildScreens() {
-  return [
+class _NavBarViewState extends State<NavBarView> {
+  int _selectedIndex = 0;
+  final List<Widget> _screensList = [
     BlocProvider(
       create: (context) => TripsCubit(
         tripRepo: getIt.get<TripRepoImpl>(),
       )..getTrips(),
       child: const MainView(),
     ),
-    const ProfileView(),
+    const BookingView(),
     const SavedTripsView(),
     const ProfileView(),
   ];
-}
 
-List<PersistentBottomNavBarItem> _navBarsItems() {
-  return [
-    navBarIcon(Icons.home),
-    navBarIcon(Icons.search),
-    navBarIcon(Icons.groups),
-    navBarIcon(Icons.account_circle_sharp),
-  ];
-}
-
-PersistentBottomNavBarItem navBarIcon(IconData icon) {
-  return PersistentBottomNavBarItem(
-    inactiveIcon: Icon(
-      icon,
-      size: 22,
-      color: AppColors.whiteColor,
-    ),
-    icon: Container(
-      height: 32,
-      width: 32,
-      decoration: const BoxDecoration(
-          color: AppColors.backgroundColor, shape: BoxShape.circle),
-      child: Icon(
-        icon,
-        size: 20,
-        color: AppColors.secondaryColor,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('BottomNavigationBar Sample'),
       ),
-    ),
-    // activeColorSecondary: Colors.black,
-  );
+      body: _screensList.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month_outlined),
+            activeIcon: Icon(Icons.calendar_month),
+            label: 'Reservations',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark_outline),
+            activeIcon: Icon(Icons.bookmark),
+            label: 'Saved',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            activeIcon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: AppColors.secondaryColor,
+        unselectedItemColor: AppColors.platinumGrey,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 }
