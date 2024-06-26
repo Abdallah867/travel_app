@@ -57,6 +57,6 @@ class TripCubit extends Cubit<TripState> {
 
   void checkIfTripSaved(savedTripsIds) {
     isTripSaved = savedTripsIds.contains(trip.tripId);
-    emit(TripSaveChanged(savedTripsIds.contains(trip.tripId)));
+    emit(TripSaveChanged(isTripSaved));
   }
 }

@@ -23,12 +23,13 @@ class ProfileView extends StatelessWidget {
           ),
           child: Scaffold(
             body: CustomScrollView(
+              physics: const NeverScrollableScrollPhysics(),
               slivers: [
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
                       const HorizontalSpace(size: double.infinity),
-                      const VerticalSpace(size: 60),
+                      const VerticalSpace(size: 24),
                       ProfileInformationsWidget(
                         user: BlocProvider.of<CurrentAccountCubit>(context)
                             .userInformations,

@@ -21,6 +21,7 @@ class RegisterView extends StatelessWidget {
           userProfileRepo: getIt.get<UserProfileRepoImpl>()),
       child: Scaffold(
         body: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 25.0.w),

@@ -12,6 +12,7 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: const ClampingScrollPhysics(),
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate(
