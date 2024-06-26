@@ -4,8 +4,8 @@ import '../../../../auth/presentation/manager/current_account_cubit/current_acco
 import '../../manager/trip_cubit/trip_cubit.dart';
 import 'custom_circular_icon.dart';
 
-class SaveButtonBlocConsumer extends StatelessWidget {
-  const SaveButtonBlocConsumer({
+class SaveButtonBlocBuilder extends StatelessWidget {
+  const SaveButtonBlocBuilder({
     super.key,
   });
 
@@ -18,33 +18,29 @@ class SaveButtonBlocConsumer extends StatelessWidget {
 
     final tripId = tripCubit.trip.tripId;
 
-    return BlocConsumer<TripCubit, TripState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return AbsorbPointer(
-            absorbing: TripCubit is TripLoadInProgress ||
-                    tripCubit.savedTripsIds == null
+    return BlocBuilder<TripCubit, TripState>(builder: (context, state) {
+      return AbsorbPointer(
+        absorbing:
+            TripCubit is TripLoadInProgress || tripCubit.savedTripsIds == null
                 ? true
                 : false,
-            child: CustomCircularIcon(
-              icon: tripCubit.isTripSaved
-                  ? Icons.bookmark
-                  : Icons.bookmark_outline,
-              onPressed: () {
-                if (tripCubit.isTripSaved) {
-                  tripCubit.unsaveTrip(
-                    tripId: tripId,
-                    userId: userId!,
-                  );
-                } else {
-                  tripCubit.saveTrip(
-                    tripId: tripId,
-                    userId: userId!,
-                  );
-                }
-              },
-            ),
-          );
-        });
+        child: CustomCircularIcon(
+          icon: tripCubit.isTripSaved ? Icons.bookmark : Icons.bookmark_outline,
+          onPressed: () {
+            if (tripCubit.isTripSaved) {
+              tripCubit.unsaveTrip(
+                tripId: tripId,
+                userId: userId!,
+              );
+            } else {
+              tripCubit.saveTrip(
+                tripId: tripId,
+                userId: userId!,
+              );
+            }
+          },
+        ),
+      );
+    });
   }
 }

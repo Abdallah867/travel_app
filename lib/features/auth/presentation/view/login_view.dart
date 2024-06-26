@@ -18,6 +18,7 @@ class LoginView extends StatelessWidget {
       create: (context) => LoginCubit(authRepo: getIt.get<AuthRepoImpl>()),
       child: Scaffold(
         body: CustomScrollView(
+          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),

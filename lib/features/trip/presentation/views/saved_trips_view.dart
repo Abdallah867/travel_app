@@ -22,6 +22,7 @@ class SavedTripsView extends StatelessWidget {
       child: Scaffold(
         appBar: customAppBar('Saved Trips'),
         body: const CustomScrollView(
+          physics: ClampingScrollPhysics(),
           slivers: [
             SavedTripsBlocBuilder(),
           ],
