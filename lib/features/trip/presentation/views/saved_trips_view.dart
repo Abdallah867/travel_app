@@ -18,8 +18,7 @@ class SavedTripsView extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => SavedTripsCubit(tripRepo: getIt.get<TripRepoImpl>())
-        ..getSavedTrips(userId: userId!)
-        ..getSavedTripsIds(userId: userId),
+        ..getSavedTrips(userId: userId!),
       child: Scaffold(
         appBar: customAppBar('Saved Trips'),
         body: const CustomScrollView(
