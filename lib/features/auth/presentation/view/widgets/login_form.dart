@@ -23,7 +23,8 @@ class LoginForm extends StatelessWidget {
         children: [
           CustomTextFormField(
             name: 'Email',
-            controller: context.read<LoginCubit>().emailController,
+            initialValue: 'abdoallahusma5704@gmail.com',
+            // controller: context.read<LoginCubit>().emailController,
             validator: (value) {
               return validateEmail(value, context);
             },
@@ -32,7 +33,8 @@ class LoginForm extends StatelessWidget {
           CustomTextFormField(
               name: 'Password',
               isPassword: true,
-              controller: context.read<LoginCubit>().passwordController,
+              initialValue: 'Abdallah23',
+              // controller: context.read<LoginCubit>().passwordController,
               validator: (value) {
                 return validatePassword(value, context);
               }),

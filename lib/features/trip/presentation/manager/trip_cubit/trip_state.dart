@@ -11,6 +11,15 @@ final class TripLoadInProgress extends TripState {}
 
 final class TripSuccess extends TripState {}
 
+class TripSaveChanged extends TripState {
+  final bool isTripSaved;
+
+  const TripSaveChanged(this.isTripSaved);
+
+  @override
+  List<Object> get props => [isTripSaved];
+}
+
 final class TripFailure extends TripState {
   final String errMessage;
 
