@@ -5,6 +5,7 @@ import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
 
 class LocationAndPriceWidget extends StatelessWidget {
@@ -36,7 +37,7 @@ class LocationAndPriceWidget extends StatelessWidget {
           ],
         ),
         Text(
-          '${tripCubit.trip.price} DA',
+          '${tripCubit.trip.price} ${S.of(context).algerianCurrency}',
           style: TextStyles.textStyle14.copyWith(
             fontWeight: FontWeightHelper.semiBold,
             color: AppColors.secondaryColor,
