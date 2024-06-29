@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../generated/l10n.dart';
 import '../../manager/saved_trips_cubit.dart/saved_trips_cubit.dart';
 import 'save_trip_list_view.dart';
 import 'shimmer_trips_list.dart';
@@ -18,9 +19,9 @@ class SavedTripsBlocBuilder extends StatelessWidget {
         } else if (state is SavedTripsSuccess) {
           return const SaveTripList();
         } else {
-          return const SliverFillRemaining(
+          return SliverFillRemaining(
             child: Center(
-              child: Text('An error occured'),
+              child: Text(S.of(context).error),
             ),
           );
         }

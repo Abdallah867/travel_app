@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../generated/l10n.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
 
 class ExpandableText extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             isExpanded = !isExpanded;
           }),
           child: Text(
-            !isExpanded ? 'Show More' : 'Show Less',
+            !isExpanded ? S.of(context).showMore : S.of(context).showLess,
             style: TextStyles.textStyle16.copyWith(
               fontWeight: FontWeightHelper.regular,
               color: AppColors.secondaryColor,

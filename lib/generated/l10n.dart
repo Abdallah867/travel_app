@@ -140,9 +140,45 @@ class S {
     );
   }
 
-  // skipped getter for the 'Already have an account?' key
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'Don\'t have an account?' key
+  /// `Saved`
+  String get saved {
+    return Intl.message(
+      'Saved',
+      name: 'saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHaveAnAccount {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Forgot password?`
   String get forgotPassword {
@@ -304,6 +340,16 @@ class S {
     );
   }
 
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Description`
   String get description {
     return Intl.message(
@@ -324,11 +370,21 @@ class S {
     );
   }
 
+  /// `Show Less`
+  String get showLess {
+    return Intl.message(
+      'Show Less',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `About`
-  String get About {
+  String get about {
     return Intl.message(
       'About',
-      name: 'About',
+      name: 'about',
       desc: '',
       args: [],
     );

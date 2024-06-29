@@ -22,9 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "About": MessageLookupByLibrary.simpleMessage("About"),
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "agencies": MessageLookupByLibrary.simpleMessage("Top agencies"),
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("DZD"),
+        "alreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Available Trips"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
@@ -34,22 +36,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "dontHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("Login failed"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "noSavedTrips": MessageLookupByLibrary.simpleMessage("No saved trips"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "saved": MessageLookupByLibrary.simpleMessage("Saved"),
         "savedTrips": MessageLookupByLibrary.simpleMessage("Saved trips"),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "showLess": MessageLookupByLibrary.simpleMessage("Show Less"),
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup failed"),
