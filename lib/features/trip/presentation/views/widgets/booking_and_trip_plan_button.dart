@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../generated/l10n.dart';
 import 'custom_circular_icon.dart';
 
 class BookingAndTripPlanButton extends StatelessWidget {
@@ -30,7 +30,7 @@ class BookingAndTripPlanButton extends StatelessWidget {
           const HorizontalSpace(size: 12),
           Expanded(
             child: CustomButton(
-              text: AppStrings.bookNow,
+              text: S.of(context).bookNow,
               onPressed: () {
                 _dialogBuilder(context);
                 // context.push(AppRoutes.kBookingView);

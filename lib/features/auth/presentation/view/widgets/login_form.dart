@@ -7,6 +7,7 @@ import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../manager/login_cubit/login_cubit.dart';
 import 'login_bloc_consumer.dart';
 
@@ -22,7 +23,7 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
-            name: 'Email',
+            name: S.of(context).email,
             initialValue: 'abdoallahusma5704@gmail.com',
             // controller: context.read<LoginCubit>().emailController,
             validator: (value) {
@@ -31,7 +32,7 @@ class LoginForm extends StatelessWidget {
           ),
           const VerticalSpace(size: 25),
           CustomTextFormField(
-              name: 'Password',
+              name: S.of(context).password,
               isPassword: true,
               initialValue: 'Abdallah23',
               // controller: context.read<LoginCubit>().passwordController,
@@ -43,7 +44,7 @@ class LoginForm extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                "Forgot Password ?",
+                S.of(context).forgotPassword,
                 style: TextStyles.textStyle14.copyWith(
                     fontWeight: FontWeightHelper.semiBold,
                     color: AppColors.secondaryColor),

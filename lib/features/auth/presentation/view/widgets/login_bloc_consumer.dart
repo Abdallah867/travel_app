@@ -6,6 +6,7 @@ import '../../../../../core/functions/show_snack_bar.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../manager/login_cubit/login_cubit.dart';
 
 class LoginBlocConsumer extends StatelessWidget {
@@ -32,7 +33,7 @@ class LoginBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return state is! LoginLoading
             ? CustomButton(
-                text: AppStrings.login,
+                text: S.of(context).login,
                 onPressed: () async {
                   if (_loginKey.currentState!.validate()) {
                     context.read<LoginCubit>().loginUser();

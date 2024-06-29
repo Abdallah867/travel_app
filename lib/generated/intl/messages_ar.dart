@@ -22,9 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "About": MessageLookupByLibrary.simpleMessage("حول"),
+        "about": MessageLookupByLibrary.simpleMessage("حول"),
         "agencies": MessageLookupByLibrary.simpleMessage("أفضل الوكالات"),
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("د.ج"),
+        "alreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("الرحلات المتاحة"),
         "bookNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
@@ -34,12 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
+        "dontHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("فشل تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -47,11 +52,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا توجد رحلات محفوظة"),
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "saved": MessageLookupByLibrary.simpleMessage("محفوظ"),
         "savedTrips": MessageLookupByLibrary.simpleMessage("الرحلات المحفوظة"),
         "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+        "showLess": MessageLookupByLibrary.simpleMessage("عرض أقل"),
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),

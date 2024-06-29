@@ -9,6 +9,7 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../data/models/user_model.dart';
 import '../../manager/cubit/edit_profile_cubit.dart';
@@ -31,8 +32,6 @@ class EditProfileBlocConsumer extends StatelessWidget {
         handlingEditProfileListener(state, context, editProfileCubit);
       },
       builder: (context, state) {
-        print('tefa7a 1');
-
         return Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -49,25 +48,25 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(
-                        name: 'Username',
+                        name: S.of(context).username,
                         controller: editProfileCubit.usernameController,
                       ),
                       const VerticalSpace(size: 16),
                       CustomTextFormField(
-                        name: 'Email',
+                        name: S.of(context).email,
                         controller: editProfileCubit.emailController,
                         validator: (value) => validateEmail(value, context),
                       ),
                       const VerticalSpace(size: 16),
                       CustomTextFormField(
-                        name: 'Phone Number',
+                        name: S.of(context).phoneNumber,
                         controller: editProfileCubit.phoneNumberController,
                         validator: (value) =>
                             validatePhoneNumber(value, context),
                       ),
                       const VerticalSpace(size: 16),
                       CustomTextFormField(
-                        name: 'Password',
+                        name: S.of(context).password,
                         isPassword: true,
                         controller: editProfileCubit.passwordController,
                         validator: (value) => validatePassword(value, context),
@@ -118,7 +117,7 @@ class CustomButtonBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state is EditProfileInformationChanged
             ? CustomButton(
-                text: 'Save',
+                text: S.of(context).save,
                 onPressed: !state.isChanged
                     ? null
                     : () async {

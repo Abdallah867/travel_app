@@ -6,6 +6,7 @@ import '../../../../../core/functions/show_snack_bar.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/manager/logout_cubit/logout_cubit.dart';
 
 class LogoutButton extends StatelessWidget {
@@ -31,14 +32,8 @@ class LogoutButton extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: CustomButton(
-                    text: 'Logout',
+                    text: S.of(context).logout,
                     color: Colors.red,
-                    // borderSide: const BorderSide(
-                    //   color: Colors.red,
-                    //   width: 2,
-                    // ),
-                    // textColor: Colors.red,
-                    // borderRadius: 16,
                     onPressed: () async {
                       await BlocProvider.of<LogoutCubit>(context).logoutUser();
                     },

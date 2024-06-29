@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../profile/data/repos/user_profile_repo_impl.dart';
 import '../../data/repos/auth_repo_impl.dart';
 import '../manager/register_cubit/register_cubit.dart';
@@ -29,9 +30,9 @@ class RegisterView extends StatelessWidget {
                 delegate: SliverChildListDelegate(
                   [
                     const VerticalSpace(size: 154),
-                    Text('Welcome!', style: TextStyles.textStyle28),
+                    Text(S.of(context).welcome, style: TextStyles.textStyle28),
                     Text(
-                      'Enter your credentials to create your account',
+                      S.of(context).credentialSignupMessage,
                       style: TextStyles.textStyle16WithOpacity,
                     ),
                     const VerticalSpace(size: 40),

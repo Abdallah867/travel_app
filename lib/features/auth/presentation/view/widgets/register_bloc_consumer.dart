@@ -7,6 +7,7 @@ import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/circular_loading_widget.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 import '../../manager/register_cubit/register_cubit.dart';
 
 class RegisterBlocConsumer extends StatelessWidget {
@@ -34,7 +35,7 @@ class RegisterBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return state is! RegisterLoading
             ? CustomButton(
-                text: AppStrings.register,
+                text: S.of(context).signup,
                 onPressed: () async {
                   if (_registerKey.currentState!.validate()) {
                     BlocProvider.of<RegisterCubit>(context).registerUser();

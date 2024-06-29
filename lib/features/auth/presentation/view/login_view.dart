@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/repos/auth_repo_impl.dart';
 import '../manager/login_cubit/login_cubit.dart';
 import 'widgets/dont_have_an_account.dart';
@@ -26,9 +27,10 @@ class LoginView extends StatelessWidget {
                 delegate: SliverChildListDelegate(
                   [
                     const VerticalSpace(size: 154),
-                    Text('Welcome Back!', style: TextStyles.textStyle28),
+                    Text(S.of(context).welcomeBack,
+                        style: TextStyles.textStyle28),
                     Text(
-                      'Enter your email and password to continue',
+                      S.of(context).credentialLoginMessage,
                       style: TextStyles.textStyle16WithOpacity,
                     ),
                     const VerticalSpace(size: 40),

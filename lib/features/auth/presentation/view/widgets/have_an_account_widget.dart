@@ -5,6 +5,8 @@ import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../generated/l10n.dart';
 
 class HaveAnAccountWidget extends StatelessWidget {
   const HaveAnAccountWidget({
@@ -17,16 +19,17 @@ class HaveAnAccountWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Already have an account? ",
+          S.of(context).alreadyHaveAnAccount,
           style: TextStyles.textStyle14
               .copyWith(fontWeight: FontWeightHelper.semiBold),
         ),
+        const HorizontalSpace(size: 4),
         GestureDetector(
           onTap: () {
             context.go(AppRoutes.kLoginView);
           },
           child: Text(
-            "Login",
+            S.of(context).login,
             style: TextStyles.textStyle14.copyWith(
                 color: AppColors.secondaryColor,
                 fontWeight: FontWeightHelper.semiBold),

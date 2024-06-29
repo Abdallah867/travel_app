@@ -22,8 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "About": MessageLookupByLibrary.simpleMessage("À propos"),
-        "agencies": MessageLookupByLibrary.simpleMessage("Agences principales"),
+        "about": MessageLookupByLibrary.simpleMessage("À propos"),
+        "agencies": MessageLookupByLibrary.simpleMessage("Meilleures Agences"),
+        "algerianCurrency": MessageLookupByLibrary.simpleMessage("DA"),
+        "alreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Voyages disponibles"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Réservez maintenant"),
@@ -33,12 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
             "Entrez vos informations d\'identification pour continuer"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "dontHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Vous n\'avez pas de compte?"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Modifier le profil"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Mot de passe oublié?"),
+        "home": MessageLookupByLibrary.simpleMessage("Accueil"),
         "login": MessageLookupByLibrary.simpleMessage("Connexion"),
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Échec de la connexion"),
@@ -47,12 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aucun voyage enregistré"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
+        "phoneNumber":
+            MessageLookupByLibrary.simpleMessage("Numéro de téléphone"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "save": MessageLookupByLibrary.simpleMessage("Enregistrer"),
+        "saved": MessageLookupByLibrary.simpleMessage("Enregistré"),
         "savedTrips":
             MessageLookupByLibrary.simpleMessage("Voyages enregistrés"),
         "seeAll": MessageLookupByLibrary.simpleMessage("Voir tout"),
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
+        "showLess": MessageLookupByLibrary.simpleMessage("Voir moins"),
         "showMore": MessageLookupByLibrary.simpleMessage("Voir plus"),
         "signup": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "signupFailed":
