@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
