@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -32,8 +33,7 @@ class BookingAndTripPlanButton extends StatelessWidget {
             child: CustomButton(
               text: S.of(context).bookNow,
               onPressed: () {
-                _dialogBuilder(context);
-                // context.push(AppRoutes.kBookingView);
+                context.push(AppRoutes.kBookingView);
               },
             ),
           ),

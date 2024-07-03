@@ -10,6 +10,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? initialValue;
   final VoidCallback? onTapOutside;
   final String? Function(String?)? validator;
+  final OutlineInputBorder? outlineInputBorder;
   const CustomTextFormField({
     super.key,
     required this.name,
@@ -18,6 +19,7 @@ class CustomTextFormField extends StatefulWidget {
     this.initialValue,
     this.onTapOutside,
     this.validator,
+    this.outlineInputBorder,
   });
 
   @override
@@ -57,7 +59,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             filled: true,
             fillColor: const Color(0xFFE5E4E2),
-            border: customInputBorder(),
+            border: widget.outlineInputBorder ?? customInputBorder(),
             enabledBorder: customInputBorder(),
             focusedBorder: customInputBorder(),
             focusedErrorBorder: customErrorInputBorder(),

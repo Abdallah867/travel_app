@@ -5,6 +5,7 @@ import '../../features/auth/presentation/manager/current_account_cubit/current_a
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
 import '../../features/booking/presentation/views/booking_view.dart';
+import '../../features/booking/presentation/views/reservation_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
@@ -48,7 +49,7 @@ abstract class AppRouter {
           }),
       GoRoute(
         path: AppRoutes.kBookingView,
-        builder: (context, GoRouterState state) => const BookingView(),
+        builder: (context, GoRouterState state) => const ReservationView(),
       ),
       GoRoute(
           path: AppRoutes.kEditProfileView,

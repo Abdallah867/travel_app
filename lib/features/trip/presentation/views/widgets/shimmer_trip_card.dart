@@ -18,7 +18,8 @@ class ShimmerTripCard extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 20.w, bottom: 16.h, top: 16.h),
+            padding: EdgeInsetsDirectional.only(
+                start: 20.w, bottom: 16.h, top: 16.h),
             child: const CustomShimmer.box(),
           ),
           const HorizontalSpace(size: 12),
