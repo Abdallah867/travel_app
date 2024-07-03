@@ -42,7 +42,7 @@ class TravelApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
-        locale: const Locale('ar'),
+        locale: const Locale('en'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

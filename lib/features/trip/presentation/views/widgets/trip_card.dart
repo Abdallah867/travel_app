@@ -49,7 +49,8 @@ class TripCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(left: 20.w, bottom: 16.h, top: 16.h),
+              margin: EdgeInsetsDirectional.only(
+                  start: 20.w, bottom: 16.h, top: 16.h),
               height: 72.h,
               width: 72.w,
               decoration: BoxDecoration(
