@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../booking/presentation/views/booking_view.dart';
+import '../../../../reservation/presentation/views/booking_view.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
 import '../../../../trip/data/repos/trip_repo_impl.dart';
 import '../../../../trip/presentation/views/saved_trips_view.dart';
