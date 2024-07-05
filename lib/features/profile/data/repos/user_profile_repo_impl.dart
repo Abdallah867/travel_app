@@ -32,6 +32,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
       );
     } catch (e) {
+      print(e);
       return right(
         Failure(errMessage: e.toString()),
       );
