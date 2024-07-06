@@ -24,7 +24,10 @@ class LoginCubit extends Cubit<LoginState> {
         email: 'abdoallahusma5704@gmail.com' ?? email,
         password: 'Abdallah23' ?? password);
     response.fold(
-      (session) => emit(LoginSuccess(session: session)),
+      (session) {
+        emit(LoginSuccess(session: session));
+        print('logged in successfully'); 
+      },
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
     );
   }
