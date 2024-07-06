@@ -15,10 +15,10 @@ class ReservationRepoImpl implements ReservationRepo {
   ReservationRepoImpl({required this.databaseService});
 
   @override
-  Future<Either<void, Failure>> saveReservation(
-    ReservationModel reservation,
-    List<TravelerModel> travelers,
-  ) async {
+  Future<Either<void, Failure>> saveReservation({
+    required ReservationModel reservation,
+    required List<TravelerModel> travelers,
+  }) async {
     try {
       await databaseService.create(
         data: reservation.toMap(),

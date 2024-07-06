@@ -24,7 +24,7 @@ void main() async {
   setupServiceLocator();
   runApp(
     DevicePreview(
-      enabled: kDebugMode && !Platform.isAndroid && !Platform.isIOS,
+      enabled: kDebugMode,
       builder: (context) => const TravelApp(),
     ),
   );
@@ -54,9 +54,9 @@ class TravelApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         routerConfig: AppRouter.router,
         theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.backgroundColor,
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
-            surface: AppColors.backgroundColor,
             seedColor: AppColors.greyColor,
           ),
         ),

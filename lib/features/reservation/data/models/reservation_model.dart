@@ -3,54 +3,54 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import '../../../profile/data/models/user_model.dart';
 import 'traveler_model.dart';
 
 class ReservationModel {
   final String reservationId;
-  final UserModel user;
+  final String userId;
   final List<TravelerModel> travelers;
-  final String choosenTrip;
+  final String choosenScheduleTripId;
   ReservationModel({
     required this.reservationId,
-    required this.user,
+    required this.userId,
     required this.travelers,
-    required this.choosenTrip,
+    required this.choosenScheduleTripId,
   });
 
   ReservationModel copyWith({
     String? reservationId,
-    UserModel? user,
+    String? userId,
     List<TravelerModel>? travelers,
-    String? choosenTrip,
+    String? choosenScheduleTripId,
   }) {
     return ReservationModel(
       reservationId: reservationId ?? this.reservationId,
-      user: user ?? this.user,
+      userId: userId ?? this.userId,
       travelers: travelers ?? this.travelers,
-      choosenTrip: choosenTrip ?? this.choosenTrip,
+      choosenScheduleTripId:
+          choosenScheduleTripId ?? this.choosenScheduleTripId,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'reservationId': reservationId,
-      'user': user.toMap(),
+      'userId': userId,
       'travelers': travelers.map((x) => x.toMap()).toList(),
-      'choosenTrip': choosenTrip,
+      'choosenScheduleTripId': choosenScheduleTripId,
     };
   }
 
   factory ReservationModel.fromMap(Map<String, dynamic> map) {
     return ReservationModel(
       reservationId: map['reservationId'] as String,
-      user: UserModel.fromMap(map['user'] as Map<String, dynamic>),
+      userId: map['userId'] as String,
       travelers: List<TravelerModel>.from(
         (map['travelers'] as List<int>).map<TravelerModel>(
           (x) => TravelerModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      choosenTrip: map['choosenTrip'] as String,
+      choosenScheduleTripId: map['choosenScheduleTripId'] as String,
     );
   }
 
@@ -61,7 +61,7 @@ class ReservationModel {
 
   @override
   String toString() {
-    return 'ReservationModel(reservationId: $reservationId, user: $user, travelers: $travelers, choosenTrip: $choosenTrip)';
+    return 'ReservationModel(reservationId: $reservationId, userId: $userId, travelers: $travelers, choosenScheduleTripId: $choosenScheduleTripId)';
   }
 
   @override
@@ -69,16 +69,16 @@ class ReservationModel {
     if (identical(this, other)) return true;
 
     return other.reservationId == reservationId &&
-        other.user == user &&
+        other.userId == userId &&
         listEquals(other.travelers, travelers) &&
-        other.choosenTrip == choosenTrip;
+        other.choosenScheduleTripId == choosenScheduleTripId;
   }
 
   @override
   int get hashCode {
     return reservationId.hashCode ^
-        user.hashCode ^
+        userId.hashCode ^
         travelers.hashCode ^
-        choosenTrip.hashCode;
+        choosenScheduleTripId.hashCode;
   }
 }
