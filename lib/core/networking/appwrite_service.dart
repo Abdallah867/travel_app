@@ -98,6 +98,7 @@ class AppwriteService implements DatabaseService {
       final DocumentList response = await database.listDocuments(
         databaseId: databaseId,
         collectionId: AppConstants.appwriteCollections[endpoint]!,
+        queries: queries,
       );
       return response.documents;
     } on AppwriteException {
