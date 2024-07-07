@@ -4,12 +4,16 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/reservation/data/repos/reservation_repo_impl.dart';
+import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
 import '../../features/reservation/presentation/views/booking_view.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
+import '../networking/appwrite_service.dart';
+import '../services/service_locator.dart';
 import 'app_routes.dart';
 
 abstract class AppRouter {
@@ -49,7 +53,14 @@ abstract class AppRouter {
           }),
       GoRoute(
         path: AppRoutes.kBookingView,
-        builder: (context, GoRouterState state) => const ReservationView(),
+        builder: (context, GoRouterState state) => BlocProvider(
+          create: (context) => ReservationCubit(
+            reservationRepo: ReservationRepoImpl(
+              databaseService: getIt.get<AppwriteService>(),
+            ),
+          ),
+          child: const ReservationView(),
+        ),
       ),
       GoRoute(
           path: AppRoutes.kEditProfileView,

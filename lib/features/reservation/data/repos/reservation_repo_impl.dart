@@ -7,6 +7,7 @@ import '../../../../core/errors/failure.dart';
 import '../../../../core/networking/database_service.dart';
 import '../models/reservation_model.dart';
 import '../models/traveler_model.dart';
+import '../models/trip_schedule_model.dart';
 import 'reservation_repo.dart';
 
 class ReservationRepoImpl implements ReservationRepo {
@@ -52,6 +53,29 @@ class ReservationRepoImpl implements ReservationRepo {
         );
       }
       return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<List<TripScheduleModel>, Failure>> getTripSchedule(
+      String tripId) async {
+    try {
+      final response = await databaseService.get(
+          endpoint: AppConstants.tripsCollectionEndpoint, id: tripId);
+
+      List<TripScheduleModel> tripSchedule = response['tripSchedule']
+          .map((trip) => TripScheduleModel.fromMap(trip))
+          .toList();
+
+      return left(tripSchedule);
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),

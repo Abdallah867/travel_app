@@ -2,12 +2,14 @@
 import 'dart:convert';
 
 class TravelerModel {
+  final String travelerId;
   final String nationalId;
   final String firstName;
   final String lastName;
   final int age;
   final String gender;
   TravelerModel({
+    required this.travelerId,
     required this.nationalId,
     required this.firstName,
     required this.lastName,
@@ -16,6 +18,7 @@ class TravelerModel {
   });
 
   TravelerModel copyWith({
+    String? travelerId,
     String? nationalId,
     String? firstName,
     String? lastName,
@@ -23,6 +26,7 @@ class TravelerModel {
     String? gender,
   }) {
     return TravelerModel(
+      travelerId: travelerId ?? this.travelerId,
       nationalId: nationalId ?? this.nationalId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
@@ -33,6 +37,7 @@ class TravelerModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'travelerId': travelerId,
       'nationalId': nationalId,
       'firstName': firstName,
       'lastName': lastName,
@@ -43,6 +48,7 @@ class TravelerModel {
 
   factory TravelerModel.fromMap(Map<String, dynamic> map) {
     return TravelerModel(
+      travelerId: map['travelerId'] as String,
       nationalId: map['nationalId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
@@ -58,6 +64,6 @@ class TravelerModel {
 
   @override
   String toString() {
-    return 'Traveler(nationalId: $nationalId, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender)';
+    return 'TravelerModel(travelerId: $travelerId, nationalId: $nationalId, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender)';
   }
 }
