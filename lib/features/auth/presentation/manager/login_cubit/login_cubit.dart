@@ -26,7 +26,6 @@ class LoginCubit extends Cubit<LoginState> {
     response.fold(
       (session) {
         emit(LoginSuccess(session: session));
-        print('logged in successfully'); 
       },
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
     );

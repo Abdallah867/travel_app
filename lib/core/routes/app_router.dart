@@ -6,7 +6,6 @@ import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
-import '../../features/reservation/presentation/views/booking_view.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
@@ -52,13 +51,13 @@ abstract class AppRouter {
             );
           }),
       GoRoute(
-        path: AppRoutes.kBookingView,
+        path: AppRoutes.kTripScheduleBookingView,
         builder: (context, GoRouterState state) => BlocProvider(
           create: (context) => ReservationCubit(
             reservationRepo: ReservationRepoImpl(
               databaseService: getIt.get<AppwriteService>(),
             ),
-          ),
+          )..getTripSchedule(state.pathParameters['tripId']!),
           child: const ReservationView(),
         ),
       ),

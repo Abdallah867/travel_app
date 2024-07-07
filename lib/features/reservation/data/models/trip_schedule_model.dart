@@ -4,24 +4,12 @@ import 'dart:convert';
 class TripScheduleModel {
   final String departureDate;
   final String returnDate;
-  final String seatsAvailable;
+  final int seatsAvailable;
   TripScheduleModel({
     required this.departureDate,
     required this.returnDate,
     required this.seatsAvailable,
   });
-
-  TripScheduleModel copyWith({
-    String? departureDate,
-    String? returnDate,
-    String? seatsAvailable,
-  }) {
-    return TripScheduleModel(
-      departureDate: departureDate ?? this.departureDate,
-      returnDate: returnDate ?? this.returnDate,
-      seatsAvailable: seatsAvailable ?? this.seatsAvailable,
-    );
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -35,7 +23,7 @@ class TripScheduleModel {
     return TripScheduleModel(
       departureDate: map['departureDate'] as String,
       returnDate: map['returnDate'] as String,
-      seatsAvailable: map['seatsAvailable'] as String,
+      seatsAvailable: map['seatsAvailable'] as int,
     );
   }
 
@@ -60,4 +48,16 @@ class TripScheduleModel {
   @override
   int get hashCode =>
       departureDate.hashCode ^ returnDate.hashCode ^ seatsAvailable.hashCode;
+
+  TripScheduleModel copyWith({
+    String? departureDate,
+    String? returnDate,
+    int? seatsAvailable,
+  }) {
+    return TripScheduleModel(
+      departureDate: departureDate ?? this.departureDate,
+      returnDate: returnDate ?? this.returnDate,
+      seatsAvailable: seatsAvailable ?? this.seatsAvailable,
+    );
+  }
 }
