@@ -71,7 +71,11 @@ class ReservationRepoImpl implements ReservationRepo {
       final response = await databaseService.get(
           endpoint: AppConstants.tripsCollectionEndpoint, id: tripId);
 
-      List<TripScheduleModel> tripSchedule = response['tripSchedule']
+      print(response);
+
+      List jsonTripSchedule = response['tripSchedule'] ?? [];
+
+      List<TripScheduleModel> tripSchedule = jsonTripSchedule
           .map((trip) => TripScheduleModel.fromMap(trip))
           .toList();
 
@@ -81,6 +85,7 @@ class ReservationRepoImpl implements ReservationRepo {
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
       );
     } catch (e) {
+      print(e);
       return right(
         Failure(errMessage: e.toString()),
       );

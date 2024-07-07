@@ -1,7 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:uuid/uuid.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/manager/login_cubit/login_cubit.dart';

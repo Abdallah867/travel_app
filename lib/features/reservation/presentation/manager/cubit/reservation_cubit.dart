@@ -24,7 +24,8 @@ class ReservationCubit extends Cubit<ReservationState> {
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedule = [];
 
-  Future<void> getTripScheduleList(String tripId) async {
+  Future<void> getTripSchedule(String tripId) async {
+    emit(ReservationLoadInProgress());
     final response = await reservationRepo.getTripSchedule(tripId);
     response.fold(
       (l) {
@@ -65,8 +66,6 @@ class ReservationCubit extends Cubit<ReservationState> {
       age: int.parse(ageController.text),
     );
     travelersList.add(traveler);
-    print(traveler);
-    print(travelersList);
   }
 
   void removeTraveler(String travelerId) {

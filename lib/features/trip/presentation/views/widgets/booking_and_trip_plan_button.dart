@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +10,7 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
 import 'custom_circular_icon.dart';
 
 class BookingAndTripPlanButton extends StatelessWidget {
@@ -18,6 +20,8 @@ class BookingAndTripPlanButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tripId = BlocProvider.of<TripCubit>(context).trip.tripId;
+    print(tripId);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
@@ -33,7 +37,8 @@ class BookingAndTripPlanButton extends StatelessWidget {
             child: CustomButton(
               text: S.of(context).bookNow,
               onPressed: () {
-                context.push(AppRoutes.kBookingView);
+                print('${AppRoutes.kBookingView}/$tripId');
+                context.push('${AppRoutes.kBookingView}/$tripId');
               },
             ),
           ),

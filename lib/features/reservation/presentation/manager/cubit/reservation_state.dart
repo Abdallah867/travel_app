@@ -9,6 +9,8 @@ sealed class ReservationState extends Equatable {
 
 final class ReservationInitial extends ReservationState {}
 
+final class ReservationLoadInProgress extends ReservationState {}
+
 final class ReservationSuccess extends ReservationState {}
 
 final class ReservationFailure extends ReservationState {
