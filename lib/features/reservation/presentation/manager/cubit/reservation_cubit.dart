@@ -19,10 +19,14 @@ class ReservationCubit extends Cubit<ReservationState> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+
   GlobalKey<FormState> reservationKey = GlobalKey();
 
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedule = [];
+
+  String selectedScheduleId = '';
 
   Future<void> getTripSchedule(String tripId) async {
     emit(ReservationLoadInProgress());

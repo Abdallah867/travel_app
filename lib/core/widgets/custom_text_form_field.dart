@@ -58,7 +58,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
             filled: true,
-            fillColor: const Color(0xFFE5E4E2),
+            fillColor: AppColors.inputGrey,
             border: widget.outlineInputBorder ?? customInputBorder(),
             enabledBorder: customInputBorder(),
             focusedBorder: customInputBorder(),

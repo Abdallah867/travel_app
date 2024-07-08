@@ -20,4 +20,6 @@ class AppColors {
 
   static const Color platinumGrey = Color(0xFFA5A5A5);
   static const Color paleGrey = Color(0xFFF0F0F0);
+
+  static const Color inputGrey = Color(0xFFE5E4E2);
 }
