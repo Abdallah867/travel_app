@@ -34,7 +34,9 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
           userInformations = user;
           emit(CurrentAccountExists());
         },
-        (failure) => (CurrentAccountFailure(errMessage: failure.errMessage),),
+        (failure) => emit(
+          CurrentAccountFailure(errMessage: failure.errMessage),
+        ),
       );
     }
   }

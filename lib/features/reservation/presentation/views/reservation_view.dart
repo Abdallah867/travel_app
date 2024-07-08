@@ -6,7 +6,7 @@ import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
 import '../manager/cubit/reservation_cubit.dart';
-import 'reservation_form.dart';
+import 'widgets/reservation_form.dart';
 
 class ReservationView extends StatelessWidget {
   const ReservationView({super.key});
