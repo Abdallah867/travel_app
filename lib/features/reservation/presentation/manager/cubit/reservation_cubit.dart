@@ -26,7 +26,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedule = [];
 
-  String selectedScheduleId = '';
+  String? selectedScheduleId;
 
   Future<void> getTripSchedule(String tripId) async {
     emit(ReservationLoadInProgress());
@@ -36,7 +36,17 @@ class ReservationCubit extends Cubit<ReservationState> {
         tripSchedule = l;
         emit(ReservationSuccess());
       },
-      (error) => ReservationFailure(errorMessage: error.errMessage),
+      (failure) => emit(ReservationFailure(errorMessage: failure.errMessage)),
+    );
+  }
+
+  void selectDate(scheduleId) {
+    selectedScheduleId = scheduleId;
+    emit(
+      ReservationInfoUpdated(
+        selectedScheduleId: scheduleId,
+        travelersList: travelersList,
+      ),
     );
   }
 
