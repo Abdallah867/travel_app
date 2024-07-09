@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
@@ -18,13 +20,27 @@ class MainView extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               const VerticalSpace(size: 50),
-              TitleSection(title: S.of(context).agencies),
+              TitleSection(
+                title: S.of(context).agencies,
+                actionTitle: Text(
+                  S.of(context).seeAll,
+                  style: TextStyles.textStyle14
+                      .copyWith(color: AppColors.secondaryColor),
+                ),
+                onTap: () {},
+              ),
               const VerticalSpace(size: 8),
               const TravelAgenciesListView(),
               const VerticalSpace(size: 28),
               const VerticalSpace(size: 8),
               TitleSection(
                 title: S.of(context).availableTrips,
+                actionTitle: Text(
+                  S.of(context).seeAll,
+                  style: TextStyles.textStyle14
+                      .copyWith(color: AppColors.secondaryColor),
+                ),
+                onTap: () {},
               ),
               const VerticalSpace(size: 8),
             ],
