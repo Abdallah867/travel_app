@@ -6,14 +6,14 @@ class TravelerModel {
   final String nationalId;
   final String firstName;
   final String lastName;
-  final int age;
+  final String birthday;
   final String gender;
   TravelerModel({
     required this.travelerId,
     required this.nationalId,
     required this.firstName,
     required this.lastName,
-    required this.age,
+    required this.birthday,
     required this.gender,
   });
 
@@ -22,7 +22,7 @@ class TravelerModel {
     String? nationalId,
     String? firstName,
     String? lastName,
-    int? age,
+    String? birthday,
     String? gender,
   }) {
     return TravelerModel(
@@ -30,7 +30,7 @@ class TravelerModel {
       nationalId: nationalId ?? this.nationalId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      age: age ?? this.age,
+      birthday: birthday ?? this.birthday,
       gender: gender ?? this.gender,
     );
   }
@@ -41,7 +41,7 @@ class TravelerModel {
       'nationalId': nationalId,
       'firstName': firstName,
       'lastName': lastName,
-      'age': age,
+      'birthday': birthday,
       'gender': gender,
     };
   }
@@ -52,7 +52,7 @@ class TravelerModel {
       nationalId: map['nationalId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
-      age: map['age'] as int,
+      birthday: map['birthday'] as String,
       gender: map['gender'] as String,
     );
   }
@@ -64,6 +64,6 @@ class TravelerModel {
 
   @override
   String toString() {
-    return 'TravelerModel(travelerId: $travelerId, nationalId: $nationalId, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender)';
+    return 'TravelerModel(travelerId: $travelerId, nationalId: $nationalId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
   }
 }
