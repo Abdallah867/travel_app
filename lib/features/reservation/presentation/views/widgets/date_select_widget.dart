@@ -45,7 +45,8 @@ class DateSelectWidget extends StatelessWidget {
             ),
             VerticalSpace(size: 8.h),
             Text(
-              DateFormatUtils.getFormattedDate(tripSchedule.departureDate),
+              DateFormatUtils.getFormattedDateByDayAndMonth(
+                  tripSchedule.departureDate),
               style: TextStyles.textStyle20SemiBold.copyWith(
                 color: !isSelected
                     ? Colors.black.withOpacity(.7)
