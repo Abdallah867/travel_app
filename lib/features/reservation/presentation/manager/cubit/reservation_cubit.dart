@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:appwrite/appwrite.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../data/models/reservation_model.dart';
@@ -18,7 +22,7 @@ class ReservationCubit extends Cubit<ReservationState> {
 
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
+  TextEditingController birthdayController = TextEditingController();
   TextEditingController genderController = TextEditingController();
 
   GlobalKey<FormState> reservationKey = GlobalKey();
@@ -54,32 +58,56 @@ class ReservationCubit extends Cubit<ReservationState> {
     required String userId,
     required String choosenScheduleTripId,
   }) async {
-    final response = await reservationRepo.saveReservation(
-      reservation: ReservationModel(
-        reservationId: const Uuid().v4(),
-        userId: userId,
-        choosenScheduleTripId: choosenScheduleTripId,
+    if (selectedScheduleId != null) {
+      final ReservationModel resevationCredentials = ReservationModel(
+        reservationId: ID.unique(),
+        user: userId,
+        tripSchedule: selectedScheduleId!,
         travelers: travelersList,
-      ),
-      travelers: travelersList,
-    );
+      );
 
-    response.fold(
-      (l) => emit(ReservationSuccess()),
-      (error) => ReservationFailure(errorMessage: error.errMessage),
-    );
+      final response = await reservationRepo.saveReservation(
+        reservation: resevationCredentials,
+        travelers: travelersList,
+      );
+
+      response.fold((l) => emit(ReservationSuccess()), (error) {
+        log(error.errMessage);
+        emit(ReservationFailure(errorMessage: error.errMessage));
+      });
+    } else {
+      emit(const ReservationFailure(errorMessage: 'please select a date'));
+    }
+  }
+
+  void clearControllers() {
+    lastNameController.clear();
+    firstNameController.clear();
+    birthdayController.clear();
+    genderController.clear();
   }
 
   void addTraveler() {
     TravelerModel traveler = TravelerModel(
-      travelerId: const Uuid().v4(),
+      travelerId: ID.unique(),
       nationalId: 'huhuhuhuhhhu88899987654',
       firstName: firstNameController.text,
       lastName: lastNameController.text,
-      gender: 'Male',
-      age: int.parse(ageController.text),
+      gender: genderController.text,
+      birthday: birthdayController.text,
     );
-    travelersList.add(traveler);
+
+    List<TravelerModel> updatedTravelerList = [...travelersList, traveler];
+
+    travelersList = updatedTravelerList;
+
+    clearControllers();
+
+    emit(
+      ReservationInfoUpdated(
+          travelersList: travelersList,
+          selectedScheduleId: selectedScheduleId ?? ''),
+    );
   }
 
   void removeTraveler(String travelerId) {

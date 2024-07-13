@@ -29,4 +29,6 @@ final class ReservationInfoUpdated extends ReservationState {
 final class ReservationFailure extends ReservationState {
   final String errorMessage;
   const ReservationFailure({required this.errorMessage});
+  @override
+  List<Object> get props => [errorMessage];
 }
