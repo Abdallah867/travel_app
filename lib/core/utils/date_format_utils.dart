@@ -1,9 +1,15 @@
 import 'package:intl/intl.dart';
 
 class DateFormatUtils {
-  static String getFormattedDate(String dateTime) {
+  static String getFormattedDateByDayAndMonth(String dateTime) {
     DateTime parsedDateTime = DateTime.parse(dateTime);
     String date = DateFormat('dd/MM').format(parsedDateTime);
+    return date;
+  }
+
+  static String getFormattedDateByDayAndMonthAndYear(String dateTime) {
+    DateTime parsedDateTime = DateTime.parse(dateTime);
+    String date = DateFormat('dd/MM/yyyy').format(parsedDateTime);
     return date;
   }
 

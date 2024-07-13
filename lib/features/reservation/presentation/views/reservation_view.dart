@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../../../generated/l10n.dart';
+import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../manager/cubit/reservation_cubit.dart';
 import 'widgets/reservation_form.dart';
 
@@ -24,9 +27,17 @@ class ReservationView extends StatelessWidget {
             child: Column(
               children: [
                 CustomButton(
-                  text: 'Pay Later',
+                  text: S.of(context).save,
                   onPressed: () {
-                    context.read<ReservationCubit>().addTraveler();
+                    context.read<ReservationCubit>().saveReservation(
+                          userId: context
+                                  .read<CurrentAccountCubit>()
+                                  .userInformations
+                                  ?.userId ??
+                              '',
+                          choosenScheduleTripId:
+                              context.read<TripCubit>().trip.tripId,
+                        );
                   },
                 ),
                 VerticalSpace(size: 12.h),

@@ -11,6 +11,8 @@ class CustomTextFormField extends StatefulWidget {
   final VoidCallback? onTapOutside;
   final String? Function(String?)? validator;
   final OutlineInputBorder? outlineInputBorder;
+  final bool enabled;
+  final Icon? prefixIcon;
   const CustomTextFormField({
     super.key,
     required this.name,
@@ -20,6 +22,8 @@ class CustomTextFormField extends StatefulWidget {
     this.onTapOutside,
     this.validator,
     this.outlineInputBorder,
+    this.enabled = true,
+    this.prefixIcon,
   });
 
   @override
@@ -34,10 +38,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   widget.name,
-        //   style: const TextStyle(fontWeight: FontWeight.bold),
-        // ),
+        Text(
+          widget.name,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         const VerticalSpace(size: 4),
         TextFormField(
           validator: widget.validator ??
@@ -54,6 +58,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           },
           initialValue: widget.initialValue,
           controller: widget.controller,
+          enabled: widget.enabled,
           obscureText: widget.isPassword ? isPasswordHidden : false,
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
@@ -68,6 +73,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             hintStyle: const TextStyle(
               color: AppColors.platinumGrey,
             ),
+            prefixIcon: widget.prefixIcon,
             suffixIcon:
                 widget.isPassword ? visibiltyIcon(isPasswordHidden) : null,
           ),

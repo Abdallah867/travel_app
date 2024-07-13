@@ -51,16 +51,28 @@ abstract class AppRouter {
             );
           }),
       GoRoute(
-        path: AppRoutes.kTripScheduleBookingView,
-        builder: (context, GoRouterState state) => BlocProvider(
-          create: (context) => ReservationCubit(
-            reservationRepo: ReservationRepoImpl(
-              databaseService: getIt.get<AppwriteService>(),
-            ),
-          )..getTripSchedule(state.pathParameters['tripId']!),
-          child: const ReservationView(),
-        ),
-      ),
+          path: AppRoutes.kTripScheduleBookingView,
+          builder: (context, GoRouterState state) {
+            final cubits = state.extra as Map<String, dynamic>;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => ReservationCubit(
+                    reservationRepo: ReservationRepoImpl(
+                      databaseService: getIt.get<AppwriteService>(),
+                    ),
+                  )..getTripSchedule(state.pathParameters['tripId']!),
+                ),
+                BlocProvider.value(
+                  value: cubits['tripCubit'] as TripCubit,
+                ),
+                BlocProvider.value(
+                  value: cubits['currentAccountCubit'] as CurrentAccountCubit,
+                ),
+              ],
+              child: const ReservationView(),
+            );
+          }),
       GoRoute(
           path: AppRoutes.kEditProfileView,
           builder: (context, state) {

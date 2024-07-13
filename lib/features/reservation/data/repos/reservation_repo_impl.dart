@@ -24,7 +24,7 @@ class ReservationRepoImpl implements ReservationRepo {
       await databaseService.create(
         data: reservation.toMap(),
         endpoint: AppConstants.reservationsCollectionEndpoint,
-        id: UniqueKey().toString(),
+        id: ID.unique(),
       );
 
       await addTravelers(travelers);
@@ -49,7 +49,7 @@ class ReservationRepoImpl implements ReservationRepo {
         await databaseService.create(
           data: traveler.toMap(),
           endpoint: AppConstants.travelersCollectionEndpoint,
-          id: UniqueKey().toString(),
+          id: ID.unique(),
         );
       }
       return left(null);
@@ -70,8 +70,6 @@ class ReservationRepoImpl implements ReservationRepo {
     try {
       final response = await databaseService.get(
           endpoint: AppConstants.tripsCollectionEndpoint, id: tripId);
-
-      print(response);
 
       List jsonTripSchedule = response['tripSchedule'] ?? [];
 
