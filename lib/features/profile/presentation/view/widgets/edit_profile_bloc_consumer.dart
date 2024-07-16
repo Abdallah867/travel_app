@@ -40,6 +40,8 @@ class EditProfileBlocConsumer extends StatelessWidget {
               child: AbsorbPointer(
                 absorbing: state is EditProfileLoadInProgress,
                 child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Column(
                     children: [
                       // const VerticalSpace(size: 24),

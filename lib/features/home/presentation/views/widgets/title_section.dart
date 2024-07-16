@@ -22,7 +22,7 @@ class TitleSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyles.textStyle20),
+          Text(title, style: TextStyles.textStyle20SemiBold),
           GestureDetector(onTap: onTap, child: actionTitle),
         ],
       ),

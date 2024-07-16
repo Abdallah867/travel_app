@@ -12,7 +12,7 @@ class DateSelectListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tripSchedule = context.read<ReservationCubit>().tripSchedule;
+    final tripSchedule = context.read<ReservationCubit>().tripSchedules;
 
     return BlocBuilder<ReservationCubit, ReservationState>(
       builder: (context, state) {

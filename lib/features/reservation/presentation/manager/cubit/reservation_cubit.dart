@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:appwrite/appwrite.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +24,10 @@ class ReservationCubit extends Cubit<ReservationState> {
   TextEditingController birthdayController = TextEditingController();
   TextEditingController genderController = TextEditingController();
 
-  GlobalKey<FormState> reservationKey = GlobalKey();
+  GlobalKey<FormState> travelerKey = GlobalKey();
 
   List<TravelerModel> travelersList = [];
-  List<TripScheduleModel> tripSchedule = [];
+  List<TripScheduleModel> tripSchedules = [];
 
   String? selectedScheduleId;
 
@@ -37,8 +36,8 @@ class ReservationCubit extends Cubit<ReservationState> {
     final response = await reservationRepo.getTripSchedule(tripId);
     response.fold(
       (l) {
-        tripSchedule = l;
-        emit(ReservationSuccess());
+        tripSchedules = l;
+        emit(ReservationScheduleTripsLoaded());
       },
       (failure) => emit(ReservationFailure(errorMessage: failure.errMessage)),
     );
@@ -60,7 +59,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   }) async {
     if (selectedScheduleId != null) {
       final ReservationModel resevationCredentials = ReservationModel(
-        reservationId: ID.unique(),
+        reservationId: const Uuid().v4(),
         user: userId,
         tripSchedule: selectedScheduleId!,
         travelers: travelersList,
@@ -89,7 +88,7 @@ class ReservationCubit extends Cubit<ReservationState> {
 
   void addTraveler() {
     TravelerModel traveler = TravelerModel(
-      travelerId: ID.unique(),
+      travelerId: const Uuid().v4(),
       nationalId: 'huhuhuhuhhhu88899987654',
       firstName: firstNameController.text,
       lastName: lastNameController.text,

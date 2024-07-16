@@ -13,6 +13,8 @@ final class ReservationLoadInProgress extends ReservationState {}
 
 final class ReservationSuccess extends ReservationState {}
 
+final class ReservationScheduleTripsLoaded extends ReservationState {}
+
 final class ReservationInfoUpdated extends ReservationState {
   final List<TravelerModel> travelersList;
   final String selectedScheduleId;
