@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/functions/custom_app_bar.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/vertical_widget.dart';
+import '../../../../core/widgets/horizontal_space.dart';
 import '../../../../generated/l10n.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../manager/cubit/reservation_cubit.dart';
+import 'widgets/reservation_bloc_consumer.dart';
 import 'widgets/reservation_form.dart';
 
 class ReservationView extends StatelessWidget {
@@ -19,35 +20,56 @@ class ReservationView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: customAppBar('Reservation'),
-        body: const ReservationForm(),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 120.h,
-            child: Column(
-              children: [
-                CustomButton(
-                  text: S.of(context).save,
-                  onPressed: () {
-                    context.read<ReservationCubit>().saveReservation(
-                          userId: context
-                                  .read<CurrentAccountCubit>()
-                                  .userInformations
-                                  ?.userId ??
-                              '',
-                          choosenScheduleTripId:
-                              context.read<TripCubit>().trip.tripId,
-                        );
-                  },
-                ),
-                VerticalSpace(size: 12.h),
-                const CustomButton(
-                  text: 'Process to Payment',
-                )
-              ],
+        body: const ReservationBlocConsumer(),
+        bottomNavigationBar: const PaymentAndSaveButtons(),
+      ),
+    );
+  }
+}
+
+class PaymentAndSaveButtons extends StatelessWidget {
+  const PaymentAndSaveButtons({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: CustomButton(
+              color: AppColors.backgroundColor,
+              textColor: AppColors.secondaryColor,
+              borderSide:
+                  const BorderSide(color: AppColors.secondaryColor, width: 2),
+              text: S.of(context).save,
+              onPressed: () {
+                context.read<ReservationCubit>().saveReservation(
+                      userId: context
+                              .read<CurrentAccountCubit>()
+                              .userInformations
+                              ?.userId ??
+                          '',
+                      choosenScheduleTripId:
+                          context.read<TripCubit>().trip.tripId,
+                    );
+              },
             ),
           ),
-        ),
+          const HorizontalSpace(size: 8),
+          Expanded(
+            flex: 4,
+            child: CustomButton(
+              text: 'Proceed to Payment',
+              onPressed: () {
+                print('payment');
+              },
+            ),
+          )
+        ],
       ),
     );
   }

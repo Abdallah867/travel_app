@@ -47,7 +47,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           validator: widget.validator ??
               (value) {
                 if (value?.isEmpty ?? true) {
-                  return "Field required";
+                  return "${widget.name} required";
                 } else {
                   return null;
                 }

@@ -30,7 +30,7 @@ class LoginForm extends StatelessWidget {
               return validateEmail(value, context);
             },
           ),
-          const VerticalSpace(size: 25),
+          const VerticalSpace(size: 12),
           CustomTextFormField(
               name: S.of(context).password,
               isPassword: true,
@@ -51,7 +51,7 @@ class LoginForm extends StatelessWidget {
               ),
             ],
           ),
-          const VerticalSpace(size: 35),
+          const VerticalSpace(size: 24),
           LoginBlocConsumer(loginKey: context.read<LoginCubit>().loginKey),
         ],
       ),

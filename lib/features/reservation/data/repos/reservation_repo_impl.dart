@@ -1,6 +1,5 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';

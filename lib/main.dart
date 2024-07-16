@@ -44,6 +44,7 @@ class TravelApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         locale: const Locale('en'),
         localizationsDelegates: const [
           S.delegate,

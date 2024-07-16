@@ -22,6 +22,7 @@ class RegisterView extends StatelessWidget {
           userProfileRepo: getIt.get<UserProfileRepoImpl>()),
       child: Scaffold(
         body: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: const ClampingScrollPhysics(),
           slivers: [
             SliverPadding(

@@ -35,4 +35,16 @@ class DateFormatUtils {
         return "Unknown";
     }
   }
+
+  static int calculateAge(String birthday) {
+    DateTime birthDate = DateFormat('MM/dd/yyyy').parse(birthday);
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+    if (currentDate.month < birthDate.month ||
+        (currentDate.month == birthDate.month &&
+            currentDate.day < birthDate.day)) {
+      age--;
+    }
+    return age;
+  }
 }

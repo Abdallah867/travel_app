@@ -23,7 +23,7 @@ class RegisterForm extends StatelessWidget {
             name: S.of(context).username,
             controller: context.read<RegisterCubit>().usernameController,
           ),
-          const VerticalSpace(size: 25),
+          const VerticalSpace(size: 12),
           CustomTextFormField(
             name: S.of(context).email,
             controller: context.read<RegisterCubit>().emailController,
@@ -31,7 +31,7 @@ class RegisterForm extends StatelessWidget {
               return validateEmail(value, context);
             },
           ),
-          const VerticalSpace(size: 25),
+          const VerticalSpace(size: 12),
           CustomTextFormField(
             name: S.of(context).password,
             isPassword: true,
@@ -40,7 +40,7 @@ class RegisterForm extends StatelessWidget {
               return validatePassword(value, context);
             },
           ),
-          const VerticalSpace(size: 35),
+          const VerticalSpace(size: 20),
           RegisterBlocConsumer(
             registerKey: context.read<RegisterCubit>().registerKey,
           ),
