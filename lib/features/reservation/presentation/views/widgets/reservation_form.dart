@@ -8,7 +8,7 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../manager/cubit/reservation_cubit.dart';
-import 'birthday_field.dart';
+import 'date_selector_field.dart';
 import 'gender_radio_button_group.dart';
 
 class ReservationForm extends StatelessWidget {
@@ -43,7 +43,9 @@ class ReservationForm extends StatelessWidget {
                 controller: reservationCubit.firstNameController,
               ),
               const VerticalSpace(size: 12),
-              BirthdayField(reservationCubit: reservationCubit),
+              DateSelectorField(
+                  label: 'Birthday',
+                  controller: reservationCubit.birthdayController),
               const VerticalSpace(size: 12),
               GenderRadioButtonGroup(
                 onChanged: (gender) {
