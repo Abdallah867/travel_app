@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
-        "agencies": MessageLookupByLibrary.simpleMessage("Top agencies"),
+        "agencies": MessageLookupByLibrary.simpleMessage("Top Agencies"),
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("DZD"),
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
@@ -31,16 +31,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Available Trips"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
+        "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "credentialLoginMessage": MessageLookupByLibrary.simpleMessage(
             "Enter your email and password to continue"),
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue"),
+        "departureDate": MessageLookupByLibrary.simpleMessage("Departure Date"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "dontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "filterTrips": MessageLookupByLibrary.simpleMessage("Filter Trips"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
@@ -52,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "returnDate": MessageLookupByLibrary.simpleMessage("Return Date"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saved": MessageLookupByLibrary.simpleMessage("Saved"),
         "savedTrips": MessageLookupByLibrary.simpleMessage("Saved trips"),

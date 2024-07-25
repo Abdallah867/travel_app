@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
@@ -20,27 +22,35 @@ class MainView extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               const VerticalSpace(size: 50),
-              TitleSection(
-                title: S.of(context).agencies,
-                actionTitle: Text(
-                  S.of(context).seeAll,
-                  style: TextStyles.textStyle14
-                      .copyWith(color: AppColors.secondaryColor),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: TitleSection(
+                  title: S.of(context).agencies,
+                  actionTitle: Text(
+                    S.of(context).seeAll,
+                    style: TextStyles.textStyle14
+                        .copyWith(color: AppColors.secondaryColor),
+                  ),
+                  onTap: () {},
                 ),
-                onTap: () {},
               ),
               const VerticalSpace(size: 8),
               const TravelAgenciesListView(),
               const VerticalSpace(size: 28),
               const VerticalSpace(size: 8),
-              TitleSection(
-                title: S.of(context).availableTrips,
-                actionTitle: Text(
-                  S.of(context).seeAll,
-                  style: TextStyles.textStyle14
-                      .copyWith(color: AppColors.secondaryColor),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: TitleSection(
+                  title: S.of(context).availableTrips,
+                  actionTitle: Text(
+                    S.of(context).seeAll,
+                    style: TextStyles.textStyle14
+                        .copyWith(color: AppColors.secondaryColor),
+                  ),
+                  onTap: () {
+                    context.push('/all-trips');
+                  },
                 ),
-                onTap: () {},
               ),
               const VerticalSpace(size: 8),
             ],
