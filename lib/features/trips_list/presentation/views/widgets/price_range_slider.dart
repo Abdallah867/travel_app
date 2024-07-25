@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../generated/l10n.dart';
+
+class PriceRangeSlider extends StatefulWidget {
+  const PriceRangeSlider({
+    super.key,
+  });
+
+  @override
+  State<PriceRangeSlider> createState() => _PriceRangeSliderState();
+}
+
+class _PriceRangeSliderState extends State<PriceRangeSlider> {
+  final double min = 1000;
+  final double max = 100000;
+  RangeValues currentRangeValues = const RangeValues(1000, 100000);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Price range',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+        RangeSlider(
+          onChanged: (values) {
+            setState(() {
+              currentRangeValues = values;
+            });
+          },
+          activeColor: AppColors.secondaryColor,
+          values: currentRangeValues,
+          min: min,
+          max: max,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Min price: ${currentRangeValues.start.round()} ${S.of(context).algerianCurrency}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Max price: ${currentRangeValues.end.round()} ${S.of(context).algerianCurrency}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

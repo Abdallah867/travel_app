@@ -10,7 +10,6 @@ import '../../../auth/presentation/manager/current_account_cubit/current_account
 import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../manager/cubit/reservation_cubit.dart';
 import 'widgets/reservation_bloc_consumer.dart';
-import 'widgets/reservation_form.dart';
 
 class ReservationView extends StatelessWidget {
   const ReservationView({super.key});

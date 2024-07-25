@@ -240,10 +240,10 @@ class S {
     );
   }
 
-  /// `Top agencies`
+  /// `Top Agencies`
   String get agencies {
     return Intl.message(
-      'Top agencies',
+      'Top Agencies',
       name: 'agencies',
       desc: '',
       args: [],
@@ -405,6 +405,46 @@ class S {
     return Intl.message(
       'DZD',
       name: 'algerianCurrency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure Date`
+  String get departureDate {
+    return Intl.message(
+      'Departure Date',
+      name: 'departureDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return Date`
+  String get returnDate {
+    return Intl.message(
+      'Return Date',
+      name: 'returnDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter Trips`
+  String get filterTrips {
+    return Intl.message(
+      'Filter Trips',
+      name: 'filterTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get clear {
+    return Intl.message(
+      'Clear',
+      name: 'clear',
       desc: '',
       args: [],
     );

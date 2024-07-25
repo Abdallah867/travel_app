@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
@@ -56,9 +54,11 @@ class TravelApp extends StatelessWidget {
         routerConfig: AppRouter.router,
         theme: ThemeData(
           scaffoldBackgroundColor: AppColors.backgroundColor,
+          bottomSheetTheme: const BottomSheetThemeData(
+              backgroundColor: AppColors.backgroundColor),
           textTheme: GoogleFonts.k2dTextTheme(),
           colorScheme: ColorScheme.fromSeed(
-            seedColor: AppColors.greyColor,
+            seedColor: AppColors.secondaryColor,
           ),
         ),
       ),

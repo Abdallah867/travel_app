@@ -18,7 +18,7 @@
   "error": "Error",
   "seeAll": "See all",
   "availableTrips": "Available Trips",
-  "agencies": "Top agencies",
+  "agencies": "Top Agencies",
   "noSavedTrips": "No saved trips",
   "savedTrips": "Saved trips",
   "profile": "Profile",
@@ -34,5 +34,9 @@
   "showLess": "Show Less",
   "about": "About",
   "bookNow": "Book Now",
-  "algerianCurrency": "DZD"
+  "algerianCurrency": "DZD",
+  "departureDate": "Departure Date",
+  "returnDate": "Return Date",
+  "filterTrips": "Filter Trips",
+  "clear": "Clear"
 }
