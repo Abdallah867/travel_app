@@ -66,29 +66,32 @@ class ReservationBlocConsumer extends StatelessWidget {
                           ),
                         ),
                   const VerticalSpace(size: 8),
-                  TitleSection(
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return ReservationForm(
-                              reservationCubit: reservationCubit);
-                        },
-                      );
-                    },
-                    title: 'Travelers',
-                    actionTitle: Row(
-                      children: [
-                        const Icon(Icons.add,
-                            color: AppColors.secondaryColor, size: 16),
-                        HorizontalSpace(size: 4.w),
-                        Text(
-                          'Add Travelers',
-                          style: TextStyles.textStyle16
-                              .copyWith(color: AppColors.secondaryColor),
-                        ),
-                      ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: TitleSection(
+                      onTap: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ReservationForm(
+                                reservationCubit: reservationCubit);
+                          },
+                        );
+                      },
+                      title: 'Travelers',
+                      actionTitle: Row(
+                        children: [
+                          const Icon(Icons.add,
+                              color: AppColors.secondaryColor, size: 16),
+                          HorizontalSpace(size: 4.w),
+                          Text(
+                            'Add Travelers',
+                            style: TextStyles.textStyle16
+                                .copyWith(color: AppColors.secondaryColor),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const VerticalSpace(size: 8),
