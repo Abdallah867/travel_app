@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/app_strings.dart';
@@ -23,10 +24,12 @@ void showSnackBar(BuildContext context, String text, String type) {
             color: Colors.white,
           ),
           const HorizontalSpace(size: 8),
-          Text(
-            text,
-            style: TextStyles.textStyle14SemiBold
-                .copyWith(color: AppColors.whiteColor),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyles.textStyle14SemiBold
+                  .copyWith(color: AppColors.whiteColor),
+            ),
           ),
         ],
       ),
