@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../generated/l10n.dart';
+import '../../manager/bloc/trips_list_bloc.dart';
 
 class PriceRangeSlider extends StatefulWidget {
   const PriceRangeSlider({
@@ -18,18 +20,23 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final TripsListBloc tripsListBloc = context.read<TripsListBloc>();
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Price range',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              S.of(context).priceRange,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),
         RangeSlider(
+          onChangeEnd: (values) {
+            tripsListBloc.minPrice = values.start.round();
+            tripsListBloc.maxPrice = values.end.round();
+          },
           onChanged: (values) {
             setState(() {
               currentRangeValues = values;

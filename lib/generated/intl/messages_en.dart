@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "priceRange": MessageLookupByLibrary.simpleMessage("Price Range"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "returnDate": MessageLookupByLibrary.simpleMessage("Return Date"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),

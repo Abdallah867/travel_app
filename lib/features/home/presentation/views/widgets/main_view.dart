@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,6 +8,7 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
+import '../../../../trips_list/presentation/manager/bloc/trips_list_bloc.dart';
 import 'title_section.dart';
 import 'travel_agencies_list_view.dart';
 
@@ -48,7 +50,8 @@ class MainView extends StatelessWidget {
                         .copyWith(color: AppColors.secondaryColor),
                   ),
                   onTap: () {
-                    context.push('/all-trips');
+                    context.push('/all-trips',
+                        extra: context.read<TripsListBloc>);
                   },
                 ),
               ),

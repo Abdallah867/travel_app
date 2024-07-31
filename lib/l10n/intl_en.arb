@@ -38,5 +38,6 @@
   "departureDate": "Departure Date",
   "returnDate": "Return Date",
   "filterTrips": "Filter Trips",
-  "clear": "Clear"
+  "clear": "Clear",
+  "priceRange": "Price Range"
 }
