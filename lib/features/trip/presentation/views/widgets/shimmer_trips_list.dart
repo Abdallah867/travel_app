@@ -22,3 +22,20 @@ class ShimmerTripsList extends StatelessWidget {
     );
   }
 }
+
+class ShimmerTripsListView extends StatelessWidget {
+  const ShimmerTripsListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: 16.h),
+          child: const ShimmerTripCard(),
+        );
+      },
+      itemCount: 5,
+    );
+  }
+}
