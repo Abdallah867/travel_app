@@ -44,8 +44,11 @@ class ReservationForm extends StatelessWidget {
               ),
               const VerticalSpace(size: 12),
               DateSelectorField(
-                  label: 'Birthday',
-                  controller: reservationCubit.birthdayController),
+                label: 'Birthday',
+                controller: reservationCubit.birthdayController,
+                initialDate: DateTime(2000, 1, 1),
+                lastDate: DateTime(DateTime.now().year - 1),
+              ),
               const VerticalSpace(size: 12),
               GenderRadioButtonGroup(
                 onChanged: (gender) {

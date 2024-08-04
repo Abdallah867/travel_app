@@ -28,12 +28,7 @@ class TripsListFirstPageFetch extends TripsListEvent {
 }
 
 class TripsListFilterApplied extends TripsListEvent {
-  final int? minPrice;
-  final int? maxPrice;
-  final String? departureDate;
-  final String? returnDate;
-  const TripsListFilterApplied(
-      {this.minPrice, this.maxPrice, this.departureDate, this.returnDate});
+  const TripsListFilterApplied();
 }
 
 class TripsListSearchTermChanged extends TripsListEvent {

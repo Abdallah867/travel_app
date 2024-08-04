@@ -4,10 +4,15 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class DateSelectorField extends StatelessWidget {
   final String label;
+  final DateTime? initialDate;
+  final DateTime? lastDate;
+
   const DateSelectorField({
     super.key,
     required this.controller,
     required this.label,
+    this.initialDate,
+    this.lastDate,
   });
 
   final TextEditingController controller;
@@ -34,9 +39,9 @@ class DateSelectorField extends StatelessWidget {
   Future<DateTime?> pickDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime(2000, 1, 1),
+      initialDate: initialDate ?? DateTime.now(),
       firstDate: DateTime(1924),
-      lastDate: DateTime(DateTime.now().year - 1),
+      lastDate: lastDate ?? DateTime(DateTime.now().year + 1),
     );
 
     return pickedDate;

@@ -32,7 +32,7 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
         } else if (event is TripsListRefreshed) {
           await _handleTripsListRefreshed(emit, event);
         } else if (event is TripsListNextPageRequested) {
-          _handleTripsListNextPageRequested(emit, event);
+          await _handleTripsListNextPageRequested(emit, event);
         } else if (event is TripsListFilterApplied) {
           await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListFirstPageFetch) {
@@ -42,34 +42,30 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
     );
   }
 
-  _handleTripsListFailedFetchRetried(Emitter<TripsListState> emit) async {
+  Future<void> _handleTripsListFailedFetchRetried(
+      Emitter<TripsListState> emit) async {
     await getTripsList(emit);
   }
 
-  _handleTripsListSearchTermChanged(
+  Future<void> _handleTripsListSearchTermChanged(
       Emitter<TripsListState> emit, TripsListSearchTermChanged event) async {
     await getTripsList(emit);
   }
 
-  _handleTripsListRefreshed(
+  Future<void> _handleTripsListRefreshed(
       Emitter<TripsListState> emit, TripsListRefreshed event) async {
     await getTripsList(emit);
   }
 
-  void _handleTripsListNextPageRequested(
+  Future<void> _handleTripsListNextPageRequested(
       Emitter<TripsListState> emit, TripsListNextPageRequested event) async {
     await getTripsList(emit, lastId: event.lastId);
   }
 
-  _handleTripsListFilterApplied(
+  Future<void> _handleTripsListFilterApplied(
       Emitter<TripsListState> emit, TripsListFilterApplied event) async {
-    _minPrice = event.minPrice;
-    _maxPrice = event.maxPrice;
-    _departureDate = event.departureDate;
-    _returnDate = event.returnDate;
-    await getTripsList(
-      emit,
-    );
+    await getTripsList(emit);
+    print('did');
   }
 
   Future<void> _handleTripsListFirstPageFetch(
@@ -89,7 +85,6 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
     );
     response.fold(
       (trips) {
-        trips = trips;
         emit(TripsListLoaded(trips: trips));
       },
       (failure) {
