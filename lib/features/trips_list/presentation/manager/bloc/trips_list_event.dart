@@ -7,10 +7,6 @@ sealed class TripsListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TripsListRefreshed extends TripsListEvent {
-  const TripsListRefreshed();
-}
-
 class TripsListNextPageRequested extends TripsListEvent {
   const TripsListNextPageRequested({
     required this.lastId,

@@ -11,6 +11,8 @@ final class TripsListInitial extends TripsListState {}
 
 final class TripsListLoadInProgress extends TripsListState {}
 
+final class TripsListRefreshed extends TripsListState {}
+
 final class TripsListLoaded extends TripsListState {
   final List<TripModel> trips;
   const TripsListLoaded({required this.trips});

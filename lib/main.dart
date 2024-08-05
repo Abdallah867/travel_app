@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
@@ -22,7 +24,7 @@ void main() async {
   setupServiceLocator();
   runApp(
     DevicePreview(
-      enabled: kDebugMode,
+      enabled: kDebugMode && !Platform.isAndroid,
       builder: (context) => const TravelApp(),
     ),
   );

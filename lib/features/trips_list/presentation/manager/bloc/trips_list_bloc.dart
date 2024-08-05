@@ -26,11 +26,11 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
     on<TripsListEvent>(
       (event, emit) async {
         if (event is TripsListFilterApplied) {
-          await _handleTripsListFailedFetchRetried(emit);
+          await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListSearchTermChanged) {
           await _handleTripsListSearchTermChanged(emit, event);
         } else if (event is TripsListRefreshed) {
-          await _handleTripsListRefreshed(emit, event);
+          // await _handleTripsListRefreshed(emit, event);
         } else if (event is TripsListNextPageRequested) {
           await _handleTripsListNextPageRequested(emit, event);
         } else if (event is TripsListFilterApplied) {
@@ -52,10 +52,10 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
     await getTripsList(emit);
   }
 
-  Future<void> _handleTripsListRefreshed(
-      Emitter<TripsListState> emit, TripsListRefreshed event) async {
-    await getTripsList(emit);
-  }
+  // Future<void> _handleTripsListRefreshed(
+  //     Emitter<TripsListState> emit, TripsListRefreshed event) async {
+  //   await getTripsList(emit);
+  // }
 
   Future<void> _handleTripsListNextPageRequested(
       Emitter<TripsListState> emit, TripsListNextPageRequested event) async {
@@ -65,7 +65,7 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> _handleTripsListFilterApplied(
       Emitter<TripsListState> emit, TripsListFilterApplied event) async {
     await getTripsList(emit);
-    print('did');
+    emit(TripsListRefreshed());
   }
 
   Future<void> _handleTripsListFirstPageFetch(

@@ -57,6 +57,9 @@ class TripsListViewState extends State<TripsListView> {
       appBar: customAppBar(S.of(context).availableTrips),
       body: BlocListener<TripsListBloc, TripsListState>(
         listener: (context, state) {
+          if (state is TripsListRefreshed) {
+            _pagingController.refresh();
+          }
           if (state is TripsListLoaded) {
             final List<TripModel> tripsList = state.trips;
             final bool isLastPage = tripsList.length < AppConstants.pageSize;

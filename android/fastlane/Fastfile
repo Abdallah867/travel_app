@@ -1,17 +1,20 @@
 default_platform(:android)
 
+before_all do
+  Dotenv.overload '.env'
+end
 platform :android do
   desc "Lane for Android Firebase App Distribution"
   lane :firebase_distribution do
     sh "flutter clean"
     sh "flutter build apk --release"
     firebase_app_distribution(
-      app: dotenv.env["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_APP_ID"],
       groups: "qa-team, trusted-testers",
-      firebase_cli_token: dotenv.env["FIREBASE_CLI_TOKEN"],
-      # android_artifact_type: "APK",
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+      android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
-      testers: "abdoallahusma5704@gmail.com",
+      testers: ENV["FIREBASE_TESTERS"],
       release_notes: "first firebase distribution"
     )  
   end
