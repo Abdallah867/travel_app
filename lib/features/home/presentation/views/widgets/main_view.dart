@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,8 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../../trip/presentation/views/widgets/custom_circular_icon.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
 import '../../../../trips_list/presentation/manager/bloc/trips_list_bloc.dart';
 import 'title_section.dart';
@@ -17,12 +20,33 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String username =
+        context.read<CurrentAccountCubit>().userInformations!.username;
     return CustomScrollView(
       physics: const ClampingScrollPhysics(),
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate(
             [
+              const VerticalSpace(size: 50),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      S.of(context).hello(username),
+                      style: TextStyles.textStyle20SemiBold,
+                    ),
+                    CustomCircularIcon(
+                      icon: CupertinoIcons.bell,
+                      bgColor: AppColors.whiteColor,
+                      iconColor: Colors.black,
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
               const VerticalSpace(size: 50),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/services/service_locator.dart';
@@ -34,30 +35,27 @@ class _NavBarViewState extends State<NavBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
       body: _screensList.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home),
+            icon: const Icon(CupertinoIcons.house),
+            activeIcon: const Icon(CupertinoIcons.house_fill),
             label: S.of(context).home,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.calendar_month_outlined),
-            activeIcon: const Icon(Icons.calendar_month),
+            icon: const Icon(CupertinoIcons.calendar),
+            activeIcon: const Icon(CupertinoIcons.calendar),
             label: S.of(context).bookings,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.bookmark_outline),
-            activeIcon: const Icon(Icons.bookmark),
+            icon: const Icon(CupertinoIcons.bookmark),
+            activeIcon: const Icon(CupertinoIcons.bookmark_fill),
             label: S.of(context).savedTrips,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.account_circle_outlined),
-            activeIcon: const Icon(Icons.account_circle),
+            icon: const Icon(CupertinoIcons.person_crop_circle),
+            activeIcon: const Icon(CupertinoIcons.person_crop_circle_fill),
             label: S.of(context).profile,
           ),
         ],

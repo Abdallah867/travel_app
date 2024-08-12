@@ -39,5 +39,6 @@
   "returnDate": "Return Date",
   "filterTrips": "Filter Trips",
   "clear": "Clear",
-  "priceRange": "Price Range"
+  "priceRange": "Price Range",
+  "hello": "Hello, {username}! "
 }

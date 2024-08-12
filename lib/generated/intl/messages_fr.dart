@@ -20,6 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'fr';
 
+  static String m0(username) => "Bienvenue, ${username}!";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("À propos"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Mot de passe oublié?"),
+        "hello": m0,
         "home": MessageLookupByLibrary.simpleMessage("Accueil"),
         "login": MessageLookupByLibrary.simpleMessage("Connexion"),
         "loginFailed":

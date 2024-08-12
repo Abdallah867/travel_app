@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../core/widgets/custom_shimmer.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
@@ -48,16 +50,32 @@ class TripCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              margin: EdgeInsetsDirectional.only(
+            // Container(
+            //   margin: EdgeInsetsDirectional.only(
+            //       start: 20.w, bottom: 16.h, top: 16.h),
+            //   height: 72.h,
+            //   width: 72.w,
+            //   decoration: BoxDecoration(
+            //     // color: AppColors.greyColor,
+            //     borderRadius: BorderRadius.all(Radius.circular(16.r)),
+            //     image: DecorationImage(
+            //       image: NetworkImage(
+            //         trip.coverImage,
+            //       ),
+            //       fit: BoxFit.fitHeight,
+            //     ),
+            //   ),
+            // ),
+            Padding(
+              padding: EdgeInsetsDirectional.only(
                   start: 20.w, bottom: 16.h, top: 16.h),
-              height: 72.h,
-              width: 72.w,
-              decoration: BoxDecoration(
-                color: AppColors.greyColor,
-                borderRadius: BorderRadius.all(Radius.circular(16.r)),
+              child: CachedNetworkImage(
+                imageUrl: trip.coverImage,
+                placeholder: (context, url) => const CustomShimmer.box(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
+
             const HorizontalSpace(size: 12),
             Expanded(
               child: Padding(

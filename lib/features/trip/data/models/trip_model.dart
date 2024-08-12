@@ -6,7 +6,7 @@ import '../../../home/data/models/agency_model.dart';
 class TripModel {
   final String tripId;
   final String title;
-  final String image;
+  final String coverImage;
   final String location;
   final String description;
   final int price;
@@ -16,7 +16,7 @@ class TripModel {
   TripModel({
     required this.tripId,
     required this.title,
-    required this.image,
+    required this.coverImage,
     required this.location,
     required this.description,
     required this.price,
@@ -28,7 +28,7 @@ class TripModel {
   TripModel copyWith({
     String? tripId,
     String? title,
-    String? image,
+    String? coverImage,
     String? location,
     String? description,
     int? price,
@@ -39,7 +39,7 @@ class TripModel {
     return TripModel(
       tripId: tripId ?? this.tripId,
       title: title ?? this.title,
-      image: image ?? this.image,
+      coverImage: coverImage ?? this.coverImage,
       location: location ?? this.location,
       description: description ?? this.description,
       price: price ?? this.price,
@@ -53,7 +53,7 @@ class TripModel {
     return <String, dynamic>{
       'tripId': tripId,
       'title': title,
-      'image': image,
+      'coverImage': coverImage,
       'location': location,
       'description': description,
       'price': price,
@@ -67,7 +67,7 @@ class TripModel {
     return TripModel(
       tripId: map['tripId'] as String,
       title: map['title'] as String,
-      image: map['image'] as String,
+      coverImage: map['coverImage'] as String,
       location: map['location'] as String,
       description: map['description'] as String,
       price: map['price'] as int,
@@ -86,7 +86,7 @@ class TripModel {
 
   @override
   String toString() {
-    return 'TripModel(tripId: $tripId, title: $title, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
+    return 'TripModel(tripId: $tripId, title: $title, coverImage: $coverImage, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
   }
 
   @override
@@ -95,7 +95,7 @@ class TripModel {
 
     return other.tripId == tripId &&
         other.title == title &&
-        other.image == image &&
+        other.coverImage == coverImage &&
         other.location == location &&
         other.description == description &&
         other.price == price &&
@@ -108,7 +108,7 @@ class TripModel {
   int get hashCode {
     return tripId.hashCode ^
         title.hashCode ^
-        image.hashCode ^
+        coverImage.hashCode ^
         location.hashCode ^
         description.hashCode ^
         price.hashCode ^

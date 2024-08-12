@@ -34,5 +34,6 @@
   "showLess": "عرض أقل",
   "about": "حول",
   "bookNow": "احجز الآن",
-  "algerianCurrency": "د.ج"
+  "algerianCurrency": "د.ج",
+  "hello": "مرحباً  {username} ! "
 }

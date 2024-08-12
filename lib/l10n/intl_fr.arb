@@ -34,5 +34,6 @@
   "showLess": "Voir moins",
   "about": "À propos",
   "bookNow": "Réservez maintenant",
-  "algerianCurrency": "DA"
+  "algerianCurrency": "DA",
+  "hello": "Bienvenue, {username}!"
 }
