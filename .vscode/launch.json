@@ -6,14 +6,19 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main_development.dart",
-      "args": ["--flavor", "Developement", "--target", "lib/main_free.dart"]
+      "args": [
+        "--flavor",
+        "Developement",
+        "--target",
+        "lib/main_developement.dart"
+      ]
     },
     {
       "name": "Rihla Production",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
-      "args": ["--flavor", "Production", "--target", "lib/main_free.dart"]
+      "args": ["--flavor", "Production", "--target", "lib/main_production.dart"]
     }
   ]
 }
