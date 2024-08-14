@@ -69,10 +69,15 @@ class TripCard extends StatelessWidget {
             Padding(
               padding: EdgeInsetsDirectional.only(
                   start: 20.w, bottom: 16.h, top: 16.h),
-              child: CachedNetworkImage(
-                imageUrl: trip.coverImage,
-                placeholder: (context, url) => const CustomShimmer.box(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.r),
+                child: CachedNetworkImage(
+                  height: 90.h,
+                  imageUrl:
+                      'https://cloud.appwrite.io/v1/storage/buckets/66b9eace002cbd9aadf6/files/66b9ebf500072e785c9a/view?project=662b832999f08a693c77&mode=admin',
+                  placeholder: (context, url) => const CustomShimmer.box(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
 

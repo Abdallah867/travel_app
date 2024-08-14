@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import '../../../home/data/models/agency_model.dart';
 
 class TripModel {
@@ -12,6 +14,7 @@ class TripModel {
   final int price;
   final int duration;
   final double rating;
+  final List<String> otherImages;
   final AgencyModel? agency;
   TripModel({
     required this.tripId,
@@ -22,6 +25,7 @@ class TripModel {
     required this.price,
     required this.duration,
     required this.rating,
+    required this.otherImages,
     this.agency,
   });
 
@@ -34,6 +38,7 @@ class TripModel {
     int? price,
     int? duration,
     double? rating,
+    List<String>? otherImages,
     AgencyModel? agency,
   }) {
     return TripModel(
@@ -45,6 +50,7 @@ class TripModel {
       price: price ?? this.price,
       duration: duration ?? this.duration,
       rating: rating ?? this.rating,
+      otherImages: otherImages ?? this.otherImages,
       agency: agency ?? this.agency,
     );
   }
@@ -59,6 +65,7 @@ class TripModel {
       'price': price,
       'duration': duration,
       'rating': rating,
+      'otherImages': otherImages,
       'agency': agency?.toMap(),
     };
   }
@@ -73,6 +80,9 @@ class TripModel {
       price: map['price'] as int,
       duration: map['duration'] as int,
       rating: map['rating'] as double,
+      otherImages: List<String>.from(
+        (map['otherImages'] as List<dynamic>),
+      ),
       agency: map['agency'] != null
           ? AgencyModel.fromMap(map['agency'] as Map<String, dynamic>)
           : null,
@@ -86,7 +96,7 @@ class TripModel {
 
   @override
   String toString() {
-    return 'TripModel(tripId: $tripId, title: $title, coverImage: $coverImage, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
+    return 'TripModel(tripId: $tripId, title: $title, coverImage: $coverImage, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, otherImages: $otherImages, agency: $agency)';
   }
 
   @override
@@ -101,6 +111,7 @@ class TripModel {
         other.price == price &&
         other.duration == duration &&
         other.rating == rating &&
+        listEquals(other.otherImages, otherImages) &&
         other.agency == agency;
   }
 
@@ -114,6 +125,7 @@ class TripModel {
         price.hashCode ^
         duration.hashCode ^
         rating.hashCode ^
+        otherImages.hashCode ^
         agency.hashCode;
   }
 }
