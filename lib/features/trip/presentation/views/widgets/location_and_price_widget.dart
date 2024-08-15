@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/horizontal_space.dart';
-
 import '../../../../../generated/l10n.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
+import 'location_widget.dart';
 
 class LocationAndPriceWidget extends StatelessWidget {
   const LocationAndPriceWidget({
@@ -15,29 +14,13 @@ class LocationAndPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tripCubit = BlocProvider.of<TripCubit>(context);
+    final trip = BlocProvider.of<TripCubit>(context).trip;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            const Icon(
-              Icons.location_on_outlined,
-              color: AppColors.lighterGrey,
-              size: 16,
-            ),
-            const HorizontalSpace(size: 2),
-            Text(
-              tripCubit.trip.location,
-              style: TextStyles.textStyle14.copyWith(
-                fontWeight: FontWeightHelper.medium,
-                color: AppColors.lighterGrey,
-              ),
-            ),
-          ],
-        ),
+        LocationWidget(location: trip.location),
         Text(
-          '${tripCubit.trip.price} ${S.of(context).algerianCurrency}',
+          '${trip.price} ${S.of(context).algerianCurrency}',
           style: TextStyles.textStyle14.copyWith(
             fontWeight: FontWeightHelper.semiBold,
             color: AppColors.secondaryColor,

@@ -1,6 +1,6 @@
 class AppConstants {
-  static const double designHeight = 915;
-  static const double designWidth = 412;
+  static const double designHeight = 851;
+  static const double designWidth = 393;
   static const String profilesCollectionEndpoint = 'profiles';
   static const String savesCollectionEndpoint = 'saves';
   static const String tripsCollectionEndpoint = 'trips';

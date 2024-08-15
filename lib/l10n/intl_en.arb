@@ -40,5 +40,6 @@
   "filterTrips": "Filter Trips",
   "clear": "Clear",
   "priceRange": "Price Range",
-  "hello": "Hello, {username}! "
+  "hello": "Hello, {username}! ",
+  "agency": "Agency"
 }

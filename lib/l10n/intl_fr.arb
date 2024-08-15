@@ -35,5 +35,6 @@
   "about": "À propos",
   "bookNow": "Réservez maintenant",
   "algerianCurrency": "DA",
-  "hello": "Bienvenue, {username}!"
+  "hello": "Bienvenue, {username}!",
+  "agency": "Agence"
 }

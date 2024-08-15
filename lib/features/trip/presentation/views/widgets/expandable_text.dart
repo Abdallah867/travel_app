@@ -25,10 +25,9 @@ class _ExpandableTextState extends State<ExpandableText> {
     return Wrap(
       children: [
         Text(
-          tripCubit.trip.description,
+          tripCubit.trip.description.trim(),
           style: TextStyles.textStyle16.copyWith(
-              fontWeight: FontWeightHelper.regular,
-              color: Colors.black.withOpacity(.55)),
+              fontWeight: FontWeightHelper.regular, color: AppColors.lightGrey),
           maxLines: !isExpanded ? 3 : null,
         ),
         GestureDetector(

@@ -82,8 +82,11 @@ class TripsListViewState extends State<TripsListView> {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: CustomScrollView(
               slivers: [
-                const SliverToBoxAdapter(
-                  child: SearchBarAndFilterWidget(),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 16.h),
+                    child: const SearchBarAndFilterWidget(),
+                  ),
                 ),
                 PagedSliverList<String?, TripModel>(
                   pagingController: _pagingController,

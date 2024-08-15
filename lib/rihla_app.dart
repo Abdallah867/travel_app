@@ -36,7 +36,7 @@ class RihlaApp extends StatelessWidget {
           scaffoldBackgroundColor: AppColors.backgroundColor,
           bottomSheetTheme: const BottomSheetThemeData(
               backgroundColor: AppColors.backgroundColor),
-          textTheme: GoogleFonts.k2dTextTheme(),
+          textTheme: GoogleFonts.dmSansTextTheme(),
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.secondaryColor,
           ),

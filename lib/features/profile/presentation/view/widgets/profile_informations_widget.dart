@@ -20,7 +20,8 @@ class ProfileInformationsWidget extends StatelessWidget {
         CircleAvatar(
           radius: 50.r,
           backgroundColor: AppColors.secondaryColor,
-          // backgroundImage: NetworkImage(state.user.imageUrl),
+          backgroundImage:
+              const AssetImage("assets/images/anonymous_profile.png"),
         ),
         const VerticalSpace(size: 8),
         CenteredText(

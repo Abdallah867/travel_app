@@ -35,5 +35,6 @@
   "about": "حول",
   "bookNow": "احجز الآن",
   "algerianCurrency": "د.ج",
-  "hello": "مرحباً  {username} ! "
+  "hello": "مرحباً  {username} ! ",
+  "agency": "Agency"
 }

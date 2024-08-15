@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/widgets/horizontal_space.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../auth/data/repos/auth_repo_impl.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../auth/presentation/manager/logout_cubit/logout_cubit.dart';
@@ -22,6 +24,9 @@ class ProfileView extends StatelessWidget {
             authRepo: getIt.get<AuthRepoImpl>(),
           ),
           child: Scaffold(
+            appBar: customAppBar(
+              S.of(context).profile,
+            ),
             body: CustomScrollView(
               physics: const NeverScrollableScrollPhysics(),
               slivers: [
@@ -29,7 +34,7 @@ class ProfileView extends StatelessWidget {
                   delegate: SliverChildListDelegate(
                     [
                       const HorizontalSpace(size: double.infinity),
-                      const VerticalSpace(size: 24),
+                      const VerticalSpace(size: 16),
                       ProfileInformationsWidget(
                         user: BlocProvider.of<CurrentAccountCubit>(context)
                             .userInformations,

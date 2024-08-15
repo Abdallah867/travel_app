@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
@@ -28,15 +29,26 @@ class MainView extends StatelessWidget {
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              const VerticalSpace(size: 50),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 36.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      S.of(context).hello(username),
-                      style: TextStyles.textStyle20SemiBold,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          S.of(context).hello(username),
+                          style: TextStyles.textStyle20SemiBold
+                              .copyWith(fontWeight: FontWeightHelper.bold),
+                        ),
+                        Text(
+                          'Do you want to go on a trip?',
+                          style: TextStyles.textStyle16.copyWith(
+                              color: Colors.black.withOpacity(.45),
+                              fontWeight: FontWeightHelper.semiBold),
+                        ),
+                      ],
                     ),
                     CustomCircularIcon(
                       icon: CupertinoIcons.bell,
@@ -47,7 +59,6 @@ class MainView extends StatelessWidget {
                   ],
                 ),
               ),
-              const VerticalSpace(size: 50),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: TitleSection(
@@ -60,10 +71,9 @@ class MainView extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              const VerticalSpace(size: 8),
+              const VerticalSpace(size: 16),
               const TravelAgenciesListView(),
-              const VerticalSpace(size: 28),
-              const VerticalSpace(size: 8),
+              const VerticalSpace(size: 24),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: TitleSection(
@@ -79,7 +89,7 @@ class MainView extends StatelessWidget {
                   },
                 ),
               ),
-              const VerticalSpace(size: 8),
+              const VerticalSpace(size: 16),
             ],
           ),
         ),

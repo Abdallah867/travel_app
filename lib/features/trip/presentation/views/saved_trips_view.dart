@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/services/service_locator.dart';
@@ -22,11 +23,14 @@ class SavedTripsView extends StatelessWidget {
         ..getSavedTrips(userId: userId!),
       child: Scaffold(
         appBar: customAppBar(S.of(context).savedTrips),
-        body: const CustomScrollView(
-          physics: ClampingScrollPhysics(),
-          slivers: [
-            SavedTripsBlocBuilder(),
-          ],
+        body: Padding(
+          padding: EdgeInsets.only(top: 16.h),
+          child: const CustomScrollView(
+            physics: ClampingScrollPhysics(),
+            slivers: [
+              SavedTripsBlocBuilder(),
+            ],
+          ),
         ),
       ),
     );

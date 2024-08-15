@@ -38,6 +38,10 @@ class ProfileMenu extends StatelessWidget {
           trailing: const Icon(Icons.arrow_forward_ios),
           minVerticalPadding: 20.h,
           shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: AppColors.lighterGrey,
+              width: 2.w,
+            ),
             borderRadius: BorderRadius.circular(12.r),
           ),
         ),

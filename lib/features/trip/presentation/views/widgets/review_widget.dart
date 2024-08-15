@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/horizontal_space.dart';
 
 class ReviewWidget extends StatelessWidget {
   final double review;
@@ -17,10 +16,9 @@ class ReviewWidget extends StatelessWidget {
       children: [
         const Icon(
           Icons.star,
-          size: 16,
+          size: 20,
           color: AppColors.yellowColor,
         ),
-        const HorizontalSpace(size: 4),
         Text(
           '(${review.toDouble().toStringAsFixed(1)})',
           style: TextStyles.textStyle14.copyWith(

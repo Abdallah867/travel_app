@@ -5,6 +5,12 @@ import '../utils/text_styles.dart';
 
 AppBar customAppBar(String name) {
   return AppBar(
+    shape: const Border(
+      bottom: BorderSide(
+        color: AppColors.lighterGrey,
+        width: 1,
+      ),
+    ),
     backgroundColor: AppColors.backgroundColor,
     centerTitle: true,
     title: Text(
