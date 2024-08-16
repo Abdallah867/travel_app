@@ -36,5 +36,5 @@
   "bookNow": "احجز الآن",
   "algerianCurrency": "د.ج",
   "hello": "مرحباً  {username} ! ",
-  "agency": "Agency"
+  "agencyName": "Agency"
 }
