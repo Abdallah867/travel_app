@@ -28,12 +28,10 @@ class UserProfileRepoImpl implements UserProfileRepo {
 
       return left(UserModel.fromMap(response));
     } on AppwriteException catch (e) {
-      print(e.message);
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
       );
     } catch (e) {
-      print(e);
       return right(
         Failure(errMessage: e.toString()),
       );

@@ -22,7 +22,7 @@ class ReviewWidget extends StatelessWidget {
         Text(
           '(${review.toDouble().toStringAsFixed(1)})',
           style: TextStyles.textStyle14.copyWith(
-            color: AppColors.lighterGrey,
+            color: AppColors.lightGrey,
           ),
         ),
       ],

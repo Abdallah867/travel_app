@@ -23,7 +23,7 @@ class RihlaApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        locale: const Locale('en'),
+        locale: const Locale('fr'),
         localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

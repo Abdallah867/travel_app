@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../data/models/user_model.dart';
 import '../../../data/repos/user_profile_repo.dart';
@@ -55,6 +58,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   void checkIfInformarionsHasBeenChanged() {
     emit(EditProfileInformationChanged(
         isChanged: (!(user == updateInformations()) ? true : false)));
+  }
+
+  Future<File> selectProfileImage(ImageSource source) async {
+    ImagePicker picker = ImagePicker();
+    XFile? image = await picker.pickImage(source: source);
+    return File(image!.path);
   }
 
   void setupControllerListeners() {

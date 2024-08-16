@@ -47,6 +47,7 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       // const VerticalSpace(size: 24),
                       ProfileInformationsWidget(
                         user: editProfileCubit.user,
+                        editProfileCubit: editProfileCubit,
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(
