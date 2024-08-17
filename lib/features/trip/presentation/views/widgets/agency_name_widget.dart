@@ -13,7 +13,7 @@ class AgencyNameWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Text(
-        '${S.of(context).agencies}: Travel DZ',
+        '${S.of(context).agencyName}: Travel DZ',
         style: TextStyles.textStyle16.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),

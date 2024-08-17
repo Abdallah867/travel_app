@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,6 +50,9 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       ProfileInformationsWidget(
                         user: editProfileCubit.user,
                         editProfileCubit: editProfileCubit,
+                        profileImage: editProfileCubit.profileImage == null
+                            ? null
+                            : FileImage(editProfileCubit.profileImage!),
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(

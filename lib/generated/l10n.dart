@@ -469,6 +469,16 @@ class S {
       args: [username],
     );
   }
+
+  /// `Agency`
+  String get agencyName {
+    return Intl.message(
+      'Agency',
+      name: 'agencyName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
