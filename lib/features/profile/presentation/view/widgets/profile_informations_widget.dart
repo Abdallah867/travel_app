@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -13,12 +12,10 @@ import '../../manager/cubit/edit_profile_cubit.dart';
 class ProfileInformationsWidget extends StatelessWidget {
   final UserModel? user;
   final EditProfileCubit? editProfileCubit;
-  final ImageProvider<Object>? profileImage;
   const ProfileInformationsWidget({
     super.key,
     required this.user,
     this.editProfileCubit,
-    this.profileImage = const AssetImage("assets/images/anonymous_profile.png"),
   });
 
   @override
@@ -31,8 +28,8 @@ class ProfileInformationsWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 50.r,
-            backgroundColor: AppColors.secondaryColor,
-            backgroundImage: profileImage,
+            backgroundColor: AppColors.backgroundColor,
+            backgroundImage: context.read<EditProfileCubit>().profileImage,
           ),
           const VerticalSpace(size: 8),
           CenteredText(

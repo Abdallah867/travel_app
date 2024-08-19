@@ -41,5 +41,6 @@
   "clear": "Clear",
   "priceRange": "Price Range",
   "hello": "Hello, {username}! ",
-  "agencyName": "Agency"
+  "agencyName": "Agency",
+  "language": "Language"
 }

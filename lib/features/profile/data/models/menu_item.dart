@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MenuItem {
   final String name;
   final IconData icon;
-  final String path;
+  final VoidCallback onTap;
 
-  const MenuItem({required this.name, required this.icon, required this.path});
+  const MenuItem({required this.name, required this.icon, required this.onTap});
 }

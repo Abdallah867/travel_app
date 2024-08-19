@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/functions/show_snack_bar.dart';
 import '../../../../../core/routes/app_routes.dart';
+import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/manager/logout_cubit/logout_cubit.dart';
+import 'profile_menu.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({
@@ -28,23 +30,26 @@ class LogoutButton extends StatelessWidget {
       },
       builder: (context, state) {
         return state is! LogoutLoadInProgress
-            ? SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: CustomButton(
-                    text: S.of(context).logout,
-                    color: Colors.red,
-                    onPressed: () async {
+            ? Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteColor,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  width: double.infinity,
+                  child: ProfileMenu(
+                    name: S.of(context).logout,
+                    icon: Icons.logout,
+                    onTap: () async {
                       await BlocProvider.of<LogoutCubit>(context).logoutUser();
                     },
-                  ),
-                ),
-              )
-            : const SliverToBoxAdapter(
-                child: Center(
-                  child: CircularProgressIndicator(
                     color: Colors.red,
                   ),
+                ))
+            : const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red,
                 ),
               );
       },

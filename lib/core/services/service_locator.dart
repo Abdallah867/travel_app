@@ -2,9 +2,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:appwrite/appwrite.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
-import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
-import '../../features/auth/presentation/manager/login_cubit/login_cubit.dart';
-import '../../features/auth/presentation/manager/register_cubit/register_cubit.dart';
 import '../../features/profile/data/repos/user_profile_repo_impl.dart';
 import '../../features/trip/data/repos/trip_repo_impl.dart';
 import '../../features/trips_list/data/repos/trips_list_repo_impl.dart';
@@ -32,6 +29,7 @@ void _setupAppwrite() {
       database: getIt.get<Databases>(),
     ),
   );
+  getIt.registerSingleton<Storage>(Storage(getIt.get<Client>()));
 }
 
 void _setupAuth() {
@@ -64,9 +62,9 @@ void _setupAuth() {
 void _setupProfile() {
   getIt.registerFactory(
     () => UserProfileRepoImpl(
-      databaseService: getIt.get<AppwriteService>(),
-      account: getIt.get<Account>(),
-    ),
+        databaseService: getIt.get<AppwriteService>(),
+        account: getIt.get<Account>(),
+        storage: getIt.get<Storage>()),
   );
 }
 

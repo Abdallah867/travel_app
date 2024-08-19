@@ -16,7 +16,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey();
-  File? profileImage;
+  ImageProvider<Object> profileImage =
+      const AssetImage("assets/images/anonymous_profile.png");
 
   final UserProfileRepo userProfileRepo;
   bool isButtonDisabled = true;
@@ -64,7 +65,23 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   Future<void> selectProfileImage(ImageSource source) async {
     ImagePicker picker = ImagePicker();
     XFile? image = await picker.pickImage(source: source);
-    profileImage = File(image!.path);
+    profileImage = FileImage(File(image!.path));
+    await uploadUserProfilePicture(image.path);
+  }
+
+  Future<void> uploadUserProfilePicture(String imagePath) async {
+    final response = await userProfileRepo.uploadUserProfilePicture(
+      path: imagePath,
+      userId: user.userId,
+    );
+
+    response.fold((file) {
+      emit(EditProfileSuccess());
+      print("nice!!!!!!!!!!");
+    }, (failure) {
+      emit(EditProfileFailure(errMessage: failure.errMessage));
+      print(failure.errMessage);
+    });
   }
 
   void setupControllerListeners() {

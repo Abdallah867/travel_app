@@ -54,16 +54,6 @@ class EditProfileInformationsWidget extends StatelessWidget {
       },
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: editProfileCubit.profileImage != null
-                    ? FileImage(editProfileCubit.profileImage!) as ImageProvider
-                    : const AssetImage("assets/images/anonymous_profile.png"),
-                fit: BoxFit.cover, // Adjust the fit as needed
-              ),
-            ),
-          ),
           CenteredText(
             text: user!.email,
             style: TextStyles.textStyle14,

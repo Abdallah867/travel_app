@@ -14,6 +14,11 @@ abstract class UserProfileRepo {
     required String password,
   });
 
+  Future<Either<File, Failure>> uploadUserProfilePicture(
+      {required String userId, required String path});
+  // Future<Either<File, Failure>> getUserProfilePicture(
+  //     {required String userId, required String path});
+
   Future<Either<void, Failure>> deleteUser({required String userId});
   Future<Either<void, Failure>> updateUsername({required String newUsername});
   Future<Either<void, Failure>> updateEmail(

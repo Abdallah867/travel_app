@@ -11,8 +11,10 @@ import 'user_profile_repo.dart';
 class UserProfileRepoImpl implements UserProfileRepo {
   final DatabaseService databaseService;
   final Account account;
+  final Storage storage;
 
   const UserProfileRepoImpl({
+    required this.storage,
     required this.databaseService,
     required this.account,
   });
@@ -137,6 +139,27 @@ class UserProfileRepoImpl implements UserProfileRepo {
     try {
       await account.updateEmail(email: newEmail, password: password);
       return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<File, Failure>> uploadUserProfilePicture(
+      {required String userId, required String path}) async {
+    try {
+      final file = await storage.createFile(
+        bucketId: '66c15cf2001c674a73e5',
+        fileId: ID.unique(),
+        file: InputFile.fromPath(path: path, filename: '$userId.jpg'),
+      );
+      return left(file);
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),

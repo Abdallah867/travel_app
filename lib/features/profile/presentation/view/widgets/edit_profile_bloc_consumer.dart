@@ -13,17 +13,13 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
-import '../../../data/models/user_model.dart';
 import '../../manager/cubit/edit_profile_cubit.dart';
 import 'profile_informations_widget.dart';
 
 class EditProfileBlocConsumer extends StatelessWidget {
   const EditProfileBlocConsumer({
     super.key,
-    required this.user,
   });
-
-  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +46,6 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       ProfileInformationsWidget(
                         user: editProfileCubit.user,
                         editProfileCubit: editProfileCubit,
-                        profileImage: editProfileCubit.profileImage == null
-                            ? null
-                            : FileImage(editProfileCubit.profileImage!),
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(
@@ -99,8 +92,8 @@ class EditProfileBlocConsumer extends StatelessWidget {
   void handlingEditProfileListener(EditProfileState state, BuildContext context,
       EditProfileCubit editProfileCubit) {
     if (state is EditProfileSuccess) {
-      BlocProvider.of<CurrentAccountCubit>(context)
-          .updateUserInformations(editProfileCubit.user);
+      // BlocProvider.of<CurrentAccountCubit>(context)
+      //     .updateUserInformations(editProfileCubit.user);
       editProfileCubit.setInitialValue();
       showSnackBar(context, 'Profile updated successfully', AppStrings.success);
       // context.pop();
