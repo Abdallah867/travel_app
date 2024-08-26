@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/functions/show_snack_bar.dart';
 import '../../../../../core/functions/validate_email.dart';
 import '../../../../../core/functions/validate_password.dart';
@@ -12,7 +11,6 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../manager/cubit/edit_profile_cubit.dart';
 import 'profile_informations_widget.dart';
 
@@ -42,10 +40,9 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Column(
                     children: [
-                      // const VerticalSpace(size: 24),
+                      const VerticalSpace(size: 16),
                       ProfileInformationsWidget(
                         user: editProfileCubit.user,
-                        editProfileCubit: editProfileCubit,
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(
@@ -74,8 +71,7 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       ),
                       const VerticalSpace(size: 32),
                       state is! EditProfileLoadInProgress
-                          ? CustomButtonBlocBuilder(
-                              editProfileCubit: editProfileCubit)
+                          ? const CustomButtonBlocBuilder()
                           : const CircularProgressIndicator(),
                       const VerticalSpace(size: 100),
                     ],
@@ -107,13 +103,13 @@ class EditProfileBlocConsumer extends StatelessWidget {
 class CustomButtonBlocBuilder extends StatelessWidget {
   const CustomButtonBlocBuilder({
     super.key,
-    required this.editProfileCubit,
   });
-
-  final EditProfileCubit editProfileCubit;
 
   @override
   Widget build(BuildContext context) {
+    final EditProfileCubit editProfileCubit =
+        BlocProvider.of<EditProfileCubit>(context);
+
     return BlocBuilder<EditProfileCubit, EditProfileState>(
       builder: (context, state) {
         return state is EditProfileInformationChanged
@@ -123,11 +119,16 @@ class CustomButtonBlocBuilder extends StatelessWidget {
                     ? null
                     : () async {
                         if (editProfileCubit.formKey.currentState!.validate()) {
-                          await editProfileCubit.updateUserData();
+                          await editProfileCubit.updateDatabaseUserData(
+                            newUserInformations: editProfileCubit.updatedUser,
+                          );
                         }
                       },
               )
-            : const SizedBox();
+            : CustomButton(
+                text: S.of(context).save,
+                onPressed: null,
+              );
       },
     );
   }

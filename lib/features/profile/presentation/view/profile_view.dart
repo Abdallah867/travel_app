@@ -27,14 +27,13 @@ class ProfileView extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => EditProfileCubit(
-            userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-            user:
-                BlocProvider.of<CurrentAccountCubit>(context).userInformations!,
-          )
-            ..setInitialValue()
-            ..setupControllerListeners(),
-        ),
+            create: (context) => EditProfileCubit(
+                  userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+                  user: BlocProvider.of<CurrentAccountCubit>(context)
+                      .userInformations!,
+                )
+                  ..setInitialValue()
+                  ..setupControllerListeners()),
       ],
       child: Scaffold(
         appBar: customAppBar(

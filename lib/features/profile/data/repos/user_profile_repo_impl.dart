@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/errors/failure.dart';
@@ -87,18 +88,8 @@ class UserProfileRepoImpl implements UserProfileRepo {
   @override
   Future<Either<UserModel, Failure>> updateUserData({
     required UserModel newUserInformations,
-    required String password,
   }) async {
     try {
-      await account.updateEmail(
-        email: newUserInformations.email,
-        password: password,
-      );
-
-      await account.updateName(
-        name: newUserInformations.username,
-      );
-
       final response = await databaseService.update(
         id: newUserInformations.userId,
         endpoint: AppConstants.profilesCollectionEndpoint,
@@ -117,7 +108,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<void, Failure>> updateUsername(
+  Future<Either<void, Failure>> updateAppwriteAuthUsername(
       {required String newUsername}) async {
     try {
       await account.updateName(name: newUsername);
@@ -134,7 +125,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
   }
 
   @override
-  Future<Either<void, Failure>> updateEmail(
+  Future<Either<void, Failure>> updateAppwriteAuthEmail(
       {required String newEmail, required String password}) async {
     try {
       await account.updateEmail(email: newEmail, password: password);
@@ -155,9 +146,29 @@ class UserProfileRepoImpl implements UserProfileRepo {
       {required String userId, required String path}) async {
     try {
       final file = await storage.createFile(
-        bucketId: '66c15cf2001c674a73e5',
+        bucketId: dotenv.env['APPWRITE_PROFILE_BUCKET_ID']!,
         fileId: ID.unique(),
         file: InputFile.fromPath(path: path, filename: '$userId.jpg'),
+      );
+      return left(file);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<File, Failure>> getUserProfilePicture(
+      {required String fileId}) async {
+    try {
+      final file = await storage.getFile(
+        bucketId: dotenv.env['APPWRITE_PROFILE_BUCKET_ID']!,
+        fileId: fileId,
       );
       return left(file);
     } on AppwriteException catch (e) {
