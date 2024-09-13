@@ -7,9 +7,8 @@ class DateFormatUtils {
     return date;
   }
 
-  static String getFormattedDateByDayAndMonthAndYear(String dateTime) {
-    DateTime parsedDateTime = DateTime.parse(dateTime);
-    String date = DateFormat('dd/MM/yyyy').format(parsedDateTime);
+  static String getFormattedDateByDayAndMonthAndYear(DateTime dateTime) {
+    String date = DateFormat('dd/MM/yyyy').format(dateTime);
     return date;
   }
 
@@ -36,8 +35,8 @@ class DateFormatUtils {
     }
   }
 
-  static int calculateAge(String birthday) {
-    DateTime birthDate = DateFormat('MM/dd/yyyy').parse(birthday);
+  static int calculateAge(DateTime birthDate) {
+    // DateTime birthDate = DateFormat('MM/dd/yyyy').parse(birthday);
     DateTime currentDate = DateTime.now();
     int age = currentDate.year - birthDate.year;
     if (currentDate.month < birthDate.month ||

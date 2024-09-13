@@ -9,7 +9,7 @@ class ReservationShimmerListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 120.h,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return const CustomShimmer.box(height: 100, width: 90);

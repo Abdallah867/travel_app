@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../../../core/utils/date_format_utils.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 
@@ -22,8 +23,7 @@ class DateSelectorField extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final DateTime? pickedDate = await pickDate(context);
-        controller.text = DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
-            pickedDate.toString());
+        controller.text = pickedDate.toString().substring(0, 10);
       },
       child: CustomTextFormField(
         name: label,

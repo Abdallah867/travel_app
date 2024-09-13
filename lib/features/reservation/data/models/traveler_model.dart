@@ -3,14 +3,12 @@ import 'dart:convert';
 
 class TravelerModel {
   final String travelerId;
-  final String nationalId;
   final String firstName;
   final String lastName;
-  final String birthday;
+  final DateTime birthday;
   final String gender;
   TravelerModel({
     required this.travelerId,
-    required this.nationalId,
     required this.firstName,
     required this.lastName,
     required this.birthday,
@@ -19,15 +17,13 @@ class TravelerModel {
 
   TravelerModel copyWith({
     String? travelerId,
-    String? nationalId,
     String? firstName,
     String? lastName,
-    String? birthday,
+    DateTime? birthday,
     String? gender,
   }) {
     return TravelerModel(
       travelerId: travelerId ?? this.travelerId,
-      nationalId: nationalId ?? this.nationalId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       birthday: birthday ?? this.birthday,
@@ -38,10 +34,9 @@ class TravelerModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'travelerId': travelerId,
-      'nationalId': nationalId,
       'firstName': firstName,
       'lastName': lastName,
-      'birthday': birthday,
+      'birthday': birthday.millisecondsSinceEpoch,
       'gender': gender,
     };
   }
@@ -49,10 +44,9 @@ class TravelerModel {
   factory TravelerModel.fromMap(Map<String, dynamic> map) {
     return TravelerModel(
       travelerId: map['travelerId'] as String,
-      nationalId: map['nationalId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
-      birthday: map['birthday'] as String,
+      birthday: DateTime.fromMillisecondsSinceEpoch(map['birthday'] as int),
       gender: map['gender'] as String,
     );
   }
@@ -64,6 +58,26 @@ class TravelerModel {
 
   @override
   String toString() {
-    return 'TravelerModel(travelerId: $travelerId, nationalId: $nationalId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
+    return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
+  }
+
+  @override
+  bool operator ==(covariant TravelerModel other) {
+    if (identical(this, other)) return true;
+
+    return other.travelerId == travelerId &&
+        other.firstName == firstName &&
+        other.lastName == lastName &&
+        other.birthday == birthday &&
+        other.gender == gender;
+  }
+
+  @override
+  int get hashCode {
+    return travelerId.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        birthday.hashCode ^
+        gender.hashCode;
   }
 }

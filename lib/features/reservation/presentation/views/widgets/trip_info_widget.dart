@@ -26,12 +26,12 @@ class TripInfoWidget extends StatelessWidget {
           _buildInfoRow(
               "Departure Date: ",
               DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
-                  tripSchedule.departureDate),
+                  DateTime.parse(tripSchedule.departureDate)),
               Icons.calendar_today),
           _buildInfoRow(
               "Return Date: ",
               DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
-                  tripSchedule.returnDate),
+                  DateTime.parse(tripSchedule.returnDate)),
               Icons.calendar_today),
           _buildInfoRow(
               "Seats Available: ",

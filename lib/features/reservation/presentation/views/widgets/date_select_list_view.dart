@@ -17,7 +17,7 @@ class DateSelectListView extends StatelessWidget {
     return BlocBuilder<ReservationCubit, ReservationState>(
       builder: (context, state) {
         return SizedBox(
-          height: 100.h,
+          height: 120.h,
           child: Padding(
             padding: EdgeInsets.only(left: 16.0.w),
             child: ListView.separated(

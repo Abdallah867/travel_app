@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/functions/custom_app_bar.dart';
+import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/horizontal_space.dart';
@@ -33,43 +35,51 @@ class PaymentAndSaveButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: CustomButton(
-              color: AppColors.backgroundColor,
-              textColor: AppColors.secondaryColor,
-              borderSide:
-                  const BorderSide(color: AppColors.secondaryColor, width: 2),
-              text: S.of(context).save,
-              onPressed: () {
-                context.read<ReservationCubit>().saveReservation(
-                      userId: context
-                              .read<CurrentAccountCubit>()
-                              .userInformations
-                              ?.userId ??
-                          '',
-                      choosenScheduleTripId:
-                          context.read<TripCubit>().trip.tripId,
-                    );
-              },
-            ),
+    return BlocBuilder<ReservationCubit, ReservationState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              state is ReservationLoadInProgress
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 36.w),
+                      child: const CircularProgressIndicator(),
+                    )
+                  : Expanded(
+                      flex: 3,
+                      child: CustomButton(
+                        color: AppColors.backgroundColor,
+                        textColor: AppColors.secondaryColor,
+                        borderSide: const BorderSide(
+                            color: AppColors.secondaryColor, width: 2),
+                        text: S.of(context).save,
+                        onPressed: () {
+                          context.read<ReservationCubit>().saveReservation(
+                                userId: context
+                                    .read<CurrentAccountCubit>()
+                                    .userInformations!
+                                    .userId,
+                                choosenScheduleTripId:
+                                    context.read<TripCubit>().trip.tripId,
+                              );
+                        },
+                      ),
+                    ),
+              const HorizontalSpace(size: 8),
+              Expanded(
+                flex: 4,
+                child: CustomButton(
+                  text: 'Proceed to Payment',
+                  onPressed: () {
+                    print('payment');
+                  },
+                ),
+              )
+            ],
           ),
-          const HorizontalSpace(size: 8),
-          Expanded(
-            flex: 4,
-            child: CustomButton(
-              text: 'Proceed to Payment',
-              onPressed: () {
-                print('payment');
-              },
-            ),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
