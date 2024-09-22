@@ -11,6 +11,7 @@ import '../../../../../core/widgets/custom_shimmer.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../data/models/trip_model.dart';
 import 'location_and_price_widget.dart';
 import 'review_widget.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
@@ -51,26 +52,22 @@ class TripCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
-              // topLeft: Radius.circular(16.r),
-              // bottomLeft: Radius.circular(16.r)),
-              child: CachedNetworkImage(
-                height: 110.h,
-                imageUrl: trip.coverImage,
-                placeholder: (context, url) => const CustomShimmer.box(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: 16.w,
+                top: 12.h,
+                bottom: 12.h,
               ),
+              child: CustomImageBox(imageUrl: trip.coverImage),
             ),
-            const HorizontalSpace(size: 12),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const HorizontalSpace(size: double.infinity),
-                    Text(trip.title, style: TextStyles.textStyle20SemiBold),
+                    Text(trip.title, style: TextStyles.textStyle16SemiBold),
                     const VerticalSpace(size: 4),
                     ReviewWidget(
                       review: trip.rating,
@@ -83,6 +80,32 @@ class TripCard extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomImageBox extends StatelessWidget {
+  const CustomImageBox({
+    super.key,
+    required this.imageUrl,
+  });
+
+  final String imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12.r),
+      // topLeft: Radius.circular(16.r),
+      // bottomLeft: Radius.circular(16.r)),
+      child: CachedNetworkImage(
+        width: 90.w,
+        height: 90.w,
+        fit: BoxFit.cover,
+        imageUrl: imageUrl,
+        placeholder: (context, url) => const CustomShimmer.box(),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
   }

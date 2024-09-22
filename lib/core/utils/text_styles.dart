@@ -27,6 +27,11 @@ abstract class TextStyles {
     fontWeight: FontWeightHelper.regular,
   );
 
+  static TextStyle textStyle16SemiBold = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.bold,
+  );
+
   static TextStyle textStyle16WithOpacity = TextStyle(
     color: Colors.grey.withOpacity(.8),
     fontSize: 16.sp,
