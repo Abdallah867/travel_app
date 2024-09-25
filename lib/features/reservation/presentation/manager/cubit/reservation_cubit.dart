@@ -19,6 +19,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   ReservationCubit({required this.reservationRepo})
       : super(ReservationInitial());
 
+  ///TODO: DIVIDE THIS CUBIT INTO RESERVATION CUBIT AND RESERVATION FORM TO HANDLE THE FORM BETTER
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
@@ -47,7 +48,7 @@ class ReservationCubit extends Cubit<ReservationState> {
     selectedScheduleId = scheduleId;
     emit(
       ReservationInfoUpdated(
-        selectedScheduleId: scheduleId,
+        selectedScheduleId: selectedScheduleId!,
         travelersList: travelersList,
       ),
     );
@@ -57,6 +58,7 @@ class ReservationCubit extends Cubit<ReservationState> {
     required String userId,
     required String choosenScheduleTripId,
   }) async {
+    emit(ReservationLoadInProgress());
     if (selectedScheduleId != null) {
       final ReservationModel resevationCredentials = ReservationModel(
         reservationId: const Uuid().v4(),
@@ -87,29 +89,41 @@ class ReservationCubit extends Cubit<ReservationState> {
   }
 
   void addTraveler() {
-    TravelerModel traveler = TravelerModel(
-      travelerId: const Uuid().v4(),
-      nationalId: 'huhuhuhuhhhu88899987654',
-      firstName: firstNameController.text,
-      lastName: lastNameController.text,
-      gender: genderController.text,
-      birthday: birthdayController.text,
-    );
+    if (travelerKey.currentState!.validate() &&
+        genderController.text.isNotEmpty) {
+      TravelerModel traveler = TravelerModel(
+        travelerId: const Uuid().v4(),
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        gender: genderController.text,
+        birthday: DateTime.parse(birthdayController.text),
+      );
 
-    List<TravelerModel> updatedTravelerList = [...travelersList, traveler];
+      List<TravelerModel> newTravelersList = [...travelersList, traveler];
+      travelersList = newTravelersList;
 
-    travelersList = updatedTravelerList;
+      emit(
+        ReservationInfoUpdated(
+            travelersList: travelersList,
+            selectedScheduleId: selectedScheduleId ?? ''),
+      );
 
-    clearControllers();
+      clearControllers();
+    } else {
+      emit(ReservationFormError());
+    }
+  }
 
+  void removeTraveler(String travelerId) {
+    List<TravelerModel> newTravelersList = travelersList
+        .where((element) => element.travelerId != travelerId)
+        .toList();
+
+    travelersList = newTravelersList;
     emit(
       ReservationInfoUpdated(
           travelersList: travelersList,
           selectedScheduleId: selectedScheduleId ?? ''),
     );
-  }
-
-  void removeTraveler(String travelerId) {
-    travelersList.removeWhere((element) => element.nationalId == travelerId);
   }
 }

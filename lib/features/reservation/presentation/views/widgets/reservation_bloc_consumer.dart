@@ -70,14 +70,7 @@ class ReservationBlocConsumer extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: TitleSection(
                       onTap: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ReservationForm(
-                                reservationCubit: reservationCubit);
-                          },
-                        );
+                        reservationCubit.addTraveler();
                       },
                       title: 'Travelers',
                       actionTitle: Row(
@@ -86,7 +79,7 @@ class ReservationBlocConsumer extends StatelessWidget {
                               color: AppColors.secondaryColor, size: 16),
                           HorizontalSpace(size: 4.w),
                           Text(
-                            'Add Travelers',
+                            'Add Traveler',
                             style: TextStyles.textStyle16
                                 .copyWith(color: AppColors.secondaryColor),
                           ),
@@ -98,8 +91,11 @@ class ReservationBlocConsumer extends StatelessWidget {
                 ],
               ),
             ),
-
             const TravelersList(),
+            const SliverToBoxAdapter(
+              child: ReservationForm(),
+            )
+
             // ReservationForm(reservationCubit: reservationCubit)
           ],
         );

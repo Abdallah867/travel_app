@@ -62,10 +62,8 @@ abstract class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) => ReservationCubit(
-                    reservationRepo: ReservationRepoImpl(
-                      databaseService: getIt.get<AppwriteService>(),
-                    ),
-                  )..getTripSchedule(state.pathParameters['tripId']!),
+                      reservationRepo: getIt.get<ReservationRepoImpl>())
+                    ..getTripSchedule(state.pathParameters['tripId']!),
                 ),
                 BlocProvider.value(
                   value: cubits['tripCubit'] as TripCubit,

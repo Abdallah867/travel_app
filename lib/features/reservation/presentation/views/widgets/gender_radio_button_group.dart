@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../manager/cubit/reservation_cubit.dart';
 
 class GenderRadioButtonGroup extends StatefulWidget {
-  final void Function(String?) onChanged;
-  final ReservationCubit reservationCubit;
+  final String selectedGender;
 
   const GenderRadioButtonGroup({
     super.key,
-    required this.onChanged,
-    required this.reservationCubit,
+    required this.selectedGender,
   });
 
   @override
@@ -17,72 +16,68 @@ class GenderRadioButtonGroup extends StatefulWidget {
 }
 
 class GenderRadioButtonGroupState extends State<GenderRadioButtonGroup> {
-  String? _selectedGender;
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Gender',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedGender = 'Male';
-                });
-                widget.onChanged(_selectedGender);
-              },
-              child: Row(
-                children: [
-                  Radio<String>(
-                    activeColor: Colors.blue,
-                    value: 'Male',
-                    groupValue: _selectedGender,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedGender = value;
-                      });
-                      widget.onChanged(_selectedGender);
-                    },
-                  ),
-                  const Text('Male'),
-                ],
-              ),
+    final ReservationCubit reservationCubit = context.read<ReservationCubit>();
+
+    final selectedGender = reservationCubit.genderController.text;
+    return BlocBuilder<ReservationCubit, ReservationState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Gender',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(width: 20.0),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedGender = 'Female';
-                });
-                widget.onChanged(_selectedGender);
-              },
-              child: Row(
-                children: [
-                  Radio<String>(
-                    value: 'Female',
-                    activeColor: Colors.pink,
-                    groupValue: _selectedGender,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedGender = value;
-                      });
-                      widget.onChanged(_selectedGender);
-                    },
-                  ),
-                  const Text('Female'),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: [
+                    Radio<String>(
+                      activeColor: Colors.blue,
+                      value: 'Male',
+                      groupValue: selectedGender,
+                      onChanged: (value) {
+                        setState(() {
+                          reservationCubit.genderController.text = 'Male';
+                        });
+                      },
+                    ),
+                    const Text('Male'),
+                  ],
+                ),
+                const SizedBox(width: 20.0),
+                Row(
+                  children: [
+                    Radio<String>(
+                        value: 'Female',
+                        activeColor: Colors.pink,
+                        groupValue: selectedGender,
+                        onChanged: (value) {
+                          setState(() {
+                            reservationCubit.genderController.text = 'Female';
+                          });
+                        }),
+                    const Text('Female'),
+                  ],
+                ),
+              ],
             ),
+            state is ReservationFormError
+                ? Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(top: 4.0, start: 8.0),
+                    child: Text(
+                      'Gender is required',
+                      style: TextStyle(color: Colors.red[800], fontSize: 12),
+                    ),
+                  )
+                : const SizedBox()
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
