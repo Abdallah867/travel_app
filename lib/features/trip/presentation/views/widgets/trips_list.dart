@@ -40,3 +40,4 @@ class TripsList extends StatelessWidget {
     );
   }
 }
+
