@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mot de passe oublié?"),
         "hello": m0,
         "home": MessageLookupByLibrary.simpleMessage("Accueil"),
+        "language": MessageLookupByLibrary.simpleMessage("Langue"),
         "login": MessageLookupByLibrary.simpleMessage("Connexion"),
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Échec de la connexion"),
