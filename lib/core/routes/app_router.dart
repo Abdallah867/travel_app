@@ -1,10 +1,12 @@
+import 'package:appwrite/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
-import '../../features/profile/presentation/manager/cubit/edit_profile_cubit.dart';
+import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
+import '../../features/profile/presentation/view/language_view.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
@@ -83,6 +85,11 @@ abstract class AppRouter {
               value: editProfileCubit,
               child: const EditProfileView(),
             );
+          }),
+      GoRoute(
+          path: AppRoutes.kLanguageView,
+          builder: (context, state) {
+            return const LanguageView();
           }),
       GoRoute(
         path: '/all-trips',

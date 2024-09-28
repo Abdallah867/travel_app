@@ -9,7 +9,7 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/centered_text.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../data/models/user_model.dart';
-import '../../manager/cubit/edit_profile_cubit.dart';
+import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
 
 class ProfileInformationsWidget extends StatelessWidget {

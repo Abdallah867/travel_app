@@ -12,7 +12,7 @@ class ContactAgencyWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Text(
-        'Contact: 05 60 57 72 70 / 05 60 57 72 70',
+        'Contact: 05 60 57 72  / 05 60 57 72 ',
         style: TextStyles.textStyle16.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),

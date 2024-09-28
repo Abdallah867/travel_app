@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/font_weight_helper.dart';
@@ -10,12 +7,20 @@ import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/horizontal_space.dart';
 import '../../../../core/widgets/vertical_widget.dart';
-import '../../../trip/presentation/views/widgets/location_and_price_widget.dart';
-import '../../../trip/presentation/views/widgets/review_widget.dart';
 import '../../../trip/presentation/views/widgets/trip_card.dart';
 
 class BookingsListView extends StatelessWidget {
   const BookingsListView({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const BookingsListViewBody();
+  }
+}
+
+class BookingsListViewBody extends StatelessWidget {
+  const BookingsListViewBody({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
