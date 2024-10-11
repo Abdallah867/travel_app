@@ -11,7 +11,7 @@ import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/models/menu_item.dart';
-import '../../manager/cubit/edit_profile_cubit.dart';
+import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
 
 class ProfileMenusListView extends StatelessWidget {
@@ -86,9 +86,11 @@ List<MenuItem> getMenuList(BuildContext context) {
       onTap: () {},
     ),
     MenuItem(
-      name: S.of(context).settings,
+      name: S.of(context).language,
       icon: Icons.language,
-      onTap: () {},
+      onTap: () {
+        context.push(AppRoutes.kLanguageView);
+      },
     ),
     MenuItem(
       name: S.of(context).notifications,

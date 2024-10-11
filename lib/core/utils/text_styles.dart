@@ -40,7 +40,7 @@ abstract class TextStyles {
 
   static TextStyle textStyle14 = TextStyle(
     fontSize: 14.sp,
-    fontWeight: FontWeightHelper.regular,
+    fontWeight: FontWeightHelper.medium,
   );
 
   static TextStyle textStyle14SemiBold = TextStyle(

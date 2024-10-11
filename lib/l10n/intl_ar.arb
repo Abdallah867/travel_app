@@ -36,6 +36,10 @@
   "bookNow": "احجز الآن",
   "algerianCurrency": "د.ج",
   "hello": "مرحباً  {username} ! ",
-  "agencyName": "Agency",
-  "language": "اللغة"
+  "agencyName": "وكالة",
+  "language": "اللغة",
+  "switch_language": "تغيير اللغة",
+  "arabic": "العربية",
+  "french": "الفرنسية",
+  "english": "الإنجليزية"
 }

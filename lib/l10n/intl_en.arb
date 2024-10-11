@@ -42,5 +42,9 @@
   "priceRange": "Price Range",
   "hello": "Hello, {username}! ",
   "agencyName": "Agency",
-  "language": "Language"
+  "language": "Language",
+  "switch_language": "Switch Language",
+  "arabic": "Arabic",
+  "french": "French",
+  "english": "English"
 }

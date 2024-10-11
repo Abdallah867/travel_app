@@ -11,7 +11,7 @@ import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
-import '../../manager/cubit/edit_profile_cubit.dart';
+import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_informations_widget.dart';
 
 class EditProfileBlocConsumer extends StatelessWidget {

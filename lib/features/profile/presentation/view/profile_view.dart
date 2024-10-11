@@ -9,7 +9,7 @@ import '../../../auth/data/repos/auth_repo_impl.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../auth/presentation/manager/logout_cubit/logout_cubit.dart';
 import '../../data/repos/user_profile_repo_impl.dart';
-import '../manager/cubit/edit_profile_cubit.dart';
+import '../manager/profile_cubit/edit_profile_cubit.dart';
 import 'widgets/logout_button.dart';
 import 'widgets/profile_menus_list_view.dart';
 import 'widgets/profile_informations_widget.dart';
