@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:appwrite/models.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../generated/l10n.dart';
 import '../../../data/models/reservation_model.dart';
 import '../../../data/models/traveler_model.dart';
 import '../../../data/models/trip_schedule_model.dart';
@@ -29,6 +31,7 @@ class ReservationCubit extends Cubit<ReservationState> {
 
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedules = [];
+  List<ReservationModel> reservations = [];
 
   String? selectedScheduleId;
 
@@ -38,7 +41,7 @@ class ReservationCubit extends Cubit<ReservationState> {
     response.fold(
       (l) {
         tripSchedules = l;
-        emit(ReservationScheduleTripsLoaded());
+        emit(ReservationSuccess());
       },
       (failure) => emit(ReservationFailure(errorMessage: failure.errMessage)),
     );
@@ -54,6 +57,25 @@ class ReservationCubit extends Cubit<ReservationState> {
     );
   }
 
+  Future<void> getReservations({
+    required String userId,
+  }) async {
+    emit(ReservationLoadInProgress());
+    final response = await reservationRepo.getReservations(userId);
+    response.fold((l) {
+      reservations = l;
+      emit(ReservationSuccess());
+    }, (error) {
+      log(error.errMessage);
+      emit(ReservationFailure(errorMessage: error.errMessage));
+    });
+  }
+
+  getTripScheduleModel(String scheduleId) {
+    return tripSchedules
+        .firstWhere((element) => element.tripScheduleId == scheduleId);
+  }
+
   Future<void> saveReservation({
     required String userId,
     required String choosenScheduleTripId,
@@ -62,8 +84,8 @@ class ReservationCubit extends Cubit<ReservationState> {
     if (selectedScheduleId != null) {
       final ReservationModel resevationCredentials = ReservationModel(
         reservationId: const Uuid().v4(),
-        user: userId,
-        tripSchedule: selectedScheduleId!,
+        userId: userId,
+        tripSchedule: getTripScheduleModel(selectedScheduleId!),
         travelers: travelersList,
       );
 
@@ -96,7 +118,7 @@ class ReservationCubit extends Cubit<ReservationState> {
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         gender: genderController.text,
-        birthday: DateTime.parse(birthdayController.text),
+        birthday: birthdayController.text,
       );
 
       List<TravelerModel> newTravelersList = [...travelersList, traveler];

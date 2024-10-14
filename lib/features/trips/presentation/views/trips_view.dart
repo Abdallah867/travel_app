@@ -16,14 +16,14 @@ import '../manager/bloc/trips_list_bloc.dart';
 import 'widgets/paged_loading_trips_list.dart';
 import 'widgets/search_bar_and_filter_widget.dart';
 
-class TripsListView extends StatefulWidget {
-  const TripsListView({super.key});
+class TripsView extends StatefulWidget {
+  const TripsView({super.key});
 
   @override
-  TripsListViewState createState() => TripsListViewState();
+  TripsViewState createState() => TripsViewState();
 }
 
-class TripsListViewState extends State<TripsListView> {
+class TripsViewState extends State<TripsView> {
   final PagingController<String?, TripModel> _pagingController =
       PagingController(firstPageKey: null);
 

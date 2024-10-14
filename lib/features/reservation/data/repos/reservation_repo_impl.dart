@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:dartz/dartz.dart';
 
@@ -13,6 +15,29 @@ class ReservationRepoImpl implements ReservationRepo {
   final DatabaseService databaseService;
 
   ReservationRepoImpl({required this.databaseService});
+
+  @override
+  Future<Either<List<ReservationModel>, Failure>> getReservations(
+      String userId) async {
+    try {
+      final response = await databaseService.getList(queries: [
+        Query.equal('userId', userId),
+      ], endpoint: AppConstants.reservationsCollectionEndpoint);
+
+      print(response);
+
+      List<ReservationModel> reservations =
+          response.map((e) => ReservationModel.fromMap(e.data)).toList();
+      print(reservations);
+
+      return left(reservations);
+    } on AppwriteException catch (e) {
+      return right(
+          Failure(errMessage: e.message ?? 'Some unexpected error occurred'));
+    } catch (e) {
+      return right(Failure(errMessage: e.toString()));
+    }
+  }
 
   @override
   Future<Either<void, Failure>> saveReservation({

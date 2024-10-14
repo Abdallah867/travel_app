@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/functions/custom_app_bar.dart';
+import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/font_weight_helper.dart';
 import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/horizontal_space.dart';
 import '../../../../core/widgets/vertical_widget.dart';
+import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../trip/presentation/views/widgets/trip_card.dart';
+import '../../data/models/reservation_model.dart';
+import '../../data/repos/reservation_repo_impl.dart';
+import '../manager/cubit/reservation_cubit.dart';
 
 class BookingsListView extends StatelessWidget {
   const BookingsListView({super.key});
   @override
   Widget build(BuildContext context) {
-    return const BookingsListViewBody();
+    return BlocProvider(
+      create: (context) => ReservationCubit(
+        reservationRepo: getIt.get<ReservationRepoImpl>(),
+      )..getReservations(
+          userId: context.read<CurrentAccountCubit>().userInformations!.userId,
+        ),
+      child: const BookingsListViewBody(),
+    );
   }
 }
 
@@ -24,26 +37,28 @@ class BookingsListViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar('Bookings'),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ReservationCard(),
-            VerticalSpace(size: 16),
-            ReservationCard(),
-            VerticalSpace(size: 16),
-            ReservationCard(),
-          ],
-        ),
-      ),
+    return BlocBuilder<ReservationCubit, ReservationState>(
+      builder: (context, state) {
+        final reservations = context.read<ReservationCubit>().reservations;
+        return Scaffold(
+          appBar: customAppBar('Bookings'),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView.builder(
+              itemCount: reservations.length,
+              itemBuilder: (context, index) =>
+                  ReservationCard(reservation: reservations[index]),
+            ),
+          ),
+        );
+      },
     );
   }
 }
 
 class ReservationCard extends StatelessWidget {
-  const ReservationCard({super.key});
+  final ReservationModel reservation;
+  const ReservationCard({super.key, required this.reservation});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +89,9 @@ class ReservationCard extends StatelessWidget {
                   top: 12.h,
                   bottom: 12.h,
                 ),
-                child: const CustomImageBox(imageUrl: 'trip.coverImage'),
+                child: CustomImageBox(
+                  imageUrl: reservation.tripSchedule.trip.coverImage,
+                ),
               ),
               Expanded(
                 child: Padding(
@@ -84,14 +101,15 @@ class ReservationCard extends StatelessWidget {
                     children: [
                       const HorizontalSpace(size: double.infinity),
                       Text(
-                        'Voyage A Collo Skikda sasasasasasasasas',
+                        reservation.tripSchedule.trip.title,
                         style: TextStyles.textStyle16SemiBold,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const VerticalSpace(size: 4),
                       Text('Aug 18, 9:00 AM', style: TextStyles.textStyle14),
                       const VerticalSpace(size: 12),
-                      Text('4 Persons', style: TextStyles.textStyle14SemiBold),
+                      Text('${reservation.travelers.length} Persons',
+                          style: TextStyles.textStyle14SemiBold),
 
                       // const LocationAndPriceWidget(),
                     ],

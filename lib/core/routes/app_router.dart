@@ -14,9 +14,9 @@ import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
-import '../../features/trips_list/data/repos/trips_list_repo_impl.dart';
-import '../../features/trips_list/presentation/manager/bloc/trips_list_bloc.dart';
-import '../../features/trips_list/presentation/views/all_trips_view.dart';
+import '../../features/trips/data/repos/trips_list_repo_impl.dart';
+import '../../features/trips/presentation/manager/bloc/trips_list_bloc.dart';
+import '../../features/trips/presentation/views/trips_view.dart';
 import '../networking/appwrite_service.dart';
 import '../services/service_locator.dart';
 import 'app_routes.dart';
@@ -96,7 +96,7 @@ abstract class AppRouter {
         builder: (context, state) => BlocProvider(
           create: (context) =>
               TripsListBloc(tripsListRepo: getIt.get<TripsListRepoImpl>()),
-          child: const TripsListView(),
+          child: const TripsView(),
         ),
       ),
     ],

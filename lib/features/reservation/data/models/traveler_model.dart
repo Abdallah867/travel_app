@@ -5,7 +5,7 @@ class TravelerModel {
   final String travelerId;
   final String firstName;
   final String lastName;
-  final DateTime birthday;
+  final String birthday;
   final String gender;
   TravelerModel({
     required this.travelerId,
@@ -19,7 +19,7 @@ class TravelerModel {
     String? travelerId,
     String? firstName,
     String? lastName,
-    DateTime? birthday,
+    String? birthday,
     String? gender,
   }) {
     return TravelerModel(
@@ -36,7 +36,7 @@ class TravelerModel {
       'travelerId': travelerId,
       'firstName': firstName,
       'lastName': lastName,
-      'birthday': birthday.millisecondsSinceEpoch,
+      'birthday': birthday,
       'gender': gender,
     };
   }
@@ -46,7 +46,7 @@ class TravelerModel {
       travelerId: map['travelerId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
-      birthday: DateTime.fromMillisecondsSinceEpoch(map['birthday'] as int),
+      birthday: map['birthday'] as String,
       gender: map['gender'] as String,
     );
   }
@@ -59,25 +59,5 @@ class TravelerModel {
   @override
   String toString() {
     return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
-  }
-
-  @override
-  bool operator ==(covariant TravelerModel other) {
-    if (identical(this, other)) return true;
-
-    return other.travelerId == travelerId &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.birthday == birthday &&
-        other.gender == gender;
-  }
-
-  @override
-  int get hashCode {
-    return travelerId.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        birthday.hashCode ^
-        gender.hashCode;
   }
 }

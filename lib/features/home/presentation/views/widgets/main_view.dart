@@ -12,7 +12,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../../trip/presentation/views/widgets/custom_circular_icon.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
-import '../../../../trips_list/presentation/manager/bloc/trips_list_bloc.dart';
+import '../../../../trips/presentation/manager/bloc/trips_list_bloc.dart';
 import 'title_section.dart';
 import 'travel_agencies_list_view.dart';
 

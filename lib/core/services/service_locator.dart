@@ -5,7 +5,7 @@ import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/profile/data/repos/user_profile_repo_impl.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/trip/data/repos/trip_repo_impl.dart';
-import '../../features/trips_list/data/repos/trips_list_repo_impl.dart';
+import '../../features/trips/data/repos/trips_list_repo_impl.dart';
 import '../networking/appwrite_service.dart';
 
 final getIt = GetIt.instance;

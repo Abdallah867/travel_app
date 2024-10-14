@@ -39,7 +39,7 @@ class TravelerCard extends StatelessWidget {
         ),
         subtitle: Row(
           children: [
-            Text('Age: ${DateFormatUtils.calculateAge(traveler.birthday)}'),
+            // Text('Age: ${DateFormatUtils.calculateAge(traveler.birthday)}'),
             const SizedBox(width: 10),
             Text('Gender: ${traveler.gender}'),
           ],
