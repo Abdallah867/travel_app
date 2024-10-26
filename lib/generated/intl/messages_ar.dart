@@ -26,10 +26,11 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("حول"),
         "agencies": MessageLookupByLibrary.simpleMessage("أفضل الوكالات"),
-        "agencyName": MessageLookupByLibrary.simpleMessage("Agency"),
+        "agencyName": MessageLookupByLibrary.simpleMessage("وكالة"),
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("د.ج"),
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
+        "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("الرحلات المتاحة"),
         "bookNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
@@ -44,9 +45,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+        "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "french": MessageLookupByLibrary.simpleMessage("الفرنسية"),
         "hello": m0,
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),
+        "switch_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "welcome": MessageLookupByLibrary.simpleMessage("أهلاً وسهلاً!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحباً بعودتك!")

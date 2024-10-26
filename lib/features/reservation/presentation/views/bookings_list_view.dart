@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/functions/custom_app_bar.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/font_weight_helper.dart';
@@ -10,6 +12,8 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/horizontal_space.dart';
 import '../../../../core/widgets/vertical_widget.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../../trip/data/repos/trip_repo_impl.dart';
+import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../../trip/presentation/views/widgets/trip_card.dart';
 import '../../data/models/reservation_model.dart';
 import '../../data/repos/reservation_repo_impl.dart';
@@ -130,7 +134,19 @@ class ReservationCard extends StatelessWidget {
                     style: TextStyles.textStyle14.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeightHelper.semiBold),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(
+                          '${AppRoutes.kBookingView}/${reservation.tripSchedule.trip.tripId}/edit',
+                          extra: {
+                            'reservation': reservation,
+                            'tripCubit': TripCubit(
+                              trip: reservation.tripSchedule.trip,
+                              tripRepo: getIt.get<TripRepoImpl>(),
+                            ),
+                            'currentAccountCubit':
+                                BlocProvider.of<CurrentAccountCubit>(context),
+                          });
+                    },
                   ),
                 ),
                 const HorizontalSpace(size: 16),

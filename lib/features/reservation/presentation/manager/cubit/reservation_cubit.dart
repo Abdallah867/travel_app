@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:appwrite/models.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cuid2/cuid2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,17 +19,17 @@ part 'reservation_state.dart';
 class ReservationCubit extends Cubit<ReservationState> {
   final ReservationRepo reservationRepo;
 
-  ReservationCubit({required this.reservationRepo})
+  ReservationCubit({this.reservation, required this.reservationRepo})
       : super(ReservationInitial());
 
   ///TODO: DIVIDE THIS CUBIT INTO RESERVATION CUBIT AND RESERVATION FORM TO HANDLE THE FORM BETTER
   TextEditingController lastNameController = TextEditingController();
   TextEditingController firstNameController = TextEditingController();
-  TextEditingController birthdayController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
   TextEditingController genderController = TextEditingController();
 
   GlobalKey<FormState> travelerKey = GlobalKey();
-
+  ReservationModel? reservation;
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedules = [];
   List<ReservationModel> reservations = [];
@@ -41,13 +42,43 @@ class ReservationCubit extends Cubit<ReservationState> {
     response.fold(
       (l) {
         tripSchedules = l;
-        emit(ReservationSuccess());
+        emit(ReservationScheduleLoaded());
+
+        if (reservation != null) {
+          selectDate(reservation!.tripSchedule.tripScheduleId);
+        }
       },
       (failure) => emit(ReservationFailure(errorMessage: failure.errMessage)),
     );
   }
 
-  void selectDate(scheduleId) {
+  void setTravelers(List<TravelerModel> travelers) {
+    List<TravelerModel> newTravelersList = [...travelers];
+
+    travelersList = newTravelersList;
+
+    emit(
+      ReservationInfoUpdated(
+          travelersList: travelersList,
+          selectedScheduleId: selectedScheduleId ?? ''),
+    );
+  }
+
+  Future<void> updateTraveler(TravelerModel updatedTraveler) async {
+    List<TravelerModel> travelerListCopy =
+        List<TravelerModel>.from(travelersList);
+    travelersList.removeWhere(
+        (element) => element.travelerId == updatedTraveler.travelerId);
+    travelersList.add(updatedTraveler);
+    final response = await reservationRepo.updateTraveler(updatedTraveler);
+    response.fold((l) {}, (error) {
+      travelersList = travelerListCopy;
+      emit(ReservationFailure(errorMessage: error.errMessage));
+    });
+  }
+
+  void selectDate(String scheduleId) {
+    print(scheduleId);
     selectedScheduleId = scheduleId;
     emit(
       ReservationInfoUpdated(
@@ -66,7 +97,6 @@ class ReservationCubit extends Cubit<ReservationState> {
       reservations = l;
       emit(ReservationSuccess());
     }, (error) {
-      log(error.errMessage);
       emit(ReservationFailure(errorMessage: error.errMessage));
     });
   }
@@ -80,7 +110,7 @@ class ReservationCubit extends Cubit<ReservationState> {
     required String userId,
     required String choosenScheduleTripId,
   }) async {
-    emit(ReservationLoadInProgress());
+    emit(ReservationSaveInProgress());
     if (selectedScheduleId != null) {
       final ReservationModel resevationCredentials = ReservationModel(
         reservationId: const Uuid().v4(),
@@ -106,7 +136,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   void clearControllers() {
     lastNameController.clear();
     firstNameController.clear();
-    birthdayController.clear();
+    ageController.clear();
     genderController.clear();
   }
 
@@ -114,11 +144,11 @@ class ReservationCubit extends Cubit<ReservationState> {
     if (travelerKey.currentState!.validate() &&
         genderController.text.isNotEmpty) {
       TravelerModel traveler = TravelerModel(
-        travelerId: const Uuid().v4(),
+        travelerId: cuid(),
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         gender: genderController.text,
-        birthday: birthdayController.text,
+        age: int.parse(ageController.text),
       );
 
       List<TravelerModel> newTravelersList = [...travelersList, traveler];

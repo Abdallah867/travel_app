@@ -31,6 +31,7 @@ dependencies:
   appwrite: ^11.0.1
   bloc: ^8.1.4
   cached_network_image: ^3.3.1
+  cuid2: ^3.1.0
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
   device_preview: ^1.1.0

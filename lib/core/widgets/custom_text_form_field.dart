@@ -14,6 +14,7 @@ class CustomTextFormField extends StatefulWidget {
   final OutlineInputBorder? outlineInputBorder;
   final bool enabled;
   final Icon? prefixIcon;
+  final TextInputType? keyboardType;
   const CustomTextFormField({
     super.key,
     required this.name,
@@ -25,6 +26,7 @@ class CustomTextFormField extends StatefulWidget {
     this.outlineInputBorder,
     this.enabled = true,
     this.prefixIcon,
+    this.keyboardType,
   });
 
   @override
@@ -57,6 +59,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             FocusManager.instance.primaryFocus?.unfocus();
             widget.onTapOutside == null ? null : widget.onTapOutside!();
           },
+          keyboardType: widget.keyboardType,
           initialValue: widget.initialValue,
           controller: widget.controller,
           enabled: widget.enabled,

@@ -40,7 +40,7 @@ class PaymentAndSaveButtons extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              state is ReservationLoadInProgress
+              state is ReservationSaveInProgress
                   ? Padding(
                       padding: EdgeInsets.symmetric(horizontal: 36.w),
                       child: const CircularProgressIndicator(),

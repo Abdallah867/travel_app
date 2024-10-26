@@ -33,24 +33,13 @@ class TripScheduleModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'tripScheduleId': tripScheduleId,
-      'departureDate': departureDate,
-      'returnDate': returnDate,
-      'seatsAvailable': seatsAvailable,
-      'trip': trip.toMap(),
-    };
-  }
-
   factory TripScheduleModel.fromMap(Map<String, dynamic> map) {
     return TripScheduleModel(
-      tripScheduleId: map['tripScheduleId'] as String,
-      departureDate: map['departureDate'] as String,
-      returnDate: map['returnDate'] as String,
-      seatsAvailable: map['seatsAvailable'] as int,
-      trip: TripModel.fromMap(map['trip'] as Map<String, dynamic>),
-    );
+        tripScheduleId: map['tripScheduleId'] as String,
+        departureDate: map['departureDate'] as String,
+        returnDate: map['returnDate'] as String,
+        seatsAvailable: map['seatsAvailable'] as int,
+        trip: TripModel.fromMap(map['trip'] as Map<String, dynamic>));
   }
 
   String toJson() => json.encode(toMap());
@@ -63,23 +52,14 @@ class TripScheduleModel {
     return 'TripScheduleModel(tripScheduleId: $tripScheduleId, departureDate: $departureDate, returnDate: $returnDate, seatsAvailable: $seatsAvailable, trip: $trip)';
   }
 
-  @override
-  bool operator ==(covariant TripScheduleModel other) {
-    if (identical(this, other)) return true;
-
-    return other.tripScheduleId == tripScheduleId &&
-        other.departureDate == departureDate &&
-        other.returnDate == returnDate &&
-        other.seatsAvailable == seatsAvailable &&
-        other.trip == trip;
-  }
-
-  @override
-  int get hashCode {
-    return tripScheduleId.hashCode ^
-        departureDate.hashCode ^
-        returnDate.hashCode ^
-        seatsAvailable.hashCode ^
-        trip.hashCode;
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'tripScheduleId': tripScheduleId,
+      'departureDate': departureDate,
+      'returnDate': returnDate,
+      'seatsAvailable': seatsAvailable,
+      'trip': trip.toMap(),
+      'tripId': trip.tripId,
+    };
   }
 }

@@ -29,7 +29,7 @@ class DateSelectWidget extends StatelessWidget {
         width: 90.w,
         decoration: BoxDecoration(
             color: !isSelected ? AppColors.inputGrey : AppColors.secondaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(16))),
+            borderRadius: const BorderRadius.all(Radius.circular(32))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

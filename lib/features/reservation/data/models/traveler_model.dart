@@ -5,13 +5,13 @@ class TravelerModel {
   final String travelerId;
   final String firstName;
   final String lastName;
-  final String birthday;
+  final int age;
   final String gender;
   TravelerModel({
     required this.travelerId,
     required this.firstName,
     required this.lastName,
-    required this.birthday,
+    required this.age,
     required this.gender,
   });
 
@@ -19,14 +19,14 @@ class TravelerModel {
     String? travelerId,
     String? firstName,
     String? lastName,
-    String? birthday,
+    int? age,
     String? gender,
   }) {
     return TravelerModel(
       travelerId: travelerId ?? this.travelerId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      birthday: birthday ?? this.birthday,
+      age: age ?? this.age,
       gender: gender ?? this.gender,
     );
   }
@@ -36,7 +36,7 @@ class TravelerModel {
       'travelerId': travelerId,
       'firstName': firstName,
       'lastName': lastName,
-      'birthday': birthday,
+      'age': age,
       'gender': gender,
     };
   }
@@ -46,7 +46,7 @@ class TravelerModel {
       travelerId: map['travelerId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
-      birthday: map['birthday'] as String,
+      age: map['age'] as int,
       gender: map['gender'] as String,
     );
   }
@@ -58,6 +58,26 @@ class TravelerModel {
 
   @override
   String toString() {
-    return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
+    return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender)';
+  }
+
+  @override
+  bool operator ==(covariant TravelerModel other) {
+    if (identical(this, other)) return true;
+
+    return other.travelerId == travelerId &&
+        other.firstName == firstName &&
+        other.lastName == lastName &&
+        other.age == age &&
+        other.gender == gender;
+  }
+
+  @override
+  int get hashCode {
+    return travelerId.hashCode ^
+        firstName.hashCode ^
+        lastName.hashCode ^
+        age.hashCode ^
+        gender.hashCode;
   }
 }

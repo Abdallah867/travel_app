@@ -4,47 +4,127 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/date_format_utils.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../data/models/traveler_model.dart';
-import '../../manager/cubit/reservation_cubit.dart'; // For date formatting
+import '../../manager/cubit/reservation_cubit.dart';
+import 'gender_radio_button_group.dart'; // For date formatting
 
-class TravelerCard extends StatelessWidget {
+class TravelerCard extends StatefulWidget {
   final TravelerModel traveler;
+  final ReservationCubit reservationCubit;
 
-  const TravelerCard({super.key, required this.traveler});
+  const TravelerCard(
+      {super.key, required this.traveler, required this.reservationCubit});
+
+  @override
+  State<TravelerCard> createState() => _TravelerCardState();
+}
+
+class _TravelerCardState extends State<TravelerCard> {
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        tileColor: AppColors.whiteColor,
-        leading: CircleAvatar(
-          child: Text('${traveler.firstName[0]}${traveler.lastName[0]}'),
-        ),
-        trailing: IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            context
-                .read<ReservationCubit>()
-                .removeTraveler(traveler.travelerId);
+    var screenHeight = MediaQuery.of(context).size.height;
+    var keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
+    return GestureDetector(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: GestureDetector(
+          onTap: () {
+            lastNameController.text = widget.traveler.lastName;
+            firstNameController.text = widget.traveler.firstName;
+            ageController.text = widget.traveler.age.toString();
+            genderController.text = widget.traveler.gender;
+            updateTravelerBottomSheet(
+                context, widget.reservationCubit, 500 + keyboardHeight);
           },
-        ),
-        title: Row(
-          children: [
-            Text('${traveler.firstName} ${traveler.lastName}'),
-          ],
-        ),
-        subtitle: Row(
-          children: [
-            // Text('Age: ${DateFormatUtils.calculateAge(traveler.birthday)}'),
-            const SizedBox(width: 10),
-            Text('Gender: ${traveler.gender}'),
-          ],
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            tileColor: AppColors.whiteColor,
+            leading: CircleAvatar(
+              child: Text(
+                  '${widget.traveler.firstName[0]}${widget.traveler.lastName[0]}'),
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                context
+                    .read<ReservationCubit>()
+                    .removeTraveler(widget.traveler.travelerId);
+              },
+            ),
+            title: Row(
+              children: [
+                Text(
+                    '${widget.traveler.firstName} ${widget.traveler.lastName}'),
+              ],
+            ),
+            subtitle: Row(
+              children: [
+                Text('Age: ${widget.traveler.age}'),
+                const SizedBox(width: 10),
+                Text('Gender: ${widget.traveler.gender}'),
+              ],
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  Future<dynamic> updateTravelerBottomSheet(
+      BuildContext context, ReservationCubit reservation,
+      [double height = 500]) {
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return BlocProvider.value(
+            value: reservation,
+            child: SizedBox(
+              height: height,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomTextFormField(
+                      name: 'Nom',
+                      controller: lastNameController,
+                    ),
+                    const VerticalSpace(size: 12),
+                    CustomTextFormField(
+                      name: 'Prenom',
+                      controller: firstNameController,
+                    ),
+                    const VerticalSpace(size: 12),
+                    CustomTextFormField(
+                      name: 'Age',
+                      controller: ageController,
+                      keyboardType: TextInputType.number,
+                    ),
+                    const VerticalSpace(size: 12),
+                    BlocBuilder<ReservationCubit, ReservationState>(
+                      builder: (context, state) {
+                        return GenderRadioButtonGroup(
+                          selectedGender: genderController.text,
+                        );
+                      },
+                    ),
+                    const VerticalSpace(size: 24),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

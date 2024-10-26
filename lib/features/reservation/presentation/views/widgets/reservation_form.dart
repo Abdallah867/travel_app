@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../manager/cubit/reservation_cubit.dart';
-import 'date_selector_field.dart';
 import 'gender_radio_button_group.dart';
 
 class ReservationForm extends StatelessWidget {
@@ -33,11 +32,10 @@ class ReservationForm extends StatelessWidget {
                 controller: reservationCubit.firstNameController,
               ),
               const VerticalSpace(size: 12),
-              DateSelectorField(
-                label: 'Birthday',
-                controller: reservationCubit.birthdayController,
-                initialDate: DateTime(2000, 1, 1),
-                lastDate: DateTime(DateTime.now().year - 1),
+              CustomTextFormField(
+                name: 'Age',
+                controller: reservationCubit.ageController,
+                keyboardType: TextInputType.number,
               ),
               const VerticalSpace(size: 12),
               BlocBuilder<ReservationCubit, ReservationState>(

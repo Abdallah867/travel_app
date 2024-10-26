@@ -7,6 +7,7 @@ import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
 import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
 import '../../features/profile/presentation/view/language_view.dart';
+import '../../features/reservation/data/models/reservation_model.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
@@ -64,11 +65,40 @@ abstract class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) => ReservationCubit(
-                      reservationRepo: getIt.get<ReservationRepoImpl>())
-                    ..getTripSchedule(state.pathParameters['tripId']!),
+                    reservationRepo: getIt.get<ReservationRepoImpl>(),
+                  )..getTripSchedule(
+                      cubits['tripCubit'].trip.tripId!,
+                    ),
                 ),
                 BlocProvider.value(
                   value: cubits['tripCubit'] as TripCubit,
+                ),
+                BlocProvider.value(
+                  value: cubits['currentAccountCubit'] as CurrentAccountCubit,
+                ),
+              ],
+              child: const ReservationView(),
+            );
+          }),
+      GoRoute(
+          path: AppRoutes.keditTripScheduleBookingView,
+          builder: (context, GoRouterState state) {
+            final cubits = state.extra as Map<String, dynamic>;
+            final reservation = cubits['reservation'] as ReservationModel;
+
+            print(reservation.travelers);
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => ReservationCubit(
+                      reservation: cubits['reservation'] as ReservationModel,
+                      reservationRepo: getIt.get<ReservationRepoImpl>())
+                    ..setTravelers(reservation.travelers)
+                    ..getTripSchedule(cubits['tripCubit'].trip.tripId!),
+                ),
+                BlocProvider(
+                  create: (context) => cubits['tripCubit'] as TripCubit,
                 ),
                 BlocProvider.value(
                   value: cubits['currentAccountCubit'] as CurrentAccountCubit,

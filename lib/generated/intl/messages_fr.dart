@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("DA"),
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Voyages disponibles"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Réservez maintenant"),
@@ -44,9 +45,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "editProfile":
             MessageLookupByLibrary.simpleMessage("Modifier le profil"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "english": MessageLookupByLibrary.simpleMessage("Anglais"),
         "error": MessageLookupByLibrary.simpleMessage("Erreur"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Mot de passe oublié?"),
+        "french": MessageLookupByLibrary.simpleMessage("Français"),
         "hello": m0,
         "home": MessageLookupByLibrary.simpleMessage("Accueil"),
         "language": MessageLookupByLibrary.simpleMessage("Langue"),
@@ -72,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signup": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "signupFailed":
             MessageLookupByLibrary.simpleMessage("Échec de l\'inscription"),
+        "switch_language":
+            MessageLookupByLibrary.simpleMessage("Changer de langue"),
         "username": MessageLookupByLibrary.simpleMessage("Nom d\'utilisateur"),
         "welcome": MessageLookupByLibrary.simpleMessage("Bienvenue!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Bon retour!")

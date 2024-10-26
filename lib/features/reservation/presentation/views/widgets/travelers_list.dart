@@ -22,6 +22,7 @@ class TravelersList extends StatelessWidget {
                     return Column(
                       children: [
                         TravelerCard(
+                          reservationCubit: context.read<ReservationCubit>(),
                           traveler: context
                               .read<ReservationCubit>()
                               .travelersList[index],

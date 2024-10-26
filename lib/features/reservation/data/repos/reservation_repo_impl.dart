@@ -46,7 +46,7 @@ class ReservationRepoImpl implements ReservationRepo {
   }) async {
     try {
       await databaseService.create(
-        data: reservation.toMap(),
+        data: reservation.copyWith(reservationId: ID.unique()).toMap(),
         endpoint: AppConstants.reservationsCollectionEndpoint,
         id: ID.unique(),
       );
@@ -73,10 +73,30 @@ class ReservationRepoImpl implements ReservationRepo {
         await databaseService.create(
           data: traveler.toMap(),
           endpoint: AppConstants.travelersCollectionEndpoint,
-          id: ID.unique(),
+          id: traveler.travelerId,
         );
       }
       return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  Future<Either<TravelerModel, Failure>> updateTraveler(
+      TravelerModel traveler) async {
+    try {
+      final updatedTraveler = await databaseService.update(
+        data: traveler.toMap(),
+        endpoint: AppConstants.travelersCollectionEndpoint,
+        id: traveler.travelerId,
+      );
+      return left(TravelerModel.fromMap(updatedTraveler));
     } on AppwriteException catch (e) {
       return right(
         Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
@@ -92,14 +112,14 @@ class ReservationRepoImpl implements ReservationRepo {
   Future<Either<List<TripScheduleModel>, Failure>> getTripSchedule(
       String tripId) async {
     try {
-      final response = await databaseService.get(
-          endpoint: AppConstants.tripsCollectionEndpoint, id: tripId);
+      final response = await databaseService.getList(
+          endpoint: AppConstants.tripScheduleCollectionEndpoint,
+          queries: [
+            Query.equal('tripId', tripId),
+          ]);
 
-      List jsonTripSchedule = response['tripSchedule'] ?? [];
-
-      List<TripScheduleModel> tripSchedule = jsonTripSchedule
-          .map((trip) => TripScheduleModel.fromMap(trip))
-          .toList();
+      List<TripScheduleModel> tripSchedule =
+          response.map((trip) => TripScheduleModel.fromMap(trip.data)).toList();
 
       return left(tripSchedule);
     } on AppwriteException catch (e) {
