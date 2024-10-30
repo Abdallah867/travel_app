@@ -1,14 +1,11 @@
 import 'dart:developer';
 
-import 'package:appwrite/models.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cuid2/cuid2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../../../../generated/l10n.dart';
 import '../../../data/models/reservation_model.dart';
 import '../../../data/models/traveler_model.dart';
 import '../../../data/models/trip_schedule_model.dart';
@@ -42,20 +39,27 @@ class ReservationCubit extends Cubit<ReservationState> {
     response.fold(
       (l) {
         tripSchedules = l;
-        emit(ReservationScheduleLoaded());
+
+        print(reservation);
 
         if (reservation != null) {
           selectDate(reservation!.tripSchedule.tripScheduleId);
         }
+
+        print('why');
+
+        emit(ReservationScheduleLoaded());
       },
       (failure) => emit(ReservationFailure(errorMessage: failure.errMessage)),
     );
   }
 
   void setTravelers(List<TravelerModel> travelers) {
-    List<TravelerModel> newTravelersList = [...travelers];
+    // List<TravelerModel> newTravelersList = [...travelers];
 
-    travelersList = newTravelersList;
+    // travelersList = newTravelersList;
+
+    travelersList = travelers;
 
     emit(
       ReservationInfoUpdated(
@@ -65,15 +69,30 @@ class ReservationCubit extends Cubit<ReservationState> {
   }
 
   Future<void> updateTraveler(TravelerModel updatedTraveler) async {
+    emit(ReservationLoadInProgress());
+// TODO: to verify if we need to make a copy for travelersList in case of success
     List<TravelerModel> travelerListCopy =
         List<TravelerModel>.from(travelersList);
     travelersList.removeWhere(
         (element) => element.travelerId == updatedTraveler.travelerId);
     travelersList.add(updatedTraveler);
     final response = await reservationRepo.updateTraveler(updatedTraveler);
-    response.fold((l) {}, (error) {
+    response.fold((l) {
+      emit(
+        ReservationInfoUpdated(
+          travelersList: travelersList,
+          selectedScheduleId: selectedScheduleId ?? '',
+        ),
+      );
+    }, (error) {
       travelersList = travelerListCopy;
       emit(ReservationFailure(errorMessage: error.errMessage));
+      emit(
+        ReservationInfoUpdated(
+          travelersList: travelersList,
+          selectedScheduleId: selectedScheduleId ?? '',
+        ),
+      );
     });
   }
 
@@ -111,9 +130,12 @@ class ReservationCubit extends Cubit<ReservationState> {
     required String choosenScheduleTripId,
   }) async {
     emit(ReservationSaveInProgress());
-    if (selectedScheduleId != null) {
+    final addingTravelers = await addTravelers(travelersList);
+    if (selectedScheduleId != null && addingTravelers != false) {
+      final id = cuid(21);
+      ID.unique();
       final ReservationModel resevationCredentials = ReservationModel(
-        reservationId: const Uuid().v4(),
+        reservationId: id,
         userId: userId,
         tripSchedule: getTripScheduleModel(selectedScheduleId!),
         travelers: travelersList,
@@ -124,13 +146,68 @@ class ReservationCubit extends Cubit<ReservationState> {
         travelers: travelersList,
       );
 
-      response.fold((l) => emit(ReservationSuccess()), (error) {
+      response.fold((l) {
+        emit(ReservationSuccess());
+      }, (error) {
         log(error.errMessage);
         emit(ReservationFailure(errorMessage: error.errMessage));
       });
     } else {
-      emit(const ReservationFailure(errorMessage: 'please select a date'));
+      if (selectedScheduleId == null) {
+        emit(const ReservationFailure(errorMessage: 'please select a date'));
+      }
+      if (addingTravelers == false) {
+        emit(const ReservationFailure(errorMessage: 'adding travelers error'));
+      }
     }
+  }
+
+  Future<void> updateReservation() async {
+    emit(ReservationSaveInProgress());
+    final addingTravelers = await addTravelers(newAddedTravelers());
+
+    if (selectedScheduleId != null && addingTravelers != false) {
+      final updatedReservation = reservation!.copyWith(
+        tripSchedule: getTripScheduleModel(selectedScheduleId!),
+        travelers: travelersList,
+      );
+      final response = await reservationRepo.updateReservation(
+        updatedReservation: updatedReservation,
+      );
+      response.fold((l) {
+        reservation = updatedReservation;
+        emit(ReservationSuccess());
+      }, (error) {
+        log(error.errMessage);
+        emit(ReservationFailure(errorMessage: error.errMessage));
+      });
+    } else {
+      if (selectedScheduleId == null) {
+        emit(const ReservationFailure(errorMessage: 'please select a date'));
+      }
+      if (addingTravelers == false) {
+        emit(const ReservationFailure(errorMessage: 'adding travelers error'));
+      }
+    }
+  }
+
+  Future<bool?> addTravelers(List<TravelerModel> travelers) async {
+    for (TravelerModel traveler in travelers) {
+      final response = await reservationRepo.addTraveler(traveler);
+      response.fold((l) {}, (error) {
+        emit(ReservationFailure(errorMessage: error.errMessage));
+        return false;
+      });
+    }
+    return null;
+  }
+
+  List<TravelerModel> newAddedTravelers() {
+    List<TravelerModel> addedTravelers = travelersList
+        .where((element) => !reservation!.travelers.contains(element))
+        .toList();
+
+    return addedTravelers;
   }
 
   void clearControllers() {
@@ -141,19 +218,20 @@ class ReservationCubit extends Cubit<ReservationState> {
   }
 
   void addTraveler() {
+    final id = cuid(21);
     if (travelerKey.currentState!.validate() &&
         genderController.text.isNotEmpty) {
       TravelerModel traveler = TravelerModel(
-        travelerId: cuid(),
+        travelerId: id,
         firstName: firstNameController.text,
         lastName: lastNameController.text,
         gender: genderController.text,
         age: int.parse(ageController.text),
       );
 
-      List<TravelerModel> newTravelersList = [...travelersList, traveler];
+      List<TravelerModel> newTravelersList = [...travelersList];
+      newTravelersList.add(traveler);
       travelersList = newTravelersList;
-
       emit(
         ReservationInfoUpdated(
             travelersList: travelersList,

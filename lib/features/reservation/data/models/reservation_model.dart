@@ -1,8 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 import 'traveler_model.dart';
 import 'trip_schedule_model.dart';
 
@@ -37,7 +34,7 @@ class ReservationModel {
     return <String, dynamic>{
       'reservationId': reservationId,
       'userId': userId,
-      'travelers': travelers.map((x) => x.toMap()).toList(),
+      'travelers': travelers.map((x) => x.travelerId).toList(),
       'tripSchedule': tripSchedule.tripScheduleId,
     };
   }

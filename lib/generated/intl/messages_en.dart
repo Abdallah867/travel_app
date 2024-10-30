@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup failed"),
         "switch_language":
             MessageLookupByLibrary.simpleMessage("Switch Language"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")

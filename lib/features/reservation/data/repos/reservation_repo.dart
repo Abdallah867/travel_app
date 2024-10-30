@@ -12,10 +12,13 @@ abstract class ReservationRepo {
   });
   Future<Either<List<TripScheduleModel>, Failure>> getTripSchedule(
       String tripId);
-  Future<Either<void, Failure>> addTravelers(List<TravelerModel> travelers);
+  Future<Either<void, Failure>> addTraveler(TravelerModel traveler);
 
   Future<Either<List<ReservationModel>, Failure>> getReservations(
     String userId,
   );
   Future<Either<TravelerModel, Failure>> updateTraveler(TravelerModel traveler);
+
+  Future<Either<void, Failure>> updateReservation(
+      {required ReservationModel updatedReservation});
 }

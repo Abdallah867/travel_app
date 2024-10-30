@@ -46,12 +46,10 @@ class ReservationRepoImpl implements ReservationRepo {
   }) async {
     try {
       await databaseService.create(
-        data: reservation.copyWith(reservationId: ID.unique()).toMap(),
+        data: reservation.toMap(),
         endpoint: AppConstants.reservationsCollectionEndpoint,
-        id: ID.unique(),
+        id: ID.custom(reservation.reservationId),
       );
-
-      await addTravelers(travelers);
 
       return left(null);
     } on AppwriteException catch (e) {
@@ -66,16 +64,16 @@ class ReservationRepoImpl implements ReservationRepo {
   }
 
   @override
-  Future<Either<void, Failure>> addTravelers(
-      List<TravelerModel> travelers) async {
+  Future<Either<void, Failure>> updateReservation({
+    required ReservationModel updatedReservation,
+  }) async {
     try {
-      for (var traveler in travelers) {
-        await databaseService.create(
-          data: traveler.toMap(),
-          endpoint: AppConstants.travelersCollectionEndpoint,
-          id: traveler.travelerId,
-        );
-      }
+      await databaseService.update(
+        data: updatedReservation.toMap(),
+        endpoint: AppConstants.reservationsCollectionEndpoint,
+        id: updatedReservation.reservationId,
+      );
+
       return left(null);
     } on AppwriteException catch (e) {
       return right(
@@ -88,6 +86,27 @@ class ReservationRepoImpl implements ReservationRepo {
     }
   }
 
+  @override
+  Future<Either<void, Failure>> addTraveler(TravelerModel traveler) async {
+    try {
+      await databaseService.create(
+        data: traveler.toMap(),
+        endpoint: AppConstants.travelersCollectionEndpoint,
+        id: traveler.travelerId,
+      );
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
   Future<Either<TravelerModel, Failure>> updateTraveler(
       TravelerModel traveler) async {
     try {

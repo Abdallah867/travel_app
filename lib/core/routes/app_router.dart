@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/payment/presentation/views/payment_view.dart';
 import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
 import '../../features/profile/presentation/view/language_view.dart';
 import '../../features/reservation/data/models/reservation_model.dart';
@@ -84,18 +85,11 @@ abstract class AppRouter {
           path: AppRoutes.keditTripScheduleBookingView,
           builder: (context, GoRouterState state) {
             final cubits = state.extra as Map<String, dynamic>;
-            final reservation = cubits['reservation'] as ReservationModel;
-
-            print(reservation.travelers);
 
             return MultiBlocProvider(
               providers: [
-                BlocProvider(
-                  create: (context) => ReservationCubit(
-                      reservation: cubits['reservation'] as ReservationModel,
-                      reservationRepo: getIt.get<ReservationRepoImpl>())
-                    ..setTravelers(reservation.travelers)
-                    ..getTripSchedule(cubits['tripCubit'].trip.tripId!),
+                BlocProvider.value(
+                  value: cubits['reservationCubit'] as ReservationCubit,
                 ),
                 BlocProvider(
                   create: (context) => cubits['tripCubit'] as TripCubit,
@@ -115,6 +109,11 @@ abstract class AppRouter {
               value: editProfileCubit,
               child: const EditProfileView(),
             );
+          }),
+      GoRoute(
+          path: AppRoutes.kPaymentView,
+          builder: (context, state) {
+            return const PaymentView();
           }),
       GoRoute(
           path: AppRoutes.kLanguageView,

@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class TravelerModel {
+import 'package:equatable/equatable.dart';
+
+class TravelerModel extends Equatable {
   final String travelerId;
   final String firstName;
   final String lastName;
   final int age;
   final String gender;
-  TravelerModel({
+
+  const TravelerModel({
     required this.travelerId,
     required this.firstName,
     required this.lastName,
@@ -62,22 +65,6 @@ class TravelerModel {
   }
 
   @override
-  bool operator ==(covariant TravelerModel other) {
-    if (identical(this, other)) return true;
-
-    return other.travelerId == travelerId &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.age == age &&
-        other.gender == gender;
-  }
-
-  @override
-  int get hashCode {
-    return travelerId.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        age.hashCode ^
-        gender.hashCode;
-  }
+  // TODO: implement props
+  List<Object?> get props => [travelerId, firstName, lastName, age, gender];
 }
