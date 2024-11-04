@@ -78,7 +78,14 @@ class PaymentAndSaveButtons extends StatelessWidget {
                 child: CustomButton(
                   text: 'Proceed to Payment',
                   onPressed: () {
-                    context.push(AppRoutes.kPaymentView);
+                    context.push(
+                      AppRoutes.kPaymentView,
+                      extra: context
+                          .read<ReservationCubit>()
+                          .reservation!
+                          .tripSchedule
+                          .trip,
+                    );
                   },
                 ),
               )

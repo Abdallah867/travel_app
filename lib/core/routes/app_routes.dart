@@ -10,4 +10,6 @@ abstract class AppRoutes {
   static const kLanguageView = '/language';
   static const kEditProfileView = '/editProfile';
   static const kPaymentView = '/payments';
+
+  static const kCheckoutView = '/checkout';
 }

@@ -37,18 +37,22 @@ class RihlaApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             routerConfig: AppRouter.router,
-            theme: ThemeData(
-              scaffoldBackgroundColor: AppColors.backgroundColor,
-              bottomSheetTheme: const BottomSheetThemeData(
-                  backgroundColor: AppColors.backgroundColor),
-              textTheme: GoogleFonts.dmSansTextTheme(),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.secondaryColor,
-              ),
-            ),
+            theme: getTheme(),
           ),
         );
       },
     );
   }
+}
+
+ThemeData getTheme() {
+  return ThemeData(
+    scaffoldBackgroundColor: AppColors.backgroundColor,
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: AppColors.backgroundColor),
+    textTheme: GoogleFonts.dmSansTextTheme(),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.secondaryColor,
+    ),
+  );
 }

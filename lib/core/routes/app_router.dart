@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/payment/data/repos/payment_repo_impl.dart';
+import '../../features/payment/presentation/manager/cubit/payment_cubit.dart';
+import '../../features/payment/presentation/views/checkout_view.dart';
 import '../../features/payment/presentation/views/payment_view.dart';
 import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
 import '../../features/profile/presentation/view/language_view.dart';
@@ -14,6 +17,7 @@ import '../../features/reservation/presentation/manager/cubit/reservation_cubit.
 import '../../features/reservation/presentation/views/reservation_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
+import '../../features/trip/data/models/trip_model.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
 import '../../features/trips/data/repos/trips_list_repo_impl.dart';
@@ -113,7 +117,13 @@ abstract class AppRouter {
       GoRoute(
           path: AppRoutes.kPaymentView,
           builder: (context, state) {
-            return const PaymentView();
+            return BlocProvider(
+              create: (context) => PaymentCubit(
+                getIt.get<PaymentRepoImpl>(),
+                state.extra as TripModel,
+              ),
+              child: const PaymentView(),
+            );
           }),
       GoRoute(
           path: AppRoutes.kLanguageView,
@@ -128,6 +138,14 @@ abstract class AppRouter {
           child: const TripsView(),
         ),
       ),
+      GoRoute(
+          path: AppRoutes.kCheckoutView,
+          builder: (context, state) {
+            final url = state.extra as String;
+            return CheckoutView(
+              url: url,
+            );
+          }),
     ],
   );
 }

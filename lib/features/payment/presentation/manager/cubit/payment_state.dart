@@ -8,3 +8,15 @@ sealed class PaymentState extends Equatable {
 }
 
 final class PaymentInitial extends PaymentState {}
+
+final class PaymentCheckoutSuccess extends PaymentState {
+  final String checkoutUrl;
+
+  const PaymentCheckoutSuccess({required this.checkoutUrl});
+}
+
+final class PaymentCheckoutFailure extends PaymentState {
+  final String errorMessage;
+
+  const PaymentCheckoutFailure({required this.errorMessage});
+}

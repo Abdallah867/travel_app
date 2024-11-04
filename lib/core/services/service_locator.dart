@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:appwrite/appwrite.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
+import '../../features/payment/data/repos/payment_repo_impl.dart';
 import '../../features/profile/data/repos/user_profile_repo_impl.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/trip/data/repos/trip_repo_impl.dart';
@@ -16,6 +18,8 @@ void setupServiceLocator() {
   _setupProfile();
   _setupTrips();
   _setupReservation();
+  _setupDio();
+  _setupPayment();
 }
 
 void _setupAppwrite() {
@@ -32,6 +36,10 @@ void _setupAppwrite() {
       database: getIt.get<Databases>(),
     ),
   );
+}
+
+void _setupDio() {
+  getIt.registerSingleton<Dio>(Dio());
 }
 
 void _setupAuth() {
@@ -88,6 +96,14 @@ void _setupReservation() {
   getIt.registerFactory(
     () => ReservationRepoImpl(
       databaseService: getIt.get<AppwriteService>(),
+    ),
+  );
+}
+
+void _setupPayment() {
+  getIt.registerFactory(
+    () => PaymentRepoImpl(
+      getIt.get<Dio>(),
     ),
   );
 }
