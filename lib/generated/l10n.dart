@@ -49,6 +49,496 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Welcome!`
+  String get welcome {
+    return Intl.message(
+      'Welcome!',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your credentials to continue`
+  String get credentialSignupMessage {
+    return Intl.message(
+      'Enter your credentials to continue',
+      name: 'credentialSignupMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email and password to continue`
+  String get credentialLoginMessage {
+    return Intl.message(
+      'Enter your email and password to continue',
+      name: 'credentialLoginMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get signup {
+    return Intl.message(
+      'Sign up',
+      name: 'signup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved`
+  String get saved {
+    return Intl.message(
+      'Saved',
+      name: 'saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHaveAnAccount {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login failed`
+  String get loginFailed {
+    return Intl.message(
+      'Login failed',
+      name: 'loginFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signup failed`
+  String get signupFailed {
+    return Intl.message(
+      'Signup failed',
+      name: 'signupFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message(
+      'See all',
+      name: 'seeAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Trips`
+  String get availableTrips {
+    return Intl.message(
+      'Available Trips',
+      name: 'availableTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Agencies`
+  String get agencies {
+    return Intl.message(
+      'Top Agencies',
+      name: 'agencies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No saved trips`
+  String get noSavedTrips {
+    return Intl.message(
+      'No saved trips',
+      name: 'noSavedTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved trips`
+  String get savedTrips {
+    return Intl.message(
+      'Saved trips',
+      name: 'savedTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookings`
+  String get bookings {
+    return Intl.message(
+      'Bookings',
+      name: 'bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show More`
+  String get showMore {
+    return Intl.message(
+      'Show More',
+      name: 'showMore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show Less`
+  String get showLess {
+    return Intl.message(
+      'Show Less',
+      name: 'showLess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book Now`
+  String get bookNow {
+    return Intl.message(
+      'Book Now',
+      name: 'bookNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `DZD`
+  String get algerianCurrency {
+    return Intl.message(
+      'DZD',
+      name: 'algerianCurrency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure Date`
+  String get departureDate {
+    return Intl.message(
+      'Departure Date',
+      name: 'departureDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return Date`
+  String get returnDate {
+    return Intl.message(
+      'Return Date',
+      name: 'returnDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter Trips`
+  String get filterTrips {
+    return Intl.message(
+      'Filter Trips',
+      name: 'filterTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get clear {
+    return Intl.message(
+      'Clear',
+      name: 'clear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price Range`
+  String get priceRange {
+    return Intl.message(
+      'Price Range',
+      name: 'priceRange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello, {username}! `
+  String hello(Object username) {
+    return Intl.message(
+      'Hello, $username! ',
+      name: 'hello',
+      desc: '',
+      args: [username],
+    );
+  }
+
+  /// `Agency`
+  String get agencyName {
+    return Intl.message(
+      'Agency',
+      name: 'agencyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch Language`
+  String get switch_language {
+    return Intl.message(
+      'Switch Language',
+      name: 'switch_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arabic`
+  String get arabic {
+    return Intl.message(
+      'Arabic',
+      name: 'arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `French`
+  String get french {
+    return Intl.message(
+      'French',
+      name: 'french',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -57,6 +547,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
+      Locale.fromSubtags(languageCode: 'fr'),
     ];
   }
 

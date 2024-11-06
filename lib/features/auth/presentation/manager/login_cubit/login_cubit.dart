@@ -10,16 +10,23 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthRepo authRepo;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> loginKey = GlobalKey();
 
   LoginCubit({required this.authRepo}) : super(LoginInitial());
 
   Future<void> loginUser() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
     emit(LoginLoading());
 
     var response = await authRepo.loginUser(
-        email: 'abdoallahusma5704@gmail.com', password: 'Abdallah23');
+        email: 'abdoallahusma5704@gmail.com' ?? email,
+        password: 'Abdallah23' ?? password);
     response.fold(
-      (session) => emit(LoginSuccess(session: session)),
+      (session) {
+        emit(LoginSuccess(session: session));
+      },
       (failure) => emit(LoginFailure(errMessage: failure.errMessage)),
     );
   }

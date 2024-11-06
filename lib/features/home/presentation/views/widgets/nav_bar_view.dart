@@ -1,80 +1,75 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../../reservation/presentation/views/bookings_list_view.dart';
 import '../../../../profile/presentation/view/profile_view.dart';
-import '../saved_trips_view.dart';
+import '../../../../trip/data/repos/trip_repo_impl.dart';
+import '../../../../trip/presentation/views/saved_trips_view.dart';
+import '../../manager/trips_cubit/trips_cubit.dart';
 import 'main_view.dart';
 
-final PersistentTabController _controller =
-    PersistentTabController(initialIndex: 0);
-
-class NavBarView extends StatelessWidget {
+class NavBarView extends StatefulWidget {
   const NavBarView({super.key});
+
+  @override
+  State<NavBarView> createState() => _NavBarViewState();
+}
+
+class _NavBarViewState extends State<NavBarView> {
+  int _selectedIndex = 0;
+  final List<Widget> _screensList = [
+    BlocProvider(
+      create: (context) => TripsCubit(
+        tripRepo: getIt.get<TripRepoImpl>(),
+      )..getTrips(),
+      child: const MainView(),
+    ),
+    const BookingsListView(),
+    const SavedTripsView(),
+    const ProfileView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PersistentTabView(
-          context,
-          bottomScreenMargin: 0,
-          controller: _controller,
-          decoration: const NavBarDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(50.0)),
+      body: _screensList.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.house),
+            activeIcon: const Icon(CupertinoIcons.house_fill),
+            label: S.of(context).home,
           ),
-          margin: EdgeInsets.only(left: 41.w, right: 41.w, bottom: 30.h),
-          screens: _buildScreens(),
-          items: _navBarsItems(),
-
-          navBarHeight: 70.0.h,
-          backgroundColor: AppColors.secondaryColor, // Default is Colors.white.
-          navBarStyle: NavBarStyle
-              .style6, // Choose the nav bar style with this property.
-        ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.calendar),
+            activeIcon: const Icon(CupertinoIcons.calendar),
+            label: S.of(context).bookings,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.bookmark),
+            activeIcon: const Icon(CupertinoIcons.bookmark_fill),
+            label: S.of(context).savedTrips,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(CupertinoIcons.person_crop_circle),
+            activeIcon: const Icon(CupertinoIcons.person_crop_circle_fill),
+            label: S.of(context).profile,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: AppColors.secondaryColor,
+        unselectedItemColor: AppColors.platinumGrey,
+        onTap: _onItemTapped,
       ),
     );
   }
-}
 
-List<Widget> _buildScreens() {
-  return [
-    const MainView(),
-    const ProfileView(),
-    const SavedTripsView(),
-    const ProfileView(),
-  ];
-}
-
-List<PersistentBottomNavBarItem> _navBarsItems() {
-  return [
-    navBarIcon(Icons.home),
-    navBarIcon(Icons.search),
-    navBarIcon(Icons.groups),
-    navBarIcon(Icons.account_circle_sharp),
-  ];
-}
-
-PersistentBottomNavBarItem navBarIcon(IconData icon) {
-  return PersistentBottomNavBarItem(
-    inactiveIcon: Icon(
-      icon,
-      size: 22,
-      color: AppColors.whiteColor,
-    ),
-    icon: Container(
-      // alignment: Alignment.center,
-      height: 32,
-      width: 32,
-      decoration: const BoxDecoration(
-          color: AppColors.secondaryColor, shape: BoxShape.circle),
-      child: Icon(
-        icon,
-        size: 20,
-        color: AppColors.whiteColor,
-      ),
-    ),
-    activeColorPrimary: AppColors.secondaryColor,
-  );
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 }

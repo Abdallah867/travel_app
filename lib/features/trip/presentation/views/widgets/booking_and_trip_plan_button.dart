@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
 import 'custom_circular_icon.dart';
 
 class BookingAndTripPlanButton extends StatelessWidget {
@@ -17,6 +21,7 @@ class BookingAndTripPlanButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tripId = BlocProvider.of<TripCubit>(context).trip.tripId;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
@@ -30,10 +35,16 @@ class BookingAndTripPlanButton extends StatelessWidget {
           const HorizontalSpace(size: 12),
           Expanded(
             child: CustomButton(
-              text: AppStrings.bookNow,
+              text: S.of(context).bookNow,
               onPressed: () {
-                _dialogBuilder(context);
-                // context.push(AppRoutes.kBookingView);
+                context.push(
+                  '${AppRoutes.kBookingView}/$tripId',
+                  extra: {
+                    'tripCubit': BlocProvider.of<TripCubit>(context),
+                    'currentAccountCubit':
+                        BlocProvider.of<CurrentAccountCubit>(context)
+                  },
+                );
               },
             ),
           ),

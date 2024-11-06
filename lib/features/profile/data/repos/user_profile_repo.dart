@@ -9,7 +9,17 @@ abstract class UserProfileRepo {
 
   Future<Either<void, Failure>> saveUserData({required User user});
 
-  Future<Either<UserModel, Failure>> updateUserData();
+  Future<Either<UserModel, Failure>> updateUserData({
+    required UserModel newUserInformations,
+  });
 
-  Future<Either<void, Failure>> deleteUser();
+  Future<Either<File, Failure>> uploadUserProfilePicture(
+      {required String userId, required String path});
+  Future<Either<File, Failure>> getUserProfilePicture({required String fileId});
+
+  Future<Either<void, Failure>> deleteUser({required String userId});
+  Future<Either<void, Failure>> updateAppwriteAuthUsername(
+      {required String newUsername});
+  Future<Either<void, Failure>> updateAppwriteAuthEmail(
+      {required String newEmail, required String password});
 }

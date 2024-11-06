@@ -20,6 +20,65 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(username) => "Hello, ${username}! ";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "agencies": MessageLookupByLibrary.simpleMessage("Top Agencies"),
+        "agencyName": MessageLookupByLibrary.simpleMessage("Agency"),
+        "algerianCurrency": MessageLookupByLibrary.simpleMessage("DZD"),
+        "alreadyHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "availableTrips":
+            MessageLookupByLibrary.simpleMessage("Available Trips"),
+        "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
+        "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
+        "clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "credentialLoginMessage": MessageLookupByLibrary.simpleMessage(
+            "Enter your email and password to continue"),
+        "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
+            "Enter your credentials to continue"),
+        "departureDate": MessageLookupByLibrary.simpleMessage("Departure Date"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "dontHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "filterTrips": MessageLookupByLibrary.simpleMessage("Filter Trips"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "french": MessageLookupByLibrary.simpleMessage("French"),
+        "hello": m0,
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginFailed": MessageLookupByLibrary.simpleMessage("Login failed"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "noSavedTrips": MessageLookupByLibrary.simpleMessage("No saved trips"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "priceRange": MessageLookupByLibrary.simpleMessage("Price Range"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "returnDate": MessageLookupByLibrary.simpleMessage("Return Date"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "saved": MessageLookupByLibrary.simpleMessage("Saved"),
+        "savedTrips": MessageLookupByLibrary.simpleMessage("Saved trips"),
+        "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "showLess": MessageLookupByLibrary.simpleMessage("Show Less"),
+        "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
+        "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "signupFailed": MessageLookupByLibrary.simpleMessage("Signup failed"),
+        "switch_language":
+            MessageLookupByLibrary.simpleMessage("Switch Language"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Welcome!"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
+      };
 }

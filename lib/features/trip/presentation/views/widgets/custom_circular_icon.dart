@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:travel_app/core/utils/app_colors.dart';
+import '../../../../../core/utils/app_colors.dart';
 
 class CustomCircularIcon extends StatelessWidget {
   final IconData icon;
   final Color bgColor;
+  final Color iconColor;
   final double radius;
   final VoidCallback onPressed;
   const CustomCircularIcon({
@@ -12,6 +13,7 @@ class CustomCircularIcon extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     this.bgColor = AppColors.whiteColor,
+    this.iconColor = AppColors.secondaryColor,
     this.radius = 24,
   });
 
@@ -24,7 +26,7 @@ class CustomCircularIcon extends StatelessWidget {
         radius: radius.r,
         child: Icon(
           icon,
-          color: AppColors.secondaryColor,
+          color: iconColor,
           size: (radius + 4).sp,
         ),
       ),

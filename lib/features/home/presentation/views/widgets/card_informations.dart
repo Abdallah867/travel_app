@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
-import '../../../../trip/presentation/manager/trip_details_cubit/trip_cubit.dart';
-import 'location_and_price_widget.dart';
+import '../../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
+import '../../../../trip/presentation/views/widgets/location_and_price_widget.dart';
 
 class CardInformations extends StatelessWidget {
   const CardInformations({
@@ -16,7 +16,7 @@ class CardInformations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

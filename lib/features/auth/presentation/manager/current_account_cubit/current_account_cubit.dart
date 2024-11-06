@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/models.dart';
 import 'package:bloc/bloc.dart';
 
@@ -21,17 +23,26 @@ class CurrentAccountCubit extends Cubit<CurrentAccountState> {
     emit(CurrentAccountLoading());
 
     User? user = await authRepo.currentUserAccount();
+    log(user.toString());
+
     if (user == null) {
       emit(NoCurrentAccount());
     } else {
       var userInDatabase = await userProfileRepo.getUserData(userId: user.$id);
       userInDatabase.fold(
-        (l) {
-          userInformations = l;
+        (user) {
+          userInformations = user;
           emit(CurrentAccountExists());
         },
-        (failure) => (CurrentAccountFailure(errMessage: failure.errMessage),),
+        (failure) => emit(
+          CurrentAccountFailure(errMessage: failure.errMessage),
+        ),
       );
     }
+  }
+
+  void updateUserInformations(UserModel newUser) {
+    userInformations = newUser;
+    emit(CurrentAccountExists());
   }
 }

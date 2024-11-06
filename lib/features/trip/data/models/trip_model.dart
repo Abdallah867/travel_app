@@ -1,50 +1,56 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import '../../../home/data/models/agency_model.dart';
 
 class TripModel {
   final String tripId;
   final String title;
-  final String image;
+  final String coverImage;
   final String location;
   final String description;
   final int price;
   final int duration;
   final double rating;
-  final AgencyModel agency;
+  final List<String> otherImages;
+  final AgencyModel? agency;
   TripModel({
     required this.tripId,
     required this.title,
-    required this.image,
+    required this.coverImage,
     required this.location,
     required this.description,
     required this.price,
     required this.duration,
     required this.rating,
-    required this.agency,
+    required this.otherImages,
+    this.agency,
   });
 
   TripModel copyWith({
     String? tripId,
     String? title,
-    String? image,
+    String? coverImage,
     String? location,
     String? description,
     int? price,
     int? duration,
     double? rating,
+    List<String>? otherImages,
     AgencyModel? agency,
   }) {
     return TripModel(
       tripId: tripId ?? this.tripId,
       title: title ?? this.title,
-      image: image ?? this.image,
+      coverImage: coverImage ?? this.coverImage,
       location: location ?? this.location,
       description: description ?? this.description,
       price: price ?? this.price,
       duration: duration ?? this.duration,
       rating: rating ?? this.rating,
+      otherImages: otherImages ?? this.otherImages,
       agency: agency ?? this.agency,
     );
   }
@@ -53,13 +59,14 @@ class TripModel {
     return <String, dynamic>{
       'tripId': tripId,
       'title': title,
-      'image': image,
+      'coverImage': coverImage,
       'location': location,
       'description': description,
       'price': price,
       'duration': duration,
       'rating': rating,
-      'agency': agency.toMap(),
+      'otherImages': otherImages,
+      'agency': agency?.toMap(),
     };
   }
 
@@ -67,13 +74,18 @@ class TripModel {
     return TripModel(
       tripId: map['tripId'] as String,
       title: map['title'] as String,
-      image: map['image'] as String,
+      coverImage: map['coverImage'] as String,
       location: map['location'] as String,
       description: map['description'] as String,
       price: map['price'] as int,
       duration: map['duration'] as int,
       rating: map['rating'] as double,
-      agency: AgencyModel.fromMap(map['agency'] as Map<String, dynamic>),
+      otherImages: List<String>.from(
+        (map['otherImages'] as List<dynamic>),
+      ),
+      agency: map['agency'] != null
+          ? AgencyModel.fromMap(map['agency'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -84,7 +96,7 @@ class TripModel {
 
   @override
   String toString() {
-    return 'TripModel(tripId: $tripId, title: $title, image: $image, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, agency: $agency)';
+    return 'TripModel(tripId: $tripId, title: $title, coverImage: $coverImage, location: $location, description: $description, price: $price, duration: $duration, rating: $rating, otherImages: $otherImages, agency: $agency)';
   }
 
   @override
@@ -93,12 +105,13 @@ class TripModel {
 
     return other.tripId == tripId &&
         other.title == title &&
-        other.image == image &&
+        other.coverImage == coverImage &&
         other.location == location &&
         other.description == description &&
         other.price == price &&
         other.duration == duration &&
         other.rating == rating &&
+        listEquals(other.otherImages, otherImages) &&
         other.agency == agency;
   }
 
@@ -106,12 +119,13 @@ class TripModel {
   int get hashCode {
     return tripId.hashCode ^
         title.hashCode ^
-        image.hashCode ^
+        coverImage.hashCode ^
         location.hashCode ^
         description.hashCode ^
         price.hashCode ^
         duration.hashCode ^
         rating.hashCode ^
+        otherImages.hashCode ^
         agency.hashCode;
   }
 }

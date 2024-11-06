@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../core/routes/app_routes.dart';
 import '../../../../core/services/service_locator.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/utils/text_styles.dart';
 import '../../../../core/widgets/vertical_widget.dart';
-import '../../data/repos/auth_rep_impl.dart';
+import '../../../../generated/l10n.dart';
+import '../../data/repos/auth_repo_impl.dart';
 import '../manager/login_cubit/login_cubit.dart';
+import 'widgets/dont_have_an_account.dart';
 import 'widgets/login_form.dart';
 
 class LoginView extends StatelessWidget {
@@ -21,21 +19,25 @@ class LoginView extends StatelessWidget {
       create: (context) => LoginCubit(authRepo: getIt.get<AuthRepoImpl>()),
       child: Scaffold(
         body: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0.w),
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
               sliver: SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    const VerticalSpace(size: 35),
-                    const LoginForm(),
-                    const VerticalSpace(size: 25),
-                    CustomButton(
-                      text: AppStrings.register,
-                      color: AppColors.greyColor,
-                      width: 254,
-                      onPressed: () => context.go(AppRoutes.kRegisterView),
+                    const VerticalSpace(size: 154),
+                    Text(S.of(context).welcomeBack,
+                        style: TextStyles.textStyle28),
+                    Text(
+                      S.of(context).credentialLoginMessage,
+                      style: TextStyles.textStyle16WithOpacity,
                     ),
+                    const VerticalSpace(size: 40),
+                    const LoginForm(),
+                    const VerticalSpace(size: 20),
+                    const DontHaveAnAccountWidget(),
                   ],
                 ),
               ),

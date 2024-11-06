@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/core/utils/font_weight_helper.dart';
-import 'package:travel_app/core/utils/text_styles.dart';
+import '../../../../../core/utils/font_weight_helper.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../generated/l10n.dart';
 
 class AgencyNameWidget extends StatelessWidget {
   const AgencyNameWidget({
@@ -12,7 +13,7 @@ class AgencyNameWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Text(
-        'Agence: Travel DZ',
+        '${S.of(context).agencyName}: Travel DZ',
         style: TextStyles.textStyle16.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),

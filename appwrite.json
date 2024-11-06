@@ -1,0 +1,613 @@
+{
+    "projectId": "662b832999f08a693c77",
+    "projectName": "Travel App",
+    "settings": {
+        "services": {
+            "account": true,
+            "avatars": true,
+            "databases": true,
+            "locale": true,
+            "health": true,
+            "storage": true,
+            "teams": true,
+            "users": true,
+            "functions": true,
+            "graphql": true,
+            "messaging": true
+        },
+        "auth": {
+            "methods": {
+                "jwt": true,
+                "phone": true,
+                "invites": true,
+                "anonymous": true,
+                "email-otp": true,
+                "magic-url": true,
+                "email-password": true
+            },
+            "security": {
+                "duration": 31536000,
+                "limit": 0,
+                "sessionsLimit": 10,
+                "passwordHistory": 0,
+                "passwordDictionary": false,
+                "personalDataCheck": false,
+                "sessionAlerts": false,
+                "mockNumbers": []
+            }
+        }
+    },
+    "databases": [
+        {
+            "$id": "662b83ea8fc3a863027e",
+            "name": "TravelApp",
+            "enabled": true
+        }
+    ],
+    "collections": [
+        {
+            "$id": "662b840e9331aff1d019",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "profiles",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "username",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 20,
+                    "default": null
+                },
+                {
+                    "key": "profilePicture",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "phoneNumber",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 10,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                },
+                {
+                    "key": "reservations",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "667ec1e0000db20a2ab7",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "user",
+                    "onDelete": "setNull",
+                    "side": "child"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "6654b7b100027501e8dc",
+            "$permissions": [
+                "read(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "trips",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "tripId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "agency",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "66575ca500179e6a8ee3",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "trips",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "price",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "duration",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "rating",
+                    "type": "double",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "title",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "location",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "tripSchedule",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "668454dd00240940a70b",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "trip",
+                    "onDelete": "restrict",
+                    "side": "child"
+                },
+                {
+                    "key": "coverImage",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "otherImages",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "format": "url",
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "66575ca500179e6a8ee3",
+            "$permissions": [],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "agencies",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "trips",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6654b7b100027501e8dc",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "agency",
+                    "onDelete": "cascade",
+                    "side": "child"
+                },
+                {
+                    "key": "agencyId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "agencyName",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 20,
+                    "default": null
+                },
+                {
+                    "key": "agencyLogo",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 300,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                },
+                {
+                    "key": "phoneNumber",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 10,
+                    "default": null
+                },
+                {
+                    "key": "adress",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "66575cf7003db0da49b5",
+            "$permissions": [
+                "read(\"user:662cd19aa97849b7e878\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "bookings",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [],
+            "indexes": []
+        },
+        {
+            "$id": "66575dd000095253e61f",
+            "$permissions": [
+                "read(\"users\")",
+                "update(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "saves",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 30,
+                    "default": null
+                },
+                {
+                    "key": "trips",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6654b7b100027501e8dc",
+                    "relationType": "manyToMany",
+                    "twoWay": false,
+                    "twoWayKey": "6658469c003091795e09",
+                    "onDelete": "restrict",
+                    "side": "parent"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "667eb4890027f48f402b",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "travelers",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "firstName",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "lastName",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "gender",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "elements": [
+                        "Male",
+                        "Female"
+                    ],
+                    "format": "enum",
+                    "default": null
+                },
+                {
+                    "key": "reservations",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "667ec1e0000db20a2ab7",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "travelers",
+                    "onDelete": "setNull",
+                    "side": "child"
+                },
+                {
+                    "key": "travelerId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "age",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": 0,
+                    "max": 100,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "667ec1e0000db20a2ab7",
+            "$permissions": [
+                "create(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "reservations",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "user",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "662b840e9331aff1d019",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "reservations",
+                    "onDelete": "setNull",
+                    "side": "parent"
+                },
+                {
+                    "key": "travelers",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "667eb4890027f48f402b",
+                    "relationType": "manyToMany",
+                    "twoWay": true,
+                    "twoWayKey": "reservations",
+                    "onDelete": "setNull",
+                    "side": "parent"
+                },
+                {
+                    "key": "tripSchedule",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "668454dd00240940a70b",
+                    "relationType": "oneToMany",
+                    "twoWay": true,
+                    "twoWayKey": "reservation",
+                    "onDelete": "setNull",
+                    "side": "child"
+                },
+                {
+                    "key": "reservationId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "667ec1f1003177117283",
+            "$permissions": [],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "payments",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [],
+            "indexes": []
+        },
+        {
+            "$id": "668454dd00240940a70b",
+            "$permissions": [
+                "read(\"users\")"
+            ],
+            "databaseId": "662b83ea8fc3a863027e",
+            "name": "tripSchedule",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "departureDate",
+                    "type": "datetime",
+                    "required": true,
+                    "array": false,
+                    "format": "",
+                    "default": null
+                },
+                {
+                    "key": "returnDate",
+                    "type": "datetime",
+                    "required": true,
+                    "array": false,
+                    "format": "",
+                    "default": null
+                },
+                {
+                    "key": "seatsAvailable",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "trip",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6654b7b100027501e8dc",
+                    "relationType": "manyToOne",
+                    "twoWay": true,
+                    "twoWayKey": "tripSchedule",
+                    "onDelete": "restrict",
+                    "side": "parent"
+                },
+                {
+                    "key": "reservation",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "667ec1e0000db20a2ab7",
+                    "relationType": "oneToMany",
+                    "twoWay": true,
+                    "twoWayKey": "tripSchedule",
+                    "onDelete": "setNull",
+                    "side": "parent"
+                },
+                {
+                    "key": "tripScheduleId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "tripId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "buckets": [
+        {
+            "$id": "66b9eace002cbd9aadf6",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "fileSecurity": true,
+            "name": "app_pictures",
+            "enabled": true,
+            "maximumFileSize": 50000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "66c15cf2001c674a73e5",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")"
+            ],
+            "fileSecurity": true,
+            "name": "profile_pictures",
+            "enabled": true,
+            "maximumFileSize": 50000000,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "svg"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        }
+    ]
+}

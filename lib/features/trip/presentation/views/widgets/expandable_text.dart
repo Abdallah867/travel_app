@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
+import '../../../../../generated/l10n.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
 
 class ExpandableText extends StatefulWidget {
   const ExpandableText({
@@ -17,13 +20,14 @@ class _ExpandableTextState extends State<ExpandableText> {
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    final tripCubit = BlocProvider.of<TripCubit>(context);
+
     return Wrap(
       children: [
         Text(
-          'lkmorem isum jkjkjljjjllkjfffffffffffffffffffffffffffffffffffffffffffffffljljlkjljjkljlkjlkljmmmmmhdjshdjshdjshdjhsjdhsjdhsjdhjsdhmmmmmmdjshjdshjdhsjdhsjds',
+          tripCubit.trip.description.trim(),
           style: TextStyles.textStyle16.copyWith(
-              fontWeight: FontWeightHelper.regular,
-              color: Colors.black.withOpacity(.55)),
+              fontWeight: FontWeightHelper.regular, color: AppColors.lightGrey),
           maxLines: !isExpanded ? 3 : null,
         ),
         GestureDetector(
@@ -31,7 +35,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             isExpanded = !isExpanded;
           }),
           child: Text(
-            !isExpanded ? 'Show More' : 'Show Less',
+            !isExpanded ? S.of(context).showMore : S.of(context).showLess,
             style: TextStyles.textStyle16.copyWith(
               fontWeight: FontWeightHelper.regular,
               color: AppColors.secondaryColor,

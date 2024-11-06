@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/text_styles.dart';
 
 AppBar customAppBar(String name) {
   return AppBar(
+    shape: const Border(
+      bottom: BorderSide(
+        color: AppColors.lighterGrey,
+        width: 1,
+      ),
+    ),
+    backgroundColor: AppColors.backgroundColor,
     centerTitle: true,
     title: Text(
       name,
-      style: TextStyle(fontSize: 20.0.sp, fontWeight: FontWeight.w900),
+      style: TextStyles.textStyle20SemiBold,
     ),
   );
 }
