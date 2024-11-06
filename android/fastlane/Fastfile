@@ -9,11 +9,11 @@ platform :android do
     sh "flutter clean"
     sh "flutter build apk --release --flavor Production --target lib/main_production.dart"
     firebase_app_distribution(
-      app: ${{ secrets.FIREBASE_APP_ID },
+      app: ${{ secrets.FIREBASE_APP_ID }},
       firebase_cli_token: ${{ secrets.FIREBASE_CLI_TOKEN }},
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
-      testers: ${{ secrets.FIREBASE_TESTERS },
+      testers: ${{ secrets.FIREBASE_TESTERS }},
       release_notes: "first firebase distribution"
     )  
   end
