@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -60,6 +61,7 @@ class SearchBarAndFilterWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const VerticalSpace(size: 12),
                   TitleSection(
@@ -76,14 +78,45 @@ class SearchBarAndFilterWidget extends StatelessWidget {
                   const VerticalSpace(size: 8),
                   const Divider(),
                   const VerticalSpace(size: 8),
-                  DateSelectorField(
-                    label: S.of(context).departureDate,
-                    controller: tripsListBloc.departureDateController,
+                  Text(
+                    'Departure Date',
+                    style: TextStyles.textStyle14SemiBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  const VerticalSpace(size: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DateSelectorField(
+                        label: 'Between:',
+                        controller:
+                            tripsListBloc.betweenDepartureDateController,
+                      ),
+                      DateSelectorField(
+                        label: 'And:',
+                        controller: tripsListBloc.andDepartureDateController,
+                      ),
+                    ],
                   ),
                   const VerticalSpace(size: 16),
-                  DateSelectorField(
-                    label: S.of(context).returnDate,
-                    controller: tripsListBloc.returnDateController,
+                  Text(
+                    'Return Date',
+                    style: TextStyles.textStyle14SemiBold,
+                    textAlign: TextAlign.start,
+                  ),
+                  const VerticalSpace(size: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      DateSelectorField(
+                        label: 'Between:',
+                        controller: tripsListBloc.betweenReturnDateController,
+                      ),
+                      DateSelectorField(
+                        label: 'And:',
+                        controller: tripsListBloc.andReturnDateController,
+                      ),
+                    ],
                   ),
                   const VerticalSpace(size: 16),
                   const PriceRangeSlider(),

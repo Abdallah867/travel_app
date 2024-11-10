@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/utils/date_format_utils.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
 
 class DateSelectorField extends StatelessWidget {
   final String label;
@@ -25,13 +27,26 @@ class DateSelectorField extends StatelessWidget {
         final DateTime? pickedDate = await pickDate(context);
         controller.text = pickedDate.toString().substring(0, 10);
       },
-      child: CustomTextFormField(
-        name: label,
-        controller: controller,
-        enabled: false,
-        prefixIcon: const Icon(
-          Icons.calendar_month_outlined,
-        ),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const HorizontalSpace(size: 8),
+          // Expanded(
+          SizedBox(
+            width: 125.w,
+            child: CustomTextFormField(
+              controller: controller,
+              enabled: false,
+              prefixIcon: const Icon(
+                Icons.calendar_month_outlined,
+              ),
+            ),
+          ),
+          // ),
+        ],
       ),
     );
   }

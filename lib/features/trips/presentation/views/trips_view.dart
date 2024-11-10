@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +31,7 @@ class TripsViewState extends State<TripsView> {
 
   String? lastId;
   bool isFirstPage = true;
+  bool isFiltering = false;
 
   @override
   void initState() {
@@ -62,6 +65,7 @@ class TripsViewState extends State<TripsView> {
           }
           if (state is TripsListLoaded) {
             final List<TripModel> tripsList = state.trips;
+            log('$tripsList');
             final bool isLastPage = tripsList.length < AppConstants.pageSize;
             if (isLastPage) {
               _pagingController.appendLastPage(tripsList);

@@ -103,29 +103,25 @@ class TripsListRepoImpl implements TripsListRepo {
     required int maxPrice,
   }) async {
     try {
-      log(DateFormat("yyyy-MM-ddTHH:mm:ss").format(DateTime.parse(
-              DateFormatUtils.transformSlashesToTire(betweenDepartureDate!))
-          .toUtc()));
+      log(DateFormatUtils.formatDateToIso8601(
+        betweenDepartureDate!,
+      ));
       List<String> queries = [
         // Query.between("price", betweenDepartureDate, andDepartureDate),
         Query.between(
           "departureDate",
-          DateFormat("yyyy-MM-ddTHH:mm:ss").format(DateTime.parse(
-                  DateFormatUtils.transformSlashesToTire(betweenDepartureDate))
-              .toUtc()),
-          DateFormat("yyyy-MM-ddTHH:mm:ss").format(DateTime.parse(
-                  DateFormatUtils.transformSlashesToTire(andDepartureDate!))
-              .toUtc()),
+          DateFormatUtils.formatDateToIso8601(
+            betweenDepartureDate,
+          ),
+          DateFormatUtils.formatDateToIso8601(andDepartureDate!),
         ),
+
         Query.between(
           "returnDate",
-          DateFormat("yyyy-MM-ddTHH:mm:ss").format(DateTime.parse(
-                  DateFormatUtils.transformSlashesToTire(betweenReturnDate!))
-              .toUtc()),
-          DateFormat("yyyy-MM-ddTHH:mm:ss").format(DateTime.parse(
-                  DateFormatUtils.transformSlashesToTire(andReturnDate!))
-              .toUtc()),
+          DateFormatUtils.formatDateToIso8601(betweenReturnDate!),
+          DateFormatUtils.formatDateToIso8601(andReturnDate!),
         ),
+
         Query.limit(AppConstants.pageSize),
         Query.orderDesc("\$createdAt")
       ];
@@ -142,10 +138,12 @@ class TripsListRepoImpl implements TripsListRepo {
       List<TripScheduleModel> tripsScheduleList = response
           .map((tripSchedule) => TripScheduleModel.fromMap(tripSchedule.data))
           .toList();
+      print('${tripsScheduleList.length}');
 
       Set<TripModel> trips =
           tripsScheduleList.map((tripSchedule) => tripSchedule.trip).toSet();
 
+      log('${trips.length}');
       return left(trips.toList());
     } on AppwriteException catch (e) {
       return right(

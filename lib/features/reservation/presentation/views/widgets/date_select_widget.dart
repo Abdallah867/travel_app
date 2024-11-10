@@ -34,7 +34,8 @@ class DateSelectWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              DateFormatUtils.getWeekday(tripSchedule.departureDate)
+              DateFormatUtils.getWeekday(DateFormatUtils.transformSlashesToTire(
+                      tripSchedule.departureDate))
                   .substring(0, 3)
                   .toUpperCase(),
               style: TextStyles.textStyle14SemiBold.copyWith(
@@ -46,7 +47,9 @@ class DateSelectWidget extends StatelessWidget {
             VerticalSpace(size: 8.h),
             Text(
               DateFormatUtils.getFormattedDateByDayAndMonth(
-                  tripSchedule.departureDate),
+                DateFormatUtils.transformSlashesToTire(
+                    tripSchedule.departureDate),
+              ),
               style: TextStyles.textStyle20SemiBold.copyWith(
                 color: !isSelected
                     ? Colors.black.withOpacity(.7)

@@ -48,7 +48,10 @@ class BookingsListViewBody extends StatelessWidget {
           appBar: customAppBar('Bookings'),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView.builder(
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const VerticalSpace(
+                size: 16.0,
+              ),
               itemCount: reservations.length,
               itemBuilder: (context, index) =>
                   ReservationCard(reservation: reservations[index]),
