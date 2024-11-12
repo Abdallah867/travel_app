@@ -120,7 +120,7 @@ abstract class AppRouter {
             return BlocProvider(
               create: (context) => PaymentCubit(
                 getIt.get<PaymentRepoImpl>(),
-                state.extra as TripModel,
+                state.extra as ReservationModel,
               ),
               child: const PaymentView(),
             );

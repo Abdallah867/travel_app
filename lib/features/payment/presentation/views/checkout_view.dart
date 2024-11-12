@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../../../core/functions/custom_app_bar.dart';
+
 class CheckoutView extends StatefulWidget {
   final String url;
 
@@ -12,6 +14,7 @@ class CheckoutView extends StatefulWidget {
 
 class _CheckoutViewState extends State<CheckoutView> {
   late WebViewController webViewController;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -20,16 +23,12 @@ class _CheckoutViewState extends State<CheckoutView> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            isLoading = true;
           },
-          onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
-            }
             return NavigationDecision.navigate;
           },
         ),
@@ -40,13 +39,13 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Web Page"),
-      ),
-      body: Scaffold(
-        body: WebViewWidget(controller: webViewController),
-      ),
-    );
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : Scaffold(
+            appBar: customAppBar("Chargily Payment Page"),
+            body: Scaffold(
+              body: WebViewWidget(controller: webViewController),
+            ),
+          );
   }
 }

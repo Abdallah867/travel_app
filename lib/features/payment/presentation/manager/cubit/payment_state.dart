@@ -20,3 +20,21 @@ final class PaymentCheckoutFailure extends PaymentState {
 
   const PaymentCheckoutFailure({required this.errorMessage});
 }
+
+final class PaymentMethodChanged extends PaymentState {
+  final String paymentMethod;
+
+  const PaymentMethodChanged({required this.paymentMethod});
+
+  @override
+  List<Object> get props => [paymentMethod];
+}
+
+class PaymentInitialDepositChanged extends PaymentState {
+  final int initialDeposit;
+
+  const PaymentInitialDepositChanged({required this.initialDeposit});
+
+  @override
+  List<Object> get props => [initialDeposit];
+}

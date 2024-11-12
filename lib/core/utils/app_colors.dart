@@ -5,7 +5,9 @@ class AppColors {
 
   // static const secondaryColor = Color.fromARGB(255, 58, 3, 255);
 
-  static const secondaryColor = Color(0xFF50C9D5);
+  // static const secondaryColor = Color(0xFF50C9D5);
+
+  static const secondaryColor = Color(0xFF3500FB);
 
   static const Color lightGreyColor = Color(0xFFF7F8F9);
 

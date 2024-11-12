@@ -18,7 +18,7 @@ class CheckoutModel {
     required this.successUrl,
     this.locale = 'en',
     this.chargilyPayFeesAllocation = 'customer',
-    this.percentageDiscount = 75,
+    this.percentageDiscount = 0,
   });
 
   CheckoutModel copyWith({

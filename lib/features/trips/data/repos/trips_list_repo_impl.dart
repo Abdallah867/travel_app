@@ -107,7 +107,7 @@ class TripsListRepoImpl implements TripsListRepo {
         betweenDepartureDate!,
       ));
       List<String> queries = [
-        // Query.between("price", betweenDepartureDate, andDepartureDate),
+        Query.between("price", minPrice, maxPrice),
         Query.between(
           "departureDate",
           DateFormatUtils.formatDateToIso8601(
@@ -115,13 +115,11 @@ class TripsListRepoImpl implements TripsListRepo {
           ),
           DateFormatUtils.formatDateToIso8601(andDepartureDate!),
         ),
-
         Query.between(
           "returnDate",
           DateFormatUtils.formatDateToIso8601(betweenReturnDate!),
           DateFormatUtils.formatDateToIso8601(andReturnDate!),
         ),
-
         Query.limit(AppConstants.pageSize),
         Query.orderDesc("\$createdAt")
       ];

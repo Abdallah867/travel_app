@@ -44,6 +44,8 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
           await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListFirstPageFetch) {
           await _handleTripsListFirstPageFetch(emit, event);
+        } else if (event is TripsListFilterClear) {
+          _handleTripsListFilterClear(emit);
         }
       },
     );
@@ -52,6 +54,15 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> _handleTripsListFailedFetchRetried(
       Emitter<TripsListState> emit) async {
     await getTripsList(emit);
+  }
+
+  void _handleTripsListFilterClear(Emitter<TripsListState> emit) {
+    betweenDepartureDateController.clear();
+    andDepartureDateController.clear();
+    andReturnDateController.clear();
+    betweenReturnDateController.clear();
+    isFiltering = false;
+    emit(const TripsListRefreshed());
   }
 
   Future<void> _handleTripsListSearchTermChanged(

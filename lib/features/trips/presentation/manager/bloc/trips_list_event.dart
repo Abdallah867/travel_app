@@ -19,6 +19,10 @@ class TripsListFailedFetchRetried extends TripsListEvent {
   const TripsListFailedFetchRetried();
 }
 
+class TripsListFilterClear extends TripsListEvent {
+  const TripsListFilterClear();
+}
+
 class TripsListFirstPageFetch extends TripsListEvent {
   const TripsListFirstPageFetch();
 }

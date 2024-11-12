@@ -73,7 +73,9 @@ class SearchBarAndFilterWidget extends StatelessWidget {
                         fontWeight: FontWeightHelper.semiBold,
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      tripsListBloc.add(const TripsListFilterClear());
+                    },
                   ),
                   const VerticalSpace(size: 8),
                   const Divider(),
