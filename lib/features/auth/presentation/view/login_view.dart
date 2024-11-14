@@ -20,7 +20,6 @@ class LoginView extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 25.w),

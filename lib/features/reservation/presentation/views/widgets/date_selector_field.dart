@@ -40,9 +40,6 @@ class DateSelectorField extends StatelessWidget {
             child: CustomTextFormField(
               controller: controller,
               enabled: false,
-              prefixIcon: const Icon(
-                Icons.calendar_month_outlined,
-              ),
             ),
           ),
           // ),

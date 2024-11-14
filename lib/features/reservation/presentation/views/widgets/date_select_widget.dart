@@ -26,10 +26,13 @@ class DateSelectWidget extends StatelessWidget {
           .read<ReservationCubit>()
           .selectDate(tripSchedule.tripScheduleId),
       child: Container(
-        width: 90.w,
+        width: 70.w,
         decoration: BoxDecoration(
-            color: !isSelected ? AppColors.inputGrey : AppColors.secondaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(32))),
+          color: !isSelected ? AppColors.inputGrey : AppColors.secondaryColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,7 +53,7 @@ class DateSelectWidget extends StatelessWidget {
                 DateFormatUtils.transformSlashesToTire(
                     tripSchedule.departureDate),
               ),
-              style: TextStyles.textStyle20SemiBold.copyWith(
+              style: TextStyles.textStyle16SemiBold.copyWith(
                 color: !isSelected
                     ? Colors.black.withOpacity(.7)
                     : AppColors.whiteColor,

@@ -16,37 +16,41 @@ class CustomTripDetailImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TripCubit tripCubit = BlocProvider.of<TripCubit>(context);
-    return ClipRRect(
-      borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(24.r),
-        bottomRight: Radius.circular(24.r),
-      ),
-      child: ImageSlideshow(
-        width: double.infinity,
-        height: 450.h,
-        initialPage: 0,
-        indicatorColor: AppColors.secondaryColor,
-        indicatorBackgroundColor: AppColors.whiteColor,
-        children: tripCubit.trip.otherImages.isNotEmpty
-            ? tripCubit.trip.otherImages
-                .map(
-                  (image) => CachedNetworkImage(
+    return Hero(
+      tag: tripCubit.trip.tripId,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(24.r),
+          bottomRight: Radius.circular(24.r),
+        ),
+        child: ImageSlideshow(
+          width: double.infinity,
+          height: 450.h,
+          initialPage: 0,
+          indicatorColor: AppColors.secondaryColor,
+          indicatorBackgroundColor: AppColors.whiteColor,
+          children: tripCubit.trip.otherImages.isNotEmpty
+              ? tripCubit.trip.otherImages
+                  .map(
+                    (image) => CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: image,
+                      placeholder: (context, url) => const CustomShimmer.box(),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  )
+                  .toList()
+              : [
+                  CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: image,
+                    imageUrl: tripCubit.trip.coverImage,
                     placeholder: (context, url) => const CustomShimmer.box(),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),
-                )
-                .toList()
-            : [
-                CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: tripCubit.trip.coverImage,
-                  placeholder: (context, url) => const CustomShimmer.box(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ],
+                ],
+        ),
       ),
     );
   }

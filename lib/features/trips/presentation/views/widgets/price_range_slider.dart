@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/utils/text_styles.dart';
 import '../../../../../generated/l10n.dart';
 import '../../manager/bloc/trips_list_bloc.dart';
 
@@ -28,7 +29,7 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
           children: [
             Text(
               S.of(context).priceRange,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyles.textStyle14SemiBold,
             ),
           ],
         ),

@@ -14,6 +14,7 @@ import '../../../../core/widgets/vertical_widget.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../trip/data/repos/trip_repo_impl.dart';
 import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
+import '../../../trip/presentation/views/widgets/custom_image_box.dart';
 import '../../../trip/presentation/views/widgets/trip_card.dart';
 import '../../data/models/reservation_model.dart';
 import '../../data/repos/reservation_repo_impl.dart';
@@ -181,17 +182,34 @@ class ReservationCardBlocBuilder extends StatelessWidget {
                     const HorizontalSpace(size: 16),
                     Expanded(
                       child: CustomButton(
-                        color: AppColors.whiteColor,
-                        style: TextStyles.textStyle14.copyWith(
-                          color: Colors.black.withOpacity(.35),
-                          fontWeight: FontWeightHelper.semiBold,
-                        ),
-                        borderSide: const BorderSide(
-                            color: AppColors.inputGrey, width: 2),
-                        height: 40.h,
-                        text: 'View Details',
-                        onPressed: () {},
-                      ),
+                          color: AppColors.whiteColor,
+                          style: TextStyles.textStyle14.copyWith(
+                            color: Colors.black.withOpacity(.35),
+                            fontWeight: FontWeightHelper.semiBold,
+                          ),
+                          borderSide: const BorderSide(
+                              color: AppColors.inputGrey, width: 2),
+                          height: 40.h,
+                          text: 'Cancel Booking',
+                          onPressed: () {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const Row(
+                                    children: [
+                                      Expanded(
+                                        child: CustomButton(
+                                            text: 'No, I change my mind'),
+                                      ),
+                                      Expanded(
+                                        child: CustomButton(
+                                          text: 'Yes, Cancel Trip',
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          }),
                     ),
                   ],
                 ),
@@ -203,3 +221,5 @@ class ReservationCardBlocBuilder extends StatelessWidget {
     );
   }
 }
+
+//    

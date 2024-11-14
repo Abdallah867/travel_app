@@ -139,11 +139,13 @@ class PaymentMethods extends StatelessWidget {
         const VerticalSpace(size: 16),
         const PaymentMethodWidget(
           name: 'Edahabia Card',
+          image: 'assets/images/alg_post_logo.png',
           paymentMethod: PaymentMethod.edahabia,
         ),
         const VerticalSpace(size: 8),
         const PaymentMethodWidget(
           name: 'CIB Card',
+          image: 'assets/images/cib_logo.png',
           paymentMethod: PaymentMethod.cib,
         ),
       ],
@@ -188,11 +190,13 @@ class InitialDeposit extends StatelessWidget {
 class PaymentMethodWidget extends StatelessWidget {
   final String name;
   final PaymentMethod paymentMethod;
+  final String image;
 
   const PaymentMethodWidget({
     super.key,
     required this.name,
     required this.paymentMethod,
+    required this.image,
   });
 
   @override
@@ -203,13 +207,17 @@ class PaymentMethodWidget extends StatelessWidget {
         Row(
           children: [
             Container(
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                color: AppColors.inputGrey,
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-            ),
+                padding: const EdgeInsets.all(8),
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  color: AppColors.inputGrey,
+                  borderRadius: BorderRadius.circular(8.r),
+                  // image: DecorationImage(
+                  //   image: AssetImage(image),
+                  // ),
+                ),
+                child: Image.asset(image)),
             const SizedBox(width: 20),
             Text(
               name,

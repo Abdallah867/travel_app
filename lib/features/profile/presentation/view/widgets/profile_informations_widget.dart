@@ -13,38 +13,44 @@ import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
 
 class ProfileInformationsWidget extends StatelessWidget {
-  final UserModel? user;
   const ProfileInformationsWidget({
     super.key,
-    required this.user,
   });
 
   @override
   Widget build(BuildContext context) {
     final EditProfileCubit editProfileCubit = context.read<EditProfileCubit>();
+
     return GestureDetector(
       onTap: () {
         profileImageMethodSelectBottomSheet(context, editProfileCubit);
       },
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 50.r,
-            backgroundColor: AppColors.backgroundColor,
-            backgroundImage: user?.profilePicture != null
-                ? NetworkImage(user!.profilePicture!)
-                : editProfileCubit.profileImage,
-          ),
-          const VerticalSpace(size: 8),
-          CenteredText(
-            text: user!.username,
-            style: TextStyles.textStyle20.copyWith(fontWeight: FontWeight.bold),
-          ),
-          CenteredText(
-            text: user!.email,
-            style: TextStyles.textStyle14,
-          ),
-        ],
+      child: BlocBuilder<EditProfileCubit, EditProfileState>(
+        builder: (context, state) {
+          final UserModel user = context.read<EditProfileCubit>().user;
+
+          return Column(
+            children: [
+              CircleAvatar(
+                radius: 50.r,
+                backgroundColor: AppColors.backgroundColor,
+                backgroundImage: user.profilePicture != null
+                    ? NetworkImage(user.profilePicture!)
+                    : editProfileCubit.profileImage,
+              ),
+              const VerticalSpace(size: 8),
+              CenteredText(
+                text: user.username,
+                style: TextStyles.textStyle20
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              CenteredText(
+                text: user.email,
+                style: TextStyles.textStyle14,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -22,9 +22,7 @@ class _CheckoutViewState extends State<CheckoutView> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            isLoading = true;
-          },
+          onProgress: (int progress) {},
           onPageFinished: (String url) {},
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
@@ -39,13 +37,11 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Scaffold(
-            appBar: customAppBar("Chargily Payment Page"),
-            body: Scaffold(
-              body: WebViewWidget(controller: webViewController),
-            ),
-          );
+    return Scaffold(
+      appBar: customAppBar("Chargily Payment Page"),
+      body: Scaffold(
+        body: WebViewWidget(controller: webViewController),
+      ),
+    );
   }
 }

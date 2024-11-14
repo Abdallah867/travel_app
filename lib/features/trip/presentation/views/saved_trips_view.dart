@@ -26,7 +26,6 @@ class SavedTripsView extends StatelessWidget {
         body: Padding(
           padding: EdgeInsets.only(top: 16.h),
           child: const CustomScrollView(
-            physics: ClampingScrollPhysics(),
             slivers: [
               SavedTripsBlocBuilder(),
             ],
