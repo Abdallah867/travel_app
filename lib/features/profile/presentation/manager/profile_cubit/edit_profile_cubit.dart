@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -40,7 +41,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       user = newUserInfo;
       emit(EditProfileSuccess());
     }, (failure) {
-      print(failure.errMessage);
+      log(failure.errMessage);
       emit(EditProfileFailure(errMessage: failure.errMessage));
     });
   }
@@ -122,6 +123,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         newUserInformations: user.copyWith(
           profilePicture: pictureUrl,
         ),
+      );
+
+      print(pictureUrl);
+
+      user = user.copyWith(
+        profilePicture: pictureUrl,
       );
 
       emit(const EditProfileInformationChanged(isChanged: true));

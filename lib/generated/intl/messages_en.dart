@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "algerianCurrency": MessageLookupByLibrary.simpleMessage("DZD"),
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Available Trips"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
@@ -45,10 +46,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "filterTrips": MessageLookupByLibrary.simpleMessage("Filter Trips"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "french": MessageLookupByLibrary.simpleMessage("French"),
         "hello": m0,
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -71,6 +74,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup failed"),
+        "switch_language":
+            MessageLookupByLibrary.simpleMessage("Switch Language"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")

@@ -26,15 +26,19 @@ class DateSelectWidget extends StatelessWidget {
           .read<ReservationCubit>()
           .selectDate(tripSchedule.tripScheduleId),
       child: Container(
-        width: 90.w,
+        width: 70.w,
         decoration: BoxDecoration(
-            color: !isSelected ? AppColors.inputGrey : AppColors.secondaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(16))),
+          color: !isSelected ? AppColors.inputGrey : AppColors.secondaryColor,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              DateFormatUtils.getWeekday(tripSchedule.departureDate)
+              DateFormatUtils.getWeekday(DateFormatUtils.transformSlashesToTire(
+                      tripSchedule.departureDate))
                   .substring(0, 3)
                   .toUpperCase(),
               style: TextStyles.textStyle14SemiBold.copyWith(
@@ -46,8 +50,10 @@ class DateSelectWidget extends StatelessWidget {
             VerticalSpace(size: 8.h),
             Text(
               DateFormatUtils.getFormattedDateByDayAndMonth(
-                  tripSchedule.departureDate),
-              style: TextStyles.textStyle20SemiBold.copyWith(
+                DateFormatUtils.transformSlashesToTire(
+                    tripSchedule.departureDate),
+              ),
+              style: TextStyles.textStyle16SemiBold.copyWith(
                 color: !isSelected
                     ? Colors.black.withOpacity(.7)
                     : AppColors.whiteColor,

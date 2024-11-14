@@ -1,17 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class TravelerModel {
+import 'package:equatable/equatable.dart';
+
+class TravelerModel extends Equatable {
   final String travelerId;
   final String firstName;
   final String lastName;
-  final String birthday;
+  final int age;
   final String gender;
-  TravelerModel({
+
+  const TravelerModel({
     required this.travelerId,
     required this.firstName,
     required this.lastName,
-    required this.birthday,
+    required this.age,
     required this.gender,
   });
 
@@ -19,14 +22,14 @@ class TravelerModel {
     String? travelerId,
     String? firstName,
     String? lastName,
-    String? birthday,
+    int? age,
     String? gender,
   }) {
     return TravelerModel(
       travelerId: travelerId ?? this.travelerId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      birthday: birthday ?? this.birthday,
+      age: age ?? this.age,
       gender: gender ?? this.gender,
     );
   }
@@ -36,7 +39,7 @@ class TravelerModel {
       'travelerId': travelerId,
       'firstName': firstName,
       'lastName': lastName,
-      'birthday': birthday,
+      'age': age,
       'gender': gender,
     };
   }
@@ -46,7 +49,7 @@ class TravelerModel {
       travelerId: map['travelerId'] as String,
       firstName: map['firstName'] as String,
       lastName: map['lastName'] as String,
-      birthday: map['birthday'] as String,
+      age: map['age'] as int,
       gender: map['gender'] as String,
     );
   }
@@ -58,6 +61,10 @@ class TravelerModel {
 
   @override
   String toString() {
-    return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, birthday: $birthday, gender: $gender)';
+    return 'TravelerModel(travelerId: $travelerId, firstName: $firstName, lastName: $lastName, age: $age, gender: $gender)';
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [travelerId, firstName, lastName, age, gender];
 }

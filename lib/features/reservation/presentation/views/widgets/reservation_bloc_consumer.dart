@@ -35,7 +35,6 @@ class ReservationBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          physics: const ClampingScrollPhysics(),
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate(

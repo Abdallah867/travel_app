@@ -26,6 +26,7 @@ class RihlaApp extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           child: MaterialApp.router(
+            showPerformanceOverlay: false,
             debugShowCheckedModeBanner: false,
             locale: Locale(
                 state is SettingsLanguageChanged ? state.language : 'en'),
@@ -37,18 +38,22 @@ class RihlaApp extends StatelessWidget {
             ],
             supportedLocales: S.delegate.supportedLocales,
             routerConfig: AppRouter.router,
-            theme: ThemeData(
-              scaffoldBackgroundColor: AppColors.backgroundColor,
-              bottomSheetTheme: const BottomSheetThemeData(
-                  backgroundColor: AppColors.backgroundColor),
-              textTheme: GoogleFonts.dmSansTextTheme(),
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: AppColors.secondaryColor,
-              ),
-            ),
+            theme: getTheme(),
           ),
         );
       },
     );
   }
+}
+
+ThemeData getTheme() {
+  return ThemeData(
+    scaffoldBackgroundColor: AppColors.backgroundColor,
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: AppColors.backgroundColor),
+    textTheme: GoogleFonts.urbanistTextTheme(),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: AppColors.secondaryColor,
+    ),
+  );
 }

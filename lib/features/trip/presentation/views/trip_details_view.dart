@@ -20,7 +20,6 @@ class TripDetailsView extends StatelessWidget {
         builder: (context, state) {
           return SafeArea(
             child: CustomScrollView(
-              physics: const ClampingScrollPhysics(),
               slivers: [
                 SliverList(
                   delegate: SliverChildListDelegate(

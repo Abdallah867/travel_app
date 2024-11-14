@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:cuid2/cuid2.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -148,7 +149,7 @@ class UserProfileRepoImpl implements UserProfileRepo {
       final file = await storage.createFile(
         bucketId: dotenv.env['APPWRITE_PROFILE_BUCKET_ID']!,
         fileId: ID.unique(),
-        file: InputFile.fromPath(path: path, filename: '$userId.jpg'),
+        file: InputFile.fromPath(path: path, filename: '${cuid()}.jpg'),
       );
       return left(file);
     } on AppwriteException catch (e) {

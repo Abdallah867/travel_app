@@ -13,6 +13,10 @@ final class ReservationLoadInProgress extends ReservationState {}
 
 final class ReservationSuccess extends ReservationState {}
 
+final class ReservationSaveInProgress extends ReservationState {}
+
+final class ReservationScheduleLoaded extends ReservationState {}
+
 final class ReservationScheduleTripsLoaded extends ReservationState {}
 
 final class ReservationFormError extends ReservationState {}

@@ -1,20 +1,19 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
-import '../../../../../core/widgets/custom_shimmer.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
-import '../../../data/models/trip_model.dart';
+import '../../manager/trip_cubit/trip_cubit.dart';
+import 'custom_image_box.dart';
 import 'location_and_price_widget.dart';
 import 'review_widget.dart';
-import '../../manager/trip_cubit/trip_cubit.dart';
 
 class TripCard extends StatelessWidget {
   const TripCard({super.key});
@@ -58,7 +57,10 @@ class TripCard extends StatelessWidget {
                 top: 12.h,
                 bottom: 12.h,
               ),
-              child: CustomImageBox(imageUrl: trip.coverImage),
+              child: CustomImageBox(
+                imageUrl: trip.coverImage,
+                tripId: trip.tripId,
+              ),
             ),
             Expanded(
               child: Padding(
@@ -80,32 +82,6 @@ class TripCard extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomImageBox extends StatelessWidget {
-  const CustomImageBox({
-    super.key,
-    required this.imageUrl,
-  });
-
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12.r),
-      // topLeft: Radius.circular(16.r),
-      // bottomLeft: Radius.circular(16.r)),
-      child: CachedNetworkImage(
-        width: 90.w,
-        height: 90.w,
-        fit: BoxFit.cover,
-        imageUrl: imageUrl,
-        placeholder: (context, url) => const CustomShimmer.box(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
   }

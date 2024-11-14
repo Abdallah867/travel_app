@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/functions/custom_app_bar.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/horizontal_space.dart';
@@ -34,13 +38,14 @@ class PaymentAndSaveButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reservationCubit = context.read<ReservationCubit>();
     return BlocBuilder<ReservationCubit, ReservationState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              state is ReservationLoadInProgress
+              state is ReservationSaveInProgress
                   ? Padding(
                       padding: EdgeInsets.symmetric(horizontal: 36.w),
                       child: const CircularProgressIndicator(),
@@ -52,16 +57,20 @@ class PaymentAndSaveButtons extends StatelessWidget {
                         textColor: AppColors.secondaryColor,
                         borderSide: const BorderSide(
                             color: AppColors.secondaryColor, width: 2),
-                        text: S.of(context).save,
+                        text: reservationCubit.reservation != null
+                            ? S.of(context).update
+                            : S.of(context).save,
                         onPressed: () {
-                          context.read<ReservationCubit>().saveReservation(
-                                userId: context
-                                    .read<CurrentAccountCubit>()
-                                    .userInformations!
-                                    .userId,
-                                choosenScheduleTripId:
-                                    context.read<TripCubit>().trip.tripId,
-                              );
+                          reservationCubit.reservation == null
+                              ? reservationCubit.saveReservation(
+                                  userId: context
+                                      .read<CurrentAccountCubit>()
+                                      .userInformations!
+                                      .userId,
+                                  choosenScheduleTripId:
+                                      context.read<TripCubit>().trip.tripId,
+                                )
+                              : reservationCubit.updateReservation();
                         },
                       ),
                     ),
@@ -71,7 +80,11 @@ class PaymentAndSaveButtons extends StatelessWidget {
                 child: CustomButton(
                   text: 'Proceed to Payment',
                   onPressed: () {
-                    print('payment');
+                    log('${context.read<ReservationCubit>().reservation!}');
+                    context.push(
+                      AppRoutes.kPaymentView,
+                      extra: context.read<ReservationCubit>().reservation!,
+                    );
                   },
                 ),
               )

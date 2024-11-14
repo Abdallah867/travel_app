@@ -1,8 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 import 'traveler_model.dart';
 import 'trip_schedule_model.dart';
 
@@ -37,8 +34,8 @@ class ReservationModel {
     return <String, dynamic>{
       'reservationId': reservationId,
       'userId': userId,
-      'travelers': travelers.map((x) => x.toMap()).toList(),
-      'tripSchedule': tripSchedule.toMap(),
+      'travelers': travelers.map((x) => x.travelerId).toList(),
+      'tripSchedule': tripSchedule.tripScheduleId,
     };
   }
 
@@ -64,23 +61,5 @@ class ReservationModel {
   @override
   String toString() {
     return 'ReservationModel(reservationId: $reservationId, userId: $userId, travelers: $travelers, tripSchedule: $tripSchedule)';
-  }
-
-  @override
-  bool operator ==(covariant ReservationModel other) {
-    if (identical(this, other)) return true;
-
-    return other.reservationId == reservationId &&
-        other.userId == userId &&
-        listEquals(other.travelers, travelers) &&
-        other.tripSchedule == tripSchedule;
-  }
-
-  @override
-  int get hashCode {
-    return reservationId.hashCode ^
-        userId.hashCode ^
-        travelers.hashCode ^
-        tripSchedule.hashCode;
   }
 }

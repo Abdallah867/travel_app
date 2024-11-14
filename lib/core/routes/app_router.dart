@@ -5,13 +5,19 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/payment/data/repos/payment_repo_impl.dart';
+import '../../features/payment/presentation/manager/cubit/payment_cubit.dart';
+import '../../features/payment/presentation/views/checkout_view.dart';
+import '../../features/payment/presentation/views/payment_view.dart';
 import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
 import '../../features/profile/presentation/view/language_view.dart';
+import '../../features/reservation/data/models/reservation_model.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/profile/presentation/view/edit_profile_view.dart';
+import '../../features/trip/data/models/trip_model.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
 import '../../features/trips/data/repos/trips_list_repo_impl.dart';
@@ -64,11 +70,33 @@ abstract class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) => ReservationCubit(
-                      reservationRepo: getIt.get<ReservationRepoImpl>())
-                    ..getTripSchedule(state.pathParameters['tripId']!),
+                    reservationRepo: getIt.get<ReservationRepoImpl>(),
+                  )..getTripSchedule(
+                      cubits['tripCubit'].trip.tripId!,
+                    ),
                 ),
                 BlocProvider.value(
                   value: cubits['tripCubit'] as TripCubit,
+                ),
+                BlocProvider.value(
+                  value: cubits['currentAccountCubit'] as CurrentAccountCubit,
+                ),
+              ],
+              child: const ReservationView(),
+            );
+          }),
+      GoRoute(
+          path: AppRoutes.keditTripScheduleBookingView,
+          builder: (context, GoRouterState state) {
+            final cubits = state.extra as Map<String, dynamic>;
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: cubits['reservationCubit'] as ReservationCubit,
+                ),
+                BlocProvider(
+                  create: (context) => cubits['tripCubit'] as TripCubit,
                 ),
                 BlocProvider.value(
                   value: cubits['currentAccountCubit'] as CurrentAccountCubit,
@@ -87,6 +115,17 @@ abstract class AppRouter {
             );
           }),
       GoRoute(
+          path: AppRoutes.kPaymentView,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) => PaymentCubit(
+                getIt.get<PaymentRepoImpl>(),
+                state.extra as ReservationModel,
+              ),
+              child: const PaymentView(),
+            );
+          }),
+      GoRoute(
           path: AppRoutes.kLanguageView,
           builder: (context, state) {
             return const LanguageView();
@@ -99,6 +138,14 @@ abstract class AppRouter {
           child: const TripsView(),
         ),
       ),
+      GoRoute(
+          path: AppRoutes.kCheckoutView,
+          builder: (context, state) {
+            final url = state.extra as String;
+            return CheckoutView(
+              url: url,
+            );
+          }),
     ],
   );
 }

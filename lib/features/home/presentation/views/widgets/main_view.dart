@@ -24,7 +24,6 @@ class MainView extends StatelessWidget {
     final String username =
         context.read<CurrentAccountCubit>().userInformations!.username;
     return CustomScrollView(
-      physics: const ClampingScrollPhysics(),
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate(
