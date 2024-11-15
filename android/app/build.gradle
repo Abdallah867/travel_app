@@ -59,11 +59,11 @@ android {
     productFlavors {
         production {
             dimension "default"
-            resValue "string", "app_name", "Rihla Production"
+            resValue "string", "app_name", "Reehla"
         }
         developement {
             dimension "default"
-            resValue "string", "app_name", "Rihla Developement"
+            resValue "string", "app_name", "Reehla Developement"
             applicationIdSuffix ".dev"
         }
     }

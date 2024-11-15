@@ -63,6 +63,14 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: "^0.14.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/reehla_logo.png"
+  background_color: "#3500FB"
+  min_sdk_android: 21 # android min sdk min:16, default 21
   flutter_test:
     sdk: flutter
 

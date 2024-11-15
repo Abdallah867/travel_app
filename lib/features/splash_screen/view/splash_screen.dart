@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:async';
 
 import '../../../core/routes/app_routes.dart';
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
       Timer(const Duration(seconds: 6), () {
         if (mounted) {
           // Uncomment and use your desired navigation logic here
-          // context.go(AppRoutes.kHomeView);
+          context.go(AppRoutes.kHomeView);
         }
       });
     });
