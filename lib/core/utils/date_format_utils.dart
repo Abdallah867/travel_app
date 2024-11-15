@@ -12,6 +12,40 @@ class DateFormatUtils {
     return date;
   }
 
+  static String formatDate(String inputDate) {
+    // Map of month numbers to their abbreviated names
+    const monthNames = {
+      1: 'Jan',
+      2: 'Feb',
+      3: 'Mar',
+      4: 'Apr',
+      5: 'May',
+      6: 'Jun',
+      7: 'Jul',
+      8: 'Aug',
+      9: 'Sep',
+      10: 'Oct',
+      11: 'Nov',
+      12: 'Dec'
+    };
+
+    // Split the input string into parts
+    final parts = inputDate.split('/');
+    if (parts.length != 3) {
+      throw const FormatException('Invalid date format. Expected DD/MM/YYYY.');
+    }
+
+    // Parse the day, month, and year
+    final day = int.parse(parts[0]);
+    final month = int.parse(parts[1]);
+    final year = int.parse(parts[2]);
+
+    // Get the abbreviated month name
+    final monthName = monthNames[month] ?? 'Invalid month';
+
+    return '$monthName $day, $year';
+  }
+
   static String getWeekday(String dateTime) {
     DateTime parsedDateTime = DateTime.parse(dateTime);
     int weekdayIndex = parsedDateTime.weekday;
@@ -89,7 +123,6 @@ class DateFormatUtils {
       return false;
     }
     // Define the date format
-    var dateFormat = 'dd/MM/yyyy';
 
     // Parse the date strings into DateTime objects
     DateTime start = DateTime.parse(startDate.split('/').reversed.join('-'));

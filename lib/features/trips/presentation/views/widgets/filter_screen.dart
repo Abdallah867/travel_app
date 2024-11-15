@@ -49,10 +49,11 @@ class FilterScreen extends StatelessWidget {
             const PriceRangeSlider(),
             const Expanded(child: SizedBox()),
             CustomButton(
-                text: 'Apply',
-                onPressed: () {
-                  tripsListBloc.add(const TripsListFilterApplied());
-                }),
+              text: 'Apply',
+              onPressed: () {
+                tripsListBloc.add(const TripsListFilterApplied());
+              },
+            ),
           ],
         ),
       ),
