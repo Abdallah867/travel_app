@@ -13,6 +13,9 @@ final class PaymentCheckoutSuccess extends PaymentState {
   final String checkoutUrl;
 
   const PaymentCheckoutSuccess({required this.checkoutUrl});
+
+  @override
+  List<Object> get props => [checkoutUrl];
 }
 
 final class PaymentCheckoutFailure extends PaymentState {

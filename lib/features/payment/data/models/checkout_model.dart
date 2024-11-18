@@ -8,14 +8,19 @@ class CheckoutModel {
   final PaymentMethod paymentMethod;
   final String currency;
   final String successUrl;
+  final String failureUrl;
+  final String webhookEndpoint;
   final String locale;
   final String chargilyPayFeesAllocation;
   final int percentageDiscount;
+
   CheckoutModel({
     required this.amount,
     required this.paymentMethod,
     this.currency = 'dzd',
     required this.successUrl,
+    required this.failureUrl,
+    required this.webhookEndpoint,
     this.locale = 'en',
     this.chargilyPayFeesAllocation = 'customer',
     this.percentageDiscount = 0,
@@ -26,6 +31,8 @@ class CheckoutModel {
     PaymentMethod? paymentMethod,
     String? currency,
     String? successUrl,
+    String? failureUrl,
+    String? webhookEndpoint,
     String? locale,
     String? chargilyPayFeesAllocation,
     int? percentageDiscount,
@@ -35,6 +42,8 @@ class CheckoutModel {
       paymentMethod: paymentMethod ?? this.paymentMethod,
       currency: currency ?? this.currency,
       successUrl: successUrl ?? this.successUrl,
+      failureUrl: failureUrl ?? this.failureUrl,
+      webhookEndpoint: webhookEndpoint ?? this.webhookEndpoint,
       locale: locale ?? this.locale,
       chargilyPayFeesAllocation:
           chargilyPayFeesAllocation ?? this.chargilyPayFeesAllocation,
@@ -48,6 +57,8 @@ class CheckoutModel {
       'payment_method': paymentMethod.name,
       'currency': currency,
       'success_url': successUrl,
+      'failure_url': failureUrl,
+      'webhook_endpoint': webhookEndpoint,
       'locale': locale,
       'chargily_pay_fees_allocation': chargilyPayFeesAllocation,
       'percentage_discount': percentageDiscount,
@@ -60,6 +71,8 @@ class CheckoutModel {
       paymentMethod: getEnumPaymentMethod(map['payment_method']),
       currency: map['currency'] as String,
       successUrl: map['success_url'] as String,
+      failureUrl: map['failure_url'] as String,
+      webhookEndpoint: map['webhook_endpoint'] as String,
       locale: map['locale'] as String,
       chargilyPayFeesAllocation: map['chargily_pay_fees_allocation'] as String,
       percentageDiscount: map['percentage_discount'] as int,
@@ -73,30 +86,6 @@ class CheckoutModel {
 
   @override
   String toString() {
-    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount)';
-  }
-
-  @override
-  bool operator ==(covariant CheckoutModel other) {
-    if (identical(this, other)) return true;
-
-    return other.amount == amount &&
-        other.paymentMethod == paymentMethod &&
-        other.currency == currency &&
-        other.successUrl == successUrl &&
-        other.locale == locale &&
-        other.chargilyPayFeesAllocation == chargilyPayFeesAllocation &&
-        other.percentageDiscount == percentageDiscount;
-  }
-
-  @override
-  int get hashCode {
-    return amount.hashCode ^
-        paymentMethod.hashCode ^
-        currency.hashCode ^
-        successUrl.hashCode ^
-        locale.hashCode ^
-        chargilyPayFeesAllocation.hashCode ^
-        percentageDiscount.hashCode;
+    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, failureUrl: $failureUrl, webhookEndpoint: $webhookEndpoint, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount)';
   }
 }

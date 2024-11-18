@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -14,32 +16,24 @@ class CheckoutView extends StatefulWidget {
 
 class _CheckoutViewState extends State<CheckoutView> {
   late WebViewController webViewController;
-  bool isLoading = false;
 
   @override
   void initState() {
     webViewController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {},
-          onPageFinished: (String url) {},
-          onHttpError: (HttpResponseError error) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
       ..loadRequest(Uri.parse(widget.url));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar("Chargily Payment Page"),
-      body: Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        log('CheckoutView is being popped!');
+        return true; // Allow the pop action to proceed.
+      },
+      child: Scaffold(
+        appBar: customAppBar("Chargily Payment Page"),
         body: WebViewWidget(controller: webViewController),
       ),
     );
