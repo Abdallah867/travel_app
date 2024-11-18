@@ -21,7 +21,9 @@ class PaymentCubit extends Cubit<PaymentState> {
   Future<void> createCheckout() async {
     final response = await paymentRepo.createCheckout(
       CheckoutModel(
+        failureUrl: '',
         amount: (calculateTotalPayment() * initialDeposit) ~/ 100,
+        webhookEndpoint: 'https://6737265f1d67e7960d68.appwrite.global',
         paymentMethod: paymentMethod,
         successUrl: 'https://edahabia.com',
       ),
