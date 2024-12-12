@@ -130,9 +130,16 @@ abstract class AppRouter {
           }),
       GoRoute(
         path: '/all-trips',
-        builder: (context, state) => BlocProvider(
-          create: (context) =>
-              TripsListBloc(tripsListRepo: getIt.get<TripsListRepoImpl>()),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  TripsListBloc(tripsListRepo: getIt.get<TripsListRepoImpl>()),
+            ),
+            BlocProvider.value(
+              value: state.extra as CurrentAccountCubit,
+            ),
+          ],
           child: const TripsView(),
         ),
       ),

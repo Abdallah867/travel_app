@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'payment_method.dart';
 
 class CheckoutModel {
@@ -13,6 +10,7 @@ class CheckoutModel {
   final String locale;
   final String chargilyPayFeesAllocation;
   final int percentageDiscount;
+  final List<Map<String, dynamic>>? metadata; // Make metadata nullable
 
   CheckoutModel({
     required this.amount,
@@ -24,6 +22,7 @@ class CheckoutModel {
     this.locale = 'en',
     this.chargilyPayFeesAllocation = 'customer',
     this.percentageDiscount = 0,
+    this.metadata, // Default to null if not provided
   });
 
   CheckoutModel copyWith({
@@ -36,6 +35,7 @@ class CheckoutModel {
     String? locale,
     String? chargilyPayFeesAllocation,
     int? percentageDiscount,
+    List<Map<String, dynamic>>? metadata,
   }) {
     return CheckoutModel(
       amount: amount ?? this.amount,
@@ -48,6 +48,7 @@ class CheckoutModel {
       chargilyPayFeesAllocation:
           chargilyPayFeesAllocation ?? this.chargilyPayFeesAllocation,
       percentageDiscount: percentageDiscount ?? this.percentageDiscount,
+      metadata: metadata ?? this.metadata,
     );
   }
 
@@ -62,6 +63,7 @@ class CheckoutModel {
       'locale': locale,
       'chargily_pay_fees_allocation': chargilyPayFeesAllocation,
       'percentage_discount': percentageDiscount,
+      'metadata': metadata, // Serialize metadata if not null
     };
   }
 
@@ -76,16 +78,16 @@ class CheckoutModel {
       locale: map['locale'] as String,
       chargilyPayFeesAllocation: map['chargily_pay_fees_allocation'] as String,
       percentageDiscount: map['percentage_discount'] as int,
+      metadata: map['metadata'] != null
+          ? List<Map<String, dynamic>>.from(
+              map['metadata'] as List,
+            )
+          : null, // Deserialize metadata if not null
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory CheckoutModel.fromJson(String source) =>
-      CheckoutModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
   @override
   String toString() {
-    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, failureUrl: $failureUrl, webhookEndpoint: $webhookEndpoint, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount)';
+    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, failureUrl: $failureUrl, webhookEndpoint: $webhookEndpoint, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount, metadata: $metadata)';
   }
 }

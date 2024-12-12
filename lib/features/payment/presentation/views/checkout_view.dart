@@ -27,15 +27,9 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        log('CheckoutView is being popped!');
-        return true; // Allow the pop action to proceed.
-      },
-      child: Scaffold(
-        appBar: customAppBar("Chargily Payment Page"),
-        body: WebViewWidget(controller: webViewController),
-      ),
+    return Scaffold(
+      appBar: customAppBar("Chargily Payment Page"),
+      body: WebViewWidget(controller: webViewController),
     );
   }
 }

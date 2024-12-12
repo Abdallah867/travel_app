@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../reservation/data/models/reservation_model.dart';
-import '../../../../trip/data/models/trip_model.dart';
 import '../../../data/models/checkout_model.dart';
 import '../../../data/models/payment_method.dart';
 import '../../../data/repos/payment_repo.dart';
@@ -19,18 +20,29 @@ class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(this.paymentRepo, this.reservation) : super(PaymentInitial());
 
   Future<void> createCheckout() async {
+    emit(PaymentLoadInProgress());
     final response = await paymentRepo.createCheckout(
       CheckoutModel(
-        failureUrl: '',
-        amount: (calculateTotalPayment() * initialDeposit) ~/ 100,
-        webhookEndpoint: 'https://6737265f1d67e7960d68.appwrite.global',
-        paymentMethod: paymentMethod,
-        successUrl: 'https://edahabia.com',
-      ),
+          failureUrl: 'https://edahabia.com',
+          amount: (calculateTotalPayment() * initialDeposit) ~/ 100,
+          webhookEndpoint: 'https://6737265f1d67e7960d68.appwrite.global',
+          paymentMethod: paymentMethod,
+          successUrl: 'https://edahabia.com',
+          metadata: [
+            {
+              'totalPrice': calculateTotalPayment(),
+              'initialDeposit': (initialDeposit / 100),
+              'reservation': reservation.reservationId,
+            }
+          ]),
     );
-    response.fold(
-        (checkoutUrl) => emit(PaymentCheckoutSuccess(checkoutUrl: checkoutUrl)),
-        (failure) => PaymentCheckoutFailure(errorMessage: failure.errMessage));
+    response.fold((checkoutUrl) {
+      emit(PaymentCheckoutSuccess(checkoutUrl: checkoutUrl));
+    }, (failure) {
+      log(failure.errMessage);
+
+      emit(PaymentCheckoutFailure(errorMessage: failure.errMessage));
+    });
   }
 
   int calculateTotalPayment() {

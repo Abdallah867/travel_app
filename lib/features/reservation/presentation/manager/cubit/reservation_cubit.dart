@@ -40,13 +40,9 @@ class ReservationCubit extends Cubit<ReservationState> {
       (l) {
         tripSchedules = l;
 
-        print(reservation);
-
         if (reservation != null) {
           selectDate(reservation!.tripSchedule.tripScheduleId);
         }
-
-        print('why');
 
         emit(ReservationScheduleLoaded());
       },
@@ -97,7 +93,6 @@ class ReservationCubit extends Cubit<ReservationState> {
   }
 
   void selectDate(String scheduleId) {
-    print(scheduleId);
     selectedScheduleId = scheduleId;
     emit(
       ReservationInfoUpdated(
@@ -131,7 +126,9 @@ class ReservationCubit extends Cubit<ReservationState> {
   }) async {
     emit(ReservationSaveInProgress());
     final addingTravelers = await addTravelers(travelersList);
-    if (selectedScheduleId != null && addingTravelers != false) {
+    if (selectedScheduleId != null &&
+        addingTravelers != false &&
+        travelersList.isNotEmpty) {
       final id = cuid(21);
       ID.unique();
       final ReservationModel resevationCredentials = ReservationModel(
@@ -159,6 +156,12 @@ class ReservationCubit extends Cubit<ReservationState> {
       if (addingTravelers == false) {
         emit(const ReservationFailure(errorMessage: 'adding travelers error'));
       }
+
+      if (travelersList.isEmpty) {
+        emit(const ReservationFailure(
+            errorMessage:
+                'Reservation Failed: you must add at least one traveler'));
+      }
     }
   }
 
@@ -166,7 +169,9 @@ class ReservationCubit extends Cubit<ReservationState> {
     emit(ReservationSaveInProgress());
     final addingTravelers = await addTravelers(newAddedTravelers());
 
-    if (selectedScheduleId != null && addingTravelers != false) {
+    if (selectedScheduleId != null &&
+        addingTravelers != false &&
+        travelersList.isNotEmpty) {
       final updatedReservation = reservation!.copyWith(
         tripSchedule: getTripScheduleModel(selectedScheduleId!),
         travelers: travelersList,

@@ -52,6 +52,7 @@ class FilterScreen extends StatelessWidget {
               text: 'Apply',
               onPressed: () {
                 tripsListBloc.add(const TripsListFilterApplied());
+                Navigator.pop(context);
               },
             ),
           ],

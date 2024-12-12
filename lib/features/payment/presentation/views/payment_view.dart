@@ -31,10 +31,17 @@ class PaymentView extends StatelessWidget {
       appBar: customAppBar('Payment'),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: CustomButton(
-          text: 'Pay Now',
-          onPressed: () {
-            context.read<PaymentCubit>().createCheckout();
+        child: BlocBuilder<PaymentCubit, PaymentState>(
+          builder: (context, state) {
+            return state is PaymentLoadInProgress
+                ? const CircularProgressIndicator()
+                : CustomButton(
+                    text: 'Pay Now',
+                    onPressed: () {
+                      context.read<PaymentCubit>().createCheckout();
+                      log('hello');
+                    },
+                  );
           },
         ),
       ),
@@ -267,6 +274,7 @@ class PriceRow extends StatelessWidget {
     return BlocListener<PaymentCubit, PaymentState>(
       listener: (context, state) {
         if (state is PaymentCheckoutSuccess) {
+          log('Checkout URL: ${state.checkoutUrl}');
           context.push(AppRoutes.kCheckoutView, extra: state.checkoutUrl);
           log('nedjma');
         }

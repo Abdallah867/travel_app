@@ -83,8 +83,10 @@ class MainView extends StatelessWidget {
                         .copyWith(color: AppColors.secondaryColor),
                   ),
                   onTap: () {
-                    context.push('/all-trips',
-                        extra: context.read<TripsListBloc>);
+                    context.push(
+                      '/all-trips',
+                      extra: context.read<CurrentAccountCubit>(),
+                    );
                   },
                 ),
               ),
