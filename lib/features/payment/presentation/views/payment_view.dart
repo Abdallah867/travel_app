@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -31,15 +32,26 @@ class PaymentView extends StatelessWidget {
       appBar: customAppBar('Payment'),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<PaymentCubit, PaymentState>(
+        child: BlocConsumer<PaymentCubit, PaymentState>(
+          listener: (context, state) {
+            if (state is PaymentCheckoutSuccess) {
+              log('Checkout URL: ${state.checkoutUrl}');
+              context.push(AppRoutes.kCheckoutView, extra: state.checkoutUrl);
+              log('nedjma');
+            }
+          },
           builder: (context, state) {
             return state is PaymentLoadInProgress
-                ? const CircularProgressIndicator()
+                ? const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                    ],
+                  )
                 : CustomButton(
                     text: 'Pay Now',
                     onPressed: () {
                       context.read<PaymentCubit>().createCheckout();
-                      log('hello');
                     },
                   );
           },
@@ -146,16 +158,28 @@ class PaymentMethods extends StatelessWidget {
           textAlign: TextAlign.start,
         ),
         const VerticalSpace(size: 16),
-        const PaymentMethodWidget(
-          name: 'Edahabia Card',
-          image: 'assets/images/alg_post_logo.png',
-          paymentMethod: PaymentMethod.edahabia,
+        GestureDetector(
+          onTap: () {
+            context
+                .read<PaymentCubit>()
+                .selectPaymentMethod(PaymentMethod.edahabia);
+          },
+          child: const PaymentMethodWidget(
+            name: 'Edahabia Card',
+            image: 'assets/images/alg_post_logo.png',
+            paymentMethod: PaymentMethod.edahabia,
+          ),
         ),
         const VerticalSpace(size: 8),
-        const PaymentMethodWidget(
-          name: 'CIB Card',
-          image: 'assets/images/cib_logo.png',
-          paymentMethod: PaymentMethod.cib,
+        GestureDetector(
+          onTap: () {
+            context.read<PaymentCubit>().selectPaymentMethod(PaymentMethod.cib);
+          },
+          child: const PaymentMethodWidget(
+            name: 'CIB Card',
+            image: 'assets/images/cib_logo.png',
+            paymentMethod: PaymentMethod.cib,
+          ),
         ),
       ],
     );
@@ -271,31 +295,22 @@ class PriceRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<PaymentCubit, PaymentState>(
-      listener: (context, state) {
-        if (state is PaymentCheckoutSuccess) {
-          log('Checkout URL: ${state.checkoutUrl}');
-          context.push(AppRoutes.kCheckoutView, extra: state.checkoutUrl);
-          log('nedjma');
-        }
-      },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 8.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyles.textStyle14
-                  .copyWith(fontWeight: isBold ? FontWeight.bold : null),
-            ),
-            Text(
-              '$price DA',
-              style: TextStyles.textStyle14
-                  .copyWith(fontWeight: isBold ? FontWeight.bold : null),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyles.textStyle14
+                .copyWith(fontWeight: isBold ? FontWeight.bold : null),
+          ),
+          Text(
+            '$price DA',
+            style: TextStyles.textStyle14
+                .copyWith(fontWeight: isBold ? FontWeight.bold : null),
+          ),
+        ],
       ),
     );
   }

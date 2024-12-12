@@ -75,7 +75,6 @@ class TripsViewState extends State<TripsView> {
           }
           if (state is TripsListFailure) {
             _pagingController.error = state.errMessage;
-            print(state.errMessage);
           }
         },
         child: RefreshIndicator(

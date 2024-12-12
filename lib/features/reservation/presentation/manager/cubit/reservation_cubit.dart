@@ -144,6 +144,7 @@ class ReservationCubit extends Cubit<ReservationState> {
       );
 
       response.fold((l) {
+        reservation = resevationCredentials;
         emit(ReservationSuccess());
       }, (error) {
         log(error.errMessage);
