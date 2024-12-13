@@ -15,7 +15,7 @@ import 'simple_bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
-  await dotenv.load(fileName: ".env.dev");
+  await dotenv.load(fileName: ".env");
 
   setupServiceLocator();
   runApp(
