@@ -7,6 +7,7 @@ abstract class AppRoutes {
   static const kTripScheduleBookingView = '/booking/:tripId';
   static const keditTripScheduleBookingView = '/booking/:tripId/edit';
   static const kBookingView = '/booking';
+  static const kBookingsView = '/bookings';
   static const kLanguageView = '/language';
   static const kEditProfileView = '/editProfile';
   static const kPaymentView = '/payments';

@@ -15,6 +15,7 @@ import '../../features/profile/presentation/view/language_view.dart';
 import '../../features/reservation/data/models/reservation_model.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
+import '../../features/reservation/presentation/views/bookings_list_view.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
 import '../../features/splash_screen/view/splash_screen.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
@@ -143,6 +144,14 @@ abstract class AppRouter {
           child: const TripsView(),
         ),
       ),
+      GoRoute(
+          path: AppRoutes.kBookingsView,
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: state.extra as CurrentAccountCubit,
+              child: const BookingsListView(),
+            );
+          }),
       GoRoute(
           path: AppRoutes.kCheckoutView,
           builder: (context, state) {

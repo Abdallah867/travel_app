@@ -35,9 +35,7 @@ class PaymentView extends StatelessWidget {
         child: BlocConsumer<PaymentCubit, PaymentState>(
           listener: (context, state) {
             if (state is PaymentCheckoutSuccess) {
-              log('Checkout URL: ${state.checkoutUrl}');
               context.push(AppRoutes.kCheckoutView, extra: state.checkoutUrl);
-              log('nedjma');
             }
           },
           builder: (context, state) {
