@@ -24,7 +24,6 @@ class MainView extends StatelessWidget {
     final String username =
         context.read<CurrentAccountCubit>().userInformations!.username;
     return CustomScrollView(
-      physics: const ClampingScrollPhysics(),
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate(
@@ -84,8 +83,10 @@ class MainView extends StatelessWidget {
                         .copyWith(color: AppColors.secondaryColor),
                   ),
                   onTap: () {
-                    context.push('/all-trips',
-                        extra: context.read<TripsListBloc>);
+                    context.push(
+                      '/all-trips',
+                      extra: context.read<CurrentAccountCubit>(),
+                    );
                   },
                 ),
               ),

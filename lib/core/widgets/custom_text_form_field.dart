@@ -5,7 +5,7 @@ import '../utils/app_colors.dart';
 import 'vertical_widget.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final String name;
+  final String? name;
   final bool isPassword;
   final TextEditingController? controller;
   final String? initialValue;
@@ -17,7 +17,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   const CustomTextFormField({
     super.key,
-    required this.name,
+    this.name,
     this.isPassword = false,
     this.controller,
     this.initialValue,
@@ -41,10 +41,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        widget.name != null
+            ? Text(
+                widget.name!,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              )
+            : const SizedBox(),
         const VerticalSpace(size: 4),
         TextFormField(
           validator: widget.validator ??

@@ -23,16 +23,10 @@ class TripInfoWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInfoRow(
-              "Departure Date: ",
-              DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
-                  DateTime.parse(tripSchedule.departureDate)),
+          _buildInfoRow("Departure Date: ", tripSchedule.departureDate,
               Icons.calendar_today),
           _buildInfoRow(
-              "Return Date: ",
-              DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
-                  DateTime.parse(tripSchedule.returnDate)),
-              Icons.calendar_today),
+              "Return Date: ", tripSchedule.returnDate, Icons.calendar_today),
           _buildInfoRow(
               "Seats Available: ",
               "${tripSchedule.seatsAvailable} seats",

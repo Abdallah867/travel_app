@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'payment_method.dart';
 
 class CheckoutModel {
@@ -8,17 +5,24 @@ class CheckoutModel {
   final PaymentMethod paymentMethod;
   final String currency;
   final String successUrl;
+  final String failureUrl;
+  final String webhookEndpoint;
   final String locale;
   final String chargilyPayFeesAllocation;
   final int percentageDiscount;
+  final List<Map<String, dynamic>>? metadata; // Make metadata nullable
+
   CheckoutModel({
     required this.amount,
     required this.paymentMethod,
     this.currency = 'dzd',
     required this.successUrl,
+    required this.failureUrl,
+    required this.webhookEndpoint,
     this.locale = 'en',
     this.chargilyPayFeesAllocation = 'customer',
-    this.percentageDiscount = 75,
+    this.percentageDiscount = 0,
+    this.metadata, // Default to null if not provided
   });
 
   CheckoutModel copyWith({
@@ -26,19 +30,25 @@ class CheckoutModel {
     PaymentMethod? paymentMethod,
     String? currency,
     String? successUrl,
+    String? failureUrl,
+    String? webhookEndpoint,
     String? locale,
     String? chargilyPayFeesAllocation,
     int? percentageDiscount,
+    List<Map<String, dynamic>>? metadata,
   }) {
     return CheckoutModel(
       amount: amount ?? this.amount,
       paymentMethod: paymentMethod ?? this.paymentMethod,
       currency: currency ?? this.currency,
       successUrl: successUrl ?? this.successUrl,
+      failureUrl: failureUrl ?? this.failureUrl,
+      webhookEndpoint: webhookEndpoint ?? this.webhookEndpoint,
       locale: locale ?? this.locale,
       chargilyPayFeesAllocation:
           chargilyPayFeesAllocation ?? this.chargilyPayFeesAllocation,
       percentageDiscount: percentageDiscount ?? this.percentageDiscount,
+      metadata: metadata ?? this.metadata,
     );
   }
 
@@ -48,9 +58,12 @@ class CheckoutModel {
       'payment_method': paymentMethod.name,
       'currency': currency,
       'success_url': successUrl,
+      'failure_url': failureUrl,
+      'webhook_endpoint': webhookEndpoint,
       'locale': locale,
       'chargily_pay_fees_allocation': chargilyPayFeesAllocation,
       'percentage_discount': percentageDiscount,
+      'metadata': metadata, // Serialize metadata if not null
     };
   }
 
@@ -60,43 +73,21 @@ class CheckoutModel {
       paymentMethod: getEnumPaymentMethod(map['payment_method']),
       currency: map['currency'] as String,
       successUrl: map['success_url'] as String,
+      failureUrl: map['failure_url'] as String,
+      webhookEndpoint: map['webhook_endpoint'] as String,
       locale: map['locale'] as String,
       chargilyPayFeesAllocation: map['chargily_pay_fees_allocation'] as String,
       percentageDiscount: map['percentage_discount'] as int,
+      metadata: map['metadata'] != null
+          ? List<Map<String, dynamic>>.from(
+              map['metadata'] as List,
+            )
+          : null, // Deserialize metadata if not null
     );
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory CheckoutModel.fromJson(String source) =>
-      CheckoutModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
   @override
   String toString() {
-    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount)';
-  }
-
-  @override
-  bool operator ==(covariant CheckoutModel other) {
-    if (identical(this, other)) return true;
-
-    return other.amount == amount &&
-        other.paymentMethod == paymentMethod &&
-        other.currency == currency &&
-        other.successUrl == successUrl &&
-        other.locale == locale &&
-        other.chargilyPayFeesAllocation == chargilyPayFeesAllocation &&
-        other.percentageDiscount == percentageDiscount;
-  }
-
-  @override
-  int get hashCode {
-    return amount.hashCode ^
-        paymentMethod.hashCode ^
-        currency.hashCode ^
-        successUrl.hashCode ^
-        locale.hashCode ^
-        chargilyPayFeesAllocation.hashCode ^
-        percentageDiscount.hashCode;
+    return 'CheckoutModel(amount: $amount, paymentMethod: $paymentMethod, currency: $currency, successUrl: $successUrl, failureUrl: $failureUrl, webhookEndpoint: $webhookEndpoint, locale: $locale, chargilyPayFeesAllocation: $chargilyPayFeesAllocation, percentageDiscount: $percentageDiscount, metadata: $metadata)';
   }
 }

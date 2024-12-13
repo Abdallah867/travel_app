@@ -6,7 +6,6 @@ import 'trip_schedule_model.dart';
 class ReservationModel {
   final String reservationId;
   final String userId;
-
   final List<TravelerModel> travelers;
   final TripScheduleModel tripSchedule;
   ReservationModel({

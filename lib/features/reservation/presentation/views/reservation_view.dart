@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,58 +42,68 @@ class PaymentAndSaveButtons extends StatelessWidget {
     return BlocBuilder<ReservationCubit, ReservationState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              state is ReservationSaveInProgress
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 36.w),
-                      child: const CircularProgressIndicator(),
-                    )
-                  : Expanded(
-                      flex: 3,
-                      child: CustomButton(
-                        color: AppColors.backgroundColor,
-                        textColor: AppColors.secondaryColor,
-                        borderSide: const BorderSide(
-                            color: AppColors.secondaryColor, width: 2),
-                        text: reservationCubit.reservation != null
-                            ? S.of(context).update
-                            : S.of(context).save,
-                        onPressed: () {
-                          reservationCubit.reservation == null
-                              ? reservationCubit.saveReservation(
-                                  userId: context
-                                      .read<CurrentAccountCubit>()
-                                      .userInformations!
-                                      .userId,
-                                  choosenScheduleTripId:
-                                      context.read<TripCubit>().trip.tripId,
-                                )
-                              : reservationCubit.updateReservation();
-                        },
+            padding: const EdgeInsets.all(8.0),
+            child: state is! ReservationSaveInProgress
+                ? Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: CustomButton(
+                          color: AppColors.backgroundColor,
+                          textColor: AppColors.secondaryColor,
+                          borderSide: const BorderSide(
+                              color: AppColors.secondaryColor, width: 2),
+                          text: reservationCubit.reservation != null
+                              ? S.of(context).update
+                              : S.of(context).save,
+                          onPressed: () {
+                            reservationCubit.reservation == null
+                                ? reservationCubit.saveReservation(
+                                    userId: context
+                                        .read<CurrentAccountCubit>()
+                                        .userInformations!
+                                        .userId,
+                                    choosenScheduleTripId:
+                                        context.read<TripCubit>().trip.tripId,
+                                  )
+                                : reservationCubit.updateReservation();
+                          },
+                        ),
                       ),
-                    ),
-              const HorizontalSpace(size: 8),
-              Expanded(
-                flex: 4,
-                child: CustomButton(
-                  text: 'Proceed to Payment',
-                  onPressed: () {
-                    context.push(
-                      AppRoutes.kPaymentView,
-                      extra: context
-                          .read<ReservationCubit>()
-                          .reservation!
-                          .tripSchedule
-                          .trip,
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
-        );
+                      const HorizontalSpace(size: 8),
+                      Expanded(
+                        flex: 4,
+                        child: CustomButton(
+                          text: 'Proceed to Payment',
+                          onPressed: () async {
+                            if (reservationCubit.reservation == null) {
+                              await reservationCubit.saveReservation(
+                                userId: context
+                                    .read<CurrentAccountCubit>()
+                                    .userInformations!
+                                    .userId,
+                                choosenScheduleTripId:
+                                    context.read<TripCubit>().trip.tripId,
+                              );
+                            }
+                            context.push(
+                              AppRoutes.kPaymentView,
+                              extra: reservationCubit.reservation!,
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 36.w),
+                        child: const CircularProgressIndicator(),
+                      ),
+                    ],
+                  ));
       },
     );
   }

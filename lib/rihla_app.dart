@@ -26,6 +26,7 @@ class RihlaApp extends StatelessWidget {
           minTextAdapt: true,
           splitScreenMode: true,
           child: MaterialApp.router(
+            showPerformanceOverlay: false,
             debugShowCheckedModeBanner: false,
             locale: Locale(
                 state is SettingsLanguageChanged ? state.language : 'en'),
@@ -50,7 +51,7 @@ ThemeData getTheme() {
     scaffoldBackgroundColor: AppColors.backgroundColor,
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: AppColors.backgroundColor),
-    textTheme: GoogleFonts.dmSansTextTheme(),
+    textTheme: GoogleFonts.urbanistTextTheme(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.secondaryColor,
     ),

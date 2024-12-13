@@ -10,6 +10,7 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../data/models/menu_item.dart';
 import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
@@ -83,7 +84,10 @@ List<MenuItem> getMenuList(BuildContext context) {
     MenuItem(
       name: S.of(context).bookings,
       icon: CupertinoIcons.calendar,
-      onTap: () {},
+      onTap: () {
+        context.push(AppRoutes.kBookingsView,
+            extra: context.read<CurrentAccountCubit>());
+      },
     ),
     MenuItem(
       name: S.of(context).language,

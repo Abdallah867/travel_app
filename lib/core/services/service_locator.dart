@@ -104,6 +104,7 @@ void _setupPayment() {
   getIt.registerFactory(
     () => PaymentRepoImpl(
       getIt.get<Dio>(),
+      getIt.get<AppwriteService>(),
     ),
   );
 }

@@ -52,22 +52,25 @@ class ProfileBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EditProfileCubit, EditProfileState>(
+    return BlocConsumer<EditProfileCubit, EditProfileState>(
+      listener: (context, state) {
+        if (state is EditProfileInformationChanged) {
+          context.read<CurrentAccountCubit>().userInformations =
+              context.read<EditProfileCubit>().user;
+        }
+      },
       builder: (context, state) {
-        return SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+        return const SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             children: [
-              const HorizontalSpace(size: double.infinity),
-              const VerticalSpace(size: 16),
-              ProfileInformationsWidget(
-                user: BlocProvider.of<CurrentAccountCubit>(context)
-                    .userInformations,
-              ),
-              const VerticalSpace(size: 24),
-              const ProfileMenusListView(),
-              const VerticalSpace(size: 16),
-              const LogoutButton(),
+              HorizontalSpace(size: double.infinity),
+              VerticalSpace(size: 16),
+              ProfileInformationsWidget(),
+              VerticalSpace(size: 24),
+              ProfileMenusListView(),
+              VerticalSpace(size: 16),
+              LogoutButton(),
             ],
           ),
         );

@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import '../../../../core/utils/date_format_utils.dart';
 import '../../../trip/data/models/trip_model.dart';
 
 class TripScheduleModel {
@@ -36,8 +37,10 @@ class TripScheduleModel {
   factory TripScheduleModel.fromMap(Map<String, dynamic> map) {
     return TripScheduleModel(
         tripScheduleId: map['tripScheduleId'] as String,
-        departureDate: map['departureDate'] as String,
-        returnDate: map['returnDate'] as String,
+        departureDate: DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
+            DateTime.parse(map['departureDate'] as String)),
+        returnDate: DateFormatUtils.getFormattedDateByDayAndMonthAndYear(
+            DateTime.parse(map['returnDate'] as String)),
         seatsAvailable: map['seatsAvailable'] as int,
         trip: TripModel.fromMap(map['trip'] as Map<String, dynamic>));
   }

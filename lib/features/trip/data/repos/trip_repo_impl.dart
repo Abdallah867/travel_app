@@ -44,9 +44,9 @@ class TripRepoImpl implements TripRepo {
       log('$savedTripsIds');
       await database.update(
         id: userId,
-        endpoint: AppConstants.savesCollectionEndpoint,
+        endpoint: AppConstants.profilesCollectionEndpoint,
         data: {
-          'trips': savedTripsIds,
+          'savings': savedTripsIds,
         },
       );
       return left(null);
@@ -67,10 +67,10 @@ class TripRepoImpl implements TripRepo {
     try {
       final response = await database.get(
         id: userId,
-        endpoint: AppConstants.savesCollectionEndpoint,
+        endpoint: AppConstants.profilesCollectionEndpoint,
       );
 
-      List jsonTrips = response['trips'] ?? [];
+      List jsonTrips = response['savings'] ?? [];
       List<TripModel> trips =
           jsonTrips.map((trip) => TripModel.fromMap(trip)).toList();
 

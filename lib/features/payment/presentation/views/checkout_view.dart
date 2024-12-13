@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../../../core/functions/custom_app_bar.dart';
 
 class CheckoutView extends StatefulWidget {
   final String url;
@@ -27,10 +31,10 @@ class _CheckoutViewState extends State<CheckoutView> {
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
+            if (request.url.startsWith('https://pay.chargily.net/')) {
+              return NavigationDecision.navigate;
             }
-            return NavigationDecision.navigate;
+            return NavigationDecision.prevent;
           },
         ),
       )
@@ -41,12 +45,8 @@ class _CheckoutViewState extends State<CheckoutView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Web Page"),
-      ),
-      body: Scaffold(
-        body: WebViewWidget(controller: webViewController),
-      ),
+      appBar: customAppBar("Chargily Payment Page"),
+      body: WebViewWidget(controller: webViewController),
     );
   }
 }

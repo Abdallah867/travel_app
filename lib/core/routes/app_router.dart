@@ -1,29 +1,28 @@
-import 'package:appwrite/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/home/presentation/views/home_view.dart';
 import '../../features/payment/data/repos/payment_repo_impl.dart';
 import '../../features/payment/presentation/manager/cubit/payment_cubit.dart';
 import '../../features/payment/presentation/views/checkout_view.dart';
 import '../../features/payment/presentation/views/payment_view.dart';
 import '../../features/profile/presentation/manager/profile_cubit/edit_profile_cubit.dart';
+import '../../features/profile/presentation/view/edit_profile_view.dart';
 import '../../features/profile/presentation/view/language_view.dart';
 import '../../features/reservation/data/models/reservation_model.dart';
 import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
+import '../../features/reservation/presentation/views/bookings_list_view.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
-import '../../features/home/presentation/views/home_view.dart';
-import '../../features/profile/presentation/view/edit_profile_view.dart';
-import '../../features/trip/data/models/trip_model.dart';
+import '../../features/splash_screen/view/splash_screen.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
 import '../../features/trips/data/repos/trips_list_repo_impl.dart';
 import '../../features/trips/presentation/manager/bloc/trips_list_bloc.dart';
 import '../../features/trips/presentation/views/trips_view.dart';
-import '../networking/appwrite_service.dart';
 import '../services/service_locator.dart';
 import 'app_routes.dart';
 
@@ -32,7 +31,7 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const SplashScreen(),
       ),
       GoRoute(
         path: AppRoutes.kLoginView,
@@ -120,7 +119,7 @@ abstract class AppRouter {
             return BlocProvider(
               create: (context) => PaymentCubit(
                 getIt.get<PaymentRepoImpl>(),
-                state.extra as TripModel,
+                state.extra as ReservationModel,
               ),
               child: const PaymentView(),
             );
@@ -132,12 +131,27 @@ abstract class AppRouter {
           }),
       GoRoute(
         path: '/all-trips',
-        builder: (context, state) => BlocProvider(
-          create: (context) =>
-              TripsListBloc(tripsListRepo: getIt.get<TripsListRepoImpl>()),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  TripsListBloc(tripsListRepo: getIt.get<TripsListRepoImpl>()),
+            ),
+            BlocProvider.value(
+              value: state.extra as CurrentAccountCubit,
+            ),
+          ],
           child: const TripsView(),
         ),
       ),
+      GoRoute(
+          path: AppRoutes.kBookingsView,
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: state.extra as CurrentAccountCubit,
+              child: const BookingsListView(),
+            );
+          }),
       GoRoute(
           path: AppRoutes.kCheckoutView,
           builder: (context, state) {

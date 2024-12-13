@@ -13,38 +13,74 @@ import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
 
 class ProfileInformationsWidget extends StatelessWidget {
-  final UserModel? user;
+  final bool isEditProfile;
   const ProfileInformationsWidget({
     super.key,
-    required this.user,
+    this.isEditProfile = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final EditProfileCubit editProfileCubit = context.read<EditProfileCubit>();
+
     return GestureDetector(
-      onTap: () {
-        profileImageMethodSelectBottomSheet(context, editProfileCubit);
-      },
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 50.r,
-            backgroundColor: AppColors.backgroundColor,
-            backgroundImage: user?.profilePicture != null
-                ? NetworkImage(user!.profilePicture!)
-                : editProfileCubit.profileImage,
-          ),
-          const VerticalSpace(size: 8),
-          CenteredText(
-            text: user!.username,
-            style: TextStyles.textStyle20.copyWith(fontWeight: FontWeight.bold),
-          ),
-          CenteredText(
-            text: user!.email,
-            style: TextStyles.textStyle14,
-          ),
-        ],
+      onTap: isEditProfile
+          ? () {
+              profileImageMethodSelectBottomSheet(context, editProfileCubit);
+            }
+          : null,
+      child: BlocBuilder<EditProfileCubit, EditProfileState>(
+        builder: (context, state) {
+          final UserModel user = context.read<EditProfileCubit>().user;
+
+          return Column(
+            children: [
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  CircleAvatar(
+                    radius: 50.r,
+                    backgroundColor: AppColors.backgroundColor,
+                    backgroundImage: user.profilePicture != null
+                        ? NetworkImage(user.profilePicture!)
+                        : editProfileCubit.profileImage,
+                  ),
+                  isEditProfile ? Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: 
+                           () {
+                              profileImageMethodSelectBottomSheet(
+                                  context, editProfileCubit);
+                            }
+                          ,
+                      child: CircleAvatar(
+                        radius: 15.r,
+                        backgroundColor: AppColors.secondaryColor,
+                        child: Icon(
+                          Icons.edit,
+                          size: 18.r,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ) : const SizedBox(),
+                ],
+              ),
+              const VerticalSpace(size: 8),
+              CenteredText(
+                text: user.username,
+                style: TextStyles.textStyle20
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              CenteredText(
+                text: user.email,
+                style: TextStyles.textStyle14,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

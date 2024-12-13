@@ -35,6 +35,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
+        splashFactory: NoSplash.splashFactory,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius.r),
           side: borderSide,
@@ -46,13 +47,20 @@ class CustomButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            text,
-            style: style ??
-                TextStyles.textStyle16.copyWith(
-                  color: textColor ?? AppColors.whiteColor,
-                  fontWeight: FontWeightHelper.bold,
-                ),
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: 95.w,
+            ),
+            child: Text(
+              textAlign: TextAlign.center,
+              text,
+              overflow: TextOverflow.clip,
+              style: style ??
+                  TextStyles.textStyle16.copyWith(
+                    color: textColor ?? AppColors.whiteColor,
+                    fontWeight: FontWeightHelper.bold,
+                  ),
+            ),
           ),
         ],
       ),

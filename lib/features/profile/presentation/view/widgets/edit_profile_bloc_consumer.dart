@@ -41,8 +41,8 @@ class EditProfileBlocConsumer extends StatelessWidget {
                   child: Column(
                     children: [
                       const VerticalSpace(size: 16),
-                      ProfileInformationsWidget(
-                        user: editProfileCubit.user,
+                      const ProfileInformationsWidget(
+                        isEditProfile: true,
                       ),
                       const VerticalSpace(size: 24),
                       CustomTextFormField(

@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/app_constants.dart';
+import '../../../../../core/errors/failure.dart';
 import '../../../../trip/data/models/trip_model.dart';
 import '../../../data/repos/trips_list_repo.dart';
 
@@ -11,12 +15,15 @@ part 'trips_list_state.dart';
 
 class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   final TripsListRepo tripsListRepo;
-  TextEditingController departureDateController = TextEditingController();
-  TextEditingController returnDateController = TextEditingController();
+  TextEditingController betweenDepartureDateController =
+      TextEditingController();
+  TextEditingController andDepartureDateController = TextEditingController();
+
+  TextEditingController andReturnDateController = TextEditingController();
+  TextEditingController betweenReturnDateController = TextEditingController();
   int? _minPrice;
   int? _maxPrice;
-  String? _departureDate;
-  String? _returnDate;
+  bool isFiltering = false;
 
   set minPrice(int? minPrice) => _minPrice = minPrice;
 
@@ -37,6 +44,8 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
           await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListFirstPageFetch) {
           await _handleTripsListFirstPageFetch(emit, event);
+        } else if (event is TripsListFilterClear) {
+          _handleTripsListFilterClear(emit);
         }
       },
     );
@@ -45,6 +54,15 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> _handleTripsListFailedFetchRetried(
       Emitter<TripsListState> emit) async {
     await getTripsList(emit);
+  }
+
+  void _handleTripsListFilterClear(Emitter<TripsListState> emit) {
+    betweenDepartureDateController.clear();
+    andDepartureDateController.clear();
+    andReturnDateController.clear();
+    betweenReturnDateController.clear();
+    isFiltering = false;
+    emit(const TripsListRefreshed());
   }
 
   Future<void> _handleTripsListSearchTermChanged(
@@ -64,8 +82,8 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
 
   Future<void> _handleTripsListFilterApplied(
       Emitter<TripsListState> emit, TripsListFilterApplied event) async {
-    await getTripsList(emit);
-    emit(TripsListRefreshed());
+    isFiltering = true;
+    emit(const TripsListRefreshed());
   }
 
   Future<void> _handleTripsListFirstPageFetch(
@@ -76,18 +94,27 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> getTripsList(Emitter<TripsListState> emit,
       {String? lastId}) async {
     emit(TripsListLoadInProgress());
-    final response = await tripsListRepo.getTripsList(
-      departureDate: _departureDate,
-      returnDate: _returnDate,
-      lastId: lastId,
-      minPrice: _minPrice ?? AppConstants.minPrice,
-      maxPrice: _maxPrice ?? AppConstants.maxPrice,
-    );
+    Either<List<TripModel>, Failure> response;
+    if (isFiltering) {
+      response = await tripsListRepo.getFilteredTripsList(
+        betweenReturnDate: betweenReturnDateController.text,
+        andReturnDate: andReturnDateController.text,
+        betweenDepartureDate: betweenDepartureDateController.text,
+        andDepartureDate: andDepartureDateController.text,
+        maxPrice: _maxPrice ?? AppConstants.maxPrice,
+        minPrice: _minPrice ?? AppConstants.minPrice,
+      );
+    } else {
+      response = await tripsListRepo.getTripsList(
+        lastId: lastId,
+      );
+    }
     response.fold(
       (trips) {
         emit(TripsListLoaded(trips: trips));
       },
       (failure) {
+        log(failure.errMessage);
         emit(TripsListFailure(errMessage: failure.errMessage));
       },
     );
@@ -95,8 +122,10 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
 
   @override
   Future<void> close() async {
-    departureDateController.dispose();
-    returnDateController.dispose();
+    betweenDepartureDateController.dispose();
+    andDepartureDateController.dispose();
+    betweenReturnDateController.dispose();
+    andReturnDateController.dispose();
     super.close();
   }
 }
