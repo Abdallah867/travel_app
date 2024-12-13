@@ -1,8 +1,9 @@
 default_platform(:android)
 
-before_all do
-  Dotenv.overload '.env'
-end
+# before_all do
+#   Dotenv.overload '.env'
+# end
+
 platform :android do
   desc "Lane for Android Firebase App Distribution"
   lane :firebase_distribution do
