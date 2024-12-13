@@ -39,8 +39,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     response.fold((checkoutUrl) {
       emit(PaymentCheckoutSuccess(checkoutUrl: checkoutUrl));
     }, (failure) {
-      log(failure.errMessage);
-
+      print(failure.errMessage);
       emit(PaymentCheckoutFailure(errorMessage: failure.errMessage));
     });
   }
