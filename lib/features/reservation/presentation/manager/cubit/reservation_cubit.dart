@@ -25,8 +25,6 @@ class ReservationCubit extends Cubit<ReservationState> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-  List<String> reservationStatusList = ['upcoming', 'previous', 'cancelled'];
-
   GlobalKey<FormState> travelerKey = GlobalKey();
   ReservationModel? reservation;
   List<TravelerModel> travelersList = [];
