@@ -5,7 +5,6 @@ import '../../../../../core/utils/date_format_utils.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../core/widgets/custom_shimmer.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
@@ -18,8 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
-import 'reservation_loading_card.dart';
 
 class ReservationCardBlocBuilder extends StatelessWidget {
   const ReservationCardBlocBuilder({
@@ -34,23 +31,20 @@ class ReservationCardBlocBuilder extends StatelessWidget {
 
         return Container(
           decoration: BoxDecoration(
-            // border radius
             borderRadius: BorderRadius.circular(16.r),
             boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(17, 17, 26, 0.1),
                 blurRadius: 0,
                 spreadRadius: 0,
-                offset: Offset(
-                  0,
-                  1,
-                ),
+                offset: Offset(0, 1),
               ),
             ],
             color: AppColors.whiteColor,
           ),
           child: Column(
             children: [
+              // Reservation Details Row
               Row(
                 children: [
                   Padding(
@@ -77,21 +71,33 @@ class ReservationCardBlocBuilder extends StatelessWidget {
                           ),
                           const VerticalSpace(size: 4),
                           Text(
-                              DateFormatUtils.formatDate(
-                                reservation.tripSchedule.departureDate,
+                            DateFormatUtils.formatDate(
+                              reservation.tripSchedule.departureDate,
+                            ),
+                            style: TextStyles.textStyle14,
+                          ),
+                          // const VerticalSpace(size: 4),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${reservation.travelers.length} Persons',
+                                style: TextStyles.textStyle14SemiBold,
                               ),
-                              style: TextStyles.textStyle14),
-                          const VerticalSpace(size: 12),
-                          Text('${reservation.travelers.length} Persons',
-                              style: TextStyles.textStyle14SemiBold),
-
-                          // const LocationAndPriceWidget(),
+                              Padding(
+                                padding: EdgeInsetsDirectional.only(end: 4.w),
+                                child: const PaymentStatusChip(isPaid: !true),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                   )
                 ],
               ),
+
+              // Action Buttons and Payment Status
               Padding(
                 padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 8.h),
                 child: Row(
@@ -102,44 +108,48 @@ class ReservationCardBlocBuilder extends StatelessWidget {
                         height: 40.h,
                         text: 'View Details',
                         style: TextStyles.textStyle14.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeightHelper.semiBold),
+                          color: Colors.white,
+                          fontWeight: FontWeightHelper.semiBold,
+                        ),
                         onPressed: () {
                           context.push(
-                              '${AppRoutes.kBookingView}/${reservation.tripSchedule.trip.tripId}/edit',
-                              extra: {
-                                'reservationCubit':
-                                    context.read<ReservationCubit>(),
-                                'tripCubit': TripCubit(
-                                  trip: reservation.tripSchedule.trip,
-                                  tripRepo: getIt.get<TripRepoImpl>(),
-                                ),
-                                'currentAccountCubit':
-                                    BlocProvider.of<CurrentAccountCubit>(
-                                        context),
-                              });
+                            '${AppRoutes.kBookingView}/${reservation.tripSchedule.trip.tripId}/edit',
+                            extra: {
+                              'reservationCubit':
+                                  context.read<ReservationCubit>(),
+                              'tripCubit': TripCubit(
+                                trip: reservation.tripSchedule.trip,
+                                tripRepo: getIt.get<TripRepoImpl>(),
+                              ),
+                              'currentAccountCubit':
+                                  BlocProvider.of<CurrentAccountCubit>(context),
+                            },
+                          );
                         },
                       ),
                     ),
                     const HorizontalSpace(size: 16),
                     Expanded(
                       child: CustomButton(
-                          color: AppColors.whiteColor,
-                          style: TextStyles.textStyle14.copyWith(
-                            color: Colors.black.withOpacity(.35),
-                            fontWeight: FontWeightHelper.semiBold,
-                          ),
-                          borderSide: const BorderSide(
-                              color: AppColors.inputGrey, width: 2),
-                          height: 40.h,
-                          text: 'Cancel Booking',
-                          onPressed: () {
-                            showCancelBookingDialog(context);
-                          }),
+                        color: AppColors.whiteColor,
+                        style: TextStyles.textStyle14.copyWith(
+                          color: Colors.black.withOpacity(.35),
+                          fontWeight: FontWeightHelper.semiBold,
+                        ),
+                        borderSide: const BorderSide(
+                          color: AppColors.inputGrey,
+                          width: 2,
+                        ),
+                        height: 40.h,
+                        text: 'Cancel Booking',
+                        onPressed: () {
+                          showCancelBookingDialog(context);
+                        },
+                      ),
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -148,50 +158,75 @@ class ReservationCardBlocBuilder extends StatelessWidget {
   }
 }
 
+// Payment Status Chip Widget
+class PaymentStatusChip extends StatelessWidget {
+  final bool isPaid;
+
+  const PaymentStatusChip({super.key, required this.isPaid});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: isPaid ? Colors.green.shade100 : Colors.red.shade100,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Text(
+        isPaid ? 'Paid' : 'Unpaid',
+        style: TextStyles.textStyle14SemiBold.copyWith(
+          color: isPaid ? Colors.green : Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
 Future<dynamic> showCancelBookingDialog(BuildContext context) {
   return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text(
-            'Are you sure you want to cancel the trip ?',
-            style: TextStyles.textStyle16SemiBold,
-            textAlign: TextAlign.center,
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: Text(
+          'Are you sure you want to cancel the trip?',
+          style: TextStyles.textStyle16SemiBold,
+          textAlign: TextAlign.center,
+        ),
+        actions: [
+          Row(
+            children: [
+              Expanded(
+                child: CustomButton(
+                  color: Colors.transparent,
+                  borderSide: const BorderSide(
+                    color: AppColors.inputGrey,
+                    width: 2,
+                  ),
+                  text: 'No, I change my mind',
+                  style: TextStyles.textStyle14SemiBold.copyWith(
+                    color: Colors.black.withOpacity(.5),
+                  ),
+                  height: 40.h,
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
+              ),
+              const HorizontalSpace(size: 16),
+              Expanded(
+                child: CustomButton(
+                  text: 'Yes, Cancel Trip',
+                  color: Colors.transparent,
+                  style: TextStyles.textStyle14SemiBold.copyWith(
+                    color: Colors.red,
+                  ),
+                  height: 40.h,
+                ),
+              ),
+            ],
           ),
-          actions: [
-            Row(
-              children: [
-                Expanded(
-                  child: CustomButton(
-                    color: Colors.transparent,
-                    borderSide: const BorderSide(
-                      color: AppColors.inputGrey,
-                      width: 2,
-                    ),
-                    text: 'No, I change my mind',
-                    style: TextStyles.textStyle14SemiBold.copyWith(
-                      color: Colors.black.withOpacity(.5),
-                    ),
-                    height: 40.h,
-                    onPressed: () {
-                      context.pop();
-                    },
-                  ),
-                ),
-                const HorizontalSpace(size: 16),
-                Expanded(
-                  child: CustomButton(
-                    text: 'Yes, Cancel Trip',
-                    color: Colors.transparent,
-                    style: TextStyles.textStyle14SemiBold.copyWith(
-                      color: Colors.red,
-                    ),
-                    height: 40.h,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        );
-      });
+        ],
+      );
+    },
+  );
 }
