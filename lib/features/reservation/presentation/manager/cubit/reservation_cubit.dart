@@ -6,6 +6,7 @@ import 'package:cuid2/cuid2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/enums/reservation_status.dart';
 import '../../../data/models/reservation_model.dart';
 import '../../../data/models/traveler_model.dart';
 import '../../../data/models/trip_schedule_model.dart';
@@ -24,6 +25,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController genderController = TextEditingController();
+  List<String> reservationStatusList = ['upcoming', 'previous', 'cancelled'];
 
   GlobalKey<FormState> travelerKey = GlobalKey();
   ReservationModel? reservation;
@@ -104,9 +106,11 @@ class ReservationCubit extends Cubit<ReservationState> {
 
   Future<void> getReservations({
     required String userId,
+    required ReservationStatus statusFilter,
   }) async {
     emit(ReservationLoadInProgress());
-    final response = await reservationRepo.getReservations(userId);
+    final response =
+        await reservationRepo.getReservations(userId, statusFilter.name);
     response.fold((l) {
       reservations = l;
       emit(ReservationSuccess());

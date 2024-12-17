@@ -18,17 +18,19 @@ class ReservationRepoImpl implements ReservationRepo {
 
   @override
   Future<Either<List<ReservationModel>, Failure>> getReservations(
-      String userId) async {
+      String userId, String statusFilter) async {
     try {
-      final response = await databaseService.getList(queries: [
+      List<String> queries = [
         Query.equal('userId', userId),
-      ], endpoint: AppConstants.reservationsCollectionEndpoint);
-
-      print(response);
+      ];
+      queries.add(Query.equal('status', statusFilter));
+      final response = await databaseService.getList(
+        queries: queries,
+        endpoint: AppConstants.reservationsCollectionEndpoint,
+      );
 
       List<ReservationModel> reservations =
           response.map((e) => ReservationModel.fromMap(e.data)).toList();
-      print(reservations);
 
       return left(reservations);
     } on AppwriteException catch (e) {

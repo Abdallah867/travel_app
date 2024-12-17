@@ -16,6 +16,7 @@ abstract class ReservationRepo {
 
   Future<Either<List<ReservationModel>, Failure>> getReservations(
     String userId,
+    String statusFilter,
   );
   Future<Either<TravelerModel, Failure>> updateTraveler(TravelerModel traveler);
 

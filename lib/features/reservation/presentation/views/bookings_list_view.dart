@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/enums/reservation_status.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../data/repos/reservation_repo_impl.dart';
@@ -16,7 +17,7 @@ class BookingsListView extends StatelessWidget {
         reservationRepo: getIt.get<ReservationRepoImpl>(),
       )..getReservations(
           userId: context.read<CurrentAccountCubit>().userInformations!.userId,
-        ),
+          statusFilter: ReservationStatus.upcoming),
       child: const BookingsListViewBody(),
     );
   }
