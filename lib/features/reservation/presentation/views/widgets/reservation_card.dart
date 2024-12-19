@@ -2,7 +2,6 @@ import '../../../../../core/services/service_locator.dart';
 import '../../../data/models/reservation_model.dart';
 import '../../../data/repos/reservation_repo_impl.dart';
 import '../../manager/cubit/reservation_cubit.dart';
-import '../bookings_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

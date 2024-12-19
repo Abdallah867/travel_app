@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../generated/l10n.dart';
 import '../manager/settings_cubit/settings_cubit.dart';
 
 class LanguageView extends StatefulWidget {
@@ -23,31 +25,29 @@ class _LanguageViewState extends State<LanguageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Language Selector'),
-        centerTitle: true,
-      ),
+      appBar: customAppBar(S.of(context).switchLanguage),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             LanguageOption(
-              language: '🇩🇿 Arabic', // Using the Algerian flag emoji
+              language:
+                  '🇩🇿 ${S.of(context).arabic}', // Using the Algerian flag emoji
               isSelected: context.read<SettingsCubit>().selectedLanguage ==
                   Language.arabic,
               onChanged: (value) => switchLanguage(Language.arabic),
             ),
             const Divider(),
             LanguageOption(
-              language: '🇫🇷 French',
+              language: '🇫🇷 ${S.of(context).french}',
               isSelected: context.read<SettingsCubit>().selectedLanguage ==
                   Language.french,
               onChanged: (value) => switchLanguage(Language.french),
             ),
             const Divider(),
             LanguageOption(
-              language: '🇬🇧 English',
+              language: '🇬🇧 ${S.of(context).english}',
               isSelected: context.read<SettingsCubit>().selectedLanguage ==
                   Language.english,
               onChanged: (value) => switchLanguage(Language.english),

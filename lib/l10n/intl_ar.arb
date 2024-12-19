@@ -38,8 +38,17 @@
   "hello": "مرحباً  {username} ! ",
   "agencyName": "وكالة",
   "language": "اللغة",
-  "switch_language": "تغيير اللغة",
+  "switchLanguage": "تغيير اللغة",
   "arabic": "العربية",
   "french": "الفرنسية",
-  "english": "الإنجليزية"
+  "english": "الإنجليزية",
+  "noBookings": "لا توجد حجوزات متاحة",
+  "upcoming": "القادمة",
+  "previous": "السابقة",
+  "cancelled": "ملغاة",
+  "persons": "الأشخاص",
+  "viewDetails": "عرض التفاصيل",
+  "cancelBooking": "إلغاء الحجز",
+  "paid": "مدفوع",
+  "unpaid": "غير مدفوع"
 }
