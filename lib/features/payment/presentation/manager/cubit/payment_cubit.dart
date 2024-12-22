@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../reservation/data/models/reservation_model.dart';
 import '../../../data/models/checkout_model.dart';
-import '../../../data/models/payment_method.dart';
+import '../../../../../core/enums/payment_method.dart';
 import '../../../data/repos/payment_repo.dart';
 
 part 'payment_state.dart';

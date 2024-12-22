@@ -16,7 +16,7 @@ import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/vertical_widget.dart';
 import '../../../reservation/data/models/reservation_model.dart';
 import '../../../reservation/data/models/traveler_model.dart';
-import '../../data/models/payment_method.dart';
+import '../../../../core/enums/payment_method.dart';
 import '../manager/cubit/payment_cubit.dart';
 
 class PaymentView extends StatelessWidget {
