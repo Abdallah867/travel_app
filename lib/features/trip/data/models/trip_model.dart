@@ -83,9 +83,7 @@ class TripModel {
       otherImages: List<String>.from(
         (map['otherImages'] as List<dynamic>),
       ),
-      agency: map['agency'] != null
-          ? AgencyModel.fromMap(map['agency'] as Map<String, dynamic>)
-          : null,
+      agency: map['agency'] != null ? AgencyModel.fromMap(map['agency']) : null,
     );
   }
 

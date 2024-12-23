@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../trip/presentation/views/widgets/review_widget.dart';
+import '../../../data/models/agency_model.dart';
 import 'travel_agency_logo.dart';
 
 class TravelAgencyCard extends StatelessWidget {
-  const TravelAgencyCard({super.key});
+  final AgencyModel agency;
+  const TravelAgencyCard({super.key, required this.agency});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class TravelAgencyCard extends StatelessWidget {
         tileColor: AppColors.whiteColor,
         leading: const TravelAgencyLogo(),
         title: Text(
-          'Travel DZ',
+          agency.agnecyName,
           style: TextStyles.textStyle16,
         ),
         subtitle: const ReviewWidget(),

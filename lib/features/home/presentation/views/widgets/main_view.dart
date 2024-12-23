@@ -4,11 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../agencies/data/repos/agencies_repo.dart';
+import '../../../../agencies/data/repos/agencies_repo_impl.dart';
+import '../../../../agencies/presentation/manager/bloc/agencies_bloc.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../../trip/presentation/views/widgets/custom_circular_icon.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
@@ -71,7 +75,7 @@ class MainView extends StatelessWidget {
                 ),
               ),
               const VerticalSpace(size: 16),
-              const TravelAgenciesListView(),
+              const HomeTravelAgenciesBlocProvider(),
               const VerticalSpace(size: 24),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -96,6 +100,22 @@ class MainView extends StatelessWidget {
         ),
         const TripsListBlocBuilder(),
       ],
+    );
+  }
+}
+
+class HomeTravelAgenciesBlocProvider extends StatelessWidget {
+  const HomeTravelAgenciesBlocProvider({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AgenciesBloc(
+        agenciesRepo: getIt.get<AgenciesRepoImpl>(),
+      )..add(const AgenciesFirstPageFetch()),
+      child: const TravelAgenciesListView(),
     );
   }
 }
