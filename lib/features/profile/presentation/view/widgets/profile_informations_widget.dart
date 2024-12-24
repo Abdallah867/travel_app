@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/centered_text.dart';
-import '../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../data/models/user_model.dart';
 import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
@@ -33,50 +34,57 @@ class ProfileInformationsWidget extends StatelessWidget {
         builder: (context, state) {
           final UserModel user = context.read<EditProfileCubit>().user;
 
-          return Column(
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const HorizontalSpace(size: 30),
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    radius: 50.r,
+                    radius: 45.r,
                     backgroundColor: AppColors.backgroundColor,
                     backgroundImage: user.profilePicture != null
                         ? NetworkImage(user.profilePicture!)
                         : editProfileCubit.profileImage,
                   ),
-                  isEditProfile ? Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: 
-                           () {
+                  isEditProfile
+                      ? Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () {
                               profileImageMethodSelectBottomSheet(
                                   context, editProfileCubit);
-                            }
-                          ,
-                      child: CircleAvatar(
-                        radius: 15.r,
-                        backgroundColor: AppColors.secondaryColor,
-                        child: Icon(
-                          Icons.edit,
-                          size: 18.r,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
-                    ),
-                  ) : const SizedBox(),
+                            },
+                            child: CircleAvatar(
+                              radius: 15.r,
+                              backgroundColor: AppColors.secondaryColor,
+                              child: Icon(
+                                Icons.edit,
+                                size: 18.r,
+                                color: AppColors.whiteColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
-              const VerticalSpace(size: 8),
-              CenteredText(
-                text: user.username,
-                style: TextStyles.textStyle20
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              CenteredText(
-                text: user.email,
-                style: TextStyles.textStyle14,
+              const HorizontalSpace(size: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CenteredText(
+                    text: user.username,
+                    style: TextStyles.textStyle20
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  CenteredText(
+                    text: user.email,
+                    style: TextStyles.textStyle14,
+                  ),
+                ],
               ),
             ],
           );

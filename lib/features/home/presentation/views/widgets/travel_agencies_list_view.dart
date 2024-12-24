@@ -20,7 +20,7 @@ class TravelAgenciesListView extends StatelessWidget {
           case AgenciesLoaded():
             // Display the list of travel agencies when data is loaded
             return SizedBox(
-              height: 100.h, // Adjust height as needed
+              height: 140.w, // Adjust height as needed
               child: Padding(
                 padding: EdgeInsets.only(left: 16.w),
                 child: ListView.separated(

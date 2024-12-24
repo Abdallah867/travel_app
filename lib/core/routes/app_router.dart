@@ -1,6 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/agencies/data/repos/agencies_repo_impl.dart';
+import '../../features/agencies/presentation/manager/bloc/agencies_bloc.dart';
+import '../../features/agencies/presentation/views/agencies_view.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
@@ -130,7 +133,7 @@ abstract class AppRouter {
             return const LanguageView();
           }),
       GoRoute(
-        path: '/all-trips',
+        path: AppRoutes.kTrips,
         builder: (context, state) => MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -142,6 +145,21 @@ abstract class AppRouter {
             ),
           ],
           child: const TripsView(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.kAgenciesView,
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  AgenciesBloc(agenciesRepo: getIt.get<AgenciesRepoImpl>()),
+            ),
+            BlocProvider.value(
+              value: state.extra as CurrentAccountCubit,
+            ),
+          ],
+          child: const AgenciesView(),
         ),
       ),
       GoRoute(

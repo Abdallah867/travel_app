@@ -22,11 +22,13 @@ class RegisterForm extends StatelessWidget {
           CustomTextFormField(
             name: S.of(context).username,
             controller: context.read<RegisterCubit>().usernameController,
+            textInputAction: TextInputAction.next,
           ),
           const VerticalSpace(size: 12),
           CustomTextFormField(
             name: S.of(context).email,
             controller: context.read<RegisterCubit>().emailController,
+            textInputAction: TextInputAction.next,
             validator: (value) {
               return validateEmail(value, context);
             },
@@ -36,6 +38,7 @@ class RegisterForm extends StatelessWidget {
             name: S.of(context).password,
             isPassword: true,
             controller: context.read<RegisterCubit>().passwordController,
+            textInputAction: TextInputAction.done,
             validator: (value) {
               return validatePassword(value, context);
             },

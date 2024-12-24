@@ -4,21 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/services/service_locator.dart';
+import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../agencies/data/repos/agencies_repo.dart';
-import '../../../../agencies/data/repos/agencies_repo_impl.dart';
-import '../../../../agencies/presentation/manager/bloc/agencies_bloc.dart';
 import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../../../trip/presentation/views/widgets/custom_circular_icon.dart';
 import '../../../../trip/presentation/views/widgets/trips_list_bloc_builder.dart';
-import '../../../../trips/presentation/manager/bloc/trips_list_bloc.dart';
+import 'home_travel_agencies_bloc_provider.dart';
 import 'title_section.dart';
-import 'travel_agencies_list_view.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -71,7 +67,12 @@ class MainView extends StatelessWidget {
                     style: TextStyles.textStyle14
                         .copyWith(color: AppColors.secondaryColor),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    context.push(
+                      AppRoutes.kAgenciesView,
+                      extra: context.read<CurrentAccountCubit>(),
+                    );
+                  },
                 ),
               ),
               const VerticalSpace(size: 16),
@@ -88,7 +89,7 @@ class MainView extends StatelessWidget {
                   ),
                   onTap: () {
                     context.push(
-                      '/all-trips',
+                      AppRoutes.kTrips,
                       extra: context.read<CurrentAccountCubit>(),
                     );
                   },
@@ -100,22 +101,6 @@ class MainView extends StatelessWidget {
         ),
         const TripsListBlocBuilder(),
       ],
-    );
-  }
-}
-
-class HomeTravelAgenciesBlocProvider extends StatelessWidget {
-  const HomeTravelAgenciesBlocProvider({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AgenciesBloc(
-        agenciesRepo: getIt.get<AgenciesRepoImpl>(),
-      )..add(const AgenciesFirstPageFetch()),
-      child: const TravelAgenciesListView(),
     );
   }
 }

@@ -17,10 +17,6 @@ class AgenciesRepoImpl implements AgenciesRepo {
   @override
   Future<Either<List<AgencyModel>, Failure>> getAgencies({
     String searchTerm = '',
-    String? betweenDepartureDate = '16/02/2024',
-    String? andReturnDate = '18/03/2024',
-    String? betweenReturnDate = '07/22/2024',
-    String? andDepartureDate = '18/03/2024',
     String? lastId,
   }) async {
     try {
@@ -40,10 +36,11 @@ class AgenciesRepoImpl implements AgenciesRepo {
       final response = await database.getList(
           endpoint: AppConstants.agenciesCollectionEndpoint, queries: queries);
 
+      log('${response[0]}');
+
       List<AgencyModel> agenciesList =
           response.map((agency) => AgencyModel.fromMap(agency.data)).toList();
 
-      log(agenciesList.toString());
       return left(agenciesList);
     } on AppwriteException catch (e) {
       return right(
@@ -60,15 +57,15 @@ class AgenciesRepoImpl implements AgenciesRepo {
   Future<Either<void, Failure>> createTestAgenciesList() async {
     try {
       final List<AgencyModel> algerianAgencies = [
-        const AgencyModel(
-          agencyId: 'DZ001',
-          agnecyName: 'Alger Voyages',
-          agencyLogo: 'https://example.com/logos/alger_voyages.png',
-          description: 'Explore Algeria with our curated travel packages.',
-          email: 'contact@algervoyages.dz',
-          phoneNumbers: ['0770123456', '0550987654'],
-          address: '12 Rue Didouche Mourad, Algiers, Algeria',
-        ),
+        // const AgencyModel(
+        //   agencyId: 'DZ001',
+        //   agnecyName: 'Alger Voyages',
+        //   agencyLogo: 'https://example.com/logos/alger_voyages.png',
+        //   description: 'Explore Algeria with our curated travel packages.',
+        //   email: 'contact@algervoyages.dz',
+        //   phoneNumbers: ['0770123456', '0550987654'],
+        //   address: '12 Rue Didouche Mourad, Algiers, Algeria',
+        // ),
         const AgencyModel(
           agencyId: 'DZ002',
           agnecyName: 'Sahara Adventures',
@@ -126,58 +123,4 @@ class AgenciesRepoImpl implements AgenciesRepo {
       );
     }
   }
-
-  // @override
-  // Future<Either<List<AgencyModel>, Failure>> getFilteredAgenciesList({
-  //   String? betweenDepartureDate,
-  //   String? andReturnDate,
-  //   String? betweenReturnDate,
-  //   String? andDepartureDate,
-  //   String? lastId,
-  //   required int minPrice,
-  //   required int maxPrice,
-  // }) async {
-  //   try {
-  //     log(DateFormatUtils.formatDateToIso8601(
-  //       betweenDepartureDate!,
-  //     ));
-  //     List<String> queries = [
-  //       Query.between("price", minPrice, maxPrice),
-  //       Query.between(
-  //         "departureDate",
-  //         DateFormatUtils.formatDateToIso8601(
-  //           betweenDepartureDate,
-  //         ),
-  //         DateFormatUtils.formatDateToIso8601(andDepartureDate!),
-  //       ),
-  //       Query.between(
-  //         "returnDate",
-  //         DateFormatUtils.formatDateToIso8601(betweenReturnDate!),
-  //         DateFormatUtils.formatDateToIso8601(andReturnDate!),
-  //       ),
-  //       Query.limit(AppConstants.pageSize),
-  //       Query.orderDesc("\$createdAt")
-  //     ];
-
-  //     if (lastId != null) {
-  //       queries.add(Query.cursorAfter(lastId));
-  //     }
-
-  //     final List<Document> response = await database.getList(
-  //       endpoint: AppConstants.agenciesCollectionEndpoint,
-  //       queries: queries,
-  //     );
-
-  //     log('${agencies.length}');
-  //     return left(agencies.toList());
-  //   } on AppwriteException catch (e) {
-  //     return right(
-  //       Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
-  //     );
-  //   } catch (e) {
-  //     return right(
-  //       Failure(errMessage: e.toString()),
-  //     );
-  //   }
-  // }
 }

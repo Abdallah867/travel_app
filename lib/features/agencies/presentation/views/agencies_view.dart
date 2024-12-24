@@ -87,14 +87,23 @@ class AgenciesViewState extends State<AgenciesView> {
                     child: const SearchBarAndFilterWidget(),
                   ),
                 ),
-                PagedSliverList<String?, AgencyModel>(
+                PagedSliverGrid<String?, AgencyModel>(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 4.w,
+                    crossAxisSpacing: 4.w,
+                    mainAxisExtent: 140.w,
+                  ),
                   pagingController: _pagingController,
                   builderDelegate: PagedChildBuilderDelegate(
                     firstPageProgressIndicatorBuilder: (_) =>
-                        const CircularProgressIndicator(),
+                        const Center(child: CircularProgressIndicator()),
                     itemBuilder: (context, agency, index) {
-                      return TravelAgencyCard(
-                        agency: agency,
+                      return Padding(
+                        padding: EdgeInsets.only(top: 12.h),
+                        child: TravelAgencyCard(
+                          agency: agency,
+                        ),
                       );
                     },
                   ),

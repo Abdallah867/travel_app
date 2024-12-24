@@ -9,15 +9,5 @@ abstract class AgenciesRepo {
     String? lastId,
   });
 
-  // Future<Either<List<AgencyModel>, Failure>> getFilteredAgenciesList({
-  //   String? betweenDepartureDate,
-  //   String? andReturnDate,
-  //   String? betweenReturnDate,
-  //   String? andDepartureDate,
-  //   String? lastId,
-  //   required int minPrice,
-  //   required int maxPrice,
-  // });
-
   Future<Either<void, Failure>> createTestAgenciesList();
 }

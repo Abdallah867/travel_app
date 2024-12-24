@@ -1,23 +1,26 @@
 import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class AgencyModel extends Equatable {
   final String agencyId;
   final String agnecyName;
-  final String agencyLogo;
+  final String? agencyLogo; // Assuming agencyLogo can be null
   final String description;
   final String email;
   final List<String>? phoneNumbers;
   final String address;
+  final double? rating; // Assuming rating can be null
 
   const AgencyModel({
     required this.agencyId,
     required this.agnecyName,
-    required this.agencyLogo,
+    this.agencyLogo,
     required this.description,
     required this.email,
-    required this.phoneNumbers,
+    this.phoneNumbers,
     required this.address,
+    this.rating,
   });
 
   AgencyModel copyWith({
@@ -28,6 +31,7 @@ class AgencyModel extends Equatable {
     String? email,
     List<String>? phoneNumbers,
     String? address,
+    double? rating,
   }) {
     return AgencyModel(
       agencyId: agencyId ?? this.agencyId,
@@ -37,6 +41,7 @@ class AgencyModel extends Equatable {
       email: email ?? this.email,
       phoneNumbers: phoneNumbers ?? this.phoneNumbers,
       address: address ?? this.address,
+      rating: rating ?? this.rating,
     );
   }
 
@@ -49,18 +54,24 @@ class AgencyModel extends Equatable {
       'email': email,
       'phoneNumbers': phoneNumbers,
       'address': address,
+      'rating': rating,
     };
   }
 
   factory AgencyModel.fromMap(Map<String, dynamic> map) {
     return AgencyModel(
       agencyId: map['agencyId'] as String,
-      agnecyName: map['agnecyName'] as String,
-      agencyLogo: map['agencyLogo'] as String,
+      agnecyName: map['agencyName'] as String,
+      agencyLogo: map['agencyLogo'] as String?, // Handling null safely
       description: map['description'] as String,
       email: map['email'] as String,
-      phoneNumbers: map['phoneNumbers'] as List<String>?,
+      phoneNumbers: map['phoneNumbers'] != null
+          ? List<String>.from(map['phoneNumbers'] as List)
+          : null, // Ensure we handle null values for phoneNumbers
       address: map['address'] as String,
+      rating: map['rating'] != null
+          ? map['rating'].toDouble() as double
+          : null, // Handle null for rating
     );
   }
 
@@ -71,7 +82,7 @@ class AgencyModel extends Equatable {
 
   @override
   String toString() {
-    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, agencyLogo: $agencyLogo, description: $description, email: $email, phoneNumbers: $phoneNumbers, address: $address)';
+    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, agencyLogo: $agencyLogo, description: $description, email: $email, phoneNumbers: $phoneNumbers, address: $address, rating: $rating)';
   }
 
   @override
@@ -83,5 +94,6 @@ class AgencyModel extends Equatable {
         email,
         phoneNumbers,
         address,
+        rating,
       ];
 }

@@ -25,6 +25,7 @@ class LoginForm extends StatelessWidget {
           CustomTextFormField(
             name: S.of(context).email,
             controller: context.read<LoginCubit>().emailController,
+            textInputAction: TextInputAction.next,
             validator: (value) {
               return validateEmail(value, context);
             },
@@ -34,6 +35,7 @@ class LoginForm extends StatelessWidget {
               name: S.of(context).password,
               isPassword: true,
               controller: context.read<LoginCubit>().passwordController,
+              textInputAction: TextInputAction.go,
               validator: (value) {
                 return validatePassword(value, context);
               }),
