@@ -48,17 +48,20 @@ class EditProfileBlocConsumer extends StatelessWidget {
                       CustomTextFormField(
                         name: S.of(context).username,
                         controller: editProfileCubit.usernameController,
+                        textInputAction: TextInputAction.next,
                       ),
                       const VerticalSpace(size: 16),
                       CustomTextFormField(
                         name: S.of(context).email,
                         controller: editProfileCubit.emailController,
                         validator: (value) => validateEmail(value, context),
+                        textInputAction: TextInputAction.next,
                       ),
                       const VerticalSpace(size: 16),
                       CustomTextFormField(
                         name: S.of(context).phoneNumber,
                         controller: editProfileCubit.phoneNumberController,
+                        textInputAction: TextInputAction.next,
                         validator: (value) =>
                             validatePhoneNumber(value, context),
                       ),
@@ -67,6 +70,7 @@ class EditProfileBlocConsumer extends StatelessWidget {
                         name: S.of(context).password,
                         isPassword: true,
                         controller: editProfileCubit.passwordController,
+                        textInputAction: TextInputAction.go,
                         validator: (value) => validatePassword(value, context),
                       ),
                       const VerticalSpace(size: 32),
