@@ -9,6 +9,7 @@ import '../../../../../core/constants/app_constants.dart';
 import '../../../../../core/functions/custom_app_bar.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../core/widgets/custom_search_bar.dart';
 import '../../../home/data/models/agency_model.dart';
 import '../../../home/presentation/views/widgets/travel_agency_card.dart';
 import '../manager/bloc/agencies_bloc.dart';
@@ -53,7 +54,7 @@ class AgenciesViewState extends State<AgenciesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(S.of(context).availableTrips),
+      appBar: customAppBar(S.of(context).availableAgencies),
       body: BlocListener<AgenciesBloc, AgenciesState>(
         listener: (context, state) {
           if (state is AgenciesRefreshed) {
@@ -84,7 +85,7 @@ class AgenciesViewState extends State<AgenciesView> {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.only(top: 16.h),
-                    child: const SearchBarAndFilterWidget(),
+                    child: const CustomSearchBar(),
                   ),
                 ),
                 PagedSliverGrid<String?, AgencyModel>(

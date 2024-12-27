@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
+        "availableAgencies":
+            MessageLookupByLibrary.simpleMessage("Agences disponibles"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Voyages disponibles"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Réservez maintenant"),

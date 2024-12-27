@@ -13,7 +13,7 @@ class TravelAgencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 140.h,
+      width: 130.w,
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(16),

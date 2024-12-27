@@ -629,6 +629,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Available Agencies`
+  String get availableAgencies {
+    return Intl.message(
+      'Available Agencies',
+      name: 'availableAgencies',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

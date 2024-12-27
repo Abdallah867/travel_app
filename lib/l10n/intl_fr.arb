@@ -50,5 +50,6 @@
   "viewDetails": "Voir les détails",
   "cancelBooking": "Annuler la réservation",
   "paid": "Payé",
-  "unpaid": "Non payé"
+  "unpaid": "Non payé",
+  "availableAgencies": "Agences disponibles"
 }

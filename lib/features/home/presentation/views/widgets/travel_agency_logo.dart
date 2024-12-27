@@ -11,12 +11,9 @@ class TravelAgencyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 8.h),
-      child: CircleAvatar(
-        radius: 24.r,
-        backgroundImage: const AssetImage(AppAssets.travelAgencyLogo),
-      ),
+    return CircleAvatar(
+      radius: 24.r,
+      backgroundImage: const AssetImage(AppAssets.travelAgencyLogo),
     );
   }
 }

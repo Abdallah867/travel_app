@@ -14,7 +14,7 @@ platform :android do
       android_artifact_type: "APK",
       android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
       testers: ENV["FIREBASE_TESTERS"],
-      release_notes: "- adding and fixing payment issues \n -fixing booking problems \n -register the payment transaction to database"
+      release_notes: "add agencies functionality"
     )  
   end
 end

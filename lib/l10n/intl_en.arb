@@ -56,5 +56,6 @@
   "viewDetails": "View Details",
   "cancelBooking": "Cancel Booking",
   "paid": "Paid",
-  "unpaid": "Unpaid"
+  "unpaid": "Unpaid",
+  "availableAgencies": "Available Agencies"
 }
