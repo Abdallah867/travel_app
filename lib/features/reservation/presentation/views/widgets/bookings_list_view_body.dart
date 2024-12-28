@@ -44,12 +44,13 @@ class _BookingsListViewBodyState extends State<BookingsListViewBody> {
                       S.of(context).cancelled,
                     ],
                     onChipSelected: (index) async {
+                      reservationCubit.statusFilter =
+                          getReservationStatusFromIndex(index);
                       await reservationCubit.getReservations(
                         userId: context
                             .read<CurrentAccountCubit>()
                             .userInformations!
                             .userId,
-                        statusFilter: getReservationStatusFromIndex(index),
                       );
                       // setState(() {
                       //   currentChipIndex = index;

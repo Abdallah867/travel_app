@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:developer';
+import '../../../payment/data/models/payment_model.dart';
 import 'traveler_model.dart';
 import 'trip_schedule_model.dart';
 
@@ -8,11 +10,14 @@ class ReservationModel {
   final String userId;
   final List<TravelerModel> travelers;
   final TripScheduleModel tripSchedule;
+  final PaymentModel? payment; // Made nullable
+
   ReservationModel({
     required this.reservationId,
     required this.userId,
     required this.travelers,
     required this.tripSchedule,
+    this.payment, // Nullable field
   });
 
   ReservationModel copyWith({
@@ -20,12 +25,14 @@ class ReservationModel {
     String? userId,
     List<TravelerModel>? travelers,
     TripScheduleModel? tripSchedule,
+    PaymentModel? payment,
   }) {
     return ReservationModel(
       reservationId: reservationId ?? this.reservationId,
       userId: userId ?? this.userId,
       travelers: travelers ?? this.travelers,
       tripSchedule: tripSchedule ?? this.tripSchedule,
+      payment: payment ?? this.payment,
     );
   }
 
@@ -35,6 +42,7 @@ class ReservationModel {
       'userId': userId,
       'travelers': travelers.map((x) => x.travelerId).toList(),
       'tripSchedule': tripSchedule.tripScheduleId,
+      'payment': payment?.toMap(), // Handle nullable payment
     };
   }
 
@@ -48,7 +56,11 @@ class ReservationModel {
         ),
       ),
       tripSchedule: TripScheduleModel.fromMap(
-          map['tripSchedule'] as Map<String, dynamic>),
+        map['tripSchedule'] as Map<String, dynamic>,
+      ),
+      payment: map['payment'] != null
+          ? PaymentModel.fromMap(map['payment'] as Map<String, dynamic>)
+          : null, // Safely handle nullable and type
     );
   }
 
@@ -59,6 +71,6 @@ class ReservationModel {
 
   @override
   String toString() {
-    return 'ReservationModel(reservationId: $reservationId, userId: $userId, travelers: $travelers, tripSchedule: $tripSchedule)';
+    return 'ReservationModel(reservationId: $reservationId, userId: $userId, travelers: $travelers, tripSchedule: $tripSchedule, payment: $payment)';
   }
 }

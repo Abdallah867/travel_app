@@ -29,8 +29,13 @@ class ReservationRepoImpl implements ReservationRepo {
         endpoint: AppConstants.reservationsCollectionEndpoint,
       );
 
-      List<ReservationModel> reservations =
-          response.map((e) => ReservationModel.fromMap(e.data)).toList();
+      log(response.toString());
+
+      List<ReservationModel> reservations = response.map((e) {
+        log('${e.data['payment']}');
+
+        return ReservationModel.fromMap(e.data);
+      }).toList();
 
       return left(reservations);
     } on AppwriteException catch (e) {

@@ -17,7 +17,7 @@ class BookingsListView extends StatelessWidget {
         reservationRepo: getIt.get<ReservationRepoImpl>(),
       )..getReservations(
           userId: context.read<CurrentAccountCubit>().userInformations!.userId,
-          statusFilter: ReservationStatus.upcoming),
+        ),
       child: const BookingsListViewBody(),
     );
   }

@@ -30,6 +30,7 @@ class ReservationCubit extends Cubit<ReservationState> {
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedules = [];
   List<ReservationModel> reservations = [];
+  ReservationStatus statusFilter = ReservationStatus.upcoming;
 
   String? selectedScheduleId;
 
@@ -104,7 +105,6 @@ class ReservationCubit extends Cubit<ReservationState> {
 
   Future<void> getReservations({
     required String userId,
-    required ReservationStatus statusFilter,
   }) async {
     emit(ReservationLoadInProgress());
     final response =
