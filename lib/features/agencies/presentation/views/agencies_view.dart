@@ -13,7 +13,6 @@ import '../../../../core/widgets/custom_search_bar.dart';
 import '../../../home/data/models/agency_model.dart';
 import '../../../home/presentation/views/widgets/travel_agency_card.dart';
 import '../manager/bloc/agencies_bloc.dart';
-import 'widgets/search_bar_and_filter_widget.dart';
 
 class AgenciesView extends StatefulWidget {
   const AgenciesView({super.key});

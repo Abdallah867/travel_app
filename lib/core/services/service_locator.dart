@@ -28,7 +28,7 @@ void _setupAppwrite() {
   getIt.registerSingleton<Client>(Client()
           .setEndpoint(dotenv.env['APPWRITE_BASE_URL']!)
           .setProject(dotenv.env['APPWRITE_PROJECT_ID'])
-      // .setSelfSigned(status: true),
+      //  .setSelfSigned(status: true),
       );
   getIt.registerSingleton<Account>(Account(getIt.get<Client>()));
   getIt.registerSingleton<Databases>(Databases(getIt.get<Client>()));

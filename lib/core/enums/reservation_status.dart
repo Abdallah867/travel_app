@@ -29,3 +29,16 @@ ReservationStatus getReservationStatusFromIndex(int index) {
       throw ArgumentError('Invalid index for ReservationStatus: $index');
   }
 }
+
+extension ReservationStatusChipColor on ReservationStatus {
+  String get chipColor {
+    switch (this) {
+      case ReservationStatus.upcoming:
+        return 'upcoming';
+      case ReservationStatus.previous:
+        return 'previous';
+      case ReservationStatus.cancelled:
+        return 'cancelled';
+    }
+  }
+}

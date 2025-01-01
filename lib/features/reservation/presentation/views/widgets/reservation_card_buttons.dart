@@ -1,3 +1,4 @@
+import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/enums/reservation_status.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/service_locator.dart';
@@ -22,22 +23,33 @@ import 'reservation_previous_buttons.dart';
 import 'reservation_upcoming_buttons.dart';
 
 class ReservationCardButtons extends StatelessWidget {
-  final ReservationStatus status;
+  final ReservationStatus reservationStatus;
+  final PaymentStatus paymentStatus;
   const ReservationCardButtons({
     super.key,
-    required this.status,
+    required this.reservationStatus,
+    required this.paymentStatus,
   });
 
   @override
   Widget build(BuildContext context) {
     final reservation = context.read<ReservationCubit>().reservation!;
-    switch (status) {
+    switch (reservationStatus) {
       case ReservationStatus.upcoming:
-        return ReservationUpcomingButtons(reservation: reservation);
+        return ReservationUpcomingButtons(
+          reservation: reservation,
+          paymentStatus: paymentStatus,
+        );
       case ReservationStatus.previous:
-        return ReservationPreviousButtons(reservation: reservation);
+        return ReservationPreviousButtons(
+          reservation: reservation,
+          paymentStatus: paymentStatus,
+        );
       case ReservationStatus.cancelled:
-        return ReservationCancelledButtons(reservation: reservation);
+        return ReservationCancelledButtons(
+          reservation: reservation,
+          paymentStatus: paymentStatus,
+        );
     }
   }
 }

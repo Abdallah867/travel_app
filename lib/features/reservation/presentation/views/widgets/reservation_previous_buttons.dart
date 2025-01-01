@@ -1,3 +1,4 @@
+import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -21,9 +22,11 @@ class ReservationPreviousButtons extends StatelessWidget {
   const ReservationPreviousButtons({
     super.key,
     required this.reservation,
+    required this.paymentStatus,
   });
 
   final ReservationModel reservation;
+  final PaymentStatus paymentStatus;
 
   @override
   Widget build(BuildContext context) {

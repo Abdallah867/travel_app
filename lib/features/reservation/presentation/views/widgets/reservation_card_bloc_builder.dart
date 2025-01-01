@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/date_format_utils.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
-import '../../../../payment/data/models/payment_model.dart';
 import '../../../../trip/presentation/views/widgets/custom_image_box.dart';
 import '../../manager/cubit/reservation_cubit.dart';
 import 'payment_status_chip.dart';
@@ -29,7 +29,6 @@ class ReservationCardBlocBuilder extends StatelessWidget {
 
         final reservation = reservationCubit.reservation;
         final String? payment = reservationCubit.reservation?.payment?.status;
-        log('$payment');
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.r),
@@ -88,11 +87,7 @@ class ReservationCardBlocBuilder extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsetsDirectional.only(end: 4.w),
                                 child: PaymentStatusChip(
-                                  isPaid: reservation.payment?.status == null
-                                      ? false
-                                      : reservation.payment!.status == 'paid'
-                                          ? true
-                                          : false,
+                                  status: getEnumStatus(payment),
                                 ),
                               ),
                             ],
@@ -108,7 +103,8 @@ class ReservationCardBlocBuilder extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 8.h),
                 child: ReservationCardButtons(
-                  status: reservationCubit.statusFilter,
+                  reservationStatus: reservationCubit.statusFilter,
+                  paymentStatus: getEnumStatus(payment),
                 ),
               ),
             ],

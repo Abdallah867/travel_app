@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:appwrite/appwrite.dart';
-import 'package:appwrite/models.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/constants/app_constants.dart';

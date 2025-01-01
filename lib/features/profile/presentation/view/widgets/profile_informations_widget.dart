@@ -9,6 +9,7 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/centered_text.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
+import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../data/models/user_model.dart';
 import '../../manager/profile_cubit/edit_profile_cubit.dart';
 import 'profile_menu.dart';
@@ -34,8 +35,8 @@ class ProfileInformationsWidget extends StatelessWidget {
         builder: (context, state) {
           final UserModel user = context.read<EditProfileCubit>().user;
 
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const HorizontalSpace(size: 30),
               Stack(
@@ -71,7 +72,7 @@ class ProfileInformationsWidget extends StatelessWidget {
                       : const SizedBox(),
                 ],
               ),
-              const HorizontalSpace(size: 16),
+              const VerticalSpace(size: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

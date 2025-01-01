@@ -1,3 +1,4 @@
+import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -15,15 +16,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'reservation_card_bloc_builder.dart';
 
 class ReservationUpcomingButtons extends StatelessWidget {
+  final ReservationModel reservation;
+  final PaymentStatus paymentStatus;
   const ReservationUpcomingButtons({
     super.key,
     required this.reservation,
+    required this.paymentStatus,
   });
-
-  final ReservationModel reservation;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +32,9 @@ class ReservationUpcomingButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: CustomButton(
-            height: 40.h,
-            text: S.of(context).update,
-            style: TextStyles.textStyle14.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeightHelper.semiBold,
-            ),
-            onPressed: () {
-              context.push(
-                '${AppRoutes.kBookingView}/${reservation.tripSchedule.trip.tripId}/edit',
-                extra: {
-                  'reservationCubit': context.read<ReservationCubit>(),
-                  'tripCubit': TripCubit(
-                    trip: reservation.tripSchedule.trip,
-                    tripRepo: getIt.get<TripRepoImpl>(),
-                  ),
-                  'currentAccountCubit':
-                      BlocProvider.of<CurrentAccountCubit>(context),
-                },
-              );
-            },
+          child: ReservationFirstUpcomingButtonByPaymentStatus(
+            paymentStatus: paymentStatus,
+            reservation: reservation,
           ),
         ),
         const HorizontalSpace(size: 16),
@@ -72,5 +55,57 @@ class ReservationUpcomingButtons extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class ReservationFirstUpcomingButtonByPaymentStatus extends StatelessWidget {
+  const ReservationFirstUpcomingButtonByPaymentStatus({
+    super.key,
+    required this.paymentStatus,
+    required this.reservation,
+  });
+
+  final PaymentStatus paymentStatus;
+  final ReservationModel reservation;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (paymentStatus) {
+      case PaymentStatus.paid:
+        return CustomButton(
+          height: 40.h,
+          text: 'View Ticket',
+          style: TextStyles.textStyle14.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeightHelper.semiBold,
+          ),
+          onPressed: () {
+            context.push(AppRoutes.kTicketScreen);
+          },
+        );
+      case PaymentStatus.unpaid:
+        return CustomButton(
+          height: 40.h,
+          text: S.of(context).update,
+          style: TextStyles.textStyle14.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeightHelper.semiBold,
+          ),
+          onPressed: () {
+            context.push(
+              '${AppRoutes.kBookingView}/${reservation.tripSchedule.trip.tripId}/edit',
+              extra: {
+                'reservationCubit': context.read<ReservationCubit>(),
+                'tripCubit': TripCubit(
+                  trip: reservation.tripSchedule.trip,
+                  tripRepo: getIt.get<TripRepoImpl>(),
+                ),
+                'currentAccountCubit':
+                    BlocProvider.of<CurrentAccountCubit>(context),
+              },
+            );
+          },
+        );
+    }
   }
 }

@@ -20,6 +20,7 @@ import '../../features/reservation/data/repos/reservation_repo_impl.dart';
 import '../../features/reservation/presentation/manager/cubit/reservation_cubit.dart';
 import '../../features/reservation/presentation/views/bookings_list_view.dart';
 import '../../features/reservation/presentation/views/reservation_view.dart';
+import '../../features/reservation/presentation/views/widgets/ticket_screen.dart';
 import '../../features/splash_screen/view/splash_screen.dart';
 import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
@@ -177,6 +178,11 @@ abstract class AppRouter {
             return CheckoutView(
               url: url,
             );
+          }),
+      GoRoute(
+          path: AppRoutes.kTicketScreen,
+          builder: (context, state) {
+            return const TicketScreen();
           }),
     ],
   );

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/custom_search_bar.dart';
-import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../manager/bloc/trips_list_bloc.dart';
 import 'filter_screen.dart';
