@@ -182,7 +182,8 @@ abstract class AppRouter {
       GoRoute(
           path: AppRoutes.kTicketScreen,
           builder: (context, state) {
-            return const TicketScreen();
+            final reservation = state.extra as ReservationModel;
+            return TicketScreen(reservation: reservation);
           }),
     ],
   );
