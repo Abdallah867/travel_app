@@ -6,6 +6,7 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
+import 'agency_email_widget.dart';
 import 'agency_name_widget.dart';
 import 'contact_agency_widget.dart';
 import 'details_title_section.dart';
@@ -50,6 +51,8 @@ class TripInformationsWidget extends StatelessWidget {
           const AgencyNameWidget(),
           const VerticalSpace(size: 4),
           const ContactAgencyWidget(),
+          const VerticalSpace(size: 4),
+          const AgencyEmailWidget(),
           const VerticalSpace(size: 24),
         ],
       ),
