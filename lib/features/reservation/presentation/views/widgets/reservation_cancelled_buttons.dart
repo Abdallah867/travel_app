@@ -1,7 +1,6 @@
 import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/service_locator.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
@@ -16,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'show_cancel_booking_dialog.dart';
 
 class ReservationCancelledButtons extends StatelessWidget {
   const ReservationCancelledButtons({
@@ -58,24 +56,6 @@ class ReservationCancelledButtons extends StatelessWidget {
           ),
         ),
         const HorizontalSpace(size: 16),
-        Expanded(
-          child: CustomButton(
-            color: AppColors.whiteColor,
-            style: TextStyles.textStyle14.copyWith(
-              color: Colors.black.withOpacity(.35),
-              fontWeight: FontWeightHelper.semiBold,
-            ),
-            borderSide: const BorderSide(
-              color: AppColors.inputGrey,
-              width: 2,
-            ),
-            height: 40.h,
-            text: S.of(context).cancelBooking,
-            onPressed: () {
-              showCancelBookingDialog(context);
-            },
-          ),
-        ),
       ],
     );
   }

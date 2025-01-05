@@ -17,6 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import 'cancel_booking_button.dart';
+
 class ReservationUpcomingButtons extends StatelessWidget {
   final ReservationModel reservation;
   final PaymentStatus paymentStatus;
@@ -38,21 +40,7 @@ class ReservationUpcomingButtons extends StatelessWidget {
           ),
         ),
         const HorizontalSpace(size: 16),
-        Expanded(
-          child: CustomButton(
-            color: AppColors.whiteColor,
-            style: TextStyles.textStyle14.copyWith(
-              color: Colors.black.withOpacity(.35),
-              fontWeight: FontWeightHelper.semiBold,
-            ),
-            borderSide: const BorderSide(
-              color: AppColors.inputGrey,
-              width: 2,
-            ),
-            height: 40.h,
-            text: S.of(context).cancelBooking,
-          ),
-        ),
+        CancelBookingButton(reservation: reservation),
       ],
     );
   }
@@ -80,7 +68,7 @@ class ReservationFirstUpcomingButtonByPaymentStatus extends StatelessWidget {
             fontWeight: FontWeightHelper.semiBold,
           ),
           onPressed: () {
-            context.push(AppRoutes.kTicketScreen);
+            context.push(AppRoutes.kTicketScreen, extra: reservation);
           },
         );
       case PaymentStatus.unpaid:

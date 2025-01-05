@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../../../core/functions/custom_app_bar.dart';
+import '../../../../../core/utils/date_format_utils.dart';
+import '../../../data/models/reservation_model.dart';
 
 class TicketScreen extends StatelessWidget {
-  const TicketScreen({super.key});
+  final ReservationModel reservation;
+  const TicketScreen({super.key, required this.reservation});
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +52,32 @@ class TicketScreen extends StatelessWidget {
                   height: 40,
                   color: Colors.grey.withOpacity(0.5),
                 ),
-                const Column(
+                Column(
                   children: [
+                    Column(
+                      children: [
+                        // TicketInfoRow(
+                        //     label: 'AGENCY NAME',
+                        //     value: reservation
+                        //         .tripSchedule.trip.agency!.agnecyName),
+                        TicketInfoRow(
+                            label: 'NUMBER OF TRAVERLERS',
+                            value: '${reservation.travelers.length}'),
+                        TicketInfoRow(
+                            label: 'REMAINING AMOUNT',
+                            value:
+                                '${(1 - reservation.payment!.initialDepositPourcentage) * reservation.payment!.totalPrice} DA'),
+                        TicketInfoRow(
+                            label: 'DESTINATION',
+                            value: reservation.tripSchedule.trip.location),
+                      ],
+                    ),
                     TicketInfoRow(
-                        label: 'TRAVELER 1', value: 'Abdallah Mohellebi'),
-                    TicketInfoRow(label: 'TRAVELER 2', value: 'Samir Lahlouhi'),
-                    TicketInfoRow(label: 'TIME', value: '9:00 PM'),
-                    TicketInfoRow(label: 'DATE', value: 'August 21 2024'),
-                    TicketInfoRow(label: 'SEAT', value: 'A2'),
+                      label: 'DATE',
+                      value: DateFormatUtils.formatDate(
+                        reservation.tripSchedule.departureDate,
+                      ),
+                    ),
                   ],
                 ),
               ],
