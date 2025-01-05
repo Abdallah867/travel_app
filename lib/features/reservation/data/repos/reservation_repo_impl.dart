@@ -94,6 +94,27 @@ class ReservationRepoImpl implements ReservationRepo {
   }
 
   @override
+  Future<Either<void, Failure>> cancelReservation(String reservationId) async {
+    try {
+      await databaseService.update(
+        data: {'status': 'cancelled'},
+        endpoint: AppConstants.reservationsCollectionEndpoint,
+        id: reservationId,
+      );
+
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
   Future<Either<void, Failure>> addTraveler(TravelerModel traveler) async {
     try {
       await databaseService.create(

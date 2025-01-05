@@ -199,6 +199,16 @@ class ReservationCubit extends Cubit<ReservationState> {
     }
   }
 
+  Future<void> cancelReservation(String reservationId) async {
+    final response = await reservationRepo.cancelReservation(reservationId);
+    response.fold((l) {
+      reservations.where((e) => e.reservationId != reservationId);
+      emit(ReservationSuccess());
+    }, (error) {
+      emit(ReservationFailure(errorMessage: error.errMessage));
+    });
+  }
+
   Future<bool?> addTravelers(List<TravelerModel> travelers) async {
     for (TravelerModel traveler in travelers) {
       final response = await reservationRepo.addTraveler(traveler);

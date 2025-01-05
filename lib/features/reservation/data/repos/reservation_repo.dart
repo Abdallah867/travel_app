@@ -22,4 +22,6 @@ abstract class ReservationRepo {
 
   Future<Either<void, Failure>> updateReservation(
       {required ReservationModel updatedReservation});
+
+  Future<Either<void, Failure>> cancelReservation(String reservationId);
 }
