@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const kPaymentView = '/payments';
   static const kCheckoutView = '/checkout';
   static const kTicketScreen = '/view_ticket';
+  static const kAgencyDetails = '/agencies/:agencyId';
 }

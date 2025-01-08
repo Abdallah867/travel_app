@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 import '../../features/agencies/data/repos/agencies_repo_impl.dart';
 import '../../features/agencies/presentation/manager/bloc/agencies_bloc.dart';
 import '../../features/agencies/presentation/views/agencies_view.dart';
+import '../../features/agencies/presentation/views/widgets/agency_details.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
+import '../../features/home/data/models/agency_model.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/payment/data/repos/payment_repo_impl.dart';
 import '../../features/payment/presentation/manager/cubit/payment_cubit.dart';
@@ -26,8 +28,10 @@ import '../../features/trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../features/trip/presentation/views/trip_details_view.dart';
 import '../../features/trips/data/repos/trips_list_repo_impl.dart';
 import '../../features/trips/presentation/manager/bloc/trips_list_bloc.dart';
+import '../../features/trips/presentation/views/trips_screen.dart';
 import '../../features/trips/presentation/views/trips_view.dart';
 import '../services/service_locator.dart';
+import 'app_name_routes.dart';
 import 'app_routes.dart';
 
 abstract class AppRouter {
@@ -145,7 +149,7 @@ abstract class AppRouter {
               value: state.extra as CurrentAccountCubit,
             ),
           ],
-          child: const TripsView(),
+          child: const TripsScreen(),
         ),
       ),
       GoRoute(
@@ -184,6 +188,20 @@ abstract class AppRouter {
           builder: (context, state) {
             final reservation = state.extra as ReservationModel;
             return TicketScreen(reservation: reservation);
+          }),
+      GoRoute(
+          name: AppNameRoutes.kAgencyDetails,
+          path: AppRoutes.kAgencyDetails,
+          builder: (context, state) {
+            final extra = state.extra as List<dynamic>;
+            final AgencyModel agency = extra[0] as AgencyModel;
+            final CurrentAccountCubit currentAccountCubit =
+                extra[1] as CurrentAccountCubit;
+
+            return AgencyDetails(
+              agency: agency,
+              currentAccountCubit: currentAccountCubit,
+            );
           }),
     ],
   );
