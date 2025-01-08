@@ -12,10 +12,9 @@ class AgencyEmailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
       child: Text(
-        'Email: ${context.read<TripCubit>().trip.agency!.email}',
-        style: TextStyles.textStyle16.copyWith(
+        context.read<TripCubit>().trip.agency!.email,
+        style: TextStyles.textStyle14.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),
         textAlign: TextAlign.start,

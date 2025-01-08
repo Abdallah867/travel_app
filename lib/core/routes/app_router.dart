@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/agencies/data/repos/agencies_repo_impl.dart';
 import '../../features/agencies/presentation/manager/bloc/agencies_bloc.dart';
-import '../../features/agencies/presentation/views/agencies_view.dart';
-import '../../features/agencies/presentation/views/widgets/agency_details.dart';
+import '../../features/agencies/presentation/views/agencies/agencies_view.dart';
+import '../../features/agencies/presentation/views/agency_detail/agency_details_view.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/login_view.dart';
 import '../../features/auth/presentation/view/register_view.dart';
@@ -198,7 +198,7 @@ abstract class AppRouter {
             final CurrentAccountCubit currentAccountCubit =
                 extra[1] as CurrentAccountCubit;
 
-            return AgencyDetails(
+            return AgencyDetailsView(
               agency: agency,
               currentAccountCubit: currentAccountCubit,
             );

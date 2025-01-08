@@ -11,6 +11,12 @@ final class AgencyDetailsInitial extends AgencyDetailsState {}
 
 final class AgencyDetailsTripsLoding extends AgencyDetailsState {}
 
-final class AgencyDetailsTripsLoaded extends AgencyDetailsState {}
+final class AgencyDetailsTripsLoaded extends AgencyDetailsState {
+  final List<TripModel> trips;
+  const AgencyDetailsTripsLoaded({required this.trips});
+}
 
-final class AgencyDetailsTripsFailure extends AgencyDetailsState {}
+final class AgencyDetailsTripsFailure extends AgencyDetailsState {
+  final String errMessage;
+  const AgencyDetailsTripsFailure({required this.errMessage});
+}

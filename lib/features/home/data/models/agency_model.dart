@@ -8,7 +8,7 @@ class AgencyModel extends Equatable {
   final String? agencyLogo; // Assuming agencyLogo can be null
   final String description;
   final String email;
-  final List<String>? phoneNumbers;
+  final List<String> phoneNumbers;
   final String address;
   final double? rating; // Assuming rating can be null
 
@@ -18,7 +18,7 @@ class AgencyModel extends Equatable {
     this.agencyLogo,
     required this.description,
     required this.email,
-    this.phoneNumbers,
+    required this.phoneNumbers,
     required this.address,
     this.rating,
   });
@@ -65,9 +65,8 @@ class AgencyModel extends Equatable {
       agencyLogo: map['agencyLogo'] as String?, // Handling null safely
       description: map['description'] as String,
       email: map['email'] as String,
-      phoneNumbers: map['phoneNumbers'] != null
-          ? List<String>.from(map['phoneNumbers'] as List)
-          : null, // Ensure we handle null values for phoneNumbers
+      phoneNumbers: List<String>.from(
+          map['phoneNumbers']), // Ensure we handle null values for phoneNumbers
       address: map['address'] as String,
       rating: map['rating'] != null
           ? map['rating'].toDouble() as double

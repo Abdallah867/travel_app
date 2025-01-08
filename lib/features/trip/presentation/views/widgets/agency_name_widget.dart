@@ -13,10 +13,9 @@ class AgencyNameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
       child: Text(
-        '${S.of(context).agencyName}: ${context.read<TripCubit>().trip.agency!.agnecyName}',
-        style: TextStyles.textStyle16.copyWith(
+        context.read<TripCubit>().trip.agency!.agnecyName,
+        style: TextStyles.textStyle14.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),
         textAlign: TextAlign.start,
