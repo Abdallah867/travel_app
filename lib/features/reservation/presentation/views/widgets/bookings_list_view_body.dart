@@ -52,50 +52,46 @@ class _BookingsListViewBodyState extends State<BookingsListViewBody> {
                             .userInformations!
                             .userId,
                       );
-                      // setState(() {
-                      //   currentChipIndex = index;
-                      // });
                     },
                   ),
                 ),
               ),
-              // Reservations List
-
-              SliverPadding(
-                padding: const EdgeInsets.all(16.0),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      if (state is ReservationLoadInProgress) {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: const ReservationLoadingCard(),
-                        );
-                      } else {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: ReservationCard(
-                            reservation: reservationCubit.reservations[index],
-                          ),
-                        );
-                      }
-                    },
-                    childCount: state is ReservationLoadInProgress
-                        ? 5
-                        : reservationCubit.reservations.length,
-                  ),
-                ),
-              ),
-              if (reservationCubit.reservations.isEmpty)
-                SliverFillRemaining(
-                  child: Center(
-                    child: Text(
-                      S.of(context).noBookings,
-                      style: TextStyles.textStyle14,
+              // Handle Different States
+              if (state is ReservationLoadInProgress)
+                SliverToBoxAdapter(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) => Padding(
+                      padding:
+                          EdgeInsets.only(top: 16.0, left: 16.w, right: 16.w),
+                      child: const ReservationLoadingCard(),
                     ),
                   ),
                 ),
-
+              if (state is ReservationSuccess)
+                if (reservationCubit.reservations.isEmpty)
+                  SliverFillRemaining(
+                    child: Center(
+                      child: Text(
+                        S.of(context).noBookings,
+                        style: TextStyles.textStyle14,
+                      ),
+                    ),
+                  )
+                else
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                        padding:
+                            EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                        child: ReservationCard(
+                          reservation: reservationCubit.reservations[index],
+                        ),
+                      ),
+                      childCount: reservationCubit.reservations.length,
+                    ),
+                  ),
               if (state is ReservationFailure)
                 SliverFillRemaining(
                   child: Center(

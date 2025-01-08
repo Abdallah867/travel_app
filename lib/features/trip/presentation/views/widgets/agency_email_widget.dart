@@ -14,7 +14,7 @@ class AgencyEmailWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Text(
-        'Email: ${context.read<TripCubit>().trip.agency.email}',
+        'Email: ${context.read<TripCubit>().trip.agency!.email}',
         style: TextStyles.textStyle16.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),

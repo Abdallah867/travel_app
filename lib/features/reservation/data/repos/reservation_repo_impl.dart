@@ -32,7 +32,7 @@ class ReservationRepoImpl implements ReservationRepo {
       log(response.toString());
 
       List<ReservationModel> reservations = response.map((e) {
-        log('${e.data['payment']}');
+        log('${e.data}');
 
         return ReservationModel.fromMap(e.data);
       }).toList();

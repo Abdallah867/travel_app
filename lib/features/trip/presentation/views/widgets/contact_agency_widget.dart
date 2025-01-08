@@ -14,7 +14,7 @@ class ContactAgencyWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Text(
-        'Contact: ${context.read<TripCubit>().trip.agency.phoneNumbers?.join(' / ')}',
+        'Contact: ${context.read<TripCubit>().trip.agency!.phoneNumbers?.join(' / ')}',
         style: TextStyles.textStyle16.copyWith(
           fontWeight: FontWeightHelper.medium,
         ),

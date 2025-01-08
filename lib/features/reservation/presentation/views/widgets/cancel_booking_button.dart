@@ -43,13 +43,13 @@ class CancelBookingButton extends StatelessWidget {
 
   Future<dynamic> showCancelBookingDialog(
     BuildContext context,
-    reservationCubit,
+    ReservationCubit reservationCubit,
   ) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return BlocProvider.value(
-          value: reservationCubit as ReservationCubit,
+          value: reservationCubit,
           child: Builder(builder: (context) {
             return AlertDialog(
               backgroundColor: AppColors.whiteColor,

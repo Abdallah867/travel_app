@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -14,8 +15,7 @@ class TripModel {
   final int duration;
   final double rating;
   final List<String> otherImages;
-  final AgencyModel agency;
-
+  final AgencyModel? agency;
   TripModel({
     required this.tripId,
     required this.title,
@@ -26,7 +26,7 @@ class TripModel {
     required this.duration,
     required this.rating,
     required this.otherImages,
-    required this.agency,
+    this.agency,
   });
 
   TripModel copyWith({
@@ -66,7 +66,7 @@ class TripModel {
       'duration': duration,
       'rating': rating,
       'otherImages': otherImages,
-      'agency': agency.toMap(),
+      'agency': agency?.toMap(),
     };
   }
 
@@ -83,7 +83,7 @@ class TripModel {
       otherImages: List<String>.from(
         (map['otherImages'] as List<dynamic>),
       ),
-      agency: AgencyModel.fromMap(map['agency'] as Map<String, dynamic>),
+      agency: map['agency'] != null ? AgencyModel.fromMap(map['agency']) : null,
     );
   }
 
