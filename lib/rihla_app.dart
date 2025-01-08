@@ -50,7 +50,7 @@ ThemeData getTheme() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundColor,
     bottomSheetTheme:
-        const BottomSheetThemeData(backgroundColor: AppColors.backgroundColor),
+        const BottomSheetThemeData(backgroundColor: AppColors.whiteColor),
     textTheme: GoogleFonts.urbanistTextTheme(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.secondaryColor,

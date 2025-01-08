@@ -84,23 +84,7 @@ class TripsViewState extends State<TripsView> {
                 SliverToBoxAdapter(
                   child: widget.child,
                 ),
-                PagedSliverList<String?, TripModel>(
-                  pagingController: _pagingController,
-                  builderDelegate: PagedChildBuilderDelegate(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        const PagedLoadingTripsList(),
-                    itemBuilder: (context, trip, index) {
-                      return BlocProvider(
-                        create: (context) => TripCubit(
-                            tripRepo: getIt.get<TripRepoImpl>(), trip: trip),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.h),
-                          child: const TripCard(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                PaginatedTripsList(pagingController: _pagingController),
                 const SliverToBoxAdapter(
                   child: VerticalSpace(
                     size: 32,
@@ -118,5 +102,34 @@ class TripsViewState extends State<TripsView> {
   void dispose() {
     _pagingController.dispose();
     super.dispose();
+  }
+}
+
+class PaginatedTripsList extends StatelessWidget {
+  const PaginatedTripsList({
+    super.key,
+    required PagingController<String?, TripModel> pagingController,
+  }) : _pagingController = pagingController;
+
+  final PagingController<String?, TripModel> _pagingController;
+
+  @override
+  Widget build(BuildContext context) {
+    return PagedSliverList<String?, TripModel>(
+      pagingController: _pagingController,
+      builderDelegate: PagedChildBuilderDelegate(
+        firstPageProgressIndicatorBuilder: (_) => const PagedLoadingTripsList(),
+        itemBuilder: (context, trip, index) {
+          return BlocProvider(
+            create: (context) =>
+                TripCubit(tripRepo: getIt.get<TripRepoImpl>(), trip: trip),
+            child: Padding(
+              padding: EdgeInsets.only(top: 16.h),
+              child: const TripCard(),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
