@@ -5,14 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-import '../../../../../core/constants/app_constants.dart';
-import '../../../../../core/functions/custom_app_bar.dart';
-import '../../../../../core/widgets/vertical_widget.dart';
-import '../../../../../generated/l10n.dart';
-import '../../../../core/widgets/custom_search_bar.dart';
-import '../../../home/data/models/agency_model.dart';
-import '../../../home/presentation/views/widgets/travel_agency_card.dart';
-import '../manager/bloc/agencies_bloc.dart';
+import '../../../../../../core/constants/app_constants.dart';
+import '../../../../../../core/functions/custom_app_bar.dart';
+import '../../../../../../core/widgets/vertical_widget.dart';
+import '../../../../../../generated/l10n.dart';
+import '../../../../../core/widgets/custom_search_bar.dart';
+import '../../../../home/data/models/agency_model.dart';
+import '../../../../home/presentation/views/widgets/travel_agency_card.dart';
+import '../../manager/bloc/agencies_bloc.dart';
 
 class AgenciesView extends StatefulWidget {
   const AgenciesView({super.key});
