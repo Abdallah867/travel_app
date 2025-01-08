@@ -7,9 +7,11 @@ abstract class TripsListRepo {
   Future<Either<List<TripModel>, Failure>> getTripsList({
     String searchTerm = '',
     String? lastId,
+    List<String>? filters,
   });
 
-  Future<Either<List<TripModel>, Failure>> getFilteredTripsList({
+  Future<Either<List<TripModel>, Failure>>
+      getFilteredTripsListFromTripSchedule({
     String? betweenDepartureDate,
     String? andReturnDate,
     String? betweenReturnDate,

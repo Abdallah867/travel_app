@@ -19,11 +19,8 @@ class TripsListRepoImpl implements TripsListRepo {
   @override
   Future<Either<List<TripModel>, Failure>> getTripsList({
     String searchTerm = '',
-    String? betweenDepartureDate = '16/02/2024',
-    String? andReturnDate = '18/03/2024',
-    String? betweenReturnDate = '07/22/2024',
-    String? andDepartureDate = '18/03/2024',
     String? lastId,
+    List<String>? filters,
   }) async {
     try {
       List<String> queries = [
@@ -35,6 +32,9 @@ class TripsListRepoImpl implements TripsListRepo {
         queries.add(Query.cursorAfter(lastId));
       }
 
+      if (filters != null) {
+        queries.addAll(filters);
+      }
       // if (departureDate != null) {
       //   queries.add(Query.equal("returnDate", returnDate));
       // }
@@ -92,7 +92,8 @@ class TripsListRepoImpl implements TripsListRepo {
   }
 
   @override
-  Future<Either<List<TripModel>, Failure>> getFilteredTripsList({
+  Future<Either<List<TripModel>, Failure>>
+      getFilteredTripsListFromTripSchedule({
     String? betweenDepartureDate,
     String? andReturnDate,
     String? betweenReturnDate,
@@ -102,15 +103,12 @@ class TripsListRepoImpl implements TripsListRepo {
     required int maxPrice,
   }) async {
     try {
-      log(DateFormatUtils.formatDateToIso8601(
-        betweenDepartureDate!,
-      ));
       List<String> queries = [
         Query.between("price", minPrice, maxPrice),
         Query.between(
           "departureDate",
           DateFormatUtils.formatDateToIso8601(
-            betweenDepartureDate,
+            betweenDepartureDate!,
           ),
           DateFormatUtils.formatDateToIso8601(andDepartureDate!),
         ),
@@ -135,7 +133,6 @@ class TripsListRepoImpl implements TripsListRepo {
       List<TripScheduleModel> tripsScheduleList = response
           .map((tripSchedule) => TripScheduleModel.fromMap(tripSchedule.data))
           .toList();
-      print('${tripsScheduleList.length}');
 
       Set<TripModel> trips =
           tripsScheduleList.map((tripSchedule) => tripSchedule.trip).toSet();

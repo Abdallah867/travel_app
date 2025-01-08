@@ -15,6 +15,8 @@ part 'trips_list_state.dart';
 
 class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   final TripsListRepo tripsListRepo;
+  String? agencyId;
+
   TextEditingController betweenDepartureDateController =
       TextEditingController();
   TextEditingController andDepartureDateController = TextEditingController();
@@ -23,13 +25,15 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   TextEditingController betweenReturnDateController = TextEditingController();
   int? _minPrice;
   int? _maxPrice;
-  bool isFiltering = false;
+  bool isFiltering;
 
   set minPrice(int? minPrice) => _minPrice = minPrice;
 
   set maxPrice(int? maxPrice) => _maxPrice = maxPrice;
 
-  TripsListBloc({required this.tripsListRepo}) : super(TripsListInitial()) {
+  TripsListBloc(
+      {required this.tripsListRepo, this.isFiltering = false, this.agencyId})
+      : super(TripsListInitial()) {
     on<TripsListEvent>(
       (event, emit) async {
         if (event is TripsListFilterApplied) {
@@ -83,6 +87,7 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> _handleTripsListFilterApplied(
       Emitter<TripsListState> emit, TripsListFilterApplied event) async {
     isFiltering = true;
+
     emit(const TripsListRefreshed());
   }
 
@@ -96,7 +101,7 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
     emit(TripsListLoadInProgress());
     Either<List<TripModel>, Failure> response;
     if (isFiltering) {
-      response = await tripsListRepo.getFilteredTripsList(
+      response = await tripsListRepo.getFilteredTripsListFromTripSchedule(
         betweenReturnDate: betweenReturnDateController.text,
         andReturnDate: andReturnDateController.text,
         betweenDepartureDate: betweenDepartureDateController.text,
