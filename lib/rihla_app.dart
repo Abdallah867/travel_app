@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'core/constants/app_constants.dart';
 import 'core/routes/app_router.dart';
+import 'core/routes/deep_link_listener.dart';
 import 'core/utils/app_colors.dart';
 import 'features/profile/presentation/manager/settings_cubit/settings_cubit.dart';
 import 'generated/l10n.dart';

@@ -21,11 +21,11 @@ class PaymentCubit extends Cubit<PaymentState> {
     emit(PaymentLoadInProgress());
     final response = await paymentRepo.createCheckout(
       CheckoutModel(
-          failureUrl: 'https://edahabia.com',
+          failureUrl: 'https://67816e09de31b761be3d.appwrite.global',
           amount: (calculateTotalPayment() * initialDeposit) ~/ 100,
           webhookEndpoint: 'https://6737265f1d67e7960d68.appwrite.global',
           paymentMethod: paymentMethod,
-          successUrl: 'https://edahabia.com',
+          successUrl: 'https://67816e09de31b761be3d.appwrite.global',
           metadata: [
             {
               'totalPrice': calculateTotalPayment(),

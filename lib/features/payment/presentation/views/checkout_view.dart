@@ -28,12 +28,12 @@ class _CheckoutViewState extends State<CheckoutView> {
           onPageFinished: (String url) {},
           onHttpError: (HttpResponseError error) {},
           onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://pay.chargily.dz/')) {
-              return NavigationDecision.navigate;
-            }
-            return NavigationDecision.prevent;
-          },
+          // onNavigationRequest: (NavigationRequest request) {
+          // if (request.u rl.startsWith('https://pay.chargily.dz/')) {
+          //   return NavigationDecision.navigate;
+          // }
+          // return NavigationDecision.prevent;
+          // },
         ),
       )
       ..loadRequest(Uri.parse(widget.url));
