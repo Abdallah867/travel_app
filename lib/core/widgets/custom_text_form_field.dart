@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/app_colors.dart';
+import '../utils/text_styles.dart';
 import 'vertical_widget.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -71,6 +72,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           obscureText: widget.isPassword ? isPasswordHidden : false,
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
+            labelStyle: TextStyles.textStyle14,
             filled: true,
             fillColor: AppColors.inputGrey,
             border: widget.outlineInputBorder ?? customInputBorder(),

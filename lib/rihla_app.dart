@@ -7,7 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'core/constants/app_constants.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/deep_link_listener.dart';
+import 'core/services/service_locator.dart';
 import 'core/utils/app_colors.dart';
+import 'features/auth/data/repos/auth_repo_impl.dart';
+import 'features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import 'features/profile/data/repos/user_profile_repo_impl.dart';
 import 'features/profile/presentation/manager/settings_cubit/settings_cubit.dart';
 import 'generated/l10n.dart';
 
@@ -19,28 +23,37 @@ class RihlaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
-        return ScreenUtilInit(
-          designSize: const Size(
-            AppConstants.designWidth,
-            AppConstants.designHeight,
-          ),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          child: MaterialApp.router(
-            showPerformanceOverlay: false,
-            debugShowCheckedModeBanner: false,
-            locale: Locale(
-                state is SettingsLanguageChanged ? state.language : 'en'),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            routerConfig: AppRouter.router,
-            theme: getTheme(),
-          ),
+        return BlocProvider(
+          create: (context) => CurrentAccountCubit(
+            authRepo: getIt.get<AuthRepoImpl>(),
+            userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+          )..currentUserAccount(),
+          child: Builder(builder: (context) {
+            return ScreenUtilInit(
+              designSize: const Size(
+                AppConstants.designWidth,
+                AppConstants.designHeight,
+              ),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              child: MaterialApp.router(
+                showPerformanceOverlay: false,
+                debugShowCheckedModeBanner: false,
+                locale: Locale(
+                    state is SettingsLanguageChanged ? state.language : 'en'),
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                routerConfig: AppRouter.setupRouter(
+                    [context.read<CurrentAccountCubit>().stream]),
+                theme: getTheme(),
+              ),
+            );
+          }),
         );
       },
     );

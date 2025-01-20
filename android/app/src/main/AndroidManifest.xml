@@ -35,7 +35,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                <data android:scheme="https" android:host="67816e09de31b761be3d.appwrite.global" />
-               <data android:pathPrefix="/home/" />
+               <data android:pathPrefix="/" />
+               <data android:pathPrefix="/verify" />
             </intent-filter>
             <!-- Deep Link sample -->
             <intent-filter>
