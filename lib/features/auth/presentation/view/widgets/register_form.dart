@@ -29,6 +29,7 @@ class RegisterForm extends StatelessWidget {
             name: S.of(context).email,
             controller: context.read<RegisterCubit>().emailController,
             textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.emailAddress,
             validator: (value) {
               return validateEmail(value, context);
             },

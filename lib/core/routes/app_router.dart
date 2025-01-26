@@ -8,6 +8,7 @@ import '../../features/agencies/presentation/manager/bloc/agencies_bloc.dart';
 import '../../features/agencies/presentation/views/agencies/agencies_view.dart';
 import '../../features/agencies/presentation/views/agency_detail/agency_details_view.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
+import '../../features/auth/presentation/manager/cubit/email_verification_cubit.dart';
 import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import '../../features/auth/presentation/view/check_inbox_view.dart';
 import '../../features/auth/presentation/view/login_view.dart';
@@ -58,9 +59,28 @@ class AppRouter {
           builder: (context, state) => const RegisterView(),
         ),
         GoRoute(
-          path: '/verify',
+          path: AppRoutes.kVerifyAccountView,
           builder: (context, state) => const CheckInboxView(),
         ),
+        GoRoute(
+            path: AppRoutes.kConfirmAccountVerifivationView,
+            redirect: (context, state) {
+              final verificationCubit = context.read<EmailVerificationCubit>();
+
+              if (verificationCubit.state is EmailVerificationUpdate) {
+                return AppRoutes.kHomeView;
+              } else {
+                return AppRoutes.kConfirmAccountVerifivationView;
+              }
+            },
+            builder: (context, state) {
+              final userId = state.uri.queryParameters['userId'] as String;
+              final secret = state.uri.queryParameters['secret'] as String;
+              final verificationCubit = context.read<EmailVerificationCubit>();
+
+              verificationCubit.updateEmailVerification(userId, secret);
+              return const CheckInboxView();
+            }),
         GoRoute(
           path: AppRoutes.kHomeView,
           builder: (context, GoRouterState state) => BlocProvider(

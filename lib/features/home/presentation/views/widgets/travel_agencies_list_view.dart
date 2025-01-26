@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/widgets/custom_shimmer.dart';
 import '../../../../agencies/presentation/manager/bloc/agencies_bloc.dart';
 import 'travel_agency_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,14 +14,25 @@ class TravelAgenciesListView extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case AgenciesLoadInProgress():
-            // Show a loading indicator when data is loading
-            return const Center(
-              child: CircularProgressIndicator(),
+            return SizedBox(
+              height: 130.w,
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return const CustomShimmer.box(
+                      width: 130,
+                    );
+                  },
+                  separatorBuilder: (context, index) => SizedBox(width: 16.w),
+                ),
+              ),
             );
           case AgenciesLoaded():
-            // Display the list of travel agencies when data is loaded
             return SizedBox(
-              height: 130.w, // Adjust height as needed
+              height: 130.w,
               child: Padding(
                 padding: EdgeInsets.only(left: 16.w),
                 child: ListView.separated(

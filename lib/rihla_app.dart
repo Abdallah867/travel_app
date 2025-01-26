@@ -10,6 +10,7 @@ import 'core/routes/deep_link_listener.dart';
 import 'core/services/service_locator.dart';
 import 'core/utils/app_colors.dart';
 import 'features/auth/data/repos/auth_repo_impl.dart';
+import 'features/auth/presentation/manager/cubit/email_verification_cubit.dart';
 import 'features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import 'features/profile/data/repos/user_profile_repo_impl.dart';
 import 'features/profile/presentation/manager/settings_cubit/settings_cubit.dart';
@@ -23,11 +24,20 @@ class RihlaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
-        return BlocProvider(
-          create: (context) => CurrentAccountCubit(
-            authRepo: getIt.get<AuthRepoImpl>(),
-            userProfileRepo: getIt.get<UserProfileRepoImpl>(),
-          )..currentUserAccount(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => CurrentAccountCubit(
+                authRepo: getIt.get<AuthRepoImpl>(),
+                userProfileRepo: getIt.get<UserProfileRepoImpl>(),
+              )..currentUserAccount(),
+            ),
+            BlocProvider(
+              create: (context) => EmailVerificationCubit(
+                getIt.get<AuthRepoImpl>(),
+              ),
+            ),
+          ],
           child: Builder(builder: (context) {
             return ScreenUtilInit(
               designSize: const Size(
@@ -48,8 +58,10 @@ class RihlaApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: S.delegate.supportedLocales,
-                routerConfig: AppRouter.setupRouter(
-                    [context.read<CurrentAccountCubit>().stream]),
+                routerConfig: AppRouter.setupRouter([
+                  context.read<CurrentAccountCubit>().stream,
+                  context.read<EmailVerificationCubit>().stream
+                ]),
                 theme: getTheme(),
               ),
             );

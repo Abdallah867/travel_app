@@ -84,7 +84,7 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<void, Failure>> verifyUserEmail() async {
     try {
       await account.createVerification(
-        url: 'https://67816e09de31b761be3d.appwrite.global/verify',
+        url: 'reehla://appwrite.io/verify',
       );
       return left(null);
     } on AppwriteException catch (e) {

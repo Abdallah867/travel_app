@@ -24,7 +24,11 @@ class HomeBlocBuilder extends StatelessWidget {
         if (state is CurrentAccountExists) {
           return const NavBarView();
         } else if (state is CurrentAccountLoading) {
-          return const CircularLoadingWidget();
+          return const Scaffold(
+            body: Center(
+              child: CircularLoadingWidget(),
+            ),
+          );
         } else {
           return const SizedBox();
         }

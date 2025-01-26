@@ -9,12 +9,8 @@ class CircularLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(
-          color: AppColors.secondaryColor,
-        ),
-      ),
+    return const CircularProgressIndicator(
+      color: AppColors.secondaryColor,
     );
   }
 }
