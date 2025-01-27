@@ -1,14 +1,17 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../../core/constants/app_constants.dart';
 import '../../../../../core/errors/failure.dart';
 import '../../../../trip/data/models/trip_model.dart';
 import '../../../data/repos/trips_list_repo.dart';
+import 'trips_list_bloc.dart';
 
 part 'trips_list_event.dart';
 part 'trips_list_state.dart';
@@ -50,6 +53,40 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
           _handleTripsListFilterClear(emit);
         }
       },
+      transformer: (eventStream, eventHandler) {
+        final nonDebounceEventStream = eventStream.where(
+          (event) => event is! TripsListSearchTermChanged,
+        );
+        final debounceEventStream = eventStream
+// 2
+            .whereType<TripsListSearchTermChanged>()
+// 3
+            .debounceTime(
+              const Duration(seconds: 1),
+            );
+// 4
+        //     .where((event) {
+        //   final previousFilter = state.TripsListSearchTermChanged;
+        //   final previousSearchTerm =
+        //       previousFilter is TripsListSearchTermChanged
+        //           ? previousFilter.searchTerm
+        //           : '';
+        //   final isSearchNotAlreadyDisplayed =
+        //       event.searchTerm != previousSearchTerm;
+        //   return isSearchNotAlreadyDisplayed;
+        // });
+// 5
+        final mergedEventStream = MergeStream([
+          nonDebounceEventStream,
+          debounceEventStream,
+        ]);
+
+        //1
+
+        final restartableTransformer = restartable<TripsListEvent>();
+// 2
+        return restartableTransformer(mergedEventStream, eventHandler);
+      },
     );
   }
 
@@ -69,7 +106,8 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
 
   Future<void> _handleTripsListSearchTermChanged(
       Emitter<TripsListState> emit, TripsListSearchTermChanged event) async {
-    await getTripsList(emit);
+    add(TripsListFilterApplied(event.searchTerm));
+    // await getTripsList(emit);
   }
 
   // Future<void> _handleTripsListRefreshed(

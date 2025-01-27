@@ -17,7 +17,13 @@ class SearchBarAndFilterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(child: CustomSearchBar()),
+        Expanded(child: CustomSearchBar(
+          onChanged: (searchTerm, context) {
+            context
+                .read<TripsListBloc>()
+                .add(TripsListSearchTermChanged(searchTerm));
+          },
+        )),
         const HorizontalSpace(size: 8),
         GestureDetector(
           onTap: () {

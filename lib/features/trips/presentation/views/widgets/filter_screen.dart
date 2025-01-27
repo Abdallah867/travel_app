@@ -51,9 +51,9 @@ class FilterScreen extends StatelessWidget {
             CustomButton(
               text: 'Apply',
               onPressed: () {
-                tripsListBloc.add(const TripsListFilterApplied());
+                tripsListBloc.add(const TripsListFilterApplied(''));
                 Navigator.pop(context);
-              },
+              }, 
             ),
           ],
         ),
