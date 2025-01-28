@@ -62,7 +62,8 @@ class AgenciesViewState extends State<AgenciesView> {
           if (state is AgenciesLoaded) {
             final List<AgencyModel> agencies = state.agencies;
             log('$agencies');
-            final bool isLastPage = agencies.length < AppConstants.pageSize;
+            final bool isLastPage =
+                agencies.length < AppConstants.agenciesPageSize;
             if (isLastPage) {
               _pagingController.appendLastPage(agencies);
             } else {

@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "paid": MessageLookupByLibrary.simpleMessage("مدفوع"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
-        "persons": MessageLookupByLibrary.simpleMessage("الأشخاص"),
+        "persons": MessageLookupByLibrary.simpleMessage("أشخاص"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "previous": MessageLookupByLibrary.simpleMessage("السابقة"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
