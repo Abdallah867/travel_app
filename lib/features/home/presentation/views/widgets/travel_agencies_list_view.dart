@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/custom_shimmer.dart';
-import '../../../../agencies/presentation/manager/bloc/agencies_bloc.dart';
+import '../../../../agencies/presentation/views/agencies/manager/bloc/agencies_bloc.dart';
 import 'travel_agency_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

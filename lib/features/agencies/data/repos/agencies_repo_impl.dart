@@ -20,7 +20,7 @@ class AgenciesRepoImpl implements AgenciesRepo {
   }) async {
     try {
       List<String> queries = [
-        Query.limit(AppConstants.pageSize),
+        Query.limit(AppConstants.agenciesPageSize),
         Query.orderDesc("\$createdAt")
       ];
 
@@ -28,9 +28,9 @@ class AgenciesRepoImpl implements AgenciesRepo {
         queries.add(Query.cursorAfter(lastId));
       }
 
-      // if (departureDate != null) {
-      //   queries.add(Query.equal("returnDate", returnDate));
-      // }
+      if (searchTerm.isNotEmpty) {
+        queries.add(Query.search("agencyName", searchTerm));
+      }
 
       final response = await database.getList(
           endpoint: AppConstants.agenciesCollectionEndpoint, queries: queries);

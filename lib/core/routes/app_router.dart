@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/agencies/data/repos/agencies_repo_impl.dart';
-import '../../features/agencies/presentation/manager/bloc/agencies_bloc.dart';
+import '../../features/agencies/presentation/views/agencies/manager/bloc/agencies_bloc.dart';
 import '../../features/agencies/presentation/views/agencies/agencies_view.dart';
 import '../../features/agencies/presentation/views/agency_detail/agency_details_view.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';

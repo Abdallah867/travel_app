@@ -12,7 +12,7 @@ import '../../../../../../generated/l10n.dart';
 import '../../../../../core/widgets/custom_search_bar.dart';
 import '../../../../home/data/models/agency_model.dart';
 import '../../../../home/presentation/views/widgets/travel_agency_card.dart';
-import '../../manager/bloc/agencies_bloc.dart';
+import 'manager/bloc/agencies_bloc.dart';
 
 class AgenciesView extends StatefulWidget {
   const AgenciesView({super.key});
@@ -82,10 +82,16 @@ class AgenciesViewState extends State<AgenciesView> {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 16.h),
-                    child: const CustomSearchBar(),
-                  ),
+                  child: Builder(builder: (context) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 16.h),
+                      child: CustomSearchBar(onChanged: (searchTerm, context) {
+                        context
+                            .read<AgenciesBloc>()
+                            .add(AgenciesSearchTermChanged(searchTerm));
+                      }),
+                    );
+                  }),
                 ),
                 PagedSliverGrid<String?, AgencyModel>(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
