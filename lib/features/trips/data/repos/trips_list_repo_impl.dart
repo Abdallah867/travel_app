@@ -10,6 +10,7 @@ import '../../../../core/networking/database_service.dart';
 import '../../../../core/utils/date_format_utils.dart';
 import '../../../reservation/data/models/trip_schedule_model.dart';
 import '../../../trip/data/models/trip_model.dart';
+import '../models/filter_trips_params.dart';
 import 'trips_list_repo.dart';
 
 class TripsListRepoImpl implements TripsListRepo {
@@ -35,9 +36,10 @@ class TripsListRepoImpl implements TripsListRepo {
       if (filters != null) {
         queries.addAll(filters);
       }
-      // if (departureDate != null) {
-      //   queries.add(Query.equal("returnDate", returnDate));
-      // }
+      if (searchTerm.isNotEmpty) {
+        queries.add(Query.search("title", searchTerm));
+        queries.add(Query.search("description", searchTerm));
+      }
 
       final List<Document> response = await database.getList(
           endpoint: AppConstants.tripsCollectionEndpoint, queries: queries);
@@ -94,28 +96,26 @@ class TripsListRepoImpl implements TripsListRepo {
   @override
   Future<Either<List<TripModel>, Failure>>
       getFilteredTripsListFromTripSchedule({
-    String? betweenDepartureDate,
-    String? andReturnDate,
-    String? betweenReturnDate,
-    String? andDepartureDate,
+    required FilterTripsParams filterTripsParams,
     String? lastId,
-    required int minPrice,
-    required int maxPrice,
   }) async {
     try {
       List<String> queries = [
-        Query.between("price", minPrice, maxPrice),
+        Query.between(
+            "price", filterTripsParams.minPrice, filterTripsParams.maxPrice),
         Query.between(
           "departureDate",
           DateFormatUtils.formatDateToIso8601(
-            betweenDepartureDate!,
+            filterTripsParams.betweenDepartureDate!,
           ),
-          DateFormatUtils.formatDateToIso8601(andDepartureDate!),
+          DateFormatUtils.formatDateToIso8601(
+              filterTripsParams.andDepartureDate!),
         ),
         Query.between(
           "returnDate",
-          DateFormatUtils.formatDateToIso8601(betweenReturnDate!),
-          DateFormatUtils.formatDateToIso8601(andReturnDate!),
+          DateFormatUtils.formatDateToIso8601(
+              filterTripsParams.betweenReturnDate!),
+          DateFormatUtils.formatDateToIso8601(filterTripsParams.andReturnDate!),
         ),
         Query.limit(AppConstants.pageSize),
         Query.orderDesc("\$createdAt")

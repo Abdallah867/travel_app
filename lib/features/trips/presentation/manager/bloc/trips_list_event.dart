@@ -28,8 +28,13 @@ class TripsListFirstPageFetch extends TripsListEvent {
 }
 
 class TripsListFilterApplied extends TripsListEvent {
-  final String searchTerm;
-  const TripsListFilterApplied(this.searchTerm);
+  final String? searchTerm;
+  final FilterTripsParams filterTripsParams;
+
+  const TripsListFilterApplied({
+    this.searchTerm,
+    required this.filterTripsParams,
+  });
 }
 
 class TripsListSearchTermChanged extends TripsListEvent {
