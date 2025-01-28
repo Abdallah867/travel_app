@@ -60,7 +60,7 @@ class AgencyModel extends Equatable {
 
   factory AgencyModel.fromMap(Map<String, dynamic> map) {
     return AgencyModel(
-      agencyId: map['agencyId'] as String,
+      agencyId: map['\$id'] as String,
       agnecyName: map['agencyName'] as String,
       agencyLogo: map['agencyLogo'] as String?, // Handling null safely
       description: map['description'] as String,

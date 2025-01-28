@@ -4,15 +4,16 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../../../core/errors/failure.dart';
-import '../../../../home/data/models/agency_model.dart';
-import '../../../data/repos/agencies_repo.dart';
+import '../../../../../../../../core/errors/failure.dart';
+import '../../../../../../home/data/models/agency_model.dart';
+import '../../../../../data/repos/agencies_repo.dart';
 
 part 'agencies_event.dart';
 part 'agencies_state.dart';
 
 class AgenciesBloc extends Bloc<AgenciesEvent, AgenciesState> {
   final AgenciesRepo agenciesRepo;
+  String searchTerm = '';
   AgenciesBloc({required this.agenciesRepo}) : super(AgenciesInitial()) {
     on<AgenciesEvent>(
       (event, emit) async {
@@ -36,7 +37,8 @@ class AgenciesBloc extends Bloc<AgenciesEvent, AgenciesState> {
 
   Future<void> _handleAgenciesSearchTermChanged(
       Emitter<AgenciesState> emit, AgenciesSearchTermChanged event) async {
-    await getAgencies(emit);
+    searchTerm = event.searchTerm;
+    emit(const AgenciesRefreshed());
   }
 
   // Future<void> _handleAgenciesRefreshed(
@@ -60,6 +62,7 @@ class AgenciesBloc extends Bloc<AgenciesEvent, AgenciesState> {
     Either<List<AgencyModel>, Failure> response =
         await agenciesRepo.getAgencies(
       lastId: lastId,
+      searchTerm: searchTerm,
     );
 
     response.fold(
