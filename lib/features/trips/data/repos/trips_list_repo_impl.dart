@@ -38,7 +38,6 @@ class TripsListRepoImpl implements TripsListRepo {
       }
       if (searchTerm.isNotEmpty) {
         queries.add(Query.search("title", searchTerm));
-        queries.add(Query.search("description", searchTerm));
       }
 
       final List<Document> response = await database.getList(
