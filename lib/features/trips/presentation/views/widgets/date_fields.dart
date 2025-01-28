@@ -2,10 +2,12 @@ import '../../../../reservation/presentation/views/widgets/date_selector_field.d
 import '../../manager/bloc/trips_list_bloc.dart';
 import 'package:flutter/material.dart';
 
-class DepartureDateFields extends StatelessWidget {
-  const DepartureDateFields({
+class DateFields extends StatelessWidget {
+  final List<TextEditingController> controllers;
+  const DateFields({
     super.key,
     required this.tripsListBloc,
+    required this.controllers,
   });
 
   final TripsListBloc tripsListBloc;
@@ -17,11 +19,11 @@ class DepartureDateFields extends StatelessWidget {
       children: [
         DateSelectorField(
           label: 'Between:',
-          controller: tripsListBloc.betweenDepartureDateController,
+          controller: controllers[0],
         ),
         DateSelectorField(
           label: 'And:',
-          controller: tripsListBloc.andDepartureDateController,
+          controller: controllers[1],
         ),
       ],
     );
