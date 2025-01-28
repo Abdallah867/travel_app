@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "saved": MessageLookupByLibrary.simpleMessage("Saved"),
         "savedTrips": MessageLookupByLibrary.simpleMessage("Saved trips"),
+        "search": MessageLookupByLibrary.simpleMessage("Search..."),
         "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "showLess": MessageLookupByLibrary.simpleMessage("Show Less"),

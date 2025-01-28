@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saved": MessageLookupByLibrary.simpleMessage("Enregistré"),
         "savedTrips":
             MessageLookupByLibrary.simpleMessage("Voyages enregistrés"),
+        "search": MessageLookupByLibrary.simpleMessage("Rechercher..."),
         "seeAll": MessageLookupByLibrary.simpleMessage("Voir tout"),
         "settings": MessageLookupByLibrary.simpleMessage("Paramètres"),
         "showLess": MessageLookupByLibrary.simpleMessage("Voir moins"),

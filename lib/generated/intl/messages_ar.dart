@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "saved": MessageLookupByLibrary.simpleMessage("محفوظ"),
         "savedTrips": MessageLookupByLibrary.simpleMessage("الرحلات المحفوظة"),
+        "search": MessageLookupByLibrary.simpleMessage("... بحث"),
         "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "showLess": MessageLookupByLibrary.simpleMessage("عرض أقل"),

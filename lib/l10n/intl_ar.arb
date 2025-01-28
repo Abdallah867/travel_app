@@ -51,5 +51,6 @@
   "cancelBooking": "إلغاء الحجز",
   "paid": "مدفوع",
   "unpaid": "غير مدفوع",
-  "availableAgencies": "الوكالات المتاحة"
+  "availableAgencies": "الوكالات المتاحة",
+  "search": "... بحث"
 }

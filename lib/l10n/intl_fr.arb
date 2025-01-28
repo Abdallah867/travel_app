@@ -51,5 +51,6 @@
   "cancelBooking": "Annuler la réservation",
   "paid": "Payé",
   "unpaid": "Non payé",
-  "availableAgencies": "Agences disponibles"
+  "availableAgencies": "Agences disponibles",
+  "search": "Rechercher..."
 }
