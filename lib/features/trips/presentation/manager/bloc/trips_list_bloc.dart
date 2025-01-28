@@ -2,16 +2,12 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../../core/constants/app_constants.dart';
-import '../../../../../core/errors/failure.dart';
 import '../../../../trip/data/models/trip_model.dart';
+import '../../../data/models/filter_trips_params.dart';
 import '../../../data/repos/trips_list_repo.dart';
-import 'trips_list_bloc.dart';
 
 part 'trips_list_event.dart';
 part 'trips_list_state.dart';
@@ -19,34 +15,27 @@ part 'trips_list_state.dart';
 class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   final TripsListRepo tripsListRepo;
 
-  TextEditingController betweenDepartureDateController =
-      TextEditingController();
-  TextEditingController andDepartureDateController = TextEditingController();
-
-  TextEditingController andReturnDateController = TextEditingController();
-  TextEditingController betweenReturnDateController = TextEditingController();
   int? _minPrice;
   int? _maxPrice;
-  bool isFiltering = false;
   set minPrice(int? minPrice) => _minPrice = minPrice;
-
   set maxPrice(int? maxPrice) => _maxPrice = maxPrice;
+  String searchTerm = '';
 
+  bool isFiltering = false;
   TripsListBloc({
     required this.tripsListRepo,
   }) : super(TripsListInitial()) {
     on<TripsListEvent>(
       (event, emit) async {
+        //TODO: RECLASSIFY THEM FOR MOST USED TO LAST
         if (event is TripsListFilterApplied) {
           await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListSearchTermChanged) {
-          await _handleTripsListSearchTermChanged(emit, event);
+          _handleTripsListSearchTermChanged(emit, event);
         } else if (event is TripsListRefreshed) {
           // await _handleTripsListRefreshed(emit, event);
         } else if (event is TripsListNextPageRequested) {
           await _handleTripsListNextPageRequested(emit, event);
-        } else if (event is TripsListFilterApplied) {
-          await _handleTripsListFilterApplied(emit, event);
         } else if (event is TripsListFirstPageFetch) {
           await _handleTripsListFirstPageFetch(emit, event);
         } else if (event is TripsListFilterClear) {
@@ -96,17 +85,21 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   }
 
   void _handleTripsListFilterClear(Emitter<TripsListState> emit) {
-    betweenDepartureDateController.clear();
-    andDepartureDateController.clear();
-    andReturnDateController.clear();
-    betweenReturnDateController.clear();
+    // betweenDepartureDateController.clear();
+    // andDepartureDateController.clear();
+    // andReturnDateController.clear();
+    // betweenReturnDateController.clear();
     isFiltering = false;
     emit(const TripsListRefreshed());
   }
 
-  Future<void> _handleTripsListSearchTermChanged(
-      Emitter<TripsListState> emit, TripsListSearchTermChanged event) async {
-    add(TripsListFilterApplied(event.searchTerm));
+  void _handleTripsListSearchTermChanged(
+      Emitter<TripsListState> emit, TripsListSearchTermChanged searchEvent) {
+    log(searchTerm);
+
+    searchTerm = searchEvent.searchTerm;
+
+    emit(const TripsListRefreshed());
     // await getTripsList(emit);
   }
 
@@ -122,7 +115,15 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
 
   Future<void> _handleTripsListFilterApplied(
       Emitter<TripsListState> emit, TripsListFilterApplied event) async {
-    isFiltering = true;
+    final filterTripsParams = event.filterTripsParams.copyWith(
+      minPrice: _minPrice,
+      maxPrice: _maxPrice,
+    );
+    final response = await tripsListRepo.getFilteredTripsListFromTripSchedule(
+      filterTripsParams: filterTripsParams,
+    );
+
+    response.fold((l) {}, (r) {});
 
     emit(const TripsListRefreshed());
   }
@@ -135,21 +136,11 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
   Future<void> getTripsList(Emitter<TripsListState> emit,
       {String? lastId}) async {
     emit(TripsListLoadInProgress());
-    Either<List<TripModel>, Failure> response;
-    if (isFiltering) {
-      response = await tripsListRepo.getFilteredTripsListFromTripSchedule(
-        betweenReturnDate: betweenReturnDateController.text,
-        andReturnDate: andReturnDateController.text,
-        betweenDepartureDate: betweenDepartureDateController.text,
-        andDepartureDate: andDepartureDateController.text,
-        maxPrice: _maxPrice ?? AppConstants.maxPrice,
-        minPrice: _minPrice ?? AppConstants.minPrice,
-      );
-    } else {
-      response = await tripsListRepo.getTripsList(
-        lastId: lastId,
-      );
-    }
+    final response = await tripsListRepo.getTripsList(
+      lastId: lastId,
+      searchTerm: searchTerm,
+    );
+
     response.fold(
       (trips) {
         emit(TripsListLoaded(trips: trips));
@@ -159,14 +150,5 @@ class TripsListBloc extends Bloc<TripsListEvent, TripsListState> {
         emit(TripsListFailure(errMessage: failure.errMessage));
       },
     );
-  }
-
-  @override
-  Future<void> close() async {
-    betweenDepartureDateController.dispose();
-    andDepartureDateController.dispose();
-    betweenReturnDateController.dispose();
-    andReturnDateController.dispose();
-    super.close();
   }
 }
