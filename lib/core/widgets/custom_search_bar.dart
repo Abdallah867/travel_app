@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../generated/l10n.dart';
+
 class CustomSearchBar extends StatelessWidget {
   final void Function(String, BuildContext)? onChanged;
   const CustomSearchBar({super.key, this.onChanged});
@@ -24,7 +26,7 @@ class CustomSearchBar extends StatelessWidget {
           border: customOutlineInputDecoration(),
           enabledBorder: customOutlineInputDecoration(),
           focusedBorder: customOutlineInputDecoration(),
-          hintText: 'Search...',
+          hintText: S.of(context).search,
           hintStyle: const TextStyle(
             color: Color(0xFF7C7C7C),
           ),
