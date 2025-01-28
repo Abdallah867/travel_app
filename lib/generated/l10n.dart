@@ -491,10 +491,10 @@ class S {
   }
 
   /// `Switch Language`
-  String get switch_language {
+  String get switchLanguage {
     return Intl.message(
       'Switch Language',
-      name: 'switch_language',
+      name: 'switchLanguage',
       desc: '',
       args: [],
     );
@@ -535,6 +535,106 @@ class S {
     return Intl.message(
       'Update',
       name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No bookings available`
+  String get noBookings {
+    return Intl.message(
+      'No bookings available',
+      name: 'noBookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous`
+  String get previous {
+    return Intl.message(
+      'Previous',
+      name: 'previous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get cancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'cancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Persons`
+  String get persons {
+    return Intl.message(
+      'Persons',
+      name: 'persons',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details`
+  String get viewDetails {
+    return Intl.message(
+      'View Details',
+      name: 'viewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel Booking`
+  String get cancelBooking {
+    return Intl.message(
+      'Cancel Booking',
+      name: 'cancelBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid`
+  String get paid {
+    return Intl.message(
+      'Paid',
+      name: 'paid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unpaid`
+  String get unpaid {
+    return Intl.message(
+      'Unpaid',
+      name: 'unpaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available Agencies`
+  String get availableAgencies {
+    return Intl.message(
+      'Available Agencies',
+      name: 'availableAgencies',
       desc: '',
       args: [],
     );

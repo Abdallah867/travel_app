@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/custom_search_bar.dart';
 import '../../../../../core/widgets/horizontal_space.dart';
 import '../../manager/bloc/trips_list_bloc.dart';
 import 'filter_screen.dart';
@@ -15,13 +17,21 @@ class SearchBarAndFilterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(child: CustomSearchBar()),
+        Expanded(child: CustomSearchBar(
+          onChanged: (searchTerm, context) {
+            context
+                .read<TripsListBloc>()
+                .add(TripsListSearchTermChanged(searchTerm));
+          },
+        )),
         const HorizontalSpace(size: 8),
         GestureDetector(
-          onTap: () => showFilterBottomSheet(
-            context,
-            context.read<TripsListBloc>(),
-          ),
+          onTap: () {
+            showFilterBottomSheet(
+              context,
+              context.read<TripsListBloc>(),
+            );
+          },
           child: Container(
             width: 55.w,
             height: 55.h,
@@ -41,7 +51,6 @@ class SearchBarAndFilterWidget extends StatelessWidget {
 
   void showFilterBottomSheet(
       BuildContext context, TripsListBloc tripsListBloc) {
-    final tripsListBloc = context.read<TripsListBloc>();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

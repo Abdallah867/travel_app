@@ -1,16 +1,67 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/widgets/horizontal_list_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/widgets/custom_shimmer.dart';
+import '../../../../agencies/presentation/views/agencies/manager/bloc/agencies_bloc.dart';
 import 'travel_agency_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TravelAgenciesListView extends StatelessWidget {
   const TravelAgenciesListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const HorizontalListView(
-      itemCount: 5,
-      child: TravelAgencyCard(),
+    return BlocBuilder<AgenciesBloc, AgenciesState>(
+      builder: (context, state) {
+        switch (state) {
+          case AgenciesLoadInProgress():
+            return SizedBox(
+              height: 130.w,
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return const CustomShimmer.box(
+                      width: 130,
+                    );
+                  },
+                  separatorBuilder: (context, index) => SizedBox(width: 16.w),
+                ),
+              ),
+            );
+          case AgenciesLoaded():
+            return SizedBox(
+              height: 130.w,
+              child: Padding(
+                padding: EdgeInsets.only(left: 16.w),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.agencies.length,
+                  itemBuilder: (context, index) {
+                    return TravelAgencyCard(
+                      agency: state.agencies[index],
+                    );
+                  },
+                  separatorBuilder: (context, index) => SizedBox(width: 16.w),
+                ),
+              ),
+            );
+          case AgenciesFailure():
+            // Display an error message when there is a failure
+            return Center(
+              child: Text(
+                'Error: ${state.errMessage}',
+                style: const TextStyle(color: Colors.red),
+              ),
+            );
+          default:
+            // Handle the initial state or unexpected states
+            return const Center(
+              child: Text('No data available.'),
+            );
+        }
+      },
     );
   }
 }

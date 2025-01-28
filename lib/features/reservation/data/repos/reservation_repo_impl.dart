@@ -18,17 +18,24 @@ class ReservationRepoImpl implements ReservationRepo {
 
   @override
   Future<Either<List<ReservationModel>, Failure>> getReservations(
-      String userId) async {
+      String userId, String statusFilter) async {
     try {
-      final response = await databaseService.getList(queries: [
+      List<String> queries = [
         Query.equal('userId', userId),
-      ], endpoint: AppConstants.reservationsCollectionEndpoint);
+      ];
+      queries.add(Query.equal('status', statusFilter));
+      final response = await databaseService.getList(
+        queries: queries,
+        endpoint: AppConstants.reservationsCollectionEndpoint,
+      );
 
-      print(response);
+      log(response.toString());
 
-      List<ReservationModel> reservations =
-          response.map((e) => ReservationModel.fromMap(e.data)).toList();
-      print(reservations);
+      List<ReservationModel> reservations = response.map((e) {
+        log('${e.data}');
+
+        return ReservationModel.fromMap(e.data);
+      }).toList();
 
       return left(reservations);
     } on AppwriteException catch (e) {
@@ -72,6 +79,27 @@ class ReservationRepoImpl implements ReservationRepo {
         data: updatedReservation.toMap(),
         endpoint: AppConstants.reservationsCollectionEndpoint,
         id: updatedReservation.reservationId,
+      );
+
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<void, Failure>> cancelReservation(String reservationId) async {
+    try {
+      await databaseService.update(
+        data: {'status': 'cancelled'},
+        endpoint: AppConstants.reservationsCollectionEndpoint,
+        id: reservationId,
       );
 
       return left(null);

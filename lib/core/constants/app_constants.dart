@@ -12,7 +12,8 @@ class AppConstants {
   static const int minPrice = 500;
   static const int maxPrice = 1000000;
 
-  static const int pageSize = 5;
+  static const int pageSize = 4;
+  static const int agenciesPageSize = 9;
 
   static const Map<String, String> appwriteCollections = {
     profilesCollectionEndpoint: '662b840e9331aff1d019',

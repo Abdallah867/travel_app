@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -6,6 +8,7 @@ import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../../../../generated/l10n.dart';
 import '../../manager/trip_cubit/trip_cubit.dart';
+import 'agency_email_widget.dart';
 import 'agency_name_widget.dart';
 import 'contact_agency_widget.dart';
 import 'details_title_section.dart';
@@ -47,9 +50,32 @@ class TripInformationsWidget extends StatelessWidget {
           const ExpandableText(),
           const VerticalSpace(size: 16),
           DetailsTitleSection(title: S.of(context).about),
-          const AgencyNameWidget(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('${S.of(context).agencyName}: '),
+              const AgencyNameWidget(),
+            ],
+          ),
           const VerticalSpace(size: 4),
-          const ContactAgencyWidget(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text('Contact: '),
+              ContactAgencyWidget(
+                phoneNumbers:
+                    context.read<TripCubit>().trip.agency!.phoneNumbers,
+              ),
+            ],
+          ),
+          const VerticalSpace(size: 4),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('Email: '),
+              AgencyEmailWidget(),
+            ],
+          ),
           const VerticalSpace(size: 24),
         ],
       ),

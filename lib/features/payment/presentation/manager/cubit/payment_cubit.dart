@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../reservation/data/models/reservation_model.dart';
 import '../../../data/models/checkout_model.dart';
-import '../../../data/models/payment_method.dart';
+import '../../../../../core/enums/payment_method.dart';
 import '../../../data/repos/payment_repo.dart';
 
 part 'payment_state.dart';
@@ -23,11 +21,11 @@ class PaymentCubit extends Cubit<PaymentState> {
     emit(PaymentLoadInProgress());
     final response = await paymentRepo.createCheckout(
       CheckoutModel(
-          failureUrl: 'https://edahabia.com',
+          failureUrl: 'https://67816e09de31b761be3d.appwrite.global/verify',
           amount: (calculateTotalPayment() * initialDeposit) ~/ 100,
           webhookEndpoint: 'https://6737265f1d67e7960d68.appwrite.global',
           paymentMethod: paymentMethod,
-          successUrl: 'https://edahabia.com',
+          successUrl: 'https://67816e09de31b761be3d.appwrite.global/verify',
           metadata: [
             {
               'totalPrice': calculateTotalPayment(),

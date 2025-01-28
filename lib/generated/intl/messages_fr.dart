@@ -31,10 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Vous avez déjà un compte?"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabe"),
+        "availableAgencies":
+            MessageLookupByLibrary.simpleMessage("Agences disponibles"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Voyages disponibles"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Réservez maintenant"),
         "bookings": MessageLookupByLibrary.simpleMessage("Réservations"),
+        "cancelBooking":
+            MessageLookupByLibrary.simpleMessage("Annuler la réservation"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Annulées"),
         "credentialLoginMessage": MessageLookupByLibrary.simpleMessage(
             "Entrez votre email et mot de passe pour continuer"),
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
@@ -57,12 +62,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginFailed":
             MessageLookupByLibrary.simpleMessage("Échec de la connexion"),
         "logout": MessageLookupByLibrary.simpleMessage("Déconnexion"),
+        "noBookings": MessageLookupByLibrary.simpleMessage(
+            "Aucune réservation disponible"),
         "noSavedTrips":
             MessageLookupByLibrary.simpleMessage("Aucun voyage enregistré"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "paid": MessageLookupByLibrary.simpleMessage("Payé"),
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
+        "persons": MessageLookupByLibrary.simpleMessage("Personnes"),
         "phoneNumber":
             MessageLookupByLibrary.simpleMessage("Numéro de téléphone"),
+        "previous": MessageLookupByLibrary.simpleMessage("Précédentes"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "save": MessageLookupByLibrary.simpleMessage("Enregistrer"),
         "saved": MessageLookupByLibrary.simpleMessage("Enregistré"),
@@ -75,9 +85,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "signup": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "signupFailed":
             MessageLookupByLibrary.simpleMessage("Échec de l\'inscription"),
-        "switch_language":
+        "switchLanguage":
             MessageLookupByLibrary.simpleMessage("Changer de langue"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Non payé"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("À venir"),
         "username": MessageLookupByLibrary.simpleMessage("Nom d\'utilisateur"),
+        "viewDetails": MessageLookupByLibrary.simpleMessage("Voir les détails"),
         "welcome": MessageLookupByLibrary.simpleMessage("Bienvenue!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Bon retour!")
       };

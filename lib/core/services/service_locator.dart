@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:appwrite/appwrite.dart';
+import '../../features/agencies/data/repos/agencies_repo_impl.dart';
 import '../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../features/payment/data/repos/payment_repo_impl.dart';
 import '../../features/profile/data/repos/user_profile_repo_impl.dart';
@@ -17,6 +18,7 @@ void setupServiceLocator() {
   _setupAuth();
   _setupProfile();
   _setupTrips();
+  _setupAgencies();
   _setupReservation();
   _setupDio();
   _setupPayment();
@@ -26,7 +28,7 @@ void _setupAppwrite() {
   getIt.registerSingleton<Client>(Client()
           .setEndpoint(dotenv.env['APPWRITE_BASE_URL']!)
           .setProject(dotenv.env['APPWRITE_PROJECT_ID'])
-      // .setSelfSigned(status: true),
+      //  .setSelfSigned(status: true),
       );
   getIt.registerSingleton<Account>(Account(getIt.get<Client>()));
   getIt.registerSingleton<Databases>(Databases(getIt.get<Client>()));
@@ -87,6 +89,14 @@ void _setupTrips() {
 
   getIt.registerFactory(
     () => TripsListRepoImpl(
+      database: getIt.get<AppwriteService>(),
+    ),
+  );
+}
+
+void _setupAgencies() {
+  getIt.registerLazySingleton(
+    () => AgenciesRepoImpl(
       database: getIt.get<AppwriteService>(),
     ),
   );

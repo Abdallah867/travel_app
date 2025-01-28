@@ -1,32 +1,107 @@
-import '../../../../../core/functions/custom_app_bar.dart';
-import '../../../../../core/widgets/vertical_widget.dart';
-import '../../manager/cubit/reservation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'reservation_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BookingsListViewBody extends StatelessWidget {
+import '../../../../../core/enums/reservation_status.dart';
+import '../../../../../core/functions/custom_app_bar.dart';
+import '../../../../../core/utils/text_styles.dart';
+import '../../../../../generated/l10n.dart';
+import '../../../../auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
+import '../../manager/cubit/reservation_cubit.dart';
+import 'bookings_status_chip_list.dart';
+import 'reservation_card.dart';
+import 'reservation_loading_card.dart';
+
+class BookingsListViewBody extends StatefulWidget {
   const BookingsListViewBody({
     super.key,
   });
 
   @override
+  State<BookingsListViewBody> createState() => _BookingsListViewBodyState();
+}
+
+class _BookingsListViewBodyState extends State<BookingsListViewBody> {
+  int currentChipIndex =
+      0; // Tracks the selected chip (e.g., Upcoming, Previous)
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ReservationCubit, ReservationState>(
       builder: (context, state) {
-        final reservations = context.read<ReservationCubit>().reservations;
+        final reservationCubit = context.read<ReservationCubit>();
         return Scaffold(
-          appBar: customAppBar('Bookings'),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView.separated(
-              separatorBuilder: (context, index) => const VerticalSpace(
-                size: 16.0,
+          appBar: customAppBar(S.of(context).bookings),
+          body: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                  child: BookingsStatusChipList(
+                    chipLabels: [
+                      S.of(context).upcoming,
+                      S.of(context).previous,
+                      S.of(context).cancelled,
+                    ],
+                    onChipSelected: (index) async {
+                      reservationCubit.statusFilter =
+                          getReservationStatusFromIndex(index);
+                      await reservationCubit.getReservations(
+                        userId: context
+                            .read<CurrentAccountCubit>()
+                            .userInformations!
+                            .userId,
+                      );
+                    },
+                  ),
+                ),
               ),
-              itemCount: reservations.length,
-              itemBuilder: (context, index) =>
-                  ReservationCard(reservation: reservations[index]),
-            ),
+              // Handle Different States
+              if (state is ReservationLoadInProgress)
+                SliverToBoxAdapter(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    itemBuilder: (context, index) => Padding(
+                      padding:
+                          EdgeInsets.only(top: 16.0, left: 16.w, right: 16.w),
+                      child: const ReservationLoadingCard(),
+                    ),
+                  ),
+                ),
+              if (state is ReservationSuccess)
+                if (reservationCubit.reservations.isEmpty)
+                  SliverFillRemaining(
+                    child: Center(
+                      child: Text(
+                        S.of(context).noBookings,
+                        style: TextStyles.textStyle14,
+                      ),
+                    ),
+                  )
+                else
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                        padding:
+                            EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                        child: ReservationCard(
+                          reservation: reservationCubit.reservations[index],
+                        ),
+                      ),
+                      childCount: reservationCubit.reservations.length,
+                    ),
+                  ),
+              if (state is ReservationFailure)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      S.of(context).error,
+                      style: TextStyles.textStyle14,
+                    ),
+                  ),
+                ),
+            ],
           ),
         );
       },

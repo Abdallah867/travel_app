@@ -25,17 +25,20 @@ class ReservationForm extends StatelessWidget {
               CustomTextFormField(
                 name: 'Nom',
                 controller: reservationCubit.lastNameController,
+                textInputAction: TextInputAction.next,
               ),
               const VerticalSpace(size: 12),
               CustomTextFormField(
                 name: 'Prenom',
                 controller: reservationCubit.firstNameController,
+                textInputAction: TextInputAction.next,
               ),
               const VerticalSpace(size: 12),
               CustomTextFormField(
                 name: 'Age',
                 controller: reservationCubit.ageController,
                 keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
               ),
               const VerticalSpace(size: 12),
               BlocBuilder<ReservationCubit, ReservationState>(

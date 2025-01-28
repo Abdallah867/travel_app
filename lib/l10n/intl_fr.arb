@@ -38,8 +38,18 @@
   "hello": "Bienvenue, {username}!",
   "agencyName": "Agence",
   "language": "Langue",
-  "switch_language": "Changer de langue",
+  "switchLanguage": "Changer de langue",
   "arabic": "Arabe",
   "french": "Français",
-  "english": "Anglais"
+  "english": "Anglais",
+  "noBookings": "Aucune réservation disponible",
+  "upcoming": "À venir",
+  "previous": "Précédentes",
+  "cancelled": "Annulées",
+  "persons": "Personnes",
+  "viewDetails": "Voir les détails",
+  "cancelBooking": "Annuler la réservation",
+  "paid": "Payé",
+  "unpaid": "Non payé",
+  "availableAgencies": "Agences disponibles"
 }

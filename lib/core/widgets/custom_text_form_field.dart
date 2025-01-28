@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/app_colors.dart';
+import '../utils/text_styles.dart';
 import 'vertical_widget.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool enabled;
   final Icon? prefixIcon;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   const CustomTextFormField({
     super.key,
     this.name,
@@ -27,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
     this.enabled = true,
     this.prefixIcon,
     this.keyboardType,
+    this.textInputAction,
   });
 
   @override
@@ -63,11 +66,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           },
           keyboardType: widget.keyboardType,
           initialValue: widget.initialValue,
+          textInputAction: widget.textInputAction,
           controller: widget.controller,
           enabled: widget.enabled,
           obscureText: widget.isPassword ? isPasswordHidden : false,
           cursorColor: AppColors.secondaryColor,
           decoration: InputDecoration(
+            labelStyle: TextStyles.textStyle14,
             filled: true,
             fillColor: AppColors.inputGrey,
             border: widget.outlineInputBorder ?? customInputBorder(),
@@ -113,45 +118,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ? const Icon(Icons.visibility_outlined)
           : const Icon(Icons.visibility_off_outlined),
       color: const Color(0xFFA5A5A5),
-    );
-  }
-}
-
-class CustomSearchBar extends StatelessWidget {
-  final void Function(String, BuildContext)? onChanged;
-  const CustomSearchBar({super.key, this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 55.w,
-      child: TextField(
-        onChanged: (value) {
-          if (onChanged != null && value.isNotEmpty) {
-            onChanged!(value, context);
-          }
-        },
-        cursorColor: Colors.black,
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: const Color(0xFFF2F3F2),
-          border: customOutlineInputDecoration(),
-          enabledBorder: customOutlineInputDecoration(),
-          focusedBorder: customOutlineInputDecoration(),
-          hintText: 'Search...',
-          hintStyle: const TextStyle(
-            color: Color(0xFF7C7C7C),
-          ),
-        ),
-      ),
-    );
-  }
-
-  OutlineInputBorder customOutlineInputDecoration() {
-    return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(15)),
-      borderSide: BorderSide.none,
     );
   }
 }

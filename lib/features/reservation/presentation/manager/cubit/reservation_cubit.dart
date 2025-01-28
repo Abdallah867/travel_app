@@ -6,6 +6,7 @@ import 'package:cuid2/cuid2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/enums/reservation_status.dart';
 import '../../../data/models/reservation_model.dart';
 import '../../../data/models/traveler_model.dart';
 import '../../../data/models/trip_schedule_model.dart';
@@ -24,12 +25,12 @@ class ReservationCubit extends Cubit<ReservationState> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-
   GlobalKey<FormState> travelerKey = GlobalKey();
   ReservationModel? reservation;
   List<TravelerModel> travelersList = [];
   List<TripScheduleModel> tripSchedules = [];
   List<ReservationModel> reservations = [];
+  ReservationStatus statusFilter = ReservationStatus.upcoming;
 
   String? selectedScheduleId;
 
@@ -106,7 +107,8 @@ class ReservationCubit extends Cubit<ReservationState> {
     required String userId,
   }) async {
     emit(ReservationLoadInProgress());
-    final response = await reservationRepo.getReservations(userId);
+    final response =
+        await reservationRepo.getReservations(userId, statusFilter.name);
     response.fold((l) {
       reservations = l;
       emit(ReservationSuccess());
@@ -195,6 +197,16 @@ class ReservationCubit extends Cubit<ReservationState> {
         emit(const ReservationFailure(errorMessage: 'adding travelers error'));
       }
     }
+  }
+
+  Future<void> cancelReservation(String reservationId) async {
+    final response = await reservationRepo.cancelReservation(reservationId);
+    response.fold((l) {
+      reservations.where((e) => e.reservationId != reservationId);
+      emit(ReservationSuccess());
+    }, (error) {
+      emit(ReservationFailure(errorMessage: error.errMessage));
+    });
   }
 
   Future<bool?> addTravelers(List<TravelerModel> travelers) async {

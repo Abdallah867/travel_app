@@ -31,10 +31,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("هل لديك حساب بالفعل؟"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "availableAgencies":
+            MessageLookupByLibrary.simpleMessage("الوكالات المتاحة"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("الرحلات المتاحة"),
         "bookNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
         "bookings": MessageLookupByLibrary.simpleMessage("الحجوزات"),
+        "cancelBooking": MessageLookupByLibrary.simpleMessage("إلغاء الحجز"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("ملغاة"),
         "credentialLoginMessage": MessageLookupByLibrary.simpleMessage(
             "أدخل بريدك الإلكتروني وكلمة المرور للمتابعة"),
         "credentialSignupMessage": MessageLookupByLibrary.simpleMessage(
@@ -56,11 +60,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("فشل تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "noBookings":
+            MessageLookupByLibrary.simpleMessage("لا توجد حجوزات متاحة"),
         "noSavedTrips":
             MessageLookupByLibrary.simpleMessage("لا توجد رحلات محفوظة"),
         "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+        "paid": MessageLookupByLibrary.simpleMessage("مدفوع"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "persons": MessageLookupByLibrary.simpleMessage("الأشخاص"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "previous": MessageLookupByLibrary.simpleMessage("السابقة"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "saved": MessageLookupByLibrary.simpleMessage("محفوظ"),
@@ -71,8 +80,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("عرض المزيد"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("فشل التسجيل"),
-        "switch_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+        "switchLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("القادمة"),
         "username": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
+        "viewDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
         "welcome": MessageLookupByLibrary.simpleMessage("أهلاً وسهلاً!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحباً بعودتك!")
       };

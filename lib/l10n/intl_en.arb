@@ -43,10 +43,19 @@
   "hello": "Hello, {username}! ",
   "agencyName": "Agency",
   "language": "Language",
-  "switch_language": "Switch Language",
+  "switchLanguage": "Switch Language",
   "arabic": "Arabic",
   "french": "French",
   "english": "English",
-  "english": "English",
-  "update": "Update"
+  "update": "Update",
+  "noBookings": "No bookings available",
+  "upcoming": "Upcoming",
+  "previous": "Previous",
+  "cancelled": "Cancelled",
+  "persons": "Persons",
+  "viewDetails": "View Details",
+  "cancelBooking": "Cancel Booking",
+  "paid": "Paid",
+  "unpaid": "Unpaid",
+  "availableAgencies": "Available Agencies"
 }

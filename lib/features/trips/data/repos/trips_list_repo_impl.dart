@@ -10,6 +10,7 @@ import '../../../../core/networking/database_service.dart';
 import '../../../../core/utils/date_format_utils.dart';
 import '../../../reservation/data/models/trip_schedule_model.dart';
 import '../../../trip/data/models/trip_model.dart';
+import '../models/filter_trips_params.dart';
 import 'trips_list_repo.dart';
 
 class TripsListRepoImpl implements TripsListRepo {
@@ -19,11 +20,8 @@ class TripsListRepoImpl implements TripsListRepo {
   @override
   Future<Either<List<TripModel>, Failure>> getTripsList({
     String searchTerm = '',
-    String? betweenDepartureDate = '16/02/2024',
-    String? andReturnDate = '18/03/2024',
-    String? betweenReturnDate = '07/22/2024',
-    String? andDepartureDate = '18/03/2024',
     String? lastId,
+    List<String>? filters,
   }) async {
     try {
       List<String> queries = [
@@ -35,9 +33,12 @@ class TripsListRepoImpl implements TripsListRepo {
         queries.add(Query.cursorAfter(lastId));
       }
 
-      // if (departureDate != null) {
-      //   queries.add(Query.equal("returnDate", returnDate));
-      // }
+      if (filters != null) {
+        queries.addAll(filters);
+      }
+      if (searchTerm.isNotEmpty) {
+        queries.add(Query.search("title", searchTerm));
+      }
 
       final List<Document> response = await database.getList(
           endpoint: AppConstants.tripsCollectionEndpoint, queries: queries);
@@ -92,32 +93,28 @@ class TripsListRepoImpl implements TripsListRepo {
   }
 
   @override
-  Future<Either<List<TripModel>, Failure>> getFilteredTripsList({
-    String? betweenDepartureDate,
-    String? andReturnDate,
-    String? betweenReturnDate,
-    String? andDepartureDate,
+  Future<Either<List<TripModel>, Failure>>
+      getFilteredTripsListFromTripSchedule({
+    required FilterTripsParams filterTripsParams,
     String? lastId,
-    required int minPrice,
-    required int maxPrice,
   }) async {
     try {
-      log(DateFormatUtils.formatDateToIso8601(
-        betweenDepartureDate!,
-      ));
       List<String> queries = [
-        Query.between("price", minPrice, maxPrice),
+        Query.between(
+            "price", filterTripsParams.minPrice, filterTripsParams.maxPrice),
         Query.between(
           "departureDate",
           DateFormatUtils.formatDateToIso8601(
-            betweenDepartureDate,
+            filterTripsParams.betweenDepartureDate!,
           ),
-          DateFormatUtils.formatDateToIso8601(andDepartureDate!),
+          DateFormatUtils.formatDateToIso8601(
+              filterTripsParams.andDepartureDate!),
         ),
         Query.between(
           "returnDate",
-          DateFormatUtils.formatDateToIso8601(betweenReturnDate!),
-          DateFormatUtils.formatDateToIso8601(andReturnDate!),
+          DateFormatUtils.formatDateToIso8601(
+              filterTripsParams.betweenReturnDate!),
+          DateFormatUtils.formatDateToIso8601(filterTripsParams.andReturnDate!),
         ),
         Query.limit(AppConstants.pageSize),
         Query.orderDesc("\$createdAt")
@@ -135,7 +132,6 @@ class TripsListRepoImpl implements TripsListRepo {
       List<TripScheduleModel> tripsScheduleList = response
           .map((tripSchedule) => TripScheduleModel.fromMap(tripSchedule.data))
           .toList();
-      print('${tripsScheduleList.length}');
 
       Set<TripModel> trips =
           tripsScheduleList.map((tripSchedule) => tripSchedule.trip).toSet();

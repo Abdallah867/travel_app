@@ -6,20 +6,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/functions/custom_app_bar.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/widgets/vertical_widget.dart';
-import '../../../../generated/l10n.dart';
 import '../../../trip/data/models/trip_model.dart';
 import '../../../trip/data/repos/trip_repo_impl.dart';
 import '../../../trip/presentation/manager/trip_cubit/trip_cubit.dart';
 import '../../../trip/presentation/views/widgets/trip_card.dart';
 import '../manager/bloc/trips_list_bloc.dart';
 import 'widgets/paged_loading_trips_list.dart';
-import 'widgets/search_bar_and_filter_widget.dart';
 
 class TripsView extends StatefulWidget {
-  const TripsView({super.key});
+  final Widget? child;
+  const TripsView({super.key, this.child});
 
   @override
   TripsViewState createState() => TripsViewState();
@@ -31,7 +29,6 @@ class TripsViewState extends State<TripsView> {
 
   String? lastId;
   bool isFirstPage = true;
-  bool isFiltering = false;
 
   @override
   void initState() {
@@ -57,7 +54,6 @@ class TripsViewState extends State<TripsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(S.of(context).availableTrips),
       body: BlocListener<TripsListBloc, TripsListState>(
         listener: (context, state) {
           if (state is TripsListRefreshed) {
@@ -86,28 +82,9 @@ class TripsViewState extends State<TripsView> {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 16.h),
-                    child: const SearchBarAndFilterWidget(),
-                  ),
+                  child: widget.child,
                 ),
-                PagedSliverList<String?, TripModel>(
-                  pagingController: _pagingController,
-                  builderDelegate: PagedChildBuilderDelegate(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        const PagedLoadingTripsList(),
-                    itemBuilder: (context, trip, index) {
-                      return BlocProvider(
-                        create: (context) => TripCubit(
-                            tripRepo: getIt.get<TripRepoImpl>(), trip: trip),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 16.h),
-                          child: const TripCard(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                PaginatedTripsList(pagingController: _pagingController),
                 const SliverToBoxAdapter(
                   child: VerticalSpace(
                     size: 32,
@@ -125,5 +102,34 @@ class TripsViewState extends State<TripsView> {
   void dispose() {
     _pagingController.dispose();
     super.dispose();
+  }
+}
+
+class PaginatedTripsList extends StatelessWidget {
+  const PaginatedTripsList({
+    super.key,
+    required PagingController<String?, TripModel> pagingController,
+  }) : _pagingController = pagingController;
+
+  final PagingController<String?, TripModel> _pagingController;
+
+  @override
+  Widget build(BuildContext context) {
+    return PagedSliverList<String?, TripModel>(
+      pagingController: _pagingController,
+      builderDelegate: PagedChildBuilderDelegate(
+        firstPageProgressIndicatorBuilder: (_) => const PagedLoadingTripsList(),
+        itemBuilder: (context, trip, index) {
+          return BlocProvider(
+            create: (context) =>
+                TripCubit(tripRepo: getIt.get<TripRepoImpl>(), trip: trip),
+            child: Padding(
+              padding: EdgeInsets.only(top: 16.h),
+              child: const TripCard(),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

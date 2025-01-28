@@ -79,6 +79,41 @@ class AuthRepoImpl implements AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<void, Failure>> verifyUserEmail() async {
+    try {
+      await account.createVerification(
+        url: 'reehla://appwrite.io/verify',
+      );
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<void, Failure>> updateUserVerification(
+      String userId, String secret) async {
+    try {
+      await account.updateVerification(userId: userId, secret: secret);
+      return left(null);
+    } on AppwriteException catch (e) {
+      return right(
+        Failure(errMessage: e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return right(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
 }
 
 // getIt.get<Account>()

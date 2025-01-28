@@ -16,9 +16,12 @@ abstract class ReservationRepo {
 
   Future<Either<List<ReservationModel>, Failure>> getReservations(
     String userId,
+    String statusFilter,
   );
   Future<Either<TravelerModel, Failure>> updateTraveler(TravelerModel traveler);
 
   Future<Either<void, Failure>> updateReservation(
       {required ReservationModel updatedReservation});
+
+  Future<Either<void, Failure>> cancelReservation(String reservationId);
 }

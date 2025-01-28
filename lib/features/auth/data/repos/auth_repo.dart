@@ -15,4 +15,9 @@ abstract class AuthRepo {
   });
   Future<User?> currentUserAccount();
   Future<Either<void, Failure>> logoutUser();
+  Future<Either<void, Failure>> verifyUserEmail();
+  Future<Either<void, Failure>> updateUserVerification(
+    String userId,
+    String secret,
+  );
 }

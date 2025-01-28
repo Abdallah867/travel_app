@@ -31,10 +31,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "availableAgencies":
+            MessageLookupByLibrary.simpleMessage("Available Agencies"),
         "availableTrips":
             MessageLookupByLibrary.simpleMessage("Available Trips"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
         "bookings": MessageLookupByLibrary.simpleMessage("Bookings"),
+        "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel Booking"),
+        "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "credentialLoginMessage": MessageLookupByLibrary.simpleMessage(
             "Enter your email and password to continue"),
@@ -58,10 +62,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFailed": MessageLookupByLibrary.simpleMessage("Login failed"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "noBookings":
+            MessageLookupByLibrary.simpleMessage("No bookings available"),
         "noSavedTrips": MessageLookupByLibrary.simpleMessage("No saved trips"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "paid": MessageLookupByLibrary.simpleMessage("Paid"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "persons": MessageLookupByLibrary.simpleMessage("Persons"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "priceRange": MessageLookupByLibrary.simpleMessage("Price Range"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "returnDate": MessageLookupByLibrary.simpleMessage("Return Date"),
@@ -74,10 +83,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "showMore": MessageLookupByLibrary.simpleMessage("Show More"),
         "signup": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupFailed": MessageLookupByLibrary.simpleMessage("Signup failed"),
-        "switch_language":
+        "switchLanguage":
             MessageLookupByLibrary.simpleMessage("Switch Language"),
+        "unpaid": MessageLookupByLibrary.simpleMessage("Unpaid"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome!"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };

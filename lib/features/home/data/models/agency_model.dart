@@ -1,22 +1,26 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class AgencyModel {
+import 'package:equatable/equatable.dart';
+
+class AgencyModel extends Equatable {
   final String agencyId;
   final String agnecyName;
-  final String agencyLogo;
+  final String? agencyLogo; // Assuming agencyLogo can be null
   final String description;
   final String email;
-  final String phoneNumber;
+  final List<String> phoneNumbers;
   final String address;
-  AgencyModel({
+  final double? rating; // Assuming rating can be null
+
+  const AgencyModel({
     required this.agencyId,
     required this.agnecyName,
-    required this.agencyLogo,
+    this.agencyLogo,
     required this.description,
     required this.email,
-    required this.phoneNumber,
+    required this.phoneNumbers,
     required this.address,
+    this.rating,
   });
 
   AgencyModel copyWith({
@@ -25,8 +29,9 @@ class AgencyModel {
     String? agencyLogo,
     String? description,
     String? email,
-    String? phoneNumber,
+    List<String>? phoneNumbers,
     String? address,
+    double? rating,
   }) {
     return AgencyModel(
       agencyId: agencyId ?? this.agencyId,
@@ -34,32 +39,38 @@ class AgencyModel {
       agencyLogo: agencyLogo ?? this.agencyLogo,
       description: description ?? this.description,
       email: email ?? this.email,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phoneNumbers: phoneNumbers ?? this.phoneNumbers,
       address: address ?? this.address,
+      rating: rating ?? this.rating,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'agencyId': agencyId,
-      'agnecyName': agnecyName,
+      'agencyName': agnecyName,
       'agencyLogo': agencyLogo,
       'description': description,
       'email': email,
-      'phoneNumber': phoneNumber,
+      'phoneNumbers': phoneNumbers,
       'address': address,
+      'rating': rating,
     };
   }
 
   factory AgencyModel.fromMap(Map<String, dynamic> map) {
     return AgencyModel(
-      agencyId: map['agencyId'] as String,
-      agnecyName: map['agnecyName'] as String,
-      agencyLogo: map['agencyLogo'] as String,
+      agencyId: map['\$id'] as String,
+      agnecyName: map['agencyName'] as String,
+      agencyLogo: map['agencyLogo'] as String?, // Handling null safely
       description: map['description'] as String,
       email: map['email'] as String,
-      phoneNumber: map['phoneNumber'] as String,
+      phoneNumbers: List<String>.from(
+          map['phoneNumbers']), // Ensure we handle null values for phoneNumbers
       address: map['address'] as String,
+      rating: map['rating'] != null
+          ? map['rating'].toDouble() as double
+          : null, // Handle null for rating
     );
   }
 
@@ -70,30 +81,18 @@ class AgencyModel {
 
   @override
   String toString() {
-    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, agencyLogo: $agencyLogo, description: $description, email: $email, phoneNumber: $phoneNumber, address: $address)';
+    return 'AgencyModel(agencyId: $agencyId, agnecyName: $agnecyName, agencyLogo: $agencyLogo, description: $description, email: $email, phoneNumbers: $phoneNumbers, address: $address, rating: $rating)';
   }
 
   @override
-  bool operator ==(covariant AgencyModel other) {
-    if (identical(this, other)) return true;
-
-    return other.agencyId == agencyId &&
-        other.agnecyName == agnecyName &&
-        other.agencyLogo == agencyLogo &&
-        other.description == description &&
-        other.email == email &&
-        other.phoneNumber == phoneNumber &&
-        other.address == address;
-  }
-
-  @override
-  int get hashCode {
-    return agencyId.hashCode ^
-        agnecyName.hashCode ^
-        agencyLogo.hashCode ^
-        description.hashCode ^
-        email.hashCode ^
-        phoneNumber.hashCode ^
-        address.hashCode;
-  }
+  List<Object?> get props => [
+        agencyId,
+        agnecyName,
+        agencyLogo,
+        description,
+        email,
+        phoneNumbers,
+        address,
+        rating,
+      ];
 }

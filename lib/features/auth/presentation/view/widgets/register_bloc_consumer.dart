@@ -25,7 +25,7 @@ class RegisterBlocConsumer extends StatelessWidget {
         if (state is RegisterSuccess) {
           showSnackBar(
               context, 'Account Created Successfully', AppStrings.success);
-          context.go(AppRoutes.kHomeView);
+          context.go(AppRoutes.kVerifyAccountView);
         }
         if (state is RegisterFailure) {
           String errorMessage = state.errMessage;

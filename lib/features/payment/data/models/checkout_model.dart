@@ -1,4 +1,4 @@
-import 'payment_method.dart';
+import '../../../../core/enums/payment_method.dart';
 
 class CheckoutModel {
   final int amount;
