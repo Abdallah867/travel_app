@@ -7,7 +7,6 @@ import 'date_fields.dart';
 import 'filter_app_bar_section.dart';
 import 'package:flutter/material.dart';
 import 'price_range_slider.dart';
-import 'return_date_fields.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({

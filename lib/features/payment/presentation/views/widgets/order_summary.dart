@@ -1,4 +1,3 @@
-import '../payment_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/auth/presentation/manager/current_account_cubit/current_account_cubit.dart';
 import 'app_routes.dart';
 
 class DeepLinkListener extends StatefulWidget {

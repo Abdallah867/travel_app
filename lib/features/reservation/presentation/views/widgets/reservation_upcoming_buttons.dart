@@ -1,7 +1,6 @@
 import '../../../../../core/enums/payment_status.dart';
 import '../../../../../core/routes/app_routes.dart';
 import '../../../../../core/services/service_locator.dart';
-import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/font_weight_helper.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';

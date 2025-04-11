@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'core/constants/app_constants.dart';
 import 'core/routes/app_router.dart';
-import 'core/routes/deep_link_listener.dart';
 import 'core/services/service_locator.dart';
 import 'core/utils/app_colors.dart';
 import 'features/auth/data/repos/auth_repo_impl.dart';

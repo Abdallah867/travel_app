@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/date_format_utils.dart';
 import '../../../data/models/trip_schedule_model.dart';
 
 class TripInfoWidget extends StatelessWidget {

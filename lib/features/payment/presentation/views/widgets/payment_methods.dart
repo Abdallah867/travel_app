@@ -2,7 +2,6 @@ import '../../../../../core/enums/payment_method.dart';
 import '../../../../../core/utils/text_styles.dart';
 import '../../../../../core/widgets/vertical_widget.dart';
 import '../../manager/cubit/payment_cubit.dart';
-import '../payment_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

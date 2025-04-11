@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/core/utils/font_weight_helper.dart';
-import 'package:travel_app/core/utils/text_styles.dart';
+import '../../../../../core/utils/font_weight_helper.dart';
+import '../../../../../core/utils/text_styles.dart';
 
 class DetailsTitleSection extends StatelessWidget {
   final String title;
